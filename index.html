@@ -1,257 +1,1173 @@
 <!DOCTYPE html>
 <html lang="hi">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>ग्राम दहेली युवा समिति</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
 <header class="header">
+
   <div class="header-inner">
+
     <div class="logo-area">
-      <div class="logo">ग्राम<br><span>दहेली</span></div>
+
+      <div class="logo">
+        ग्राम
+        <br>
+        <span>दहेली</span>
+      </div>
+
       <div>
         <h1>ग्राम दहेली युवा समिति</h1>
         <p>गाँव के विकास की पहली शुरुआत अपने घर से होती है।</p>
       </div>
+
     </div>
 
-    <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+    <button
+      class="menu-toggle"
+      id="menuToggle">
+      ☰
+    </button>
 
     <nav class="nav" id="mainNav">
+
       <a href="#home">Home</a>
 
+      <!-- ABOUT US -->
+
       <div class="dropdown">
-        <button class="dropbtn">About Us <span>⌄</span></button>
+
+        <button class="dropbtn">
+          About Us <span>⌄</span>
+        </button>
+
         <div class="dropdown-menu">
+
           <a href="#introduction">परिचय</a>
+
           <a href="#objectives">उद्देश्य</a>
-          <a href="#moa">Memorandum of Association</a>
-          <a href="#rules">नियम एवं कार्यप्रणाली</a>
+
+          <a href="#moa">
+            Memorandum of Association
+          </a>
+
+          <a href="#rules">
+            नियम एवं कार्यप्रणाली
+          </a>
+
         </div>
+
       </div>
+
+
+      <!-- PROGRAMS -->
 
       <div class="dropdown">
-        <button class="dropbtn">कार्यक्रम <span>⌄</span></button>
+
+        <button class="dropbtn">
+          कार्यक्रम <span>⌄</span>
+        </button>
+
         <div class="dropdown-menu">
-          <a href="#development">ग्राम विकास</a>
-          <a href="#cleanliness">स्वच्छता अभियान</a>
-          <a href="#social">सामाजिक कार्यक्रम</a>
-          <a href="#emergency">आपदा एवं सहायता</a>
+
+          <a href="#development">
+            ग्राम विकास
+          </a>
+
+          <a href="#cleanliness">
+            स्वच्छता अभियान
+          </a>
+
+          <a href="#social">
+            सामाजिक कार्यक्रम
+          </a>
+
+          <a href="#emergency">
+            आपदा एवं सहायता
+          </a>
+
         </div>
+
       </div>
+
+
+      <!-- RESOURCES -->
 
       <div class="dropdown">
-        <button class="dropbtn">Resources <span>⌄</span></button>
+
+        <button class="dropbtn">
+          Resources <span>⌄</span>
+        </button>
+
         <div class="dropdown-menu">
-          <a href="#gallery">Photo Gallery</a>
-          <a href="#reports">Reports</a>
-          <a href="#documents">Documents</a>
+
+          <a href="#gallery">
+            📸 Photo Gallery
+          </a>
+
+          <a href="#documents">
+            📁 समिति Documents
+          </a>
+
+          <a href="#income">
+            💰 Incoming Payment
+          </a>
+
+          <a href="#expenses">
+            💸 Expenses
+          </a>
+
         </div>
+
       </div>
 
-      <a href="#committee">समिति सदस्य</a>
-      <a href="#contact">Contact Us</a>
+
+      <a href="#committee">
+        समिति सदस्य
+      </a>
+
+      <a href="#contact">
+        Contact Us
+      </a>
+
+      <a href="#admin">
+        🔐 Admin
+      </a>
+
     </nav>
+
   </div>
+
 </header>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
 <main>
 
-  <!-- FRONT PAGE -->
-  <section class="hero" id="home">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <span class="hero-tag">ग्राम दहेली • पौड़ी गढ़वाल • उत्तराखण्ड</span>
-      <h2>ग्राम दहेली युवा समिति</h2>
+
+<!-- =====================================================
+     HOME
+===================================================== -->
+
+<section class="hero" id="home">
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+
+    <span class="hero-tag">
+      ग्राम दहेली • पौड़ी गढ़वाल • उत्तराखण्ड
+    </span>
+
+    <h2>
+      ग्राम दहेली युवा समिति
+    </h2>
+
+    <p>
+      एकता, सहयोग और विकास के साथ अपने गाँव को बेहतर
+      बनाने की सामूहिक पहल।
+    </p>
+
+    <div class="hero-buttons">
+
+      <a
+        class="btn primary"
+        href="#about">
+        समिति के बारे में
+      </a>
+
+      <a
+        class="btn secondary"
+        href="#moa">
+        MOA देखें
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     WELCOME
+===================================================== -->
+
+<section class="welcome" id="about">
+
+  <div class="container">
+
+    <p class="section-label">
+      हमारा उद्देश्य
+    </p>
+
+    <h2>
+      गाँव के लिए, गाँव के साथ
+    </h2>
+
+    <p>
+      ग्राम दहेली युवा समिति का उद्देश्य ग्राम दहेली में
+      धार्मिक, सामाजिक, सांस्कृतिक एवं विकास कार्यों को
+      संगठित रूप से संचालित करना तथा आपसी भाईचारा,
+      सहयोग और सामाजिक एकता को बढ़ावा देना है।
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     INTRODUCTION
+===================================================== -->
+
+<section class="content-section" id="introduction">
+
+  <div class="container">
+
+    <h2>समिति का परिचय</h2>
+
+    <p>
+      ग्राम दहेली युवा समिति एक गैर-राजनीतिक,
+      गैर-लाभकारी एवं जनहितकारी समिति है, जिसका
+      कार्यक्षेत्र प्रारम्भ में ग्राम दहेली एवं उसके
+      आसपास का क्षेत्र रहेगा।
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     OBJECTIVES
+===================================================== -->
+
+<section class="content-section" id="objectives">
+
+  <div class="container">
+
+    <h2>संस्था के उद्देश्य</h2>
+
+    <ol>
+
+      <li>
+        ग्राम दहेली के धार्मिक, सामाजिक, सांस्कृतिक
+        एवं विकास कार्यों को संगठित रूप से संचालित करना।
+      </li>
+
+      <li>
+        गाँव में आपसी भाईचारा, सहयोग एवं सामाजिक
+        एकता को बढ़ावा देना।
+      </li>
+
+      <li>
+        नंदा माता मंदिर, भैरव बाबा मंदिर एवं अन्य
+        धार्मिक स्थलों की पूजा, रखरखाव एवं आवश्यक
+        व्यवस्थाओं में सहयोग करना।
+      </li>
+
+      <li>
+        धार्मिक, सामाजिक, सांस्कृतिक एवं जनहित
+        कार्यक्रमों का आयोजन करना।
+      </li>
+
+      <li>
+        टेंट, कुर्सी, बर्तन, लाइट, साउंड सिस्टम एवं
+        अन्य आवश्यक सामग्री की खरीद, रखरखाव एवं
+        जनहित में उपयोग करना।
+      </li>
+
+      <li>
+        शिक्षा, स्वच्छता, पर्यावरण संरक्षण, स्वास्थ्य
+        एवं जन-जागरूकता संबंधी कार्यक्रम संचालित करना।
+      </li>
+
+      <li>
+        प्राकृतिक आपदा, दुर्घटना अथवा अन्य
+        आपातकालीन परिस्थितियों में राहत एवं सहयोग
+        प्रदान करना।
+      </li>
+
+      <li>
+        संस्था पूर्णतः गैर-राजनीतिक, गैर-लाभकारी
+        एवं जनहितकारी संस्था होगी।
+      </li>
+
+      <li>
+        कोई भी सदस्य संस्था की आय, निधि अथवा संपत्ति
+        पर व्यक्तिगत स्वामित्व या लाभ का दावा नहीं करेगा।
+      </li>
+
+    </ol>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     MOA
+===================================================== -->
+
+<section class="content-section" id="moa">
+
+  <div class="container">
+
+    <h2>Memorandum of Association (MOA)</h2>
+
+    <div class="document">
+
+      <h3>1. संस्था का नाम</h3>
+
+      <p>ग्राम दहेली युवा समिति</p>
+
+      <h3>2. पंजीकृत कार्यालय</h3>
+
       <p>
-        एकता, सहयोग और विकास के साथ अपने गाँव को बेहतर बनाने की सामूहिक पहल।
+        ग्राम: दहेली, पोस्ट: रीठाखाल,
+        तहसील: सतपुली, जनपद: पौड़ी गढ़वाल,
+        राज्य: उत्तराखण्ड, पिन कोड: 246172
       </p>
-      <div class="hero-buttons">
-        <a class="btn primary" href="#about">समिति के बारे में</a>
-        <a class="btn secondary" href="#moa">MOA देखें</a>
+
+      <h3>3. संस्था के उद्देश्य</h3>
+
+      <p>
+        संस्था के मुख्य उद्देश्य ऊपर उल्लिखित
+        उद्देश्यों के अनुसार होंगे।
+      </p>
+
+      <h3>4. कार्यक्षेत्र</h3>
+
+      <p>
+        संस्था का कार्यक्षेत्र प्रारम्भ में ग्राम दहेली
+        एवं उसके आसपास का क्षेत्र रहेगा। आवश्यकता होने
+        पर संस्था उत्तराखण्ड राज्य के अन्य क्षेत्रों में
+        भी अपने उद्देश्यों के अनुरूप कार्य कर सकेगी।
+      </p>
+
+      <h3>5. संस्था की आय</h3>
+
+      <ul>
+        <li>सदस्यता शुल्क</li>
+        <li>स्वैच्छिक दान</li>
+        <li>समिति की सामग्री के उपयोग/किराये से प्राप्त आय</li>
+        <li>अन्य वैध स्रोत</li>
+      </ul>
+
+      <h3>6. संस्था की संपत्ति</h3>
+
+      <p>
+        संस्था द्वारा अर्जित समस्त चल एवं अचल संपत्ति
+        संस्था की सामूहिक संपत्ति होगी। किसी भी सदस्य
+        का उस पर व्यक्तिगत स्वामित्व नहीं होगा।
+      </p>
+
+      <h3>7. संस्था की अवधि एवं विघटन</h3>
+
+      <p>
+        संस्था की अवधि अनिश्चितकाल होगी तथा संस्था का
+        संचालन समय-समय पर पारित नियमों एवं निर्णयों
+        के अनुसार किया जाएगा।
+      </p>
+
+      <p class="place">
+
+        <strong>स्थान:</strong>
+        ग्राम दहेली, जनपद पौड़ी गढ़वाल,
+        उत्तराखण्ड - 246172
+
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     RULES
+===================================================== -->
+
+<section class="content-section" id="rules">
+
+  <div class="container">
+
+    <h2>नियम एवं कार्यप्रणाली</h2>
+
+    <ol>
+
+      <li>
+        समिति का संचालन सभी सदस्यों की सहमति एवं
+        निर्धारित नियमों के अनुसार किया जाएगा।
+      </li>
+
+      <li>
+        समिति का उद्देश्य ग्राम हित एवं जनसेवा रहेगा।
+      </li>
+
+      <li>
+        समिति किसी राजनीतिक गतिविधि में भाग नहीं लेगी।
+      </li>
+
+      <li>
+        समिति की आय एवं व्यय का उचित लेखा-जोखा रखा जाएगा।
+      </li>
+
+      <li>
+        समिति की संपत्ति का उपयोग केवल समिति एवं
+        जनहित के कार्यों के लिए किया जाएगा।
+      </li>
+
+    </ol>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROGRAMS
+===================================================== -->
+
+<section class="content-section" id="development">
+
+  <div class="container">
+
+    <h2>ग्राम विकास</h2>
+
+    <p>
+      ग्राम की सड़क, पानी, बिजली, स्वच्छता, मंदिर एवं
+      अन्य आवश्यक विकास कार्यों में सहयोग करना।
+    </p>
+
+  </div>
+
+</section>
+
+
+<section class="content-section" id="cleanliness">
+
+  <div class="container">
+
+    <h2>स्वच्छता अभियान</h2>
+
+    <p>
+      गाँव में समय-समय पर स्वच्छता अभियान चलाना एवं
+      पर्यावरण संरक्षण के लिए लोगों को जागरूक करना।
+    </p>
+
+  </div>
+
+</section>
+
+
+<section class="content-section" id="social">
+
+  <div class="container">
+
+    <h2>सामाजिक कार्यक्रम</h2>
+
+    <p>
+      सामाजिक, सांस्कृतिक एवं जनहितकारी कार्यक्रमों
+      का आयोजन एवं संचालन करना।
+    </p>
+
+  </div>
+
+</section>
+
+
+<section class="content-section" id="emergency">
+
+  <div class="container">
+
+    <h2>आपदा एवं सहायता</h2>
+
+    <p>
+      प्राकृतिक आपदा, दुर्घटना अथवा अन्य आपातकालीन
+      परिस्थितियों में आवश्यक सहायता एवं सहयोग प्रदान करना।
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     COMMITTEE
+===================================================== -->
+
+<section class="content-section" id="committee">
+
+  <div class="container">
+
+    <h2>समिति सदस्य</h2>
+
+    <div class="member-grid">
+
+
+      <div class="member-card">
+        <h3 class="main-post">अध्यक्ष</h3>
+        <p>श्री सतपाल रावत</p>
+        <small>पुत्र श्री सैन सिंह रावत</small>
       </div>
-    </div>
-  </section>
 
-  <section class="welcome" id="about">
-    <div class="container">
-      <p class="section-label">हमारा उद्देश्य</p>
-      <h2>गाँव के लिए, गाँव के साथ</h2>
+
+      <div class="member-card">
+        <h3 class="main-post">उपाध्यक्ष</h3>
+        <p>श्री वीरेंद्र सिंह पनासी</p>
+        <small>पुत्र श्री मंगल सिंह पनासी</small>
+      </div>
+
+
+      <div class="member-card">
+        <h3 class="main-post">कोषाध्यक्ष</h3>
+        <p>श्री कौशल सिंह रावत</p>
+        <small>पुत्र श्री राजे सिंह रावत</small>
+      </div>
+
+
+      <div class="member-card">
+        <h3>प्रेरणा एवं सदस्य समन्वय</h3>
+        <p>श्री सुनील रावत</p>
+        <small>पुत्र श्री जोगेंद्र सिंह रावत</small>
+      </div>
+
+
+      <div class="member-card">
+        <h3>मीडिया एवं सूचना</h3>
+        <p>श्री शुभम रावत</p>
+        <small>पुत्र श्री अमर सिंह रावत</small>
+      </div>
+
+
+      <div class="member-card">
+        <h3>ग्राम विकास सहयोगी</h3>
+        <p>श्री पंकज रावत</p>
+        <small>पुत्र श्री मनबर सिंह</small>
+      </div>
+
+
+      <div class="member-card">
+        <h3>ग्राम विकास सहयोगी</h3>
+        <p>श्री सूरज चन्द्र</p>
+        <small>पुत्र श्री प्रकाश चंद्र</small>
+      </div>
+
+
+      <!-- MEMBERS -->
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री कमल रावत</p>
+        <small>पुत्र श्री सैन सिंह रावत</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री जगपाल रावत</p>
+        <small>पुत्र श्री सैन सिंह रावत</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री राहुल रावत</p>
+        <small>पुत्र श्री पृथ्वी सिंह रावत</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री रोहित रावत</p>
+        <small>पुत्र श्री पृथ्वी सिंह रावत</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री संतोषी / ज्योत्सना रावत</p>
+        <small>पुत्री श्री राजेंद्र सिंह रावत</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री नरेंद्र रावत</p>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री वीरेंद्र सिंह पनासी</p>
+        <small>पुत्र श्री मंगल सिंह पनासी</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री सुरेंद्र रावत</p>
+        <small>पुत्र श्री मंगल सिंह पनासी</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री अमित रावत</p>
+        <small>पुत्र श्री ठाकुर सिंह रावत</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री सुमित रावत</p>
+        <small>पुत्र श्री ठाकुर सिंह रावत</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री संजय रावत</p>
+        <small>पुत्र श्री कुँवर सिंह रावत</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री राकेश नेगी</p>
+        <small>पुत्र श्री महिपाल नेगी</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री हरपाल रावत</p>
+        <small>पुत्र श्री नेत्र सिंह रावत</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री अंकित नेगी</p>
+        <small>पुत्र श्री देवेंद्र नेगी</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री अतुल नेगी</p>
+        <small>पुत्र श्री देवेंद्र नेगी</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री पुष्कर काजल रावत</p>
+        <small>पुत्र श्री मेहरबान सिंह रावत</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री जगमोहन रावत</p>
+        <small>पुत्र श्री मेहरबान सिंह रावत</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री हेमंत रावत</p>
+        <small>पुत्र श्री मेहरबान सिंह रावत</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री अनुज रावत</p>
+        <small>पुत्र श्री अमर सिंह रावत</small>
+      </div>
+
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री खेमराज रावत</p>
+        <small>पुत्र श्री रिपुदमन सिंह रावत</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री मनदीप रावत</p>
+        <small>पुत्र श्री रिपुदमन सिंह रावत</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री विवेक चंद ढौंडियाल</p>
+        <small>पुत्र श्री घन्ना नंद ढौंडियाल</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री विपिन चंद ढौंडियाल</p>
+        <small>पुत्र श्री ब्रह्मानंद ढौंडियाल</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री दीपक चंद ढौंडियाल</p>
+        <small>पुत्र श्री ब्रह्मानंद ढौंडियाल</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री अरविंद ढौंडियाल</p>
+        <small>पुत्र श्री रमेश चंद</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री अशोक ढौंडियाल</p>
+        <small>पुत्र श्री रमेश चंद</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री मोहित नेगी</p>
+        <small>पुत्र श्री दिनेश नेगी</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री जितेंद्र नेगी</p>
+        <small>पुत्र श्री भगवान सिंह नेगी</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री सतेंद्र नेगी</p>
+        <small>पुत्र श्री भगवान सिंह नेगी</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री मनीष रावत</p>
+        <small>पुत्र श्री राजे सिंह रावत</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री अनिल रावत</p>
+        <small>पुत्र श्री जोगेंद्र सिंह रावत</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री दीपक रावत</p>
+        <small>पुत्र श्री मदन सिंह रावत</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री कुलदीप सिंह</p>
+        <small>पुत्र श्री महादेव सिंह</small>
+      </div>
+
+      <div class="member-card">
+        <h3>समिति सदस्य</h3>
+        <p>श्री हरक सिंह</p>
+        <small>पुत्र श्री वीर सिंह</small>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PHOTO GALLERY
+===================================================== -->
+
+<section class="content-section" id="gallery">
+
+  <div class="container">
+
+    <h2>📸 Photo Gallery</h2>
+
+    <p class="section-description">
+      समिति की गतिविधियों एवं कार्यक्रमों की तस्वीरें
+    </p>
+
+
+    <!-- ADMIN PHOTO UPLOAD -->
+
+    <div
+      class="gallery-admin-box"
+      id="galleryAdminBox"
+      style="display:none;">
+
+      <h3>📤 समिति की फोटो अपलोड करें</h3>
+
       <p>
-        ग्राम दहेली युवा समिति का उद्देश्य ग्राम दहेली में धार्मिक, सामाजिक,
-        सांस्कृतिक एवं विकास कार्यों को संगठित रूप से संचालित करना तथा
-        आपसी भाईचारा, सहयोग और सामाजिक एकता को बढ़ावा देना है।
+        केवल Admin ही फोटो Upload और Delete कर सकता है।
       </p>
-    </div>
-  </section>
 
-  <!-- TOGGLE-ONLY CONTENT: these sections are not shown on the front page -->
-  <section class="content-section" id="introduction">
-    <div class="container">
-      <h2>समिति का परिचय</h2>
+      <input
+        type="file"
+        id="galleryInput"
+        accept="image/*"
+        multiple
+      >
+
+      <button
+        type="button"
+        class="upload-btn"
+        id="galleryUploadBtn">
+
+        📤 फोटो Upload करें
+
+      </button>
+
+    </div>
+
+
+    <!-- PHOTO LIST -->
+
+    <div
+      class="photo-gallery"
+      id="photoGallery">
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     COMMITTEE DOCUMENTS
+===================================================== -->
+
+<section class="content-section" id="documents">
+
+  <div class="container">
+
+    <h2>📁 समिति के दस्तावेज़</h2>
+
+    <p class="section-description">
+      समिति से संबंधित महत्वपूर्ण दस्तावेज़ यहाँ उपलब्ध हैं।
+    </p>
+
+
+    <div class="upload-panel" id="documentsUploadPanel" style="display:none;">
+
+      <h3>📤 दस्तावेज़ अपलोड करें</h3>
+
+      <input
+        type="file"
+        class="file-input"
+        id="documentsInput"
+        accept=".pdf,.doc,.docx,.xls,.xlsx,.txt,.jpg,.jpeg,.png"
+      >
+
+      <button
+        class="upload-btn"
+        id="documentsUploadBtn">
+
+        📤 Upload Document
+
+      </button>
+
+    </div>
+
+
+    <div
+      class="file-list"
+      id="documentsList">
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     INCOME
+===================================================== -->
+
+<section class="content-section" id="income">
+
+  <div class="container">
+
+    <h2>💰 Incoming Payment / आय</h2>
+
+    <p class="section-description">
+      समिति को प्राप्त होने वाली राशि एवं संबंधित
+      रसीदें/दस्तावेज़ यहाँ उपलब्ध होंगे।
+    </p>
+
+
+    <div class="upload-panel" id="incomeUploadPanel" style="display:none;">
+
+      <h3>📤 आय का दस्तावेज़ अपलोड करें</h3>
+
+      <input
+        type="file"
+        class="file-input"
+        id="incomeInput"
+        accept=".pdf,.doc,.docx,.xls,.xlsx,.txt,.jpg,.jpeg,.png"
+      >
+
+      <button
+        class="upload-btn"
+        id="incomeUploadBtn">
+
+        📤 Upload Document
+
+      </button>
+
+    </div>
+
+
+    <div
+      class="file-list"
+      id="incomeList">
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     EXPENSES
+===================================================== -->
+
+<section class="content-section" id="expenses">
+
+  <div class="container">
+
+    <h2>💸 Expenses / व्यय</h2>
+
+    <p class="section-description">
+      समिति द्वारा किए गए खर्च एवं संबंधित बिल/रसीदें
+      यहाँ उपलब्ध होंगी।
+    </p>
+
+
+    <div class="upload-panel" id="expensesUploadPanel" style="display:none;">
+
+      <h3>📤 व्यय का दस्तावेज़ अपलोड करें</h3>
+
+      <input
+        type="file"
+        class="file-input"
+        id="expensesInput"
+        accept=".pdf,.doc,.docx,.xls,.xlsx,.txt,.jpg,.jpeg,.png"
+      >
+
+      <button
+        class="upload-btn"
+        id="expensesUploadBtn">
+
+        📤 Upload Document
+
+      </button>
+
+    </div>
+
+
+    <div
+      class="file-list"
+      id="expensesList">
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     ADMIN
+===================================================== -->
+
+<section class="content-section" id="admin">
+
+  <div class="container">
+
+    <div
+      class="admin-login"
+      id="adminLogin">
+
+      <h2>🔐 Admin Login</h2>
+
       <p>
-        ग्राम दहेली युवा समिति एक गैर-राजनीतिक, गैर-लाभकारी एवं जनहितकारी
-        समिति है, जिसका कार्यक्षेत्र प्रारम्भ में ग्राम दहेली एवं उसके आसपास
-        का क्षेत्र रहेगा।
+        केवल अधिकृत समिति प्रशासक के लिए।
       </p>
+
+      <input
+        type="password"
+        id="adminPassword"
+        placeholder="Admin Password"
+      >
+
+      <button
+        id="loginBtn"
+        class="admin-login-btn">
+
+        🔐 Login
+
+      </button>
+
+      <p
+        id="loginMessage"
+        class="login-message">
+      </p>
+
     </div>
-  </section>
 
-  <section class="content-section" id="objectives">
-    <div class="container">
-      <h2>संस्था के उद्देश्य</h2>
-      <ol>
-        <li>ग्राम दहेली के धार्मिक, सामाजिक, सांस्कृतिक एवं विकास कार्यों को संगठित रूप से संचालित करना।</li>
-        <li>गाँव में आपसी भाईचारा, सहयोग एवं सामाजिक एकता को बढ़ावा देना।</li>
-        <li>नंदा माता मंदिर, भैरव बाबा मंदिर एवं अन्य धार्मिक स्थलों की पूजा, रखरखाव एवं आवश्यक व्यवस्थाओं में सहयोग करना।</li>
-        <li>धार्मिक, सामाजिक, सांस्कृतिक एवं जनहित कार्यक्रमों का आयोजन करना।</li>
-        <li>टेंट, कुर्सी, बर्तन, लाइट, साउंड सिस्टम एवं अन्य आवश्यक सामग्री की खरीद, रखरखाव एवं जनहित में उपयोग करना।</li>
-        <li>शिक्षा, स्वच्छता, पर्यावरण संरक्षण, स्वास्थ्य एवं जन-जागरूकता संबंधी कार्यक्रम संचालित करना।</li>
-        <li>प्राकृतिक आपदा, दुर्घटना अथवा अन्य आपातकालीन परिस्थितियों में राहत एवं सहयोग प्रदान करना।</li>
-        <li>संस्था पूर्णतः गैर-राजनीतिक, गैर-लाभकारी एवं जनहितकारी संस्था होगी।</li>
-        <li>कोई भी सदस्य संस्था की आय, निधि अथवा संपत्ति पर व्यक्तिगत स्वामित्व या लाभ का दावा नहीं करेगा।</li>
-      </ol>
-    </div>
-  </section>
 
-  <section class="content-section" id="moa">
-    <div class="container">
-      <h2>Memorandum of Association (MOA)</h2>
+    <div
+      class="admin-panel"
+      id="adminPanel">
 
-      <div class="document">
-        <h3>1. संस्था का नाम</h3>
-        <p>ग्राम दहेली युवा समिति</p>
+      <h2>🔐 Admin Panel</h2>
 
-        <h3>2. पंजीकृत कार्यालय</h3>
-        <p>
-          ग्राम: दहेली, पोस्ट: रीठाखाल, तहसील: सतपुली,
-          जनपद: पौड़ी गढ़वाल, राज्य: उत्तराखण्ड,
-          पिन कोड: 246172
-        </p>
+      <p>
+        Admin mode सक्रिय है।
+      </p>
 
-        <h3>3. संस्था के उद्देश्य</h3>
-        <p>संस्था के मुख्य उद्देश्य ऊपर उल्लिखित उद्देश्यों के अनुसार होंगे।</p>
+      <div class="admin-status">
+        🟢 Admin Logged In
+      </div>
 
-        <h3>4. कार्यक्षेत्र</h3>
-        <p>
-          संस्था का कार्यक्षेत्र प्रारम्भ में ग्राम दहेली एवं उसके आसपास का
-          क्षेत्र रहेगा। आवश्यकता होने पर संस्था उत्तराखण्ड राज्य के अन्य
-          क्षेत्रों में भी अपने उद्देश्यों के अनुरूप कार्य कर सकेगी।
-        </p>
+      <button
+        id="logoutBtn"
+        class="logout-btn">
 
-        <h3>5. संस्था की आय</h3>
+        Logout
+
+      </button>
+
+
+      <div class="admin-info">
+
+        <h3>Admin क्या कर सकता है?</h3>
+
         <ul>
-          <li>सदस्यता शुल्क</li>
-          <li>स्वैच्छिक दान</li>
-          <li>समिति की सामग्री के उपयोग/किराये से प्राप्त आय</li>
-          <li>अन्य वैध स्रोत</li>
+
+          <li>📸 Photo Gallery में फोटो Upload करना</li>
+
+          <li>🗑️ Photos Delete करना</li>
+
+          <li>📤 समिति Documents Upload करना</li>
+
+          <li>📤 Incoming Payment documents Upload करना</li>
+
+          <li>📤 Expenses documents Upload करना</li>
+
+          <li>🗑️ Documents Delete करना</li>
+
+          <li>📥 Documents Download करना</li>
+
         </ul>
 
-        <h3>6. संस्था की संपत्ति</h3>
-        <p>
-          संस्था द्वारा अर्जित समस्त चल एवं अचल संपत्ति संस्था की सामूहिक
-          संपत्ति होगी। किसी भी सदस्य का उस पर व्यक्तिगत स्वामित्व नहीं होगा।
-        </p>
-
-        <h3>7. संस्था की अवधि एवं विघटन</h3>
-        <p>
-          संस्था की अवधि अनिश्चितकाल होगी तथा संस्था का संचालन समय-समय पर
-          पारित नियमों एवं निर्णयों के अनुसार किया जाएगा। संस्था का विघटन
-          संस्था की नियमावली एवं प्रचलित कानून के अनुसार किया जाएगा।
-        </p>
-
-        <p class="place"><strong>स्थान:</strong> ग्राम दहेली, जनपद पौड़ी गढ़वाल, उत्तराखण्ड - 246172</p>
       </div>
-    </div>
-  </section>
 
-  <section class="content-section" id="committee">
-    <div class="container">
-      <h2>समिति सदस्य</h2>
-      <div class="member-grid">
-        <div class="member-card"><h3>अध्यक्ष</h3><p>श्री सतपाल रावत</p></div>
-        <div class="member-card"><h3>उपाध्यक्ष</h3><p>श्रीमती काजल देवी</p></div>
-        <div class="member-card"><h3>कोषाध्यक्ष</h3><p>श्री कौशल सिंह रावत</p></div>
-        <div class="member-card"><h3>मीडिया एवं सूचना</h3><p>श्री शुभम रावत</p></div>
-      </div>
     </div>
-  </section>
 
-  <section class="content-section" id="gallery">
-    <div class="container">
-      <h2>Photo Gallery</h2>
-      <div class="gallery">
-        <div class="gallery-box">ग्राम विकास कार्य</div>
-        <div class="gallery-box">स्वच्छता अभियान</div>
-        <div class="gallery-box">सामाजिक कार्यक्रम</div>
-      </div>
-    </div>
-  </section>
+  </div>
 
-  <section class="content-section" id="contact">
-    <div class="container">
-      <h2>संपर्क करें</h2>
-      <div class="contact-box">
-        <p><strong>ग्राम:</strong> दहेली</p>
-        <p><strong>पोस्ट:</strong> रीठाखाल</p>
-        <p><strong>तहसील:</strong> सतपुली</p>
-        <p><strong>जनपद:</strong> पौड़ी गढ़वाल, उत्तराखण्ड</p>
-        <p><strong>पिन कोड:</strong> 246172</p>
-      </div>
+</section>
+
+
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section class="content-section" id="contact">
+
+  <div class="container">
+
+    <h2>संपर्क करें</h2>
+
+    <div class="contact-box">
+
+      <p>
+        <strong>ग्राम:</strong>
+        दहेली
+      </p>
+
+      <p>
+        <strong>पोस्ट:</strong>
+        रीठाखाल
+      </p>
+
+      <p>
+        <strong>तहसील:</strong>
+        सतपुली
+      </p>
+
+      <p>
+        <strong>जनपद:</strong>
+        पौड़ी गढ़वाल, उत्तराखण्ड
+      </p>
+
+      <p>
+        <strong>पिन कोड:</strong>
+        246172
+      </p>
+
+      <p>
+        <strong>दूरभाष संख्या 📞:</strong>
+        6395103634
+      </p>
+
+      <p>
+        <strong>ई-मेल:</strong>
+        daheliyuvasamiti@gmail.com
+      </p>
+
     </div>
-  </section>
+
+  </div>
+
+</section>
 
 </main>
 
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
 <footer>
+
   <div class="container">
-    <h3>ग्राम दहेली युवा समिति</h3>
-    <p>एकता • सहयोग • सेवा • विकास</p>
-    <p>© 2026 Gram Daheli Yuva Samiti. All Rights Reserved.</p>
+
+    <h3>
+      ग्राम दहेली युवा समिति
+    </h3>
+
+    <p>
+      एकता • सहयोग • सेवा • विकास
+    </p>
+
+    <p>
+      © 2026 Gram Daheli Yuva Samiti.
+      All Rights Reserved.
+    </p>
+
   </div>
+
 </footer>
 
-<script>
-  const toggle = document.getElementById("menuToggle");
-  const nav = document.getElementById("mainNav");
 
-  toggle.addEventListener("click", () => {
-    nav.classList.toggle("show");
-  });
-
-  document.querySelectorAll(".dropbtn").forEach(button => {
-    button.addEventListener("click", function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      const parent = this.parentElement;
-
-      document.querySelectorAll(".dropdown").forEach(drop => {
-        if (drop !== parent) drop.classList.remove("open");
-      });
-
-      parent.classList.toggle("open");
-    });
-  });
-
-  document.querySelectorAll(".dropdown-menu a, .nav > a").forEach(link => {
-    link.addEventListener("click", () => {
-      document.querySelectorAll(".dropdown").forEach(drop => {
-        drop.classList.remove("open");
-      });
-      nav.classList.remove("show");
-    });
-  });
-
-  document.addEventListener("click", () => {
-    document.querySelectorAll(".dropdown").forEach(drop => {
-      drop.classList.remove("open");
-    });
-  });
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
