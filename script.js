@@ -1,3 +1,11 @@
+const SUPABASE_URL = "https://cmhfmlvxgtwqzbhpjvdx.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_7cKvIjO6LXkpnFmGj8VaHA_fHQKNsui";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 /* =====================================================
    GRAM DAHELI YUVA SAMITI
    ADMIN + PHOTO + DOCUMENT SYSTEM
@@ -24,8 +32,6 @@ let isAdmin = sessionStorage.getItem("daheliAdmin") === "true";
    LOCAL STORAGE
 ===================================================== */
 
-let photos =
-  JSON.parse(localStorage.getItem("daheliPhotos")) || [];
 
 let documents =
   JSON.parse(localStorage.getItem("daheliDocuments")) || [];
@@ -211,7 +217,7 @@ function updateAdminUI() {
     document.body.classList.remove("admin-mode");
   }
 
-  renderPhotos();
+  loadGallery();
   renderFiles("documents");
   renderFiles("income");
   renderFiles("expenses");
@@ -316,177 +322,83 @@ function createId() {
    PHOTO UPLOAD
 ===================================================== */
 
-const galleryInput =
-  document.getElementById("galleryInput");
-
-const galleryUploadBtn =
-  document.getElementById("galleryUploadBtn");
-
-
-if (galleryUploadBtn) {
-
-  galleryUploadBtn.addEventListener("click", function () {
-
-    if (!isAdmin) {
-
-      alert(
-        "🔐 केवल Admin ही फोटो Upload कर सकता है।"
-      );
-
-      window.location.hash = "admin";
-
-      return;
-
-    }
-
-    const files =
-      galleryInput.files;
-
-    if (!files || files.length === 0) {
-
-      alert("कृपया फोटो चुनें।");
-
-      return;
-
-    }
-
-
-    let pending =
-      files.length;
-
-
-    Array.from(files).forEach(function (file) {
-
-      if (!file.type.startsWith("image/")) {
-
-        pending--;
-
-        return;
-
-      }
-
-
-      const reader =
-        new FileReader();
-
-
-      reader.onload = function (event) {
-
-        photos.push({
-
-          id: createId(),
-
-          name: file.name,
-
-          data: event.target.result,
-
-          date: new Date().toLocaleString("hi-IN")
-
-        });
-
-
-        pending--;
-
-
-        if (pending === 0) {
-
-          localStorage.setItem(
-            "daheliPhotos",
-            JSON.stringify(photos)
-          );
-
-          galleryInput.value = "";
-
-          renderPhotos();
-
-          alert(
-            "✅ फोटो सफलतापूर्वक Upload हो गई।"
-          );
-
-        }
-
-      };
-
-
-      reader.readAsDataURL(file);
-
-    });
-
-  });
-
-}
-
 
 /* =====================================================
    RENDER PHOTOS
 ===================================================== */
 
-function renderPhotos() {
+
+/* =====================================================
+   DELETE PHOTO
+===================================================== */
+
+/* =====================================================
+   SUPABASE PHOTO GALLERY
+===================================================== */
+
+async function loadGallery() {
 
   const gallery =
     document.getElementById("photoGallery");
 
-  if (!gallery) {
+  if (!gallery) return;
+
+  gallery.innerHTML = "<p>Loading...</p>";
+
+  const { data, error } =
+    await supabaseClient.storage
+      .from("Photo Gallery")
+      .list("", { limit: 100 });
+
+  if (error) {
+
+    console.error(error);
+
+    gallery.innerHTML =
+      "<p>Gallery Load Failed</p>";
+
     return;
   }
-
 
   gallery.innerHTML = "";
 
+  if (data.length === 0) {
 
-  if (photos.length === 0) {
-
-    gallery.innerHTML = `
-      <p class="no-photo">
-        अभी कोई फोटो उपलब्ध नहीं है।
-      </p>
-    `;
+    gallery.innerHTML =
+      "<p>अभी कोई फोटो उपलब्ध नहीं है।</p>";
 
     return;
-
   }
 
+  data.forEach(file => {
 
-  photos.forEach(function (photo) {
+    const { data: urlData } =
+      supabaseClient.storage
+        .from("Photo Gallery")
+        .getPublicUrl(file.name);
 
     const card =
       document.createElement("div");
 
-    card.className =
-      "photo-card";
-
-
-    let deleteButton = "";
-
-
-    if (isAdmin) {
-
-      deleteButton = `
-        <button
-          class="photo-delete"
-          onclick="deletePhoto('${photo.id}')">
-          🗑️ Delete
-        </button>
-      `;
-
-    }
-
+    card.className = "photo-card";
 
     card.innerHTML = `
-
       <img
-        src="${photo.data}"
-        alt="${escapeHTML(photo.name)}">
+        src="${urlData.publicUrl}"
+        alt="${file.name}">
 
-      <div class="photo-info">
-
-        
-        ${deleteButton}
-
-      </div>
-
+      ${
+        isAdmin
+          ? `
+          <button
+            class="photo-delete"
+            onclick="deletePhoto('${file.name}')">
+            🗑️ Delete
+          </button>
+          `
+          : ""
+      }
     `;
-
 
     gallery.appendChild(card);
 
@@ -494,53 +406,101 @@ function renderPhotos() {
 
 }
 
+const galleryInput =
+  document.getElementById("galleryInput");
 
-/* =====================================================
-   DELETE PHOTO
-===================================================== */
+const galleryUploadBtn =
+  document.getElementById("galleryUploadBtn");
 
-function deletePhoto(id) {
+if (galleryUploadBtn) {
 
-  if (!isAdmin) {
+  galleryUploadBtn.addEventListener(
+    "click",
+    async function () {
 
-    alert(
-      "🔐 केवल Admin ही फोटो Delete कर सकता है।"
-    );
+      if (!isAdmin) {
 
-    return;
+        alert(
+          "🔐 केवल Admin ही फोटो Upload कर सकता है।"
+        );
 
-  }
+        return;
+      }
 
+      const files =
+        galleryInput.files;
 
-  const confirmDelete =
-    confirm(
-      "क्या आप यह फोटो Delete करना चाहते हैं?"
-    );
+      if (!files.length) {
 
+        alert("फोटो चुनें");
 
-  if (!confirmDelete) {
-    return;
-  }
+        return;
+      }
 
+      for (const file of files) {
 
-  photos =
-    photos.filter(function (photo) {
+        const fileName =
+          Date.now() + "_" + file.name;
 
-      return photo.id !== id;
+        const { error } =
+          await supabaseClient.storage
+            .from("Photo Gallery")
+            .upload(
+              fileName,
+              file
+            );
 
-    });
+        if (error) {
 
+          console.error(error);
 
-  localStorage.setItem(
-    "daheliPhotos",
-    JSON.stringify(photos)
+          alert(error.message);
+
+          return;
+        }
+
+      }
+
+      galleryInput.value = "";
+
+      await loadGallery();
+
+      alert(
+        "✅ फोटो सफलतापूर्वक Upload हो गई।"
+      );
+
+    }
   );
-
-
-  renderPhotos();
 
 }
 
+async function deletePhoto(fileName) {
+
+  if (!isAdmin) return;
+
+  if (
+    !confirm(
+      "क्या आप यह फोटो Delete करना चाहते हैं?"
+    )
+  ) {
+    return;
+  }
+
+  const { error } =
+    await supabaseClient.storage
+      .from("Photo Gallery")
+      .remove([fileName]);
+
+  if (error) {
+
+    alert(error.message);
+
+    return;
+  }
+
+  await loadGallery();
+
+}
 
 /* =====================================================
    DOCUMENT UPLOAD BUTTONS
@@ -943,3 +903,4 @@ function escapeHTML(text) {
 ===================================================== */
 
 updateAdminUI();
+loadGallery();
