@@ -376,6 +376,8 @@ async function loadGallery() {
       supabaseClient.storage
         .from("Photo Gallery")
         .getPublicUrl(file.name);
+   console.log(file.name);
+   console.log(urlData.publicUrl);
 
     const card =
       document.createElement("div");
