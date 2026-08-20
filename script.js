@@ -33,16 +33,6 @@ let isAdmin = sessionStorage.getItem("daheliAdmin") === "true";
 ===================================================== */
 
 
-let documents =
-  JSON.parse(localStorage.getItem("daheliDocuments")) || [];
-
-let income =
-  JSON.parse(localStorage.getItem("daheliIncome")) || [];
-
-let expenses =
-  JSON.parse(localStorage.getItem("daheliExpenses")) || [];
-
-
 /* =====================================================
    MOBILE MENU
 ===================================================== */
@@ -531,265 +521,129 @@ setupFileUpload(
    FILE UPLOAD FUNCTION
 ===================================================== */
 
-function setupFileUpload(
+async function setupFileUpload(
   category,
   inputId,
   buttonId
 ) {
 
-  const input =
-    document.getElementById(inputId);
+  const input = document.getElementById(inputId);
+  const button = document.getElementById(buttonId);
 
-  const button =
-    document.getElementById(buttonId);
+  if (!input || !button) return;
 
-
-  if (!input || !button) {
-    return;
-  }
-
-
-  button.addEventListener("click", function () {
+  button.addEventListener("click", async function () {
 
     if (!isAdmin) {
-
-      alert(
-        "🔐 केवल Admin ही document Upload कर सकता है।"
-      );
-
-      window.location.hash = "admin";
-
+      alert("🔐 केवल Admin ही Upload कर सकता है।");
       return;
-
     }
 
-
-    const file =
-      input.files[0];
-
+    const file = input.files[0];
 
     if (!file) {
-
-      alert(
-        "कृपया पहले document चुनें।"
-      );
-
+      alert("कृपया file चुनें।");
       return;
-
     }
 
+    const fileName =
+      Date.now() + "_" + file.name;
 
-    const reader =
-      new FileReader();
+    const { error } =
+      await supabaseClient.storage
+        .from(category)
+        .upload(fileName, file);
 
+    if (error) {
+      console.error(error);
+      alert(error.message);
+      return;
+    }
 
-    reader.onload = function (event) {
+    input.value = "";
 
+    await renderFiles(category);
 
-      const newFile = {
-
-        id: createId(),
-
-        name: file.name,
-
-        type: file.type,
-
-        size: file.size,
-
-        data: event.target.result,
-
-        date: new Date().toLocaleString("hi-IN")
-
-      };
-
-
-      if (category === "documents") {
-
-        documents.push(newFile);
-
-        localStorage.setItem(
-          "daheliDocuments",
-          JSON.stringify(documents)
-        );
-
-      }
-
-
-      if (category === "income") {
-
-        income.push(newFile);
-
-        localStorage.setItem(
-          "daheliIncome",
-          JSON.stringify(income)
-        );
-
-      }
-
-
-      if (category === "expenses") {
-
-        expenses.push(newFile);
-
-        localStorage.setItem(
-          "daheliExpenses",
-          JSON.stringify(expenses)
-        );
-
-      }
-
-
-      input.value = "";
-
-
-      renderFiles(category);
-
-
-      alert(
-        "✅ Document सफलतापूर्वक Upload हो गया।"
-      );
-
-    };
-
-
-    reader.readAsDataURL(file);
-
+    alert("✅ Upload Successful");
   });
 
 }
+
+
 
 
 /* =====================================================
    GET FILE ARRAY
 ===================================================== */
 
-function getFiles(category) {
-
-  if (category === "documents") {
-    return documents;
-  }
-
-  if (category === "income") {
-    return income;
-  }
-
-  if (category === "expenses") {
-    return expenses;
-  }
-
-  return [];
-
-}
-
 
 /* =====================================================
    RENDER FILES
 ===================================================== */
 
-function renderFiles(category) {
+async function renderFiles(category) {
 
   let listId = "";
 
+  if (category === "documents") listId = "documentsList";
+  if (category === "income") listId = "incomeList";
+  if (category === "expenses") listId = "expensesList";
 
-  if (category === "documents") {
-    listId = "documentsList";
-  }
+  const list = document.getElementById(listId);
 
-  if (category === "income") {
-    listId = "incomeList";
-  }
+  if (!list) return;
 
-  if (category === "expenses") {
-    listId = "expensesList";
-  }
+  const { data: files, error } =
+    await supabaseClient.storage
+      .from(category)
+      .list("", { limit: 100 });
 
-
-  const list =
-    document.getElementById(listId);
-
-
-  if (!list) {
+  if (error) {
+    console.error(error);
     return;
   }
-
-
-  const files =
-    getFiles(category);
-
 
   list.innerHTML = "";
 
-
   if (files.length === 0) {
-
-    list.innerHTML = `
-      <p class="no-document">
-        अभी कोई document उपलब्ध नहीं है।
-      </p>
-    `;
-
+    list.innerHTML =
+      "<p class='no-document'>अभी कोई document उपलब्ध नहीं है।</p>";
     return;
-
   }
 
+  files.forEach((file) => {
 
-  files.forEach(function (file) {
+    const { data: urlData } =
+      supabaseClient.storage
+        .from(category)
+        .getPublicUrl(file.name);
 
-    const item =
-      document.createElement("div");
+    const item = document.createElement("div");
 
-    item.className =
-      "file-item";
-
-
-    let deleteButton = "";
-
-
-    if (isAdmin) {
-
-      deleteButton = `
-        <button
-          class="delete-btn"
-          onclick="deleteFile('${category}', '${file.id}')">
-          🗑️ Delete
-        </button>
-      `;
-
-    }
-
+    item.className = "file-item";
 
     item.innerHTML = `
+      <span>${file.name}</span>
 
-      <div>
+      <a
+        class="download-btn"
+        href="${urlData.publicUrl}"
+        target="_blank">
+        📥 Download
+      </a>
 
-        <div class="file-name">
-          📄 ${escapeHTML(file.name)}
-        </div>
-
-        <div class="file-type">
-          ${file.date || ""}
-        </div>
-
-      </div>
-
-
-      <div class="file-actions">
-
-        <a
-          class="download-btn"
-          href="${file.data}"
-          download="${escapeHTML(file.name)}">
-
-          📥 Download
-
-        </a>
-
-        ${deleteButton}
-
-      </div>
-
+      ${
+        isAdmin
+          ? `
+          <button
+            class="delete-btn"
+            onclick="deleteFile('${category}','${file.name}')">
+            🗑️ Delete
+          </button>
+          `
+          : ""
+      }
     `;
-
 
     list.appendChild(item);
 
@@ -797,90 +651,35 @@ function renderFiles(category) {
 
 }
 
+  
+
 
 /* =====================================================
    DELETE FILE
 ===================================================== */
 
-function deleteFile(category, id) {
+async function deleteFile(category, fileName) {
 
-  if (!isAdmin) {
+  if (!isAdmin) return;
 
-    alert(
-      "🔐 केवल Admin ही document Delete कर सकता है।"
-    );
-
+  if (!confirm("क्या आप यह file Delete करना चाहते हैं?")) {
     return;
-
   }
 
+  const { error } =
+    await supabaseClient.storage
+      .from(category)
+      .remove([fileName]);
 
-  if (!confirm(
-    "क्या आप यह document Delete करना चाहते हैं?"
-  )) {
-
+  if (error) {
+    alert(error.message);
     return;
-
   }
-
-
-  if (category === "documents") {
-
-    documents =
-      documents.filter(function (file) {
-
-        return file.id !== id;
-
-      });
-
-
-    localStorage.setItem(
-      "daheliDocuments",
-      JSON.stringify(documents)
-    );
-
-  }
-
-
-  if (category === "income") {
-
-    income =
-      income.filter(function (file) {
-
-        return file.id !== id;
-
-      });
-
-
-    localStorage.setItem(
-      "daheliIncome",
-      JSON.stringify(income)
-    );
-
-  }
-
-
-  if (category === "expenses") {
-
-    expenses =
-      expenses.filter(function (file) {
-
-        return file.id !== id;
-
-      });
-
-
-    localStorage.setItem(
-      "daheliExpenses",
-      JSON.stringify(expenses)
-    );
-
-  }
-
 
   renderFiles(category);
 
 }
+
 
 
 /* =====================================================
@@ -906,3 +705,6 @@ function escapeHTML(text) {
 
 updateAdminUI();
 loadGallery();
+renderFiles("documents");
+renderFiles("income");
+renderFiles("expenses");
