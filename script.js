@@ -433,8 +433,11 @@ if (galleryUploadBtn) {
 
     for (const file of files) {
 
+  const safeName = file.name
+    .replace(/[^a-zA-Z0-9._-]/g, "_");
+
   const fileName =
-  Date.now() + "." + file.name.split('.').pop();
+    Date.now() + "_" + safeName;
 
   const { error } =
     await supabaseClient.storage
@@ -544,8 +547,11 @@ async function setupFileUpload(
       return;
     }
   
+const safeName = file.name
+  .replace(/[^a-zA-Z0-9._-]/g, "_");
+
 const fileName =
-  Date.now() + "." + file.name.split('.').pop();
+  Date.now() + "_" + safeName;
 
     const { error } =
       await supabaseClient.storage
