@@ -433,8 +433,7 @@ if (galleryUploadBtn) {
 
     for (const file of files) {
 
- const fileName =
-  Date.now() + "_" + encodeURIComponent(file.name);
+ const fileName = file.name;
 
   const { error } =
     await supabaseClient.storage
@@ -544,8 +543,7 @@ async function setupFileUpload(
       return;
     }
   
-const fileName =
-  Date.now() + "_" + encodeURIComponent(file.name);
+const fileName = file.name;
 
     const { error } =
       await supabaseClient.storage
@@ -624,11 +622,7 @@ if (category === "Expenses") listId = "expensesList";
 
     item.className = "file-item";
 
-    const originalName =
-  decodeURIComponent(file.name);
-
-const displayName =
-  originalName.replace(/^\d+_/, "");
+    const displayName = file.name;
 
 item.innerHTML = `
   <span>${displayName}</span>
