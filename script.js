@@ -433,8 +433,14 @@ if (galleryUploadBtn) {
 
     for (const file of files) {
 
-  const fileName =
-  Date.now() + "_" + file.name;
+  const extension = file.name.split('.').pop();
+
+const baseName = file.name.replace(/\.[^/.]+$/, '');
+
+const fileName =
+  Date.now() + "_" +
+  encodeURIComponent(baseName) +
+  "." + extension;
 
   const { error } =
     await supabaseClient.storage
@@ -544,8 +550,14 @@ async function setupFileUpload(
       return;
     }
   
+const extension = file.name.split('.').pop();
+
+const baseName = file.name.replace(/\.[^/.]+$/, '');
+
 const fileName =
-  Date.now() + "_" + file.name;
+  Date.now() + "_" +
+  encodeURIComponent(baseName) +
+  "." + extension;
 
     const { error } =
       await supabaseClient.storage
@@ -625,7 +637,7 @@ if (category === "Expenses") listId = "expensesList";
     item.className = "file-item";
 
     item.innerHTML = `
-     <span>${file.name.replace(/^\d+_/, '')}</span>
+     <span>${decodeURIComponent(file.name.replace(/^\d+_/, ''))}</span>
 
       <a
         class="download-btn"
