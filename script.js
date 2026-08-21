@@ -624,29 +624,34 @@ if (category === "Expenses") listId = "expensesList";
 
     item.className = "file-item";
 
-    item.innerHTML = `
-      <span>${decodeURIComponent(file.name.replace(/^\d+_/, ""))}</span>
+    const originalName =
+  decodeURIComponent(file.name);
 
-      <a
-        class="download-btn"
-        href="${urlData.publicUrl}"
-        target="_blank">
-        📥 Download
-      </a>
+const displayName =
+  originalName.replace(/^\d+_/, "");
 
-      ${
-        isAdmin
-          ? `
-          <button
-            class="delete-btn"
-            onclick="deleteFile('${category}','${file.name}')">
-            🗑️ Delete
-          </button>
-          `
-          : ""
-      }
-    `;
+item.innerHTML = `
+  <span>${displayName}</span>
 
+  <a
+    class="download-btn"
+    href="${urlData.publicUrl}"
+    target="_blank">
+    📥 Download
+  </a>
+
+  ${
+    isAdmin
+      ? `
+      <button
+        class="delete-btn"
+        onclick="deleteFile('${category}','${file.name}')">
+        🗑️ Delete
+      </button>
+      `
+      : ""
+  }
+`;   
     list.appendChild(item);
 
   });
