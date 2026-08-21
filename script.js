@@ -433,8 +433,8 @@ if (galleryUploadBtn) {
 
     for (const file of files) {
 
-  const fileName =
-  Date.now() + "." + file.name.split('.').pop();
+ const fileName =
+  Date.now() + "_" + encodeURIComponent(file.name);
 
   const { error } =
     await supabaseClient.storage
@@ -545,7 +545,7 @@ async function setupFileUpload(
     }
   
 const fileName =
-  Date.now() + "." + file.name.split('.').pop();
+  Date.now() + "_" + encodeURIComponent(file.name);
 
     const { error } =
       await supabaseClient.storage
@@ -625,7 +625,7 @@ if (category === "Expenses") listId = "expensesList";
     item.className = "file-item";
 
     item.innerHTML = `
-      <span>${file.name}</span>
+      <span>${decodeURIComponent(file.name.replace(/^\d+_/, ""))}</span>
 
       <a
         class="download-btn"
