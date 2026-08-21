@@ -433,7 +433,8 @@ if (galleryUploadBtn) {
 
     for (const file of files) {
 
- const fileName = encodeURIComponent(file.name);
+  const fileName =
+  Date.now() + "." + file.name.split('.').pop();
 
   const { error } =
     await supabaseClient.storage
@@ -543,7 +544,8 @@ async function setupFileUpload(
       return;
     }
   
-const fileName = encodeURIComponent(file.name);
+const fileName =
+  Date.now() + "." + file.name.split('.').pop();
 
     const { error } =
       await supabaseClient.storage
@@ -622,30 +624,29 @@ if (category === "Expenses") listId = "expensesList";
 
     item.className = "file-item";
 
-    const displayName = decodeURIComponent(file.name);
+    item.innerHTML = `
+      <span>${file.name}</span>
 
-item.innerHTML = `
-  <span>${displayName}</span>
+      <a
+        class="download-btn"
+        href="${urlData.publicUrl}"
+        target="_blank">
+        📥 Download
+      </a>
 
-  <a
-    class="download-btn"
-    href="${urlData.publicUrl}"
-    target="_blank">
-    📥 Download
-  </a>
+      ${
+        isAdmin
+          ? `
+          <button
+            class="delete-btn"
+            onclick="deleteFile('${category}','${file.name}')">
+            🗑️ Delete
+          </button>
+          `
+          : ""
+      }
+    `;
 
-  ${
-    isAdmin
-      ? `
-      <button
-        class="delete-btn"
-        onclick="deleteFile('${category}','${file.name}')">
-        🗑️ Delete
-      </button>
-      `
-      : ""
-  }
-`;   
     list.appendChild(item);
 
   });
