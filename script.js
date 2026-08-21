@@ -431,18 +431,18 @@ if (galleryUploadBtn) {
         return;
       }
 
-      for (const file of files) {
+    for (const file of files) {
 
-        const fileName =
-          Date.now() + "_" + file.name;
+  const safeName = file.name
+    .replace(/[^a-zA-Z0-9._-]/g, "_");
 
-        const { error } =
-          await supabaseClient.storage
-            .from("Photo Gallery")
-            .upload(
-              fileName,
-              file
-            );
+  const fileName =
+    Date.now() + "_" + safeName;
+
+  const { error } =
+    await supabaseClient.storage
+      .from("Photo Gallery")
+      .upload(fileName, file);
 
         if (error) {
 
@@ -546,9 +546,12 @@ async function setupFileUpload(
       alert("कृपया file चुनें।");
       return;
     }
+  
+const safeName = file.name
+  .replace(/[^a-zA-Z0-9._-]/g, "_");
 
-    const fileName =
-      Date.now() + "_" + file.name;
+const fileName =
+  Date.now() + "_" + safeName;
 
     const { error } =
       await supabaseClient.storage
