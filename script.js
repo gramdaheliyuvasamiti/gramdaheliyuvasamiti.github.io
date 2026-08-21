@@ -208,6 +208,8 @@ const expensesUploadPanel =
   }
 
   loadGallery();
+console.log("Supabase Connected");
+console.log(supabaseClient);
 renderFiles("Samiti Documents");
 renderFiles("Incoming Payment");
 renderFiles("Expenses");
@@ -597,6 +599,10 @@ if (category === "Expenses") listId = "expensesList";
       .from(category)
       .list("", { limit: 100 });
 
+  console.log("Bucket:", category);
+ console.log("Files:", files);
+ console.log("Error:", error);
+
   if (error) {
     console.error(error);
     return;
@@ -707,3 +713,4 @@ loadGallery();
 renderFiles("Samiti Documents");
 renderFiles("Incoming Payment");
 renderFiles("Expenses");
+
