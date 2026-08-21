@@ -141,14 +141,14 @@ function updateAdminUI() {
   const galleryAdminBox =
     document.getElementById("galleryAdminBox");
 
-  const documentsUploadPanel =
-    document.getElementById("documentsUploadPanel");
+ const documentsUploadPanel =
+  document.getElementById("documentsUploadPanel");
 
-  const incomeUploadPanel =
-    document.getElementById("incomeUploadPanel");
+const incomeUploadPanel =
+  document.getElementById("incomeUploadPanel");
 
-  const expensesUploadPanel =
-    document.getElementById("expensesUploadPanel");
+const expensesUploadPanel =
+  document.getElementById("expensesUploadPanel");
 
   if (isAdmin) {
 
@@ -208,9 +208,9 @@ function updateAdminUI() {
   }
 
   loadGallery();
-  renderFiles("documents");
-  renderFiles("income");
-  renderFiles("expenses");
+renderFiles("Samiti Documents");
+renderFiles("Incoming Payment");
+renderFiles("Expenses");
 }
 
 if (loginBtn) {
@@ -497,21 +497,20 @@ async function deletePhoto(fileName) {
 /* =====================================================
    DOCUMENT UPLOAD BUTTONS
 ===================================================== */
-
 setupFileUpload(
-  "documents",
+  "Samiti Documents",
   "documentsInput",
   "documentsUploadBtn"
 );
 
 setupFileUpload(
-  "income",
+  "Incoming Payment",
   "incomeInput",
   "incomeUploadBtn"
 );
 
 setupFileUpload(
-  "expenses",
+  "Expenses",
   "expensesInput",
   "expensesUploadBtn"
 );
@@ -585,9 +584,9 @@ async function renderFiles(category) {
 
   let listId = "";
 
-  if (category === "documents") listId = "documentsList";
-  if (category === "income") listId = "incomeList";
-  if (category === "expenses") listId = "expensesList";
+  if (category === "Samiti Documents") listId = "documentsList";
+if (category === "Incoming Payment") listId = "incomeList";
+if (category === "Expenses") listId = "expensesList";
 
   const list = document.getElementById(listId);
 
@@ -705,6 +704,6 @@ function escapeHTML(text) {
 
 updateAdminUI();
 loadGallery();
-renderFiles("documents");
-renderFiles("income");
-renderFiles("expenses");
+renderFiles("Samiti Documents");
+renderFiles("Incoming Payment");
+renderFiles("Expenses");
