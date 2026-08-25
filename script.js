@@ -24,6 +24,17 @@ const supabaseClient = supabase.createClient(
 */
 
 const ADMIN_PASSWORD = "Daheli@2026";
+const DOWNLOAD_PASSWORD = "Member@2026";
+
+function secureDownload(url) {
+  const pass = prompt("📥 Enter Password ");
+
+  if (pass === DOWNLOAD_PASSWORD) {
+    window.open(url);
+  } else {
+    alert("❌ Wrong Password");
+  }
+}
 
 let isAdmin = sessionStorage.getItem("daheliAdmin") === "true";
 
@@ -639,12 +650,12 @@ if (category === "Expenses") listId = "expensesList";
     item.innerHTML = `
      <span>${decodeURIComponent(file.name.replace(/^\d+_/, ''))}</span>
 
-      <a
-        class="download-btn"
-        href="${urlData.publicUrl}"
-        target="_blank">
-        📥 Download
-      </a>
+     <a
+   class="download-btn"
+   href="${urlData.publicUrl}"
+   target="_blank">
+   📥 Download
+</a>
 
       ${
         isAdmin
