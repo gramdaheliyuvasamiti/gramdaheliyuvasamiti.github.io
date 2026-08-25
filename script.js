@@ -650,11 +650,11 @@ if (category === "Expenses") listId = "expensesList";
     item.innerHTML = `
      <span>${decodeURIComponent(file.name.replace(/^\d+_/, ''))}</span>
 
-     <a
-   class="download-btn"
-   href="${urlData.publicUrl}"
-   target="_blank">
-   📥 Download
+ <a
+ class="download-btn"
+ href="#"
+ onclick="secureDownload('${urlData.publicUrl}'); return false;">
+ 📥 Download
 </a>
 
       ${
