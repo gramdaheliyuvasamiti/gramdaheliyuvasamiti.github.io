@@ -165,7 +165,7 @@ body {
 ===================================================== */
 
 .hero {
-  min-height: 520px;
+  min-height: 80vh;
   position: relative;
   display: flex;
   align-items: center;
