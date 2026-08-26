@@ -173,10 +173,16 @@ body {
   background-image: url("Village.jpg");
   background-size: cover;
   background-position: center;
+
+  filter: brightness(1.4);
 }
 
-.hero-overlay {
-  display: none;
+.hero::before{
+  content:none !important;
+}
+
+.hero-overlay{
+  display:none !important;
 }
 
 .hero-content {
