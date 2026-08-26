@@ -172,24 +172,23 @@ body {
 
   background-image:
     linear-gradient(
-      rgba(30,20,35,.38),
-      rgba(30,20,35,.55)
+      rgba(30,20,35,.10),
+      rgba(30,20,35,.20)
     ),
     url("Village.jpg");
 
   background-size: cover;
   background-position: center;
+
+  filter: brightness(1.15);
 }
 
 .hero-overlay {
-  position: absolute;
-  inset: 0;
-
   background:
     linear-gradient(
       90deg,
-      rgba(25,15,35,.72),
-      rgba(25,15,35,.1)
+      rgba(25,15,35,.35),
+      rgba(25,15,35,.02)
     );
 }
 
