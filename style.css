@@ -170,26 +170,13 @@ body {
   display: flex;
   align-items: center;
 
-  background-image:
-    linear-gradient(
-      rgba(30,20,35,.10),
-      rgba(30,20,35,.20)
-    ),
-    url("Village.jpg");
-
+  background-image: url("Village.jpg");
   background-size: cover;
   background-position: center;
-
-  filter: brightness(1.15);
 }
 
 .hero-overlay {
-  background:
-    linear-gradient(
-      90deg,
-      rgba(25,15,35,.35),
-      rgba(25,15,35,.02)
-    );
+  display: none;
 }
 
 .hero-content {
