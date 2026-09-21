@@ -344,9 +344,16 @@ async function loadGallery() {
   const gallery =
     document.getElementById("photoGallery");
 
+    const homeGallery =
+    document.getElementById("homePhotoGallery");
+
   if (!gallery) return;
 
   gallery.innerHTML = "<p>Loading...</p>";
+
+if(homeGallery){
+    homeGallery.innerHTML = "<p>Loading...</p>";
+}
 
   const { data, error } =
     await supabaseClient.storage
@@ -364,6 +371,10 @@ async function loadGallery() {
   }
 
   gallery.innerHTML = "";
+
+if(homeGallery){
+    homeGallery.innerHTML = "";
+}
 
   if (data.length === 0) {
 
@@ -406,6 +417,19 @@ async function loadGallery() {
     `;
 
     gallery.appendChild(card);
+    if(homeGallery){
+
+    const homeCard = card.cloneNode(true);
+
+    const deleteBtn =
+      homeCard.querySelector(".photo-delete");
+
+    if(deleteBtn){
+        deleteBtn.remove();
+    }
+
+    homeGallery.appendChild(homeCard);
+}
 
   });
 
