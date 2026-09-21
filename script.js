@@ -26,15 +26,7 @@ const supabaseClient = supabase.createClient(
 const ADMIN_PASSWORD = "Daheli@2026";
 const DOWNLOAD_PASSWORD = "Member@2026";
 
-function secureDownload(url) {
-  const pass = prompt("📥 Enter Password ");
 
-  if (pass === DOWNLOAD_PASSWORD) {
-    window.open(url);
-  } else {
-    alert("❌ Wrong Password");
-  }
-}
 
 let isAdmin = sessionStorage.getItem("daheliAdmin") === "true";
 
@@ -705,29 +697,49 @@ if (category === "Expenses") listId = "expensesList";
 
 async function downloadFile(category, fileName) {
 
-  const { data, error } = await supabaseClient.storage
-    .from(category)
-    .download(fileName);
+  const pass = prompt("📥 Enter Password");
 
-  if (error) {
-    console.error(error);
-    alert("Download failed: " + error.message);
+  if (pass !== DOWNLOAD_PASSWORD) {
+    alert("❌ Wrong Password");
     return;
   }
 
-  const url = URL.createObjectURL(data);
+  try {
 
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = fileName.replace(/^\d+_/, "");
+    const { data, error } = await supabaseClient.storage
+      .from(category)
+      .download(fileName);
 
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
+    if (error) {
+      console.error(error);
+      alert("❌ Download failed: " + error.message);
+      return;
+    }
 
-  URL.revokeObjectURL(url);
+    const url = URL.createObjectURL(data);
+
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = decodeURIComponent(
+      fileName.replace(/^\d+_/, "")
+    );
+
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+    }, 1000);
+
+  } catch (error) {
+
+    console.error(error);
+    alert("❌ Download failed");
+
+  }
 }
-
 
 /* =====================================================
    DELETE FILE
@@ -754,34 +766,6 @@ async function deleteFile(category, fileName) {
   renderFiles(category);
 }
   
-
-
-/* =====================================================
-   DELETE FILE
-===================================================== */
-
-async function deleteFile(category, fileName) {
-
-  if (!isAdmin) return;
-
-  if (!confirm("क्या आप यह file Delete करना चाहते हैं?")) {
-    return;
-  }
-
-  const { error } =
-    await supabaseClient.storage
-      .from(category)
-      .remove([fileName]);
-
-  if (error) {
-    alert(error.message);
-    return;
-  }
-
-  renderFiles(category);
-
-}
-
 
 
 /* =====================================================
