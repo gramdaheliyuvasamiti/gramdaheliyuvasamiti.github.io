@@ -674,12 +674,11 @@ if (category === "Expenses") listId = "expensesList";
     item.innerHTML = `
      <span>${decodeURIComponent(file.name.replace(/^\d+_/, ''))}</span>
 
- <a
- class="download-btn"
- href="#"
- onclick="secureDownload('${urlData.publicUrl}'); return false;">
- 📥 Download
-</a>
+<button
+  class="download-btn"
+  onclick="downloadFile('${category}', '${file.name}')">
+  📥 Download
+</button>
 
       ${
         isAdmin
@@ -700,6 +699,60 @@ if (category === "Expenses") listId = "expensesList";
 
 }
 
+/* =====================================================
+   DOWNLOAD FILE
+===================================================== */
+
+async function downloadFile(category, fileName) {
+
+  const { data, error } = await supabaseClient.storage
+    .from(category)
+    .download(fileName);
+
+  if (error) {
+    console.error(error);
+    alert("Download failed: " + error.message);
+    return;
+  }
+
+  const url = URL.createObjectURL(data);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = fileName.replace(/^\d+_/, "");
+
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  URL.revokeObjectURL(url);
+}
+
+
+/* =====================================================
+   DELETE FILE
+===================================================== */
+
+async function deleteFile(category, fileName) {
+
+  if (!isAdmin) return;
+
+  if (!confirm("क्या आप यह file Delete करना चाहते हैं?")) {
+    return;
+  }
+
+  const { error } =
+    await supabaseClient.storage
+      .from(category)
+      .remove([fileName]);
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  renderFiles(category);
+}
   
 
 
