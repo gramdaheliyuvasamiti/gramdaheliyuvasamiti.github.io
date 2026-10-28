@@ -26,7 +26,15 @@ const supabaseClient = supabase.createClient(
 const ADMIN_PASSWORD = "Daheli@2026";
 const DOWNLOAD_PASSWORD = "Member@2026";
 
+function secureDownload(url) {
+  const pass = prompt("📥 Enter Password ");
 
+  if (pass === DOWNLOAD_PASSWORD) {
+    window.open(url);
+  } else {
+    alert("❌ Wrong Password");
+  }
+}
 
 let isAdmin = sessionStorage.getItem("daheliAdmin") === "true";
 
@@ -225,25 +233,21 @@ if (loginBtn) {
     const password =
       adminPassword.value.trim();
 
-    if (password === ADMIN_PASSWORD) {
+    
+if (password === ADMIN_PASSWORD) {
 
-      isAdmin = true;
+  isAdmin = true;
 
-      sessionStorage.setItem(
-        "daheliAdmin",
-        "true"
-      );
+  sessionStorage.setItem("daheliAdmin", "true");
 
-      loginMessage.textContent =
-        "✅ Login सफल हुआ।";
+  loginMessage.textContent = "✅ Login सफल हुआ।";
+  loginMessage.style.color = "#28633b";
 
-      loginMessage.style.color =
-        "#28633b";
+  adminPassword.value = "";
 
-      adminPassword.value = "";
+  window.location.href = "account.html";
 
-      updateAdminUI();
-
+     
     } else {
 
       loginMessage.textContent =
@@ -697,49 +701,29 @@ if (category === "Expenses") listId = "expensesList";
 
 async function downloadFile(category, fileName) {
 
-  const pass = prompt("📥 Enter Password");
+  const { data, error } = await supabaseClient.storage
+    .from(category)
+    .download(fileName);
 
-  if (pass !== DOWNLOAD_PASSWORD) {
-    alert("❌ Wrong Password");
+  if (error) {
+    console.error(error);
+    alert("Download failed: " + error.message);
     return;
   }
 
-  try {
+  const url = URL.createObjectURL(data);
 
-    const { data, error } = await supabaseClient.storage
-      .from(category)
-      .download(fileName);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = fileName.replace(/^\d+_/, "");
 
-    if (error) {
-      console.error(error);
-      alert("❌ Download failed: " + error.message);
-      return;
-    }
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
 
-    const url = URL.createObjectURL(data);
-
-    const a = document.createElement("a");
-
-    a.href = url;
-    a.download = decodeURIComponent(
-      fileName.replace(/^\d+_/, "")
-    );
-
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-
-    setTimeout(() => {
-      URL.revokeObjectURL(url);
-    }, 1000);
-
-  } catch (error) {
-
-    console.error(error);
-    alert("❌ Download failed");
-
-  }
+  URL.revokeObjectURL(url);
 }
+
 
 /* =====================================================
    DELETE FILE
@@ -766,6 +750,34 @@ async function deleteFile(category, fileName) {
   renderFiles(category);
 }
   
+
+
+/* =====================================================
+   DELETE FILE
+===================================================== */
+
+async function deleteFile(category, fileName) {
+
+  if (!isAdmin) return;
+
+  if (!confirm("क्या आप यह file Delete करना चाहते हैं?")) {
+    return;
+  }
+
+  const { error } =
+    await supabaseClient.storage
+      .from(category)
+      .remove([fileName]);
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  renderFiles(category);
+
+}
+
 
 
 /* =====================================================
