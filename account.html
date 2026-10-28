@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ग्राम दहेली युवा समिति | अकाउंटिंग पोर्टल</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      color: #172033;
+    }
+    header {
+      background: #14532d;
+      color: white;
+      padding: 20px;
+    }
+    header h2 { margin: 0 0 6px; }
+    header p { margin: 0; }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 14px;
+      background: white;
+      box-shadow: 0 2px 8px #0001;
+    }
+    button {
+      border: 0;
+      padding: 11px 15px;
+      border-radius: 7px;
+      cursor: pointer;
+      background: #166534;
+      color: white;
+      font-size: 14px;
+    }
+    nav button { background: #e2e8f0; color: #172033; }
+    nav button.active { background: #166534; color: white; }
+    .logout { background: #b91c1c; margin-left: auto; }
+    main { padding: 20px; max-width: 1100px; margin: auto; }
+    .panel {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 10px #0000000b;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    input, select, textarea {
+      display: block;
+      width: 100%;
+      padding: 11px;
+      margin: 7px 0 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      background: white;
+    }
+    label { font-weight: 600; font-size: 14px; }
+    .page { display: none; }
+    .page.active { display: block; }
+    .stat { font-size: 25px; font-weight: bold; margin-top: 8px; }
+    .muted { color: #64748b; font-size: 13px; }
+    .table-wrap { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+    th, td { padding: 10px; border-bottom: 1px solid #e2e8f0; text-align: left; }
+    th { background: #f8fafc; }
+    .danger { background: #b91c1c; }
+    @media print {
+      nav, .no-print, header { display: none !important; }
+      .page { display: none !important; }
+      .page.active { display: block !important; }
+      body { background: white; }
+      .panel { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+<script>
+  // सामान्य पेज-गेट: यह अकेले सुरक्षित authentication नहीं है।
+  if (sessionStorage.getItem("daheliAdmin") !== "true") {
+    window.location.replace("index.html#admin");
+  }
+</script>
+
+<header>
+  <h2>ग्राम दहेली युवा समिति</h2>
+  <p>समिति लेखा एवं मासिक भुगतान पोर्टल</p>
+</header>
+
+<nav class="no-print">
+  <button class="active" data-page="dashboard">डैशबोर्ड</button>
+  <button data-page="members">सदस्य भुगतान</button>
+  <button data-page="expenses">खर्च / बिल</button>
+  <button data-page="donations">दान रसीद</button>
+  <button data-page="receiving">मटेरियल रिसीविंग</button>
+  <button data-page="reports">रिपोर्ट</button>
+  <button id="logout" class="logout">Logout</button>
+</nav>
+
+<main>
+  <section id="dashboard" class="page active">
+    <div class="panel">
+      <h2>डैशबोर्ड</h2>
+      <p>समिति के लेखा रिकॉर्ड यहाँ दर्ज और देख सकते हैं।</p>
+      <p class="muted">इस संस्करण में डेटा इसी ब्राउज़र में सेव होगा। अन्य डिवाइस पर डेटा साझा करने के लिए सुरक्षित ऑनलाइन डेटाबेस जोड़ना होगा।</p>
+    </div>
+    <div class="grid">
+      <div class="panel">कुल खर्च<div id="totalExpense" class="stat">₹0</div></div>
+      <div class="panel">कुल दान<div id="totalDonation" class="stat">₹0</div></div>
+      <div class="panel">सदस्य भुगतान<div id="totalPayment" class="stat">₹0</div></div>
+      <div class="panel">रिसीविंग रिकॉर्ड<div id="totalReceiving" class="stat">0</div></div>
+    </div>
+  </section>
+
+  <section id="members" class="page">
+    <div class="panel">
+      <h2>सदस्य भुगतान एंट्री</h2>
+      <form id="memberForm">
+        <div class="grid">
+          <div><label>सदस्य आईडी</label><input name="memberId" placeholder="DYS-001" required></div>
+          <div><label>सदस्य का नाम</label><input name="name" required></div>
+          <div><label>पिता का नाम</label><input name="father"></div>
+          <div><label>मोबाइल नंबर</label><input name="mobile" inputmode="numeric"></div>
+          <div><label>महीना</label><select name="month" required>
+            <option value="">महीना चुनें</option>
+            <option>जनवरी</option><option>फरवरी</option><option>मार्च</option>
+            <option>अप्रैल</option><option>मई</option><option>जून</option>
+            <option>जुलाई</option><option>अगस्त</option><option>सितंबर</option>
+            <option>अक्टूबर</option><option>नवंबर</option><option>दिसंबर</option>
+          </select></div>
+          <div><label>वर्ष</label><input name="year" type="number" value="2026" required></div>
+          <div><label>राशि (₹)</label><input name="amount" type="number" min="1" step="0.01" required></div>
+          <div><label>भुगतान की तारीख</label><input name="date" type="date" required></div>
+        </div>
+        <button type="submit">भुगतान सेव करें</button>
+      </form>
+    </div>
+    <div class="panel">
+      <h3>भुगतान रिकॉर्ड</h3>
+      <input id="memberSearch" placeholder="नाम या सदस्य आईडी खोजें">
+      <div id="memberRecords" class="table-wrap"></div>
+    </div>
+  </section>
+
+  <section id="expenses" class="page">
+    <div class="panel">
+      <h2>खर्च / बिल एंट्री</h2>
+      <form id="expenseForm">
+        <div class="grid">
+          <div><label>बिल नंबर</label><input name="billNo" required></div>
+          <div><label>तारीख</label><input name="date" type="date" required></div>
+          <div><label>विक्रेता / भुगतान पाने वाला</label><input name="party" required></div>
+          <div><label>काम / खर्च का विवरण</label><input name="description" required></div>
+          <div><label>राशि (₹)</label><input name="amount" type="number" min="0.01" step="0.01" required></div>
+        </div>
+        <label>नोट</label><textarea name="notes"></textarea>
+        <button type="submit">खर्च सेव करें</button>
+      </form>
+    </div>
+    <div class="panel">
+      <h3>खर्च रिकॉर्ड</h3>
+      <div id="expenseRecords" class="table-wrap"></div>
+    </div>
+  </section>
+
+  <section id="donations" class="page">
+    <div class="panel">
+      <h2>दान रसीद</h2>
+      <form id="donationForm">
+        <div class="grid">
+          <div><label>रसीद नंबर</label><input name="receiptNo" required></div>
+          <div><label>तारीख</label><input name="date" type="date" required></div>
+          <div><label>दाता का नाम</label><input name="donor" required></div>
+          <div><label>मोबाइल नंबर</label><input name="mobile" inputmode="numeric"></div>
+          <div><label>दान राशि (₹)</label><input name="amount" type="number" min="1" step="0.01" required></div>
+          <div><label>दान का उद्देश्य</label><input name="purpose"></div>
+        </div>
+        <button type="submit">दान सेव करें</button>
+      </form>
+    </div>
+    <div class="panel">
+      <h3>दान रिकॉर्ड</h3>
+      <div id="donationRecords" class="table-wrap"></div>
+    </div>
+  </section>
+
+  <section id="receiving" class="page">
+    <div class="panel">
+      <h2>मटेरियल रिसीविंग</h2>
+      <form id="receivingForm">
+        <div class="grid">
+          <div><label>रिसीविंग नंबर</label><input name="receiptNo" required></div>
+          <div><label>तारीख</label><input name="date" type="date" required></div>
+          <div><label>साइट / स्थान</label><input name="site" required></div>
+          <div><label>सप्लायर का नाम</label><input name="supplier" required></div>
+          <div><label>चालान नंबर</label><input name="challan"></div>
+          <div><label>वाहन नंबर</label><input name="vehicle"></div>
+          <div><label>सामग्री का नाम</label><input name="material" required></div>
+          <div><label>मात्रा</label><input name="qty" type="number" min="0.01" step="any" required></div>
+          <div><label>यूनिट</label><select name="unit"><option>नग</option><option>बैग</option><option>किलो</option><option>टन</option><option>लीटर</option><option>फीट</option><option>मीटर</option><option>अन्य</option></select></div>
+          <div><label>प्राप्त करने वाले का नाम</label><input name="receivedBy" required></div>
+          <div><label>सामग्री की स्थिति</label><select name="condition"><option>ठीक प्राप्त</option><option>आंशिक क्षति</option><option>जाँच आवश्यक</option></select></div>
+        </div>
+        <label>टिप्पणी</label><textarea name="notes"></textarea>
+        <button type="submit">रिसीविंग सेव करें</button>
+      </form>
+    </div>
+    <div class="panel">
+      <h3>रिसीविंग रिकॉर्ड</h3>
+      <div id="receivingRecords" class="table-wrap"></div>
+    </div>
+  </section>
+
+  <section id="reports" class="page">
+    <div class="panel">
+      <h2>रिपोर्ट और बैकअप</h2>
+      <p>नीचे से रिकॉर्ड CSV में डाउनलोड या प्रिंट कर सकते हैं।</p>
+      <button id="exportCsv">CSV डाउनलोड करें</button>
+      <button id="backupJson">JSON बैकअप डाउनलोड करें</button>
+      <button onclick="window.print()">प्रिंट / PDF</button>
+      <button id="clearAll" class="danger">सभी रिकॉर्ड हटाएँ</button>
+    </div>
+    <div class="panel">
+      <h3>आय-व्यय सारांश</h3>
+      <p>कुल सदस्य भुगतान: <strong id="reportPayments">₹0</strong></p>
+      <p>कुल दान: <strong id="reportDonations">₹0</strong></p>
+      <p>कुल खर्च: <strong id="reportExpenses">₹0</strong></p>
+      <p>शेष राशि: <strong id="reportBalance">₹0</strong></p>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  if (sessionStorage.getItem("daheliAdmin") !== "true") return;
+
+  const KEY = "daheliAccountingRecordsV1";
+  const emptyData = () => ({members: [], expenses: [], donations: [], receiving: []});
+  let db;
+  try {
+    db = JSON.parse(localStorage.getItem(KEY)) || emptyData();
+  } catch {
+    db = emptyData();
+  }
+  ["members", "expenses", "donations", "receiving"].forEach(k => {
+    if (!Array.isArray(db[k])) db[k] = [];
+  });
+
+  const money = n => "₹" + Number(n || 0).toLocaleString("en-IN", {maximumFractionDigits: 2});
+  const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  }[c]));
+  const save = () => {
+    localStorage.setItem(KEY, JSON.stringify(db));
+    render();
+  };
+  const values = form => Object.fromEntries(new FormData(form).entries());
+
+  document.querySelectorAll("nav button[data-page]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      document.querySelectorAll("nav button[data-page]").forEach(b => b.classList.remove("active"));
+      document.getElementById(btn.dataset.page).classList.add("active");
+      btn.classList.add("active");
+    });
+  });
+
+  document.getElementById("logout").onclick = () => {
+    sessionStorage.removeItem("daheliAdmin");
+    window.location.replace("index.html#admin");
+  };
+
+  function bindForm(id, key) {
+    document.getElementById(id).addEventListener("submit", e => {
+      e.preventDefault();
+      const record = values(e.target);
+      record.id = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random()));
+      record.createdAt = new Date().toISOString();
+      db[key].push(record);
+      save();
+      e.target.reset();
+      const dateInput = e.target.querySelector('input[type="date"]');
+      if (dateInput) dateInput.value = new Date().toISOString().slice(0, 10);
+      alert("रिकॉर्ड सेव हो गया।");
+    });
+  }
+
+  bindForm("memberForm", "members");
+  bindForm("expenseForm", "expenses");
+  bindForm("donationForm", "donations");
+  bindForm("receivingForm", "receiving");
+
+  document.querySelectorAll('input[type="date"]').forEach(el => {
+    el.value = new Date().toISOString().slice(0, 10);
+  });
+
+  function table(key, fields) {
+    if (!db[key].length) return "<p>अभी कोई रिकॉर्ड नहीं है।</p>";
+    return '<table><thead><tr>' +
+      fields.map(f => `<th>${esc(f[1])}</th>`).join("") +
+      '<th class="no-print">कार्य</th></tr></thead><tbody>' +
+      db[key].map(r => `<tr>${fields.map(f => `<td>${esc(f[0] === "amount" ? money(r[f[0]]) : r[f[0]])}</td>`).join("")}
+        <td class="no-print"><button class="danger" data-delete="${esc(key)}" data-id="${esc(r.id)}">हटाएँ</button></td></tr>`).join("") +
+      "</tbody></table>";
+  }
+
+  function render() {
+    document.getElementById("memberRecords").innerHTML = table("members", [
+      ["memberId","आईडी"],["name","नाम"],["month","महीना"],["year","वर्ष"],["amount","राशि"],["date","तारीख"]
+    ]);
+    document.getElementById("expenseRecords").innerHTML = table("expenses", [
+      ["billNo","बिल नंबर"],["date","तारीख"],["party","भुगतान पाने वाला"],["description","विवरण"],["amount","राशि"]
+    ]);
+    document.getElementById("donationRecords").innerHTML = table("donations", [
+      ["receiptNo","रसीद नंबर"],["date","तारीख"],["donor","दाता"],["purpose","उद्देश्य"],["amount","राशि"]
+    ]);
+    document.getElementById("receivingRecords").innerHTML = table("receiving", [
+      ["receiptNo","रिसीविंग नंबर"],["date","तारीख"],["site","साइट"],["supplier","सप्लायर"],["material","सामग्री"],["qty","मात्रा"],["unit","यूनिट"],["condition","स्थिति"]
+    ]);
+
+    const payments = db.members.reduce((s,r) => s + Number(r.amount || 0), 0);
+    const donations = db.donations.reduce((s,r) => s + Number(r.amount || 0), 0);
+    const expenses = db.expenses.reduce((s,r) => s + Number(r.amount || 0), 0);
+    document.getElementById("totalPayment").textContent = money(payments);
+    document.getElementById("totalDonation").textContent = money(donations);
+    document.getElementById("totalExpense").textContent = money(expenses);
+    document.getElementById("totalReceiving").textContent = db.receiving.length;
+    document.getElementById("reportPayments").textContent = money(payments);
+    document.getElementById("reportDonations").textContent = money(donations);
+    document.getElementById("reportExpenses").textContent = money(expenses);
+    document.getElementById("reportBalance").textContent = money(payments + donations - expenses);
+  }
+
+  document.addEventListener("click", e => {
+    const btn = e.target.closest("button[data-delete]");
+    if (!btn) return;
+    if (!confirm("क्या आप यह रिकॉर्ड हटाना चाहते हैं?")) return;
+    const key = btn.dataset.delete;
+    db[key] = db[key].filter(r => r.id !== btn.dataset.id);
+    save();
+  });
+
+  document.getElementById("memberSearch").addEventListener("input", e => {
+    const q = e.target.value.toLowerCase();
+    document.querySelectorAll("#memberRecords tbody tr").forEach(tr => {
+      tr.style.display = tr.textContent.toLowerCase().includes(q) ? "" : "none";
+    });
+  });
+
+  document.getElementById("exportCsv").onclick = () => {
+    const rows = [["प्रकार","रिकॉर्ड"]];
+    for (const key of ["members","expenses","donations","receiving"]) {
+      db[key].forEach(r => rows.push([key, JSON.stringify(r)]));
+    }
+    const csv = "\uFEFF" + rows.map(row =>
+      row.map(v => '"' + String(v ?? "").replace(/"/g, '""') + '"').join(",")
+    ).join("\r\n");
+    const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"});
+    download(blob, "daheli-accounting.csv");
+  };
+
+  document.getElementById("backupJson").onclick = () => {
+    download(new Blob([JSON.stringify(db, null, 2)], {type:"application/json"}), "daheli-accounting-backup.json");
+  };
+
+  function download(blob, name) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = name;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  document.getElementById("clearAll").onclick = () => {
+    if (!confirm("सभी अकाउंटिंग रिकॉर्ड स्थायी रूप से हटाने हैं? पहले बैकअप डाउनलोड कर लें।")) return;
+    db = emptyData();
+    save();
+  };
+
+  render();
+})();
+</script>
+</body>
+</html>
