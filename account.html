@@ -485,7 +485,7 @@ store();render();initExpenseUI();showMainTab('memberTab');refreshDonationYearOpt
   const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_7cKvIjO6LXkpnFmGj8VaHA_fHQKNsui";
   const TABLE = "member_register";
   const ROW_ID = 1;
-  const APP_KEYS = ["daheli_register_v1", "daheli_selected_year", "daheli_document_branding_v1", "daheli_used_expense_bill_numbers_v1", "daheli_donation_entries_v1", "daheli_bill_entries_v1", "daheli_bill_details_used_numbers_v1", "daheli_member_import_dyss_001_051_v1"];
+  const APP_KEYS = ["daheli_register_v1", "daheli_selected_year", "daheli_document_branding_v1", "daheli_used_expense_bill_numbers_v1", "daheli_donation_entries_v1", "daheli_bill_entries_v1", "daheli_bill_details_used_numbers_v1", "daheli_member_import_dyss_001_051_v1", "daheli_fresh_reset_51members_v1"];
   const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
   const loginBox = document.getElementById("cloudLogin");
   const loginBtn = document.getElementById("cloudLoginBtn");
@@ -508,28 +508,57 @@ store();render();initExpenseUI();showMainTab('memberTab');refreshDonationYearOpt
     for (const key of APP_KEYS) { const value = localStorage.getItem(key); if (value !== null) out[key] = value; }
     return out;
   }
-  function backupLocal() {
-    try { localStorage.setItem("daheli_local_backup_before_supabase_v1", JSON.stringify(snapshot())); }
-    catch (e) { console.warn("Local backup could not be saved:", e); }
+  const RESET_KEY = "daheli_fresh_reset_51members_v1";
+  const DYSS_MASTER_FRESH = [{"id":"DYSS-001","name":"Satpal Rawat","father":"Mr. Sain Singh Rawat","mobile":"9627265112"},{"id":"DYSS-002","name":"Kamal Rawat","father":"Mr. Sain Singh Rawat","mobile":"9548813587"},{"id":"DYSS-003","name":"Jagpal Rawat","father":"Mr. Sain Singh Rawat","mobile":"6351153588"},{"id":"DYSS-004","name":"Rahul Rawat","father":"Mr. Pirthvi Singh Rawat","mobile":"8650363435"},{"id":"DYSS-005","name":"Rohit Rawat","father":"Mr. Pirthvi Singh Rawat","mobile":"9997445710"},{"id":"DYSS-006","name":"Rajender Singh Rawat","father":"Mr. Trilok Singh Rawat","mobile":"6395505213"},{"id":"DYSS-007","name":"Narendra Rawat","father":"Mr. Hayat Singh Rawat","mobile":"9315795229"},{"id":"DYSS-008","name":"Virendra singh panasi","father":"Mr. Mangal singh panasi","mobile":"9013368420"},{"id":"DYSS-009","name":"Surendra singh panasi","father":"Mr. Mangal singh panasi","mobile":"9811512178"},{"id":"DYSS-010","name":"Amit Rawat","father":"Mr. Thakur singh rawat","mobile":"9893049534"},{"id":"DYSS-011","name":"Sumit Rawat","father":"Mr. Thakur singh rawat","mobile":"9650513582"},{"id":"DYSS-012","name":"Puneet Negi","father":"Mr. Thakur singh Negi","mobile":"9717027800"},{"id":"DYSS-013","name":"Sanjay Rawat","father":"Mr. Kunwar singh Rawat","mobile":"8433016532"},{"id":"DYSS-014","name":"Harvinder Singh Negi","father":"Mr. Digpal Singh Negi","mobile":"9968322061"},{"id":"DYSS-015","name":"Nirmal Singh Negi","father":"Mr. Yashpal Singh Negi","mobile":"9711725901"},{"id":"DYSS-016","name":"Vinod Singh Negi","father":"Mr. Anand singh Negi","mobile":"9811912590"},{"id":"DYSS-017","name":"Rakesh Singh Negi","father":"Mr. Mahipal singh Negi","mobile":"8506009645"},{"id":"DYSS-018","name":"Harpal Rawat","father":"Mr. Netra singh Rawat","mobile":"7982217225"},{"id":"DYSS-019","name":"Deepak Rawat","father":"Mr. Balam singh Rawat","mobile":"7351848326"},{"id":"DYSS-020","name":"Ankit Negi","father":"Mr. Devendra singh Negi","mobile":"55374335"},{"id":"DYSS-021","name":"Atul Negi","father":"Mr. Devendra singh Negi","mobile":"8810424628"},{"id":"DYSS-022","name":"Puskar Rawat","father":"Mr. Meharban singh Rawat","mobile":"9548733216"},{"id":"DYSS-023","name":"Jagmohan Rawat","father":"Mr. Meharban singh Rawat","mobile":"8130021322"},{"id":"DYSS-024","name":"Hemant Singh Rawat","father":"Mr. Meharban singh Rawat","mobile":"9810928614"},{"id":"DYSS-025","name":"Shubham Rawat","father":"Mr. Amar Singh Rawat","mobile":"9536647699"},{"id":"DYSS-026","name":"Anuj Rawat","father":"Mr. Amar Singh Rawat","mobile":"9548248881"},{"id":"DYSS-027","name":"Khemraj Rawat","father":"Mr. Ripudaman singh Rawat","mobile":"9520668927"},{"id":"DYSS-028","name":"Manvendra Rawat","father":"Mr. Ripudaman singh Rawat","mobile":"8619980592"},{"id":"DYSS-029","name":"Pankaj Singh Rawat","father":"Mr. Manber singh Rawat","mobile":"9821159392"},{"id":"DYSS-030","name":"Manoj Dhondiyal","father":"Mr. Anandmani Dhondiyal","mobile":"6398052892"},{"id":"DYSS-031","name":"Vivekanand","father":"Mr. Ghananand Dhondiyal","mobile":"9990610129"},{"id":"DYSS-032","name":"Vipin Dhondiyal","father":"Mr. Barmanand Dhondiyal","mobile":"9389944258"},{"id":"DYSS-033","name":"Deepak Chand","father":"Mr. Barmanand Dhondiyal","mobile":"8454875299"},{"id":"DYSS-034","name":"Arvind Dhoundiyal","father":"Mr. Ramesh Chand Dhondiyal","mobile":"8802140931"},{"id":"DYSS-035","name":"Ashok Dhoundiyal","father":"Mr. Ramesh Chand Dhondiyal","mobile":"7503052151"},{"id":"DYSS-036","name":"Raghubeer Singh Negi","father":"Mr. Ratan Singh Negi","mobile":"8894788807"},{"id":"DYSS-037","name":"Satyabeer Singh Negi","father":"Mr. Ratan Singh Negi","mobile":"9756731752"},{"id":"DYSS-038","name":"Rishabh Negi","father":"Mr. Dinesh Singh Negi","mobile":"9548262018"},{"id":"DYSS-039","name":"Jitendra Negi","father":"Mr. Bhawan singh negi","mobile":"7505170421"},{"id":"DYSS-040","name":"Satendra Negi","father":"Mr. Bhawan singh negi","mobile":"8527963238"},{"id":"DYSS-041","name":"Pramendra Negi","father":"Mr. Hari singh Negi","mobile":"8869073116"},{"id":"DYSS-042","name":"Kaushal Rawat","father":"Mr. Raje singh Rawat","mobile":"9899389530"},{"id":"DYSS-043","name":"Manish Rawat","father":"Mr. Raje singh Rawat","mobile":"8800109884"},{"id":"DYSS-044","name":"Anil Rawat","father":"Mr. Jogendra singh Rawat","mobile":"9877689615"},{"id":"DYSS-045","name":"Sunil Rawat","father":"Mr. Jogendra singh Rawat","mobile":"7027045072"},{"id":"DYSS-046","name":"Deepak Rawat","father":"Mr. Madan Singh Rawat","mobile":"8954399725"},{"id":"DYSS-047","name":"Mandeep Rawat","father":"Mr. Madan Singh Rawat","mobile":"6397843759"},{"id":"DYSS-048","name":"Kuldeep Singh","father":"Mr. Mahadev Singh","mobile":"9555594088"},{"id":"DYSS-049","name":"Suraj Chandra","father":"Mr. Prakash Chandra","mobile":"9719101877"},{"id":"DYSS-050","name":"Harak Singh","father":"Mr. Veer Singh","mobile":"9690309440"},{"id":"DYSS-051","name":"Thakur Singh Rawat","father":"Mr. Chandan Singh Rawat","mobile":"8449929977"}];
+  function freshStorage(preserveBranding) {
+    const members = DYSS_MASTER_FRESH.map(m => ({...m, payments: {}, _carried: false}));
+    const cleanDb = {
+      "2026": {
+        months: ["SEP-2026", "OCT-2026", "NOV-2026", "DEC-2026"],
+        members,
+        removedMemberIds: [],
+        opening: 0,
+        donations: {},
+        expenses: {}
+      }
+    };
+    const storage = {
+      "daheli_register_v1": JSON.stringify(cleanDb),
+      "daheli_selected_year": "2026",
+      "daheli_used_expense_bill_numbers_v1": "[]",
+      "daheli_donation_entries_v1": "[]",
+      "daheli_bill_entries_v1": "[]",
+      "daheli_bill_details_used_numbers_v1": "[]",
+      "daheli_member_import_dyss_001_051_v1": "done",
+      [RESET_KEY]: "done"
+    };
+    // Preserve only document branding/preferences, not any old financial/member-entry records.
+    if (preserveBranding && typeof preserveBranding === "string") {
+      storage["daheli_document_branding_v1"] = preserveBranding;
+    }
+    return storage;
   }
   async function loadRemoteOrMigrate() {
     const { data: row, error } = await client.from(TABLE).select("id,data").eq("id", ROW_ID).maybeSingle();
     if (error) throw error;
-    backupLocal();
-    if (row && row.data && row.data.storage && typeof row.data.storage === "object") {
-      const remote = row.data.storage;
+    const remote = row && row.data && row.data.storage && typeof row.data.storage === "object"
+      ? row.data.storage : {};
+    if (remote[RESET_KEY] !== "done") {
+      // One-time clean start: replace old cloud/local records without making a backup.
+      const clean = freshStorage(remote["daheli_document_branding_v1"]);
       for (const key of APP_KEYS) localStorage.removeItem(key);
-      for (const [key, value] of Object.entries(remote)) {
-        if (APP_KEYS.includes(key) && typeof value === "string") localStorage.setItem(key, value);
-      }
-      return "Supabase से रिकॉर्ड लोड हो गया";
+      for (const [key, value] of Object.entries(clean)) localStorage.setItem(key, value);
+      const { error: resetError } = await client.from(TABLE).upsert({
+        id: ROW_ID, data: { storage: clean }, updated_at: new Date().toISOString()
+      }, { onConflict: "id" });
+      if (resetError) throw resetError;
+      return "Fresh setup complete — 51 members safe, all old entries cleared";
     }
-    const localData = snapshot();
-    const { error: insertError } = await client.from(TABLE).upsert({
-      id: ROW_ID, data: { storage: localData }, updated_at: new Date().toISOString()
-    }, { onConflict: "id" });
-    if (insertError) throw insertError;
-    return "इस browser का मौजूदा डेटा पहली बार Supabase में सुरक्षित किया गया";
+    for (const key of APP_KEYS) localStorage.removeItem(key);
+    for (const [key, value] of Object.entries(remote)) {
+      if (APP_KEYS.includes(key) && typeof value === "string") localStorage.setItem(key, value);
+    }
+    return "Supabase से fresh register लोड हो गया";
   }
   async function pushNow() {
     if (!cloudReady) return;
