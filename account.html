@@ -57,6 +57,22 @@
  body.print-receipt .receipt-foot{font-size:5px!important;margin:0!important}
 }
 </style></head><body>
+
+<div id="cloudLogin" style="max-width:430px;margin:8vh auto;padding:24px;background:#fff;border:1px solid #d9e1e8;border-radius:12px;box-shadow:0 8px 30px #17324d18;font:14px Arial,sans-serif;color:#1e293b">
+  <h2 style="margin:0 0 8px;color:#17324d">ग्राम दहेली युवा समिति — Admin Login</h2>
+  <p style="color:#64748b;line-height:1.5">Member Register खोलने के लिए अपने Supabase Admin Email और Password से लॉगिन करें।</p>
+  <label style="display:block;margin:14px 0 5px">Admin Email</label>
+  <input id="cloudEmail" type="email" autocomplete="username" style="width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:6px">
+  <label style="display:block;margin:14px 0 5px">Password</label>
+  <input id="cloudPassword" type="password" autocomplete="current-password" style="width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:6px">
+  <button id="cloudLoginBtn" style="width:100%;margin-top:18px;padding:11px;background:#17324d;color:white;border:0;border-radius:6px;font-weight:bold;cursor:pointer">Login & Open Register</button>
+  <p id="cloudLoginStatus" role="status" style="margin:12px 0 0;color:#b42318;line-height:1.5"></p>
+</div>
+<div id="cloudStatus" style="position:sticky;top:0;z-index:999;background:#e8f3ed;color:#166534;padding:7px 12px;font:12px Arial,sans-serif;display:none">
+  <span id="cloudStatusText">Supabase connected</span>
+  <button id="cloudLogoutBtn" style="float:right;background:#17324d;color:white;border:0;border-radius:4px;padding:3px 9px;cursor:pointer">Logout</button>
+</div>
+<div id="appShell" style="display:none">
 <header><div class="wrap" style="padding:0"><h1>ग्राम दहेली युवा समिति</h1><p>समिति लेखा पोर्टल · हिसाब-किताब और रिपोर्ट</p></div></header>
 <main class="wrap">
 <nav class="tab-nav no-print">
@@ -125,7 +141,8 @@
 <label>3. Status</label><select id="status"><option value="none">NONE</option><option value="advance">Advance Paid</option><option value="late">With Late Payment</option><option value="unpaid">Unpaid</option><option value="on_join">Paid on Join</option><option value="left">Left the Committee</option></select>
 <label>Payment Date</label><input id="date" type="date">
 <p style="text-align:right"><button class="light" onclick="closeModal()">Cancel</button> <button onclick="savePayment()">Save</button></p></div></div>
-<script>
+</div>
+<script type="text/plain" id="legacyAppCode">
 const K='daheli_register_v1',isFirstInstall=!localStorage.getItem('daheli_register_v1'),months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];let db=JSON.parse(localStorage.getItem(K)||'{}'),yr=localStorage.getItem('daheli_selected_year')||'2026',target=null;
 function blank(y){return {months:y==='2026'?['SEP-2026','OCT-2026','NOV-2026','DEC-2026']:months.map(m=>m+'-'+y),members:[],removedMemberIds:[],opening:0,donations:{},expenses:{}}}
 function memberCopy(m,carried=false){return {id:m.id,name:m.name,father:m.father,mobile:m.mobile,payments:{},_carried:!!carried}}
@@ -440,4 +457,121 @@ function printStandalone(html,letterhead=true,receipt=false){const root=document
 function printCustom(html,withFooter=true){const root=document.getElementById('singlePrint');const summaryHtml=withFooter?'<h3 class="center">OVERALL FINANCIAL SUMMARY</h3>'+document.getElementById('summary').outerHTML:'';root.innerHTML=buildPrintableDocument(html+summaryHtml+(withFooter?'<div class="center"><b>Gram Daheli Yuva Samiti · Official Record</b></div>':''));root.style.display='block';document.body.classList.add('print-single');window.print();document.body.classList.remove('print-single');root.style.display='none';}
 
 if(!db['2026'])db['2026']=blank('2026');migrateCrossYearMonths();allBills().forEach(syncBillExpense);if(!db['2025'])db['2026'].opening=0;if(!/^\d{4}$/.test(yr)||yr==='all')yr='2026';if(!db[yr])yr='2026';/* Seed the starter members BEFORE syncing later years. The old order synced empty 2027 first, then seeded 2026, leaving future years empty. */if(isFirstInstall&&(!db['2026'].members||!db['2026'].members.length))db['2026'].members=[{id:'DYSS-001',name:'Satpal Rawat',father:'Sain Singh',mobile:'9627265112',payments:{'AUG-2026':{status:'paid',amount:200,late:20},'SEP-2026':{status:'paid',amount:800},'OCT-2026':{status:'unpaid'},'NOV-2026':{status:'advance',amount:200},'DEC-2026':{status:'advance',amount:200},'JAN-2027':{status:'advance',amount:200}}},{id:'DYSS-002',name:'Kamal Rawat',father:'Sain Singh',mobile:'9548813587',payments:{'AUG-2026':{status:'paid',amount:200,late:40},'SEP-2026':{status:'paid',amount:800},'OCT-2026':{status:'paid',amount:100},'NOV-2026':{status:'unpaid'},'DEC-2026':{status:'advance',amount:200},'JAN-2027':{status:'unpaid'}}}];if(!db['2027'])db['2027']=blank('2027');Object.keys(db).filter(y=>/^\d{4}$/.test(y)&&Number(y)>2027).forEach(y=>{if(!yearHasData(db[y],y)&&!db[y]._createdEmpty)delete db[y]});Object.keys(db).filter(y=>/^\d{4}$/.test(y)).sort((a,b)=>Number(a)-Number(b)).forEach(y=>{if(Number(y)>2026)syncMembersForYear(y)});store();render();initExpenseUI();showMainTab('memberTab');refreshDonationYearOptions();renderDonations();refreshBillDetailNumberOptions();renderBills();if(!document.querySelector("#billItemRows tr"))addBillItemRow();updateBillMonthDisplay();updateSharedFooters();
-</script></body></html>
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(() => {
+  "use strict";
+  const SUPABASE_URL = "https://cmhfmlvxgtwqzbhpjvdx.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_7cKvIjO6LXkpnFmGj8VaHA_fHQKNsui";
+  const TABLE = "member_register";
+  const ROW_ID = 1;
+  const APP_KEYS = ["daheli_register_v1", "daheli_selected_year", "daheli_document_branding_v1", "daheli_used_expense_bill_numbers_v1", "daheli_donation_entries_v1", "daheli_bill_entries_v1", "daheli_bill_details_used_numbers_v1"];
+  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+  const loginBox = document.getElementById("cloudLogin");
+  const loginBtn = document.getElementById("cloudLoginBtn");
+  const statusBar = document.getElementById("cloudStatus");
+  const statusText = document.getElementById("cloudStatusText");
+  const appShell = document.getElementById("appShell");
+  let cloudReady = false, saveTimer = null, saveChain = Promise.resolve();
+
+  function showLogin(message) {
+    loginBox.style.display = "block"; appShell.style.display = "none"; statusBar.style.display = "none";
+    document.getElementById("cloudLoginStatus").textContent = message || "";
+    loginBtn.disabled = false; loginBtn.textContent = "Login & Open Register";
+  }
+  function showApp(message) {
+    loginBox.style.display = "none"; appShell.style.display = "block"; statusBar.style.display = "block";
+    statusText.textContent = message || "Supabase connected";
+  }
+  function snapshot() {
+    const out = {};
+    for (const key of APP_KEYS) { const value = localStorage.getItem(key); if (value !== null) out[key] = value; }
+    return out;
+  }
+  function backupLocal() {
+    try { localStorage.setItem("daheli_local_backup_before_supabase_v1", JSON.stringify(snapshot())); }
+    catch (e) { console.warn("Local backup could not be saved:", e); }
+  }
+  async function loadRemoteOrMigrate() {
+    const { data: row, error } = await client.from(TABLE).select("id,data").eq("id", ROW_ID).maybeSingle();
+    if (error) throw error;
+    backupLocal();
+    if (row && row.data && row.data.storage && typeof row.data.storage === "object") {
+      const remote = row.data.storage;
+      for (const key of APP_KEYS) localStorage.removeItem(key);
+      for (const [key, value] of Object.entries(remote)) {
+        if (APP_KEYS.includes(key) && typeof value === "string") localStorage.setItem(key, value);
+      }
+      return "Supabase से रिकॉर्ड लोड हो गया";
+    }
+    const localData = snapshot();
+    const { error: insertError } = await client.from(TABLE).upsert({
+      id: ROW_ID, data: { storage: localData }, updated_at: new Date().toISOString()
+    }, { onConflict: "id" });
+    if (insertError) throw insertError;
+    return "इस browser का मौजूदा डेटा पहली बार Supabase में सुरक्षित किया गया";
+  }
+  async function pushNow() {
+    if (!cloudReady) return;
+    const payload = { id: ROW_ID, data: { storage: snapshot() }, updated_at: new Date().toISOString() };
+    saveChain = saveChain.catch(() => {}).then(async () => {
+      const { error } = await client.from(TABLE).upsert(payload, { onConflict: "id" });
+      if (error) throw error;
+      statusText.textContent = "Supabase में बदलाव सुरक्षित हैं";
+    });
+    try { await saveChain; }
+    catch (error) {
+      console.error("Supabase save failed:", error);
+      statusText.textContent = "Cloud save में समस्या — बदलाव इस browser में हैं; इंटरनेट/लॉगिन जाँचें";
+    }
+  }
+  function scheduleSave() {
+    if (!cloudReady) return;
+    clearTimeout(saveTimer); saveTimer = setTimeout(pushNow, 900);
+    statusText.textContent = "बदलाव Supabase में सुरक्षित किए जा रहे हैं…";
+  }
+  const originalSetItem = Storage.prototype.setItem;
+  Storage.prototype.setItem = function(key, value) {
+    originalSetItem.call(this, key, value);
+    if (this === localStorage && APP_KEYS.includes(String(key))) scheduleSave();
+  };
+
+  async function openAfterAuth() {
+    try {
+      const message = await loadRemoteOrMigrate();
+      cloudReady = true; showApp(message);
+      const source = document.getElementById("legacyAppCode").textContent;
+      const script = document.createElement("script"); script.text = source; document.body.appendChild(script);
+      statusText.textContent = message;
+    } catch (error) {
+      console.error(error);
+      showLogin("Supabase से डेटा लोड नहीं हुआ: " + (error.message || "Internet और RLS policy जाँचें।"));
+    }
+  }
+  loginBtn.addEventListener("click", async () => {
+    const email = document.getElementById("cloudEmail").value.trim();
+    const password = document.getElementById("cloudPassword").value;
+    if (!email || !password) { document.getElementById("cloudLoginStatus").textContent = "Email और Password दोनों भरें।"; return; }
+    loginBtn.disabled = true; loginBtn.textContent = "Logging in…";
+    document.getElementById("cloudLoginStatus").textContent = "";
+    const { error } = await client.auth.signInWithPassword({ email, password });
+    if (error) { showLogin("Login नहीं हुआ: " + error.message); return; }
+    await openAfterAuth();
+  });
+  document.getElementById("cloudPassword").addEventListener("keydown", e => { if (e.key === "Enter") loginBtn.click(); });
+  document.getElementById("cloudLogoutBtn").addEventListener("click", async () => {
+    cloudReady = false; const { error } = await client.auth.signOut();
+    if (error) statusText.textContent = "Logout error: " + error.message;
+    location.reload();
+  });
+  (async () => {
+    if (!window.supabase) { showLogin("Supabase library load नहीं हुई। Internet connection जाँचें और refresh करें।"); return; }
+    const { data, error } = await client.auth.getSession();
+    if (error) { showLogin("Session जाँचने में समस्या: " + error.message); return; }
+    if (data.session) await openAfterAuth(); else showLogin("");
+  })();
+})();
+</script>
+</body></html>
