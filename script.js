@@ -6,6 +6,7 @@ const supabaseClient = supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
+
 /* =====================================================
    GRAM DAHELI YUVA SAMITI
    ADMIN + PHOTO + DOCUMENT SYSTEM
@@ -152,14 +153,14 @@ function updateAdminUI() {
   const galleryAdminBox =
     document.getElementById("galleryAdminBox");
 
- const documentsUploadPanel =
-  document.getElementById("documentsUploadPanel");
+  const documentsUploadPanel =
+    document.getElementById("documentsUploadPanel");
 
-const incomeUploadPanel =
-  document.getElementById("incomeUploadPanel");
+  const incomeUploadPanel =
+    document.getElementById("incomeUploadPanel");
 
-const expensesUploadPanel =
-  document.getElementById("expensesUploadPanel");
+  const expensesUploadPanel =
+    document.getElementById("expensesUploadPanel");
 
   if (isAdmin) {
 
@@ -219,12 +220,15 @@ const expensesUploadPanel =
   }
 
   loadGallery();
-console.log("Supabase Connected");
-console.log(supabaseClient);
-renderFiles("Samiti Documents");
-renderFiles("Incoming Payment");
-renderFiles("Expenses");
+
+  console.log("Supabase Connected");
+  console.log(supabaseClient);
+
+  renderFiles("Samiti Documents");
+  renderFiles("Incoming Payment");
+  renderFiles("Expenses");
 }
+
 
 if (loginBtn) {
 
@@ -233,21 +237,19 @@ if (loginBtn) {
     const password =
       adminPassword.value.trim();
 
-    
-if (password === ADMIN_PASSWORD) {
+    if (password === ADMIN_PASSWORD) {
 
-  isAdmin = true;
+      isAdmin = true;
 
-  sessionStorage.setItem("daheliAdmin", "true");
+      sessionStorage.setItem("daheliAdmin", "true");
 
-  loginMessage.textContent = "✅ Login सफल हुआ।";
-  loginMessage.style.color = "#28633b";
+      loginMessage.textContent = "✅ Login सफल हुआ।";
+      loginMessage.style.color = "#28633b";
 
-  adminPassword.value = "";
+      adminPassword.value = "";
 
-  window.location.href = "account.html";
+      window.location.href = "account.html";
 
-     
     } else {
 
       loginMessage.textContent =
@@ -331,6 +333,7 @@ function createId() {
    DELETE PHOTO
 ===================================================== */
 
+
 /* =====================================================
    SUPABASE PHOTO GALLERY
 ===================================================== */
@@ -340,16 +343,16 @@ async function loadGallery() {
   const gallery =
     document.getElementById("photoGallery");
 
-    const homeGallery =
+  const homeGallery =
     document.getElementById("homePhotoGallery");
 
   if (!gallery) return;
 
   gallery.innerHTML = "<p>Loading...</p>";
 
-if(homeGallery){
+  if (homeGallery) {
     homeGallery.innerHTML = "<p>Loading...</p>";
-}
+  }
 
   const { data, error } =
     await supabaseClient.storage
@@ -368,9 +371,9 @@ if(homeGallery){
 
   gallery.innerHTML = "";
 
-if(homeGallery){
+  if (homeGallery) {
     homeGallery.innerHTML = "";
-}
+  }
 
   if (data.length === 0) {
 
@@ -386,8 +389,9 @@ if(homeGallery){
       supabaseClient.storage
         .from("Photo Gallery")
         .getPublicUrl(file.name);
-   console.log(file.name);
-   console.log(urlData.publicUrl);
+
+    console.log(file.name);
+    console.log(urlData.publicUrl);
 
     const card =
       document.createElement("div");
@@ -413,29 +417,32 @@ if(homeGallery){
     `;
 
     gallery.appendChild(card);
-    if(homeGallery){
 
-    const homeCard = card.cloneNode(true);
+    if (homeGallery) {
 
-    const deleteBtn =
-      homeCard.querySelector(".photo-delete");
+      const homeCard = card.cloneNode(true);
 
-    if(deleteBtn){
+      const deleteBtn =
+        homeCard.querySelector(".photo-delete");
+
+      if (deleteBtn) {
         deleteBtn.remove();
-    }
+      }
 
-    homeGallery.appendChild(homeCard);
-}
+      homeGallery.appendChild(homeCard);
+    }
 
   });
 
 }
+
 
 const galleryInput =
   document.getElementById("galleryInput");
 
 const galleryUploadBtn =
   document.getElementById("galleryUploadBtn");
+
 
 if (galleryUploadBtn) {
 
@@ -462,21 +469,21 @@ if (galleryUploadBtn) {
         return;
       }
 
-    for (const file of files) {
+      for (const file of files) {
 
-  const extension = file.name.split('.').pop();
+        const extension = file.name.split('.').pop();
 
-const baseName = file.name.replace(/\.[^/.]+$/, '');
+        const baseName = file.name.replace(/\.[^/.]+$/, '');
 
-const fileName =
-  Date.now() + "_" +
-  encodeURIComponent(baseName) +
-  "." + extension;
+        const fileName =
+          Date.now() + "_" +
+          encodeURIComponent(baseName) +
+          "." + extension;
 
-  const { error } =
-    await supabaseClient.storage
-      .from("Photo Gallery")
-      .upload(fileName, file);
+        const { error } =
+          await supabaseClient.storage
+            .from("Photo Gallery")
+            .upload(fileName, file);
 
         if (error) {
 
@@ -501,6 +508,7 @@ const fileName =
   );
 
 }
+
 
 async function deletePhoto(fileName) {
 
@@ -530,9 +538,11 @@ async function deletePhoto(fileName) {
 
 }
 
+
 /* =====================================================
    DOCUMENT UPLOAD BUTTONS
 ===================================================== */
+
 setupFileUpload(
   "Samiti Documents",
   "documentsInput",
@@ -580,15 +590,15 @@ async function setupFileUpload(
       alert("कृपया file चुनें।");
       return;
     }
-  
-const extension = file.name.split('.').pop();
 
-const baseName = file.name.replace(/\.[^/.]+$/, '');
+    const extension = file.name.split('.').pop();
 
-const fileName =
-  Date.now() + "_" +
-  encodeURIComponent(baseName) +
-  "." + extension;
+    const baseName = file.name.replace(/\.[^/.]+$/, '');
+
+    const fileName =
+      Date.now() + "_" +
+      encodeURIComponent(baseName) +
+      "." + extension;
 
     const { error } =
       await supabaseClient.storage
@@ -606,11 +616,10 @@ const fileName =
     await renderFiles(category);
 
     alert("✅ Upload Successful");
+
   });
 
 }
-
-
 
 
 /* =====================================================
@@ -627,8 +636,8 @@ async function renderFiles(category) {
   let listId = "";
 
   if (category === "Samiti Documents") listId = "documentsList";
-if (category === "Incoming Payment") listId = "incomeList";
-if (category === "Expenses") listId = "expensesList";
+  if (category === "Incoming Payment") listId = "incomeList";
+  if (category === "Expenses") listId = "expensesList";
 
   const list = document.getElementById(listId);
 
@@ -640,8 +649,8 @@ if (category === "Expenses") listId = "expensesList";
       .list("", { limit: 100 });
 
   console.log("Bucket:", category);
- console.log("Files:", files);
- console.log("Error:", error);
+  console.log("Files:", files);
+  console.log("Error:", error);
 
   if (error) {
     console.error(error);
@@ -668,13 +677,13 @@ if (category === "Expenses") listId = "expensesList";
     item.className = "file-item";
 
     item.innerHTML = `
-     <span>${decodeURIComponent(file.name.replace(/^\d+_/, ''))}</span>
+      <span>${decodeURIComponent(file.name.replace(/^\d+_/, ''))}</span>
 
-<button
-  class="download-btn"
-  onclick="downloadFile('${category}', '${file.name}')">
-  📥 Download
-</button>
+      <button
+        class="download-btn"
+        onclick="downloadFile('${category}', '${file.name}')">
+        📥 Download
+      </button>
 
       ${
         isAdmin
@@ -695,11 +704,42 @@ if (category === "Expenses") listId = "expensesList";
 
 }
 
+
 /* =====================================================
    DOWNLOAD FILE
 ===================================================== */
 
 async function downloadFile(category, fileName) {
+
+  // PDF, Word और Excel के लिए पासवर्ड पूछें।
+  const extension = fileName.split(".").pop().toLowerCase();
+
+  const protectedExtensions = [
+    "pdf",
+    "doc",
+    "docx",
+    "xls",
+    "xlsx"
+  ];
+
+  if (protectedExtensions.includes(extension)) {
+
+    const enteredPassword = prompt(
+      "📥 Download ke liye password enter karein:"
+    );
+
+    // गलत पासवर्ड या Cancel करने पर डाउनलोड बंद।
+    if (
+      enteredPassword === null ||
+      enteredPassword !== DOWNLOAD_PASSWORD
+    ) {
+
+      alert("❌ गलत पासवर्ड। Download नहीं हुआ।");
+
+      return;
+    }
+
+  }
 
   const { data, error } = await supabaseClient.storage
     .from(category)
@@ -714,42 +754,20 @@ async function downloadFile(category, fileName) {
   const url = URL.createObjectURL(data);
 
   const a = document.createElement("a");
+
   a.href = url;
+
   a.download = fileName.replace(/^\d+_/, "");
 
   document.body.appendChild(a);
+
   a.click();
+
   a.remove();
 
   URL.revokeObjectURL(url);
+
 }
-
-
-/* =====================================================
-   DELETE FILE
-===================================================== */
-
-async function deleteFile(category, fileName) {
-
-  if (!isAdmin) return;
-
-  if (!confirm("क्या आप यह file Delete करना चाहते हैं?")) {
-    return;
-  }
-
-  const { error } =
-    await supabaseClient.storage
-      .from(category)
-      .remove([fileName]);
-
-  if (error) {
-    alert(error.message);
-    return;
-  }
-
-  renderFiles(category);
-}
-  
 
 
 /* =====================================================
@@ -778,6 +796,32 @@ async function deleteFile(category, fileName) {
 
 }
 
+
+/* =====================================================
+   DELETE FILE
+===================================================== */
+
+async function deleteFile(category, fileName) {
+
+  if (!isAdmin) return;
+
+  if (!confirm("क्या आप यह file Delete करना चाहते हैं?")) {
+    return;
+  }
+
+  const { error } =
+    await supabaseClient.storage
+      .from(category)
+      .remove([fileName]);
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  renderFiles(category);
+
+}
 
 
 /* =====================================================
@@ -802,8 +846,11 @@ function escapeHTML(text) {
 ===================================================== */
 
 updateAdminUI();
-loadGallery();
-renderFiles("Samiti Documents");
-renderFiles("Incoming Payment");
-renderFiles("Expenses");
 
+loadGallery();
+
+renderFiles("Samiti Documents");
+
+renderFiles("Incoming Payment");
+
+renderFiles("Expenses");
