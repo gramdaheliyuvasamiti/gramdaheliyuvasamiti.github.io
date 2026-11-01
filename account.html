@@ -216,7 +216,7 @@ function yearHasData(x,year){
  const hasPayment=(x.members||[]).some(m=>Object.values(m.payments||{}).some(p=>p&&(p.status&&p.status!=='none'||(p.amount!==null&&p.amount!==undefined&&p.amount!=='')||(p.late!==null&&p.late!==undefined&&p.late!=='')||p.date)));
  if(hasPayment)return true;
  if(Object.values(x.donations||{}).some(v=>Number(v)!==0)||Object.values(x.expenses||{}).some(v=>Number(v)!==0)||(x.expenseEntries||[]).length||Number(x.opening||0)!==0)return true;
- const yy=String(year||'');const defaultMonths=yy==='2026'?['SEP-2026','OCT-2026','NOV-2026','DEC-2026']:months.map(m=>m+'-'+yy);
+ const yy=String(year||'');const defaultMonths=yy==='2026'?['AUG-2026','SEP-2026','OCT-2026','NOV-2026','DEC-2026']:months.map(m=>m+'-'+yy);
  const actualMonths=(x.months||[]).slice().sort();if(JSON.stringify(actualMonths)!==JSON.stringify(defaultMonths.slice().sort()))return true;
  return false;
 }
