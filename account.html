@@ -144,7 +144,7 @@
 </div>
 <script type="text/plain" id="legacyAppCode">
 const K='daheli_register_v1',isFirstInstall=!localStorage.getItem('daheli_register_v1'),months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];let db=JSON.parse(localStorage.getItem(K)||'{}'),yr=localStorage.getItem('daheli_selected_year')||'2026',target=null;
-function blank(y){return {months:y==='2026'?['SEP-2026','OCT-2026','NOV-2026','DEC-2026']:months.map(m=>m+'-'+y),members:[],removedMemberIds:[],opening:0,donations:{},expenses:{}}}
+function blank(y){return {months:y==='2026'?['AUG-2026','SEP-2026','OCT-2026','NOV-2026','DEC-2026']:months.map(m=>m+'-'+y),members:[],removedMemberIds:[],opening:0,donations:{},expenses:{}}}
 function memberCopy(m,carried=false){return {id:m.id,name:m.name,father:m.father,mobile:m.mobile,payments:{},_carried:!!carried}}
 function isLeftInYear(m,y){return Object.entries(m.payments||{}).some(([mo,p])=>mo.endsWith('-'+String(y))&&p&&['left','left_committee'].includes(String(p.status||'').toLowerCase()))}
 function syncMembersForYear(y){
