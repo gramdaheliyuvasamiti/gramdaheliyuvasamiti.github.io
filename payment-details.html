@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Payment Details | ग्राम दहेली युवा समिति</title>
+  <link rel="stylesheet" href="payment-details.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="mark">GDYS</div>
+      <div><h1>ग्राम दहेली युवा समिति</h1><p>Member Payment & Financial Details</p></div>
+    </div>
+    <a class="back-link" href="index.html">← मुख्य वेबसाइट</a>
+  </header>
+
+  <main class="wrap">
+    <section id="loginPanel" class="login-card">
+      <div class="eyebrow">MEMBER VIEW · READ ONLY</div>
+      <h2>Payment Details Portal</h2>
+      <p>रिकॉर्ड देखने के लिए समिति द्वारा दिया गया Member Password दर्ज करें।</p>
+      <form id="loginForm">
+        <label for="memberPassword">Member Password</label>
+        <input id="memberPassword" type="password" autocomplete="current-password" required placeholder="Password दर्ज करें">
+        <button class="btn primary" id="loginBtn" type="submit">View Payment Details</button>
+      </form>
+      <p id="loginMessage" class="message" role="status"></p>
+      <p class="security-note">यह पेज केवल रिकॉर्ड देखने और प्रिंट/PDF बनाने के लिए है। यहाँ से कोई entry add, edit या delete नहीं की जा सकती।</p>
+    </section>
+
+    <section id="portal" hidden>
+      <div class="portal-heading">
+        <div><div class="eyebrow">OFFICIAL MEMBER RECORD</div><h2>Payment Details</h2><p id="lastUpdated">Live data from committee accounting register</p></div>
+        <div class="heading-actions"><button class="btn secondary" id="refreshBtn" type="button">↻ Refresh</button><button class="btn secondary" id="printBtn" type="button">Print / Save PDF</button><button class="btn outline" id="logoutBtn" type="button">Logout</button></div>
+      </div>
+
+      <div class="filters no-print">
+        <label>Record Year<select id="yearFilter"></select></label>
+        <label>Month<select id="monthFilter"><option value="ALL">All Months</option></select></label>
+        <span id="statusText" class="status-text">Connected</span>
+      </div>
+
+      <nav class="tabs no-print" aria-label="Payment details sections">
+        <button class="tab active" data-tab="members" type="button">Monthly Member Collection</button>
+        <button class="tab" data-tab="expenses" type="button">Expense Details</button>
+        <button class="tab" data-tab="donations" type="button">Donation Details</button>
+        <button class="tab" data-tab="bills" type="button">Bill Details</button>
+        <button class="tab" data-tab="summary" type="button">Financial Summary</button>
+      </nav>
+
+      <section class="tab-panel active" id="tab-members">
+        <div class="section-title"><div><h3>Monthly Member Collection</h3><p>Member-wise payment status and collection</p></div><button class="btn small secondary no-print" data-export="memberTable" type="button">Export CSV</button></div>
+        <div class="table-wrap"><table id="memberTable"><thead></thead><tbody></tbody><tfoot></tfoot></table></div>
+        <p class="footnote">Monthly amount में दर्ज payment amount और late fee शामिल हैं। Status वही दिखाया गया है जो Accounting Register में सेव है।</p>
+      </section>
+
+      <section class="tab-panel" id="tab-expenses" hidden>
+        <div class="section-title"><div><h3>Expense Details</h3><p>Accounting Register के expense entries</p></div><button class="btn small secondary no-print" data-export="expenseTable" type="button">Export CSV</button></div>
+        <div class="table-wrap"><table id="expenseTable"><thead><tr><th>S.No.</th><th>Month</th><th>Bill No.</th><th>Date</th><th>Expense Details</th><th>Amount (₹)</th></tr></thead><tbody></tbody><tfoot></tfoot></table></div>
+      </section>
+
+      <section class="tab-panel" id="tab-donations" hidden>
+        <div class="section-title"><div><h3>Donation Details</h3><p>Donation register entries</p></div><button class="btn small secondary no-print" data-export="donationTable" type="button">Export CSV</button></div>
+        <div class="table-wrap"><table id="donationTable"><thead><tr><th>S.No.</th><th>Date</th><th>Month</th><th>Receipt No.</th><th>Donor Name</th><th>Purpose</th><th>Amount (₹)</th></tr></thead><tbody></tbody><tfoot></tfoot></table></div>
+      </section>
+
+      <section class="tab-panel" id="tab-bills" hidden>
+        <div class="section-title"><div><h3>Bill Details</h3><p>Bill-wise work/material details and amount</p></div><button class="btn small secondary no-print" data-export="billTable" type="button">Export CSV</button></div>
+        <div class="table-wrap"><table id="billTable"><thead><tr><th>S.No.</th><th>Bill No.</th><th>Date</th><th>Bill Title</th><th>Item Details</th><th>Amount (₹)</th></tr></thead><tbody></tbody><tfoot></tfoot></table></div>
+      </section>
+
+      <section class="tab-panel" id="tab-summary" hidden>
+        <div class="section-title"><div><h3>Financial Summary</h3><p>Year-wise totals from the current Accounting Register</p></div></div>
+        <div id="summaryCards" class="summary-grid"></div>
+        <h4 class="subheading">Month-wise Opening & Closing Balance</h4>
+        <div class="table-wrap"><table id="balanceTable"><thead><tr><th>Month</th><th>Opening Balance (₹)</th><th>Member Collection (₹)</th><th>Donation in balance field (₹)</th><th>Expense (₹)</th><th>Closing Balance (₹)</th></tr></thead><tbody></tbody></table></div>
+        <p class="footnote warning">ध्यान दें: यह balance table मौजूदा Accounting Register के balance calculation को ही follow करती है। अलग Donation Register की entries अलग tab और overall donation total में दिखाई जाती हैं; उन्हें पुराने monthly balance field में अपने-आप नहीं जोड़ा जाता। किसी पुराने record को यहाँ से बदला नहीं जाता।</p>
+        <div class="signatures"><span>PREPARED BY</span><span>VERIFIED BY</span><span>APPROVED BY</span></div>
+        <p class="official">Gram Daheli Yuva Samiti · Official Record</p>
+      </section>
+      <p id="dataMessage" class="message" role="status"></p>
+    </section>
+  </main>
+  <footer>ग्राम दहेली युवा समिति · Official Payment Details Portal</footer>
+  <script src="payment-details.js"></script>
+</body>
+</html>
