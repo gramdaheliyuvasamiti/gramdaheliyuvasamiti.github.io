@@ -56,6 +56,17 @@
  body.print-receipt .stamp-only img{width:8mm!important;height:8mm!important}
  body.print-receipt .receipt-foot{font-size:5px!important;margin:0!important}
 }
+
+/* Member payment status colours — display only; does not change saved data */
+.cell.status-unpaid{background:#fee2e2!important;border:1px solid #fca5a5!important;color:#991b1b!important}
+.cell.status-late{background:#fef3c7!important;border:1px solid #fcd34d!important;color:#92400e!important}
+.cell.status-advance,.cell.status-on_join{background:#dcfce7!important;border:1px solid #86efac!important;color:#166534!important}
+.cell.status-left,.cell.status-left_committee{background:#fecaca!important;border:1px solid #f87171!important;color:#7f1d1d!important}
+.printval.status-unpaid{background:#fee2e2;color:#991b1b;padding:3px 5px;border:1px solid #fca5a5;border-radius:4px}
+.printval.status-late{background:#fef3c7;color:#92400e;padding:3px 5px;border:1px solid #fcd34d;border-radius:4px}
+.printval.status-advance,.printval.status-on_join{background:#dcfce7;color:#166534;padding:3px 5px;border:1px solid #86efac;border-radius:4px}
+.printval.status-left,.printval.status-left_committee{background:#fecaca;color:#7f1d1d;padding:3px 5px;border:1px solid #f87171;border-radius:4px}
+
 </style></head><body>
 
 <div id="cloudLogin" style="max-width:430px;margin:8vh auto;padding:24px;background:#fff;border:1px solid #d9e1e8;border-radius:12px;box-shadow:0 8px 30px #17324d18;font:14px Arial,sans-serif;color:#1e293b">
@@ -202,7 +213,7 @@ function paymentAmount(p){return (hasPaymentAmount(p)?(+p.amount||0):0)+(hasLate
 function yearMonths(x,y=yr){return (x.months||[]).filter(m=>m.endsWith('-'+y)).sort((a,b)=>months.indexOf(a.slice(0,3))-months.indexOf(b.slice(0,3)))}
 function totals(){return yearMonths(d()).map(m=>d().members.reduce((s,x)=>s+paymentAmount(x.payments?.[m]),0))}
 function render(){let x=d(),visibleMonths=yearMonths(x),t=totals();refreshMemberIdOptions();session.textContent='SESSION: '+(visibleMonths[0]||'—')+' – '+(visibleMonths.at(-1)||'—');members.tHead.innerHTML='<tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...visibleMonths,'Late Fee (₹)',''].map(v=>'<th>'+v+'</th>').join('')+'</tr>';
-members.tBodies[0].innerHTML=x.members.map((m,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(m.id)+'</td><td>'+esc(m.name)+'</td><td>'+esc(m.father)+'</td><td>'+esc(m.mobile)+'</td>'+visibleMonths.map((mo,j)=>{let p=m.payments?.[mo]||{};let parts=[];if(hasPaymentAmount(p))parts.push(money(p.amount));let labels={advance:'Advance Paid',late:'With Late Payment',unpaid:'Unpaid',on_join:'Paid on Join',left:'Left the Committee'};if(p.status&&p.status!=='none'&&labels[p.status])parts.push(labels[p.status]);let shown=parts.join(' · ')||'—';return '<td><button class="cell no-print" onclick="editPay('+i+','+j+')">'+shown+'</button><span class="printval">'+shown+'</span></td>'}).join('')+'<td>'+money(Object.entries(m.payments||{}).filter(([mo])=>mo.endsWith('-'+yr)).reduce((s,[,p])=>s+(hasLateFee(p)?(+p.late||0):0),0))+'</td><td class="no-print"><button class="light" title="Edit Member" onclick="editMember('+i+')">✎</button> <button class="danger" title="Delete Member" onclick="delMember('+i+')">×</button></td></tr>').join('')||'<tr><td colspan="20">No members added</td></tr>';
+members.tBodies[0].innerHTML=x.members.map((m,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(m.id)+'</td><td>'+esc(m.name)+'</td><td>'+esc(m.father)+'</td><td>'+esc(m.mobile)+'</td>'+visibleMonths.map((mo,j)=>{let p=m.payments?.[mo]||{};let parts=[];if(hasPaymentAmount(p))parts.push(money(p.amount));let labels={advance:'Advance Paid',late:'With Late Payment',unpaid:'Unpaid',on_join:'Paid on Join',left:'Left the Committee',left_committee:'Left the Committee'};let st=String(p.status||'').toLowerCase();if(st!=='none'&&labels[st])parts.push(labels[st]);let shown=parts.join(' · ')||'—';let colourClass=['unpaid','late','advance','on_join','left','left_committee'].includes(st)?' status-'+st:'';return '<td><button class="cell no-print'+colourClass+'" onclick="editPay('+i+','+j+')">'+shown+'</button><span class="printval'+colourClass+'">'+shown+'</span></td>'}).join('')+'<td>'+money(Object.entries(m.payments||{}).filter(([mo])=>mo.endsWith('-'+yr)).reduce((s,[,p])=>s+(hasLateFee(p)?(+p.late||0):0),0))+'</td><td class="no-print"><button class="light" title="Edit Member" onclick="editMember('+i+')">✎</button> <button class="danger" title="Delete Member" onclick="delMember('+i+')">×</button></td></tr>').join('')||'<tr><td colspan="20">No members added</td></tr>';
 members.tFoot.innerHTML='<tr><td colspan="5">TOTAL MEMBER MONTHLY COLLECTION ₹</td>'+t.map(v=>'<td>'+money(v)+'</td>').join('')+'<td>'+money(x.members.reduce((s,m)=>s+Object.values(m.payments||{}).reduce((a,p)=>a+(hasLateFee(p)?(+p.late||0):0),0),0))+'</td><td class="no-print"></td></tr>';
 let op=openingForYear(yr),bt='';visibleMonths.forEach((m,i)=>{let don=+x.donations[m]||0,ex=expenseTotalForMonth(x,m),cl=op+t[i]+don-ex;bt+='<tr><td>'+m+'</td><td>'+money(op)+'</td><td>'+money(t[i])+'</td><td>'+money(don)+'</td><td>'+money(ex)+'</td><td><b>'+money(cl)+'</b></td></tr>';op=cl});balances.tBodies[0].innerHTML=bt;
 let coll=t.reduce((a,b)=>a+b,0),don=Object.values(x.donations||{}).reduce((a,b)=>a+(+b||0),0)+donationTotalForYear(yr),ex=totalExpensesForYear(x);summary.innerHTML=[['Opening Balance',money(openingForYear(yr))],['Total Member Collection',money(coll)],['Total Expense',money(ex)],['Total Donation Collection',money(don)],['GRAND TOTAL BALANCE / CLOSING BALANCE',money(op)]].map(r=>'<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>').join('');
@@ -544,21 +555,31 @@ store();render();initExpenseUI();showMainTab('memberTab');refreshDonationYearOpt
     const remote = row && row.data && row.data.storage && typeof row.data.storage === "object"
       ? row.data.storage : {};
     if (remote[RESET_KEY] !== "done") {
-      // One-time clean start: replace old cloud/local records without making a backup.
-      const clean = freshStorage(remote["daheli_document_branding_v1"]);
+      // Non-destructive migration: preserve existing cloud data; if cloud is empty,
+      // retain this browser's current data. Never run the old fresh-reset over entries.
+      const remoteHasAppData = Object.keys(remote).some(key =>
+        APP_KEYS.includes(key) && key !== RESET_KEY && typeof remote[key] === "string"
+      );
+      const localBeforeLoad = snapshot();
+      const source = remoteHasAppData ? remote : localBeforeLoad;
+      const preserved = {};
+      for (const key of APP_KEYS) {
+        if (typeof source[key] === "string") preserved[key] = source[key];
+      }
+      preserved[RESET_KEY] = "done";
       for (const key of APP_KEYS) localStorage.removeItem(key);
-      for (const [key, value] of Object.entries(clean)) localStorage.setItem(key, value);
-      const { error: resetError } = await client.from(TABLE).upsert({
-        id: ROW_ID, data: { storage: clean }, updated_at: new Date().toISOString()
+      for (const [key, value] of Object.entries(preserved)) localStorage.setItem(key, value);
+      const { error: preserveError } = await client.from(TABLE).upsert({
+        id: ROW_ID, data: { storage: preserved }, updated_at: new Date().toISOString()
       }, { onConflict: "id" });
-      if (resetError) throw resetError;
-      return "Fresh setup complete — 51 members safe, all old entries cleared";
+      if (preserveError) throw preserveError;
+      return "Existing member/payment data सुरक्षित रखकर Supabase से register लोड हुआ";
     }
     for (const key of APP_KEYS) localStorage.removeItem(key);
     for (const [key, value] of Object.entries(remote)) {
       if (APP_KEYS.includes(key) && typeof value === "string") localStorage.setItem(key, value);
     }
-    return "Supabase से fresh register लोड हो गया";
+    return "Supabase से register लोड हो गया";
   }
   async function pushNow() {
     if (!cloudReady) return;
