@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ग्राम दहेली युवा समिति - लेखा पोर्टल</title>
+<title>V7 - ग्राम दहेली युवा समिति - लेखा पोर्टल | V2</title>
+<!-- PORTAL RELEASE: V3 | Rent register donation-style table + number chooser popup -->
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f3f6f9;color:#1e293b;font:14px Arial,sans-serif}header{background:#17324d;color:white;padding:20px}header h1{margin:0}.wrap{max-width:1400px;margin:auto;padding:16px}.bar,.panel{background:white;border:1px solid #d9e1e8;border-radius:10px;padding:14px;margin-bottom:14px}.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}button{border:0;border-radius:6px;padding:9px 12px;background:#245b83;color:white;cursor:pointer;font-weight:bold}.danger{background:#b42318}.green{background:#16794b}.light{background:#e8eef4;color:#17324d}input,select{padding:8px;border:1px solid #cbd5e1;border-radius:5px;max-width:100%}h2{color:#17324d;font-size:17px;margin:0 0 12px}.center{text-align:center}.muted{color:#64748b;font-size:12px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.grid label{display:block;font-size:12px;color:#64748b;font-weight:bold}table{border-collapse:collapse;width:100%;min-width:950px;background:white}th,td{border:1px solid #cbd5e1;padding:7px;text-align:center}th{background:#eaf0f5;color:#17324d;font-size:12px}.scroll{overflow:auto}.cell{background:#eef4f8;color:#17324d;border:1px solid #cbd5e1;padding:5px;font-size:12px}.sub{font-weight:bold;text-align:center;color:#17324d;margin:12px}.summary{max-width:700px;margin:auto}.summary td:first-child{text-align:left;font-weight:bold}.summary td:last-child{text-align:right;font-weight:bold}.sign{display:grid;grid-template-columns:repeat(3,1fr);gap:25px;margin:42px 10px 15px;text-align:center;font-weight:bold}.sign div{border-top:0!important;padding-top:8px}.records{display:flex;gap:10px;flex-wrap:wrap}.record{padding:12px;border:1px solid #d9e1e8;border-radius:8px;background:#f8fafc}.modal{display:none;position:fixed;inset:0;background:#0008;align-items:center;justify-content:center;padding:15px}.box{background:white;padding:20px;border-radius:10px;width:min(400px,100%)}.box label{display:block;margin-top:8px}.box input,.box select{width:100%}
 @media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}}
@@ -35,23 +36,21 @@
 .tab-nav{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.tab-nav button{flex:1;min-width:190px}.tab-nav button.active{background:#0f766e}.tab-section{display:none}.tab-section.active{display:block}.tab-footer{margin-top:16px}.tab-footer .sign{margin-top:32px}.form-grid{display:grid;grid-template-columns:repeat(6,minmax(130px,1fr));gap:8px;align-items:end}.form-grid label{display:block;font-size:12px;font-weight:bold;color:#64748b;margin-bottom:4px}.form-grid input,.form-grid select{width:100%}.total-row{font-weight:bold;background:#eef4f8}.module-panel>h2{text-align:center;font-size:20px;margin:0 0 6px}.module-subtitle{text-align:center;color:#17324d;font-weight:bold;margin:0 0 14px}.module-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center;margin:12px 0}.module-table-wrap{width:100%;overflow:auto;margin-top:10px}.module-table{width:100%;min-width:850px;table-layout:fixed}.module-table th{white-space:normal;vertical-align:middle}.module-table td{height:30px;vertical-align:middle}.module-footer{margin-top:18px;border-top:1px solid #d9e1e8;padding-top:12px}.module-footer .panel{margin:0;border:0;padding:4px}.module-total{font-weight:bold;background:#eef4f8}.module-print-title{text-align:center;margin:0 0 12px}@media(max-width:900px){.form-grid{grid-template-columns:repeat(2,minmax(130px,1fr))}}
 
 @media print{
- @page{size:A3 landscape;margin:0}
- @page receipt{size:85.6mm 54mm;margin:0}
- body.print-receipt{page:receipt!important}
- html:has(body.print-receipt),body.print-receipt{width:85.6mm!important;height:54mm!important;margin:0!important;padding:0!important;overflow:hidden!important}
+ @page{size:A3 landscape;margin:10mm}
+ body.print-receipt{width:auto!important;height:auto!important;margin:0!important;padding:0!important;overflow:visible!important}
  body.print-receipt>header,body.print-receipt main>.bar,body.print-receipt main>.panel{display:none!important}
- body.print-receipt main>#singlePrint{display:block!important;width:85.6mm!important;height:54mm!important;margin:0!important;padding:0!important;overflow:hidden!important}
- body.print-receipt #singlePrint .print-content{width:85.6mm!important;height:54mm!important;min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}
- body.print-receipt .receipt-card{width:85.6mm!important;height:54mm!important;max-width:none!important;margin:0!important;padding:2.5mm!important;border:0.6mm solid #17324d!important;border-radius:2mm!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;justify-content:space-between!important}
- body.print-receipt .receipt-head{margin:-2.5mm -2.5mm 1mm!important;padding:1.5mm!important;border-radius:1mm 1mm 0 0!important}
- body.print-receipt .receipt-head h1{font-size:10px!important;margin:0!important}
- body.print-receipt .receipt-head p{font-size:6px!important}
- body.print-receipt .receipt-title{font-size:10px!important;letter-spacing:1px!important;margin:0.5mm 0!important}
- body.print-receipt .receipt-meta{font-size:6px!important;gap:1mm!important;padding-bottom:1mm!important}
- body.print-receipt .receipt-details{margin:1mm 0!important;font-size:7px!important}
- body.print-receipt .receipt-details p{padding:0.7mm 0!important;line-height:1.15!important}
- body.print-receipt .receipt-amount{font-size:9px!important;padding:1mm!important;margin:1mm 0!important}
- body.print-receipt .receipt-thanks{font-size:6px!important;line-height:1.25!important;margin:1mm 0!important}
+ body.print-receipt main>#singlePrint{display:block!important;width:100%!important;height:auto!important;min-height:0!important;margin:0!important;padding:0!important;overflow:visible!important}
+ body.print-receipt #singlePrint .print-content{width:100%!important;height:auto!important;min-height:0!important;margin:0!important;padding:0!important;overflow:visible!important}
+ body.print-receipt .receipt-card{width:100%!important;height:auto!important;min-height:0!important;max-width:none!important;margin:0!important;padding:10mm!important;border:1px solid #17324d!important;border-radius:0!important;overflow:visible!important;display:block!important}
+ body.print-receipt .receipt-head{margin:-10mm -10mm 6mm!important;padding:6mm!important;border-radius:0!important}
+ body.print-receipt .receipt-head h1{font-size:22pt!important;margin:0 0 2mm!important}
+ body.print-receipt .receipt-head p{font-size:11pt!important}
+ body.print-receipt .receipt-title{font-size:18pt!important;letter-spacing:1px!important;margin:4mm 0!important}
+ body.print-receipt .receipt-meta{font-size:11pt!important;gap:4mm!important;padding-bottom:3mm!important}
+ body.print-receipt .receipt-details{margin:5mm 0!important;font-size:11pt!important}
+ body.print-receipt .receipt-details p{padding:2mm 0!important;line-height:1.3!important}
+ body.print-receipt .receipt-amount{font-size:16pt!important;padding:4mm!important;margin:5mm 0!important}
+ body.print-receipt .receipt-thanks{font-size:11pt!important;line-height:1.5!important;margin:5mm 0!important}
  body.print-receipt .stamp-only{margin:0.5mm auto!important}
  body.print-receipt .stamp-only img{width:8mm!important;height:8mm!important}
  body.print-receipt .receipt-foot{font-size:5px!important;margin:0!important}
@@ -67,6 +66,693 @@
 .printval.status-advance,.printval.status-on_join{background:#dcfce7;color:#166534;padding:3px 5px;border:1px solid #86efac;border-radius:4px}
 .printval.status-left,.printval.status-left_committee{background:#fecaca;color:#7f1d1d;padding:3px 5px;border:1px solid #f87171;border-radius:4px}
 
+/* FINAL A3 LANDSCAPE LETTERHEAD PRINT LAYOUT */
+@media print {
+  @page {
+    size: A3 landscape;
+    margin: 45mm 9mm 30mm 9mm;
+  }
+
+  html, body {
+    width: auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body { font-size: 8px !important; }
+
+  /* Print only the selected report container. */
+  body.print-single > header,
+  body.print-single main > .bar,
+  body.print-single main > .panel,
+  body.print-single main > #allPrint,
+  body.print-single main > #expensePrint { display: none !important; }
+  body.print-single main > #singlePrint { display: block !important; }
+
+  body.print-expense > header,
+  body.print-expense main > .bar,
+  body.print-expense main > .panel,
+  body.print-expense main > #singlePrint,
+  body.print-expense main > #allPrint { display: none !important; }
+  body.print-expense main > #expensePrint { display: block !important; }
+
+  body.print-all > header,
+  body.print-all main > .bar,
+  body.print-all main > .panel,
+  body.print-all main > #singlePrint,
+  body.print-all main > #expensePrint { display: none !important; }
+  body.print-all main > #allPrint { display: block !important; }
+
+  body.print-single main > #singlePrint,
+  body.print-expense main > #expensePrint,
+  body.print-all main > #allPrint {
+    position: relative !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+  }
+
+  /* The full-page letterhead repeats on every printed page.
+     The page content starts 45mm below the top and ends 30mm above the bottom. */
+  .print-letterhead-bg {
+    display: block !important;
+    position: fixed !important;
+    left: -9mm !important;
+    top: -45mm !important;
+    width: 420mm !important;
+    height: 297mm !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: fill !important;
+    z-index: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: none !important;
+  }
+
+  .print-content {
+    display: block !important;
+    position: relative !important;
+    z-index: 1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+  }
+
+  .print-content h1,
+  .print-content h2,
+  .print-content h3,
+  .print-content p { break-after: avoid; page-break-after: avoid; }
+
+  .print-content table {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    table-layout: auto;
+    border-collapse: collapse;
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+  .print-content thead { display: table-header-group !important; }
+  .print-content tfoot { display: table-footer-group !important; }
+  .print-content tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+  .print-content th,
+  .print-content td {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .print-approval,
+  .sign,
+  .stamp-only,
+  .receipt-card,
+  .approval-block {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .print-content img { max-width: 100%; }
+  .no-print, .screen-only, .module-toolbar { display: none !important; }
+  .scroll { overflow: visible !important; }
+}
+\n
+
+/* MEMBER REGISTER: A3 LANDSCAPE / 45mm TOP / 30mm BOTTOM */
+@media print {
+  @page {
+    size: A3 landscape;
+    margin: 45mm 9mm 30mm 9mm;
+  }
+
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: auto !important;
+    background: transparent !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* The application is hidden on screen with inline display:none. */
+  body.print-single #cloudLogin,
+  body.print-single #cloudStatus,
+  body.print-single #appShell > header,
+  body.print-single #appShell > main > nav,
+  body.print-single #appShell > main > .bar,
+  body.print-single #appShell > main > .panel:not(#singlePrint),
+  body.print-single #appShell > main > #allPrint,
+  body.print-single #appShell > main > #expensePrint {
+    display: none !important;
+  }
+
+  body.print-single #appShell {
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  body.print-single #appShell > main.wrap {
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+  }
+
+  body.print-single #singlePrint {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  /* Full physical A3 background. The page margins keep report text inside
+     the 222mm content band on every page. */
+  body.print-single #singlePrint > .print-letterhead-bg {
+    display: block !important;
+    position: fixed !important;
+    left: -9mm !important;
+    top: -45mm !important;
+    width: 420mm !important;
+    height: 297mm !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: fill !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+  }
+
+  body.print-single #singlePrint > .print-content {
+    display: block !important;
+    position: relative !important;
+    z-index: 1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+  }
+
+  body.print-single .print-content h1 {
+    margin: 0 0 2mm !important;
+    font-size: 11pt !important;
+    text-align: center !important;
+  }
+  body.print-single .print-content h2 {
+    margin: 1mm 0 2mm !important;
+    font-size: 9pt !important;
+    text-align: center !important;
+  }
+  body.print-single .print-content h3 {
+    margin: 2mm 0 1mm !important;
+    font-size: 8pt !important;
+  }
+
+  body.print-single .print-content table {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+    font-size: 6.5pt !important;
+  }
+  body.print-single .print-content th,
+  body.print-single .print-content td {
+    padding: 1mm 0.6mm !important;
+    font-size: 6.5pt !important;
+    line-height: 1.1 !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
+  body.print-single .print-content thead {
+    display: table-header-group !important;
+  }
+  body.print-single .print-content tfoot {
+    display: table-footer-group !important;
+  }
+  body.print-single .print-content tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+  body.print-single .print-content section,
+  body.print-single .print-content .panel {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  body.print-single .print-content .scroll {
+    overflow: visible !important;
+  }
+  body.print-single .print-content img {
+    max-width: 100% !important;
+  }
+  body.print-single .print-approval,
+  body.print-single .sign,
+  body.print-single .stamp-only,
+  body.print-single .approval-block {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+  body.print-single .no-print,
+  body.print-single .screen-only,
+  body.print-single .module-toolbar,
+  body.print-single button {
+    display: none !important;
+  }
+
+  /* Preserve the separate non-letterhead print modes. */
+  body.print-receipt #singlePrint {
+    display: block !important;
+  }
+}
+/* ===== A3 LANDSCAPE REPORT PRINT CENTER FIX ===== */
+
+@media print {
+
+  @page {
+    size: A3 landscape;
+    margin: 45mm 9mm 30mm 9mm;
+  }
+
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    background: transparent !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body.print-single,
+  body.print-all,
+  body.print-expense {
+    font-size: 8px !important;
+  }
+
+  /* Report container */
+  body.print-single #singlePrint,
+  body.print-all #allPrint,
+  body.print-expense #expensePrint {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+  }
+
+  /* Letterhead on every page */
+  .print-letterhead-bg {
+    display: block !important;
+    position: fixed !important;
+    top: -45mm !important;
+    left: -9mm !important;
+    width: 420mm !important;
+    height: 297mm !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: fill !important;
+    z-index: 0 !important;
+    visibility: visible !important;
+  }
+
+  /* Center report content */
+  .print-content {
+    display: block !important;
+    position: relative !important;
+    z-index: 1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 0 !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+
+  /* Center tables on the page */
+  .print-content table {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border-collapse: collapse !important;
+    table-layout: auto !important;
+  }
+
+  .print-content th,
+  .print-content td {
+    text-align: center !important;
+    vertical-align: middle !important;
+    overflow-wrap: anywhere !important;
+    padding: 3px !important;
+  }
+
+  .print-content tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .print-content thead {
+    display: table-header-group !important;
+  }
+
+  .print-content tfoot {
+    display: table-footer-group !important;
+  }
+
+  .print-content img {
+    max-width: 100% !important;
+  }
+
+  .no-print,
+  .screen-only,
+  .module-toolbar {
+    display: none !important;
+  }
+
+  .scroll {
+    overflow: visible !important;
+  }
+}
+
+
+/* Rent receipt: A3 landscape with centered stamp watermark and approval signatures */
+@media print{
+ @page { size: A3 landscape; margin: 12mm; }
+ body.print-receipt #singlePrint{display:block!important;width:100%!important;margin:0!important;padding:0!important}
+ body.print-receipt .rent-id-card{display:block!important;position:relative!important;width:100%!important;max-width:none!important;min-height:0!important;height:auto!important;margin:0!important;padding:10mm!important;box-sizing:border-box!important;background:#fff!important;color:#172b3d!important;overflow:visible!important;border:1.2px solid #17324d!important;break-inside:avoid-page!important}
+ body.print-receipt .rent-id-card .receipt-watermark{position:absolute!important;width:115mm!important;height:115mm!important;left:50%!important;top:52%!important;transform:translate(-50%,-50%)!important;opacity:.13!important;z-index:0!important;pointer-events:none!important}
+ body.print-receipt .rent-id-card .receipt-watermark img{width:100%!important;height:100%!important;object-fit:contain!important}
+ body.print-receipt .rent-id-card .receipt-head,body.print-receipt .rent-id-card .receipt-title,body.print-receipt .rent-id-card .rent-receipt-meta,body.print-receipt .rent-id-card .rent-receipt-details,body.print-receipt .rent-id-card .rent-receipt-total,body.print-receipt .rent-id-card .rent-receipt-files,body.print-receipt .rent-id-card .rent-receipt-signers,body.print-receipt .rent-id-card .receipt-foot{position:relative!important;z-index:1!important}
+ body.print-receipt .rent-id-card .receipt-head{margin:-12mm -12mm 8mm!important;padding:9mm!important;text-align:center!important;background:#17324d!important;color:#fff!important}
+ body.print-receipt .rent-id-card .receipt-head h1{font-size:27pt!important;line-height:1.2!important;margin:0 0 3mm!important}
+ body.print-receipt .rent-id-card .receipt-head p{font-size:13pt!important;letter-spacing:2px!important;margin:0!important}
+ body.print-receipt .rent-id-card .receipt-title{font-size:22pt!important;letter-spacing:2px!important;text-align:center!important;margin:5mm 0 8mm!important;font-weight:800!important}
+ body.print-receipt .rent-receipt-meta{display:flex!important;justify-content:space-between!important;gap:8mm!important;font-size:15pt!important;border-bottom:1px solid #64748b!important;padding:0 0 5mm!important;margin-bottom:7mm!important}
+ body.print-receipt .rent-receipt-details{margin:6mm 0!important;max-height:none!important;overflow:visible!important}
+ body.print-receipt .rent-receipt-details table{width:100%!important;min-width:0!important;table-layout:auto!important;font-size:13pt!important;border-collapse:collapse!important}
+ body.print-receipt .rent-receipt-details th,body.print-receipt .rent-receipt-details td{padding:5mm 3mm!important;line-height:1.3!important;overflow-wrap:anywhere!important;border:1px solid #64748b!important}
+ body.print-receipt .rent-receipt-total{font-size:19pt!important;font-weight:bold!important;text-align:right!important;margin:8mm 0!important;padding:5mm!important;background:#edf3f7!important;border:1px solid #9aa8b5!important}
+ body.print-receipt .rent-receipt-files{font-size:11pt!important;line-height:1.4!important;margin:4mm 0!important}
+ body.print-receipt .rent-receipt-signers{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:12mm!important;text-align:center!important;font-size:13pt!important;line-height:1.3!important;margin:14mm 0 5mm!important;align-items:end!important}
+ body.print-receipt .rent-receipt-signers .signer{min-height:42mm!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-end!important;border-top:1px solid #334155!important;padding-top:3mm!important}
+ body.print-receipt .rent-receipt-signers img{display:block!important;max-width:48mm!important;max-height:22mm!important;object-fit:contain!important;margin:0 auto 2mm!important}
+ body.print-receipt .rent-receipt-signers small{font-size:10pt!important}
+ body.print-receipt .rent-id-card .receipt-foot{font-size:11pt!important;text-align:center!important;margin:7mm 0 0!important}
+}
+
+
+/* FINAL V6: A3 landscape report area between 45mm header and 30mm footer */
+@media print {
+  @page { size: A3 landscape; margin: 45mm 9mm 30mm 9mm; }
+
+  html, body {
+    margin: 0 !important; padding: 0 !important;
+    width: auto !important; min-width: 0 !important;
+    background: #fff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body.print-single > header,
+  body.print-single main > .bar,
+  body.print-single main > .panel,
+  body.print-single main > #allPrint,
+  body.print-single main > #expensePrint { display:none !important; }
+  body.print-all > header,
+  body.print-all main > .bar,
+  body.print-all main > .panel,
+  body.print-all main > #singlePrint,
+  body.print-all main > #expensePrint { display:none !important; }
+  body.print-expense > header,
+  body.print-expense main > .bar,
+  body.print-expense main > .panel,
+  body.print-expense main > #singlePrint,
+  body.print-expense main > #allPrint { display:none !important; }
+
+  body.print-single main > #singlePrint,
+  body.print-all main > #allPrint,
+  body.print-expense main > #expensePrint {
+    display:block !important;
+    position:relative !important;
+    width:100% !important; max-width:none !important; min-width:0 !important;
+    height:auto !important; min-height:0 !important;
+    margin:0 !important; padding:0 !important;
+    overflow:visible !important; background:transparent !important;
+  }
+
+  .print-letterhead-bg {
+    display:block !important;
+    position:fixed !important;
+    top:-45mm !important; left:-9mm !important;
+    width:420mm !important; height:297mm !important;
+    max-width:none !important; max-height:none !important;
+    object-fit:fill !important; z-index:0 !important;
+    visibility:visible !important; pointer-events:none !important;
+  }
+
+  .print-content {
+    display:block !important; position:relative !important; z-index:1 !important;
+    width:100% !important; max-width:none !important; min-width:0 !important;
+    height:auto !important; min-height:0 !important;
+    margin:0 auto !important; padding:0 !important;
+    overflow:visible !important; background:transparent !important;
+  }
+
+  body.print-single .print-content,
+  body.print-all .print-content,
+  body.print-expense .print-content {
+    width:100% !important;
+    margin-left:auto !important; margin-right:auto !important;
+  }
+
+  .print-content table {
+    width:100% !important; min-width:0 !important; max-width:100% !important;
+    margin-left:auto !important; margin-right:auto !important;
+    table-layout:fixed !important; border-collapse:collapse !important;
+  }
+  .print-content th, .print-content td {
+    padding:2px 3px !important;
+    font-size:7px !important;
+    line-height:1.15 !important;
+    overflow-wrap:anywhere !important;
+  }
+  .print-content h1, .print-content h2, .print-content h3,
+  .print-content p { text-align:center; break-after:avoid; page-break-after:avoid; }
+  .print-content section, .print-content .panel {
+    width:100% !important; max-width:none !important; min-width:0 !important;
+    margin:0 0 3mm !important; padding:0 !important;
+    background:transparent !important; box-shadow:none !important;
+  }
+  .print-content tr { break-inside:avoid !important; page-break-inside:avoid !important; }
+  .print-content thead { display:table-header-group !important; }
+  .print-content tfoot { display:table-footer-group !important; }
+  .print-content .summary { width:72% !important; margin:3mm auto !important; }
+  .print-content .sign, .print-content .print-approval,
+  .print-content .stamp-only, .print-content .approval-block {
+    break-inside:avoid !important; page-break-inside:avoid !important;
+  }
+  .scroll { overflow:visible !important; }
+  .no-print, .screen-only, .module-toolbar, button { display:none !important; }
+}
+
+
+/* V7: Combined Financial Report uses physical A3 sheets; print-dialog margins cannot shift its layout. */
+@media print {
+  @page { size: A3 landscape; margin: 0 !important; }
+  html, body { margin:0 !important; padding:0 !important; width:420mm !important; background:#fff !important; }
+  body.print-combined main > *:not(#singlePrint) { display:none !important; }
+  body.print-combined main > #singlePrint { display:block !important; width:420mm !important; margin:0 !important; padding:0 !important; overflow:visible !important; }
+  body.print-combined .report-page {
+    position:relative !important; display:block !important; box-sizing:border-box !important;
+    width:420mm !important; height:297mm !important; min-height:297mm !important;
+    margin:0 !important; padding:45mm 9mm 30mm !important;
+    overflow:hidden !important; page-break-after:always !important; break-after:page !important;
+    background:#fff !important;
+  }
+  body.print-combined .report-page:last-child { page-break-after:auto !important; break-after:auto !important; }
+  body.print-combined .report-page-bg {
+    position:absolute !important; inset:0 !important; display:block !important;
+    width:420mm !important; height:297mm !important; max-width:none !important; max-height:none !important;
+    object-fit:fill !important; z-index:0 !important; pointer-events:none !important;
+  }
+  body.print-combined .report-page-content {
+    position:relative !important; z-index:1 !important; width:100% !important;
+    height:222mm !important; max-height:222mm !important; min-height:0 !important;
+    margin:0 !important; padding:0 !important; overflow:hidden !important;
+    display:flex !important; flex-direction:column !important; justify-content:center !important;
+    background:transparent !important; box-sizing:border-box !important;
+  }
+  body.print-combined .report-page-content h1 { font-size:14px !important; margin:0 0 2mm !important; }
+  body.print-combined .report-page-content h2 { font-size:10px !important; margin:2mm 0 1.2mm !important; }
+  body.print-combined .report-page-content h3 { font-size:9px !important; margin:2mm 0 1mm !important; }
+  body.print-combined .report-page-content p { margin:0 0 1.5mm !important; }
+  body.print-combined .report-page-content table {
+    width:100% !important; max-width:100% !important; min-width:0 !important;
+    table-layout:fixed !important; border-collapse:collapse !important; margin:0 auto 1.5mm !important;
+    break-inside:avoid !important; page-break-inside:avoid !important;
+  }
+  body.print-combined .report-page-content th,
+  body.print-combined .report-page-content td {
+    font-size:7.2px !important; line-height:1.12 !important;
+    padding:1.5px 2px !important; overflow-wrap:anywhere !important; vertical-align:middle !important;
+  }
+  body.print-combined .report-page-content tr { break-inside:avoid !important; page-break-inside:avoid !important; }
+  body.print-combined .report-page-content thead { display:table-header-group !important; }
+  body.print-combined .report-page-content tfoot { display:table-row-group !important; }
+  body.print-combined .report-page-content .summary { width:70% !important; margin:2mm auto !important; }
+  body.print-combined .report-page-content .print-approval { margin-top:3mm !important; }
+  body.print-combined .report-page-content img { max-width:100% !important; }
+  body.print-combined .no-print, body.print-combined button { display:none !important; }
+}
+
+
+/* V8 FINAL PRINT OVERRIDE: clean combined report pages only */
+@media print {
+  @page { size: 420mm 297mm; margin: 0 !important; }
+  html, body {
+    width: 420mm !important; min-width: 420mm !important; max-width: 420mm !important;
+    height: auto !important; margin: 0 !important; padding: 0 !important;
+    background: #fff !important; overflow: visible !important;
+    -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+  }
+  body.print-combined #cloudLogin,
+  body.print-combined #cloudStatus,
+  body.print-combined #appShell > header,
+  body.print-combined #appShell > main > nav,
+  body.print-combined #appShell > main > .bar,
+  body.print-combined #appShell > main > .panel:not(#singlePrint),
+  body.print-combined #appShell > main > #allPrint,
+  body.print-combined #appShell > main > #expensePrint,
+  body.print-combined .modal,
+  body.print-combined .no-print,
+  body.print-combined button {
+    display: none !important;
+  }
+  body.print-combined #appShell,
+  body.print-combined #appShell > main {
+    display: block !important; width: 420mm !important; max-width: 420mm !important;
+    min-width: 420mm !important; margin: 0 !important; padding: 0 !important;
+    border: 0 !important; overflow: visible !important; background: transparent !important;
+  }
+  body.print-combined #appShell > main > #singlePrint {
+    display: block !important; position: static !important;
+    width: 420mm !important; max-width: 420mm !important; min-width: 420mm !important;
+    margin: 0 !important; padding: 0 !important; border: 0 !important;
+    overflow: visible !important; background: transparent !important;
+  }
+  body.print-combined .report-page {
+    position: relative !important; display: block !important;
+    box-sizing: border-box !important; width: 420mm !important; height: 297mm !important;
+    min-height: 297mm !important; max-height: 297mm !important;
+    margin: 0 !important; padding: 45mm 9mm 30mm !important;
+    overflow: hidden !important; background: transparent !important;
+    break-inside: avoid !important; page-break-inside: avoid !important;
+    break-after: page !important; page-break-after: always !important;
+  }
+  body.print-combined .report-page:last-child {
+    break-after: auto !important; page-break-after: auto !important;
+  }
+  body.print-combined .report-page-bg {
+    position: absolute !important; display: block !important;
+    left: 0 !important; top: 0 !important; right: auto !important; bottom: auto !important;
+    width: 420mm !important; height: 297mm !important;
+    min-width: 420mm !important; max-width: 420mm !important;
+    min-height: 297mm !important; max-height: 297mm !important;
+    object-fit: fill !important; object-position: center center !important;
+    margin: 0 !important; padding: 0 !important; z-index: 0 !important;
+  }
+  body.print-combined .report-page-content {
+    position: relative !important; z-index: 1 !important;
+    display: flex !important; flex-direction: column !important; justify-content: center !important;
+    box-sizing: border-box !important; width: 100% !important; height: 222mm !important;
+    min-height: 0 !important; max-height: 222mm !important;
+    margin: 0 !important; padding: 0 !important; overflow: hidden !important;
+    background: transparent !important;
+  }
+  body.print-combined .report-page-content table {
+    width: 100% !important; min-width: 0 !important; max-width: 100% !important;
+    table-layout: fixed !important; border-collapse: collapse !important;
+    margin-left: auto !important; margin-right: auto !important;
+    break-inside: avoid !important; page-break-inside: avoid !important;
+  }
+  body.print-combined .report-page-content th,
+  body.print-combined .report-page-content td {
+    font-size: 7.2px !important; line-height: 1.12 !important;
+    padding: 1.5px 2px !important; overflow-wrap: anywhere !important;
+  }
+  body.print-combined .report-page-content h1,
+  body.print-combined .report-page-content h2,
+  body.print-combined .report-page-content h3,
+  body.print-combined .report-page-content p { text-align: center !important; break-after: avoid !important; page-break-after: avoid !important; }
+  body.print-combined .report-page-content .print-approval { margin-top: 3mm !important; }
+}
+
+
+/* V11 combined financial report heading and emphasized totals */
+.report-page .financial-report-title{font-size:25px!important;font-weight:900!important;letter-spacing:1.2px!important;margin:0 0 2mm!important;text-align:center!important}
+.report-page .financial-report-year{font-size:18px!important;font-weight:800!important;margin:0 0 5mm!important;text-align:center!important}
+.report-page tfoot td,.report-page tfoot th{font-size:11px!important;font-weight:900!important;padding-top:3px!important;padding-bottom:3px!important}
+.report-page .summary tr:nth-last-child(-n+2) td{font-size:12px!important;font-weight:900!important;padding-top:4px!important;padding-bottom:4px!important}
+
+
+/* Report identity is printed inside the letterhead's content area. */
+.report-heading{text-align:center;line-height:1.25;margin:0 0 4mm;color:#17324d;position:relative;z-index:1}
+.report-heading .samiti{font-size:15px;font-weight:900;letter-spacing:1.1px;margin:0 0 1.5mm}
+.report-heading .report-name{font-size:12px;font-weight:900;margin:0 0 1mm}
+.report-heading .period{font-size:10px;font-weight:800;margin:0}
 </style></head><body>
 
 <div id="cloudLogin" style="max-width:430px;margin:8vh auto;padding:24px;background:#fff;border:1px solid #d9e1e8;border-radius:12px;box-shadow:0 8px 30px #17324d18;font:14px Arial,sans-serif;color:#1e293b">
@@ -90,6 +776,7 @@
 <button class="active" data-tab-btn="memberTab" onclick="showMainTab('memberTab')">Monthly Member Collection Details</button>
 <button data-tab-btn="expenseTab" onclick="showMainTab('expenseTab')">Expense Details</button>
 <button data-tab-btn="donationTab" onclick="showMainTab('donationTab')">Donation Details</button>
+<button data-tab-btn="rentTab" onclick="showMainTab('rentTab')">Rent Collection</button>
 <button data-tab-btn="billTab" onclick="showMainTab('billTab')">Bill Details</button>
 </nav>
 <section class="bar no-print" data-tab="memberTab">
@@ -100,7 +787,7 @@
 <div><label>Member ID</label><select id="mid"></select></div><div><label>Name</label><input id="mname"></div><div><label>Father's Name</label><input id="father"></div><div><label>Mobile</label><input id="mobile"></div></div><p><button onclick="addMember()">Add Member</button></p></section>
 <section class="panel" data-tab="memberTab"><div class="center"><h2 style="font-size:20px;margin:0">MEMBER & MONTHLY PAYMENT REGISTER</h2><b id="session">SESSION: AUGUST 2026 – JANUARY 2027</b></div><div class="sub">MEMBER & PAYMENT DETAILS</div><div class="scroll"><table id="members"><thead></thead><tbody></tbody><tfoot></tfoot></table></div><p class="muted no-print">भुगतान बदलने के लिए महीने के बटन पर क्लिक करें। Amount, Status, Payment Date और Late Fee भरें।</p></section>
 
-<section class="panel screen-only" data-tab="memberTab"><h2>MONTH-WISE OPENING & CLOSING BALANCE</h2><div class="scroll"><table id="balances"><thead><tr><th>Month</th><th>Opening Balance</th><th>Collection</th><th>Donation</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody></tbody></table></div><p class="muted no-print">यह केवल रिपोर्ट है। Opening और Closing Balance पिछले साल के Closing तथा उपलब्ध Member Collection, Donation और Expense रिकॉर्ड से अपने-आप दिखेंगे। Donation और Expense की एंट्री अलग मॉड्यूल में जोड़ी जाएगी।</p></section>
+<section class="panel screen-only" data-tab="memberTab"><h2>MONTH-WISE OPENING & CLOSING BALANCE</h2><div class="scroll"><table id="balances"><thead><tr><th>Month</th><th>Opening Balance</th><th>Collection</th><th>Donation</th><th>Rent</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody></tbody></table></div><p class="muted no-print">यह केवल रिपोर्ट है। Opening और Closing Balance पिछले साल के Closing तथा उपलब्ध Member Collection, Donation और Expense रिकॉर्ड से अपने-आप दिखेंगे। Donation, Rent और Expense की एंट्री अलग मॉड्यूल में जोड़ी जाएगी।</p></section>
 <section class="panel" id="memberSummarySection" data-tab="memberTab"><div class="sub">OVERALL FINANCIAL SUMMARY</div><div class="summary"><table id="summary"></table></div><div class="sign"><div>PREPARED BY</div><div>VERIFIED BY</div><div>APPROVED BY</div></div><div class="center"><b>Gram Daheli Yuva Samiti · Official Record</b></div></section>
 
 <section class="panel module-panel" id="expensePanel" data-tab="expenseTab"><h2>Expense Details</h2><div class="module-subtitle">MONTH-WISE EXPENSE REGISTER</div><div class="bar no-print" style="padding:0;border:0;justify-content:center"><label>Expense Month</label><select id="expenseMonth" onchange="renderExpenses()"><option value="ALL">All</option></select><button class="light" onclick="printExpenseMonth()">Print Monthly</button><button class="light" onclick="printExpenseAll()">Print All</button><span class="muted">Month Range</span><select id="expenseFromMonth"></select><select id="expenseToMonth"></select><button class="light" onclick="printExpenseMonthRange()">Print Month Range</button><span class="muted">Year Range</span><select id="expenseFromYear"></select><select id="expenseToYear"></select><button class="light" onclick="printExpenseYearRange()">Print Year Range</button></div><div class="module-table-wrap"><table id="expenseTable" class="module-table"><thead><tr><th>S.No.</th><th>Month</th><th>Bill Number</th><th>Expense Date</th><th>Expense Details</th><th>Expense Amount (₹)</th><th>Action</th></tr></thead><tbody></tbody><tfoot></tfoot></table></div><p class="muted">हर महीने का खर्च अलग रहेगा। सभी महीने के खर्च का योग मुख्य Expenses में अपने-आप जुड़ेगा। हटाए गए Bill Number दोबारा इस्तेमाल नहीं होंगे।</p><div class="module-footer" id="expenseFooter"></div></section>
@@ -119,6 +806,21 @@
 <div class="bar no-print module-toolbar" style="padding:8px 0;border:0"><button class="green" onclick="saveDonation()" id="donSaveBtn">Add Donation</button><button class="light" onclick="printDonationMonth()">Print Monthly</button><button class="light" onclick="printDonationAll()">Print All</button><label>Record Year</label><select id="donYear" onchange="refreshDonationMonthOptions();renderDonations()"></select><label>Donation Month</label><select id="donMonth" onchange="renderDonations()"><option value="all">All Months</option></select></div>
 <div class="module-table-wrap"><table id="donationTable" class="module-table"><thead><tr><th>S.No.</th><th>Month</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th><th class="no-print">Action</th></tr></thead><tbody></tbody><tfoot></tfoot></table></div>
 <div class="module-footer" id="donationFooter"></div>
+</section>
+<section class="panel module-panel" id="rentPanel" data-tab="rentTab">
+<h2>RENT COLLECTION DETAILS REGISTER</h2>
+<div class="module-subtitle">RENT COLLECTION REGISTER</div>
+<div class="form-grid no-print" style="grid-template-columns:repeat(4,minmax(150px,1fr))">
+<div><label>Collection Date</label><input type="date" id="rentDate" onchange="updateRentMonthDisplay()"></div>
+<div><label>Collection Month</label><input type="text" id="rentMonthDisplay" placeholder="Select Date" readonly></div>
+<div><label>Collection Number</label><input id="rentNoDisplay" type="text" value="GDYS-RENT-001" readonly style="background:#f8fafc;font-weight:700;color:#17324d"><input id="rentNo" type="hidden"></div>
+</div>
+<div class="module-table-wrap no-print"><table class="module-table" style="min-width:1050px"><thead><tr><th>S.No.</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Unit / Qty</th><th>Rate / Unit (₹)</th><th>Amount (₹)</th><th>Attachment (PDF / PNG / JPG)</th><th>Action</th></tr></thead><tbody id="rentItemRows"></tbody></table></div>
+<div class="bar no-print"><button type="button" class="light" onclick="addRentItemRow()">+ Add Item / Column</button><b id="rentFormTotal">Total: ₹0.00</b></div>
+<p class="muted no-print">हर Item के साथ PDF / PNG / JPG attachment जोड़ सकते हैं। Attachment न होने पर भी Item save होगा। प्रति फाइल अधिकतम 2 MB।</p>
+<div class="bar no-print module-toolbar" style="padding:8px 0;border:0"><button class="green" onclick="saveRentCollection()" id="rentSaveBtn">Save Complete Collection</button><label>Print Month</label><select id="rentPrintMonth"><option value="all">All Months</option></select><button class="light" onclick="printRentMonthly()">Print Month</button><button class="light" onclick="printRentAll()">Print All Collections</button></div>
+<div class="module-table-wrap"><table id="rentTable" class="module-table" style="min-width:1100px"><thead><tr><th>S.No.</th><th>Month</th><th>Date</th><th>Collection Number</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Amount (₹)</th><th class="no-print">Action</th></tr></thead><tbody></tbody><tfoot></tfoot></table></div>
+<div class="module-footer" id="rentFooter"></div>
 </section>
 <section class="panel module-panel" id="billPanel" data-tab="billTab">
 <h2>Bill Details</h2><div class="module-subtitle">BILL & WORK DETAILS REGISTER</div>
@@ -210,14 +912,14 @@ function next(m){let [a,y]=m.split('-'),i=months.indexOf(a)+1;if(i===12){i=0;y=+
 function hasPaymentAmount(p){return !!p&&(p.amountMode===undefined?(p.amount!==undefined&&p.amount!==null&&p.amount!==''):p.amountMode==='value')}
 function hasLateFee(p){return !!p&&(p.lateMode===undefined?(p.late!==undefined&&p.late!==null&&p.late!==''):p.lateMode==='value')}
 function paymentAmount(p){return (hasPaymentAmount(p)?(+p.amount||0):0)+(hasLateFee(p)?(+p.late||0):0)}
-function yearMonths(x,y=yr){return (x.months||[]).filter(m=>m.endsWith('-'+y)).sort((a,b)=>months.indexOf(a.slice(0,3))-months.indexOf(b.slice(0,3)))}
+function yearMonths(x,y=yr){const base=(x.months||[]).filter(m=>m.endsWith('-'+y));const rentMonths=typeof allRentCollections==='function'?allRentCollections().map(e=>e.month).filter(m=>m&&m.endsWith('-'+y)):[];return [...new Set([...base,...rentMonths])].sort((a,b)=>monthKey(a)-monthKey(b))}
 function totals(){return yearMonths(d()).map(m=>d().members.reduce((s,x)=>s+paymentAmount(x.payments?.[m]),0))}
 function render(){let x=d(),visibleMonths=yearMonths(x),t=totals();refreshMemberIdOptions();session.textContent='SESSION: '+(visibleMonths[0]||'—')+' – '+(visibleMonths.at(-1)||'—');members.tHead.innerHTML='<tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...visibleMonths,'Late Fee (₹)',''].map(v=>'<th>'+v+'</th>').join('')+'</tr>';
 members.tBodies[0].innerHTML=x.members.map((m,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(m.id)+'</td><td>'+esc(m.name)+'</td><td>'+esc(m.father)+'</td><td>'+esc(m.mobile)+'</td>'+visibleMonths.map((mo,j)=>{let p=m.payments?.[mo]||{};let parts=[];if(hasPaymentAmount(p))parts.push(money(p.amount));let labels={advance:'Advance Paid',late:'With Late Payment',unpaid:'Unpaid',on_join:'Paid on Join',left:'Left the Committee',left_committee:'Left the Committee'};let st=String(p.status||'').toLowerCase();if(st!=='none'&&labels[st])parts.push(labels[st]);let shown=parts.join(' · ')||'—';let colourClass=['unpaid','late','advance','on_join','left','left_committee'].includes(st)?' status-'+st:'';return '<td><button class="cell no-print'+colourClass+'" onclick="editPay('+i+','+j+')">'+shown+'</button><span class="printval'+colourClass+'">'+shown+'</span></td>'}).join('')+'<td>'+money(Object.entries(m.payments||{}).filter(([mo])=>mo.endsWith('-'+yr)).reduce((s,[,p])=>s+(hasLateFee(p)?(+p.late||0):0),0))+'</td><td class="no-print"><button class="light" title="Edit Member" onclick="editMember('+i+')">✎</button> <button class="danger" title="Delete Member" onclick="delMember('+i+')">×</button></td></tr>').join('')||'<tr><td colspan="20">No members added</td></tr>';
 members.tFoot.innerHTML='<tr><td colspan="5">TOTAL MEMBER MONTHLY COLLECTION ₹</td>'+t.map(v=>'<td>'+money(v)+'</td>').join('')+'<td>'+money(x.members.reduce((s,m)=>s+Object.values(m.payments||{}).reduce((a,p)=>a+(hasLateFee(p)?(+p.late||0):0),0),0))+'</td><td class="no-print"></td></tr>';
-let op=openingForYear(yr),bt='';visibleMonths.forEach((m,i)=>{let don=+x.donations[m]||0,ex=expenseTotalForMonth(x,m),cl=op+t[i]+don-ex;bt+='<tr><td>'+m+'</td><td>'+money(op)+'</td><td>'+money(t[i])+'</td><td>'+money(don)+'</td><td>'+money(ex)+'</td><td><b>'+money(cl)+'</b></td></tr>';op=cl});balances.tBodies[0].innerHTML=bt;
-let coll=t.reduce((a,b)=>a+b,0),don=Object.values(x.donations||{}).reduce((a,b)=>a+(+b||0),0)+donationTotalForYear(yr),ex=totalExpensesForYear(x);summary.innerHTML=[['Opening Balance',money(openingForYear(yr))],['Total Member Collection',money(coll)],['Total Expense',money(ex)],['Total Donation Collection',money(don)],['GRAND TOTAL BALANCE / CLOSING BALANCE',money(op)]].map(r=>'<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>').join('');
-const yearList=availableYears();year.innerHTML=yearList.map(y=>'<option value="'+y+'" '+(y===yr?'selected':'')+'>'+y+'</option>').join('');if(document.getElementById('expenseMonth'))initExpenseUI();refreshDonationYearOptions();updateDonationMonthDisplay();renderDonations();refreshBillDetailNumberOptions();renderBills();if(!document.querySelector("#billItemRows tr"))addBillItemRow();updateBillMonthDisplay();updateSharedFooters();}
+let op=openingForYear(yr),bt='';visibleMonths.forEach((m,i)=>{let don=donationTotalForMonth(m)+(Number(x.donations?.[m])||0),rent=rentTotalForMonth(m),ex=expenseTotalForMonth(x,m),cl=op+t[i]+don+rent-ex;bt+='<tr><td>'+m+'</td><td>'+money(op)+'</td><td>'+money(t[i])+'</td><td>'+money(don)+'</td><td>'+money(rent)+'</td><td>'+money(ex)+'</td><td><b>'+money(cl)+'</b></td></tr>';op=cl});balances.tBodies[0].innerHTML=bt;
+let coll=t.reduce((a,b)=>a+b,0),lateColl=x.members.reduce((a,m)=>a+Object.entries(m.payments||{}).filter(([mo])=>mo.endsWith('-'+yr)).reduce((b,[,p])=>b+(hasLateFee(p)?(+p.late||0):0),0),0),baseColl=coll-lateColl,don=Object.values(x.donations||{}).reduce((a,b)=>a+(+b||0),0)+donationTotalForYear(yr),rent=rentTotalForYear(yr),ex=totalExpensesForYear(x);summary.innerHTML=[['Opening Balance',money(openingForYear(yr))],['Member Collection (Without Late Fee)',money(baseColl)],['Late Payment Charges',money(lateColl)],['TOTAL MEMBER COLLECTION (Including Late Fee)',money(coll)],['Total Donation Collection',money(don)],['Total Rent Collection',money(rent)],['Total Expense (Minus)',money(ex)],['GRAND TOTAL BALANCE / CLOSING BALANCE',money(op)]].map(r=>'<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>').join('');
+const yearList=availableYears();year.innerHTML=yearList.map(y=>'<option value="'+y+'" '+(y===yr?'selected':'')+'>'+y+'</option>').join('');if(document.getElementById('expenseMonth'))initExpenseUI();refreshDonationYearOptions();updateDonationMonthDisplay();renderDonations();renderRentCollections();refreshBillDetailNumberOptions();renderBills();if(!document.querySelector("#billItemRows tr"))addBillItemRow();if(!document.querySelector("#rentItemRows tr"))addRentItemRow();resetRentForm();updateBillMonthDisplay();updateSharedFooters();}
 // Year selection is controlled only by the single dropdown at the top.
 function selectYear(v){if(v==="all"){year.value=yr;return}switchYear(v)}
 function yearHasData(x,year){
@@ -226,7 +928,7 @@ function yearHasData(x,year){
  if((x.members||[]).some(m=>!m._carried))return true;
  const hasPayment=(x.members||[]).some(m=>Object.values(m.payments||{}).some(p=>p&&(p.status&&p.status!=='none'||(p.amount!==null&&p.amount!==undefined&&p.amount!=='')||(p.late!==null&&p.late!==undefined&&p.late!=='')||p.date)));
  if(hasPayment)return true;
- if(Object.values(x.donations||{}).some(v=>Number(v)!==0)||Object.values(x.expenses||{}).some(v=>Number(v)!==0)||(x.expenseEntries||[]).length||Number(x.opening||0)!==0)return true;
+ if(Object.values(x.donations||{}).some(v=>Number(v)!==0)||Object.values(x.expenses||{}).some(v=>Number(v)!==0)||(x.expenseEntries||[]).length||Number(x.opening||0)!==0||(typeof allRentCollections==='function'&&allRentCollections().some(e=>String(e.month||'').endsWith('-'+year))))return true;
  const yy=String(year||'');const defaultMonths=yy==='2026'?['AUG-2026','SEP-2026','OCT-2026','NOV-2026','DEC-2026']:months.map(m=>m+'-'+yy);
  const actualMonths=(x.months||[]).slice().sort();if(JSON.stringify(actualMonths)!==JSON.stringify(defaultMonths.slice().sort()))return true;
  return false;
@@ -247,7 +949,7 @@ function removeEmptyYear(){
  if(!confirm(y+' खाली है। क्या इसे हटाएँ? अगली बार Add Year करने पर यही '+y+' फिर मिलेगा।'))return;
  delete db[y];const prev=String(n-1);yr=db[prev]?prev:'2027';store();render();alert(y+' हट गया। अगली बार Add Year करने पर यही साल फिर बनेगा।');
 }
-function allAvailableMonths(){const monthsFromDb=Object.keys(db).filter(y=>/^\d{4}$/.test(y)).flatMap(y=>yearMonths(db[y],y));const monthsFromExpenses=Object.values(db).flatMap(x=>(x.expenseEntries||[]).map(e=>e.month).filter(Boolean));return [...new Set([...monthsFromDb,...monthsFromExpenses])].sort((a,b)=>monthKey(a)-monthKey(b))}
+function allAvailableMonths(){const monthsFromDb=Object.keys(db).filter(y=>/^\d{4}$/.test(y)).flatMap(y=>yearMonths(db[y],y));const monthsFromExpenses=Object.values(db).flatMap(x=>(x.expenseEntries||[]).map(e=>e.month).filter(Boolean));const monthsFromRent=allRentCollections().map(e=>e.month).filter(Boolean);return [...new Set([...monthsFromDb,...monthsFromExpenses,...monthsFromRent])].sort((a,b)=>monthKey(a)-monthKey(b))}
 function monthKey(m){const [mm,yy]=String(m).split('-');return Number(yy)*12+months.indexOf(mm)}
 function openPrintOptions(){const ys=availableYears();printYear.innerHTML=ys.map(y=>'<option value="'+y+'" '+(y===yr?'selected':'')+'>'+y+'</option>').join('');const all=allAvailableMonths();const opts=all.map(m=>'<option value="'+m+'">'+m+'</option>').join('');printMonth.innerHTML=opts;printToMonth.innerHTML=opts;if(all.length){printMonth.value=all[0];printToMonth.value=all[all.length-1]}printType.onchange=updatePrintControls;printYear.onchange=()=>{};printModal.style.display='flex';updatePrintControls()}
 function updatePrintControls(){const all=printType.value==='all',range=printType.value==='range',year=printType.value==='year';printYearLabel.style.display=year?'block':'none';printYear.style.display=year?'block':'none';printMonthLabel.style.display=range?'block':'none';printMonth.style.display=range?'block':'none';printToMonthLabel.style.display=range?'block':'none';printToMonth.style.display=range?'block':'none'}
@@ -261,37 +963,43 @@ function runPrint(){
  const ms=all.filter(m=>monthKey(m)>=monthKey(from)&&monthKey(m)<=monthKey(to));closePrintOptions();printCombinedReport(ms,ms.length===1?ms[0]:ms[0]+' से '+ms[ms.length-1]);
 }
 function printCombinedReport(ms,periodTitle){
- const root=document.getElementById('singlePrint');let html='<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">COMBINED FINANCIAL REPORT</h2><p class="center"><b>'+esc(periodTitle)+'</b></p>';
+ const root=document.getElementById('singlePrint');let html='<div class="report-heading"><div class="samiti">GRAM DAHELI YUVA SAMITI</div><div class="report-name">MEMBER COLLECTION REPORT</div><div class="period">'+esc(periodTitle)+'</div></div>';
  const monthTotals=ms.map(mo=>{const q=monthData(mo);return {mo,...q}});
  const memberMap=new Map();ms.forEach(mo=>{const x=db[mo.split('-')[1]];(x?.members||[]).forEach(m=>{if(!memberMap.has(String(m.id)))memberMap.set(String(m.id),m)})});const members=[...memberMap.values()];
- html+='<h2 class="center">MONTHLY MEMBER COLLECTION DETAILS</h2><table><thead><tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th>'+esc(v)+'</th>').join('')+'</tr></thead><tbody>';
+ html+='<table><thead><tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th>'+esc(v)+'</th>').join('')+'</tr></thead><tbody>';
  members.forEach((m,i)=>{html+='<tr><td>'+(i+1)+'</td><td>'+esc(m.id)+'</td><td>'+esc(m.name)+'</td><td>'+esc(m.father)+'</td><td>'+esc(m.mobile)+'</td>';ms.forEach(mo=>{const actual=(db[mo.split('-')[1]]?.members||[]).find(z=>String(z.id)===String(m.id)),q=actual?.payments?.[mo]||{},v=[];if(hasPaymentAmount(q))v.push(money(q.amount));if(statusLabel(q))v.push(statusLabel(q));html+='<td>'+esc(v.join(' · ')||'—')+'</td>'});const late=ms.reduce((a,mo)=>{const z=(db[mo.split('-')[1]]?.members||[]).find(z=>String(z.id)===String(m.id)),q=z?.payments?.[mo]||{};return a+(hasLateFee(q)?Number(q.late)||0:0)},0);html+='<td>'+money(late)+'</td></tr>'});
- const collection=monthTotals.reduce((a,q)=>a+q.collection,0),donation=monthTotals.reduce((a,q)=>a+q.donation,0),expense=monthTotals.reduce((a,q)=>a+q.expense,0),opening=balanceBeforeMonth(ms[0]),closing=opening+collection+donation-expense;
- html+='</tbody><tfoot><tr><td colspan="5"><b>TOTAL MEMBER COLLECTION</b></td>'+ms.map(mo=>'<td>'+money(monthData(mo).collection)+'</td>').join('')+'<td></td></tr></tfoot></table>';
+ const baseCollection=monthTotals.reduce((a,q)=>a+q.baseCollection,0),lateCollection=monthTotals.reduce((a,q)=>a+q.lateFee,0),collection=baseCollection+lateCollection,donation=monthTotals.reduce((a,q)=>a+q.donation,0),rent=monthTotals.reduce((a,q)=>a+q.rent,0),expense=monthTotals.reduce((a,q)=>a+q.expense,0),opening=balanceBeforeMonth(ms[0]),closing=opening+collection+donation+rent-expense;
+ html+='</tbody><tfoot><tr><td colspan="5"><b>TOTAL MEMBER COLLECTION (INCLUDING LATE FEE)</b></td>'+ms.map(mo=>'<td>'+money(monthData(mo).collection)+'</td>').join('')+'<td>'+money(monthTotals.reduce((a,q)=>a+q.lateFee,0))+'</td></tr></tfoot></table>';
  html+='<h2 class="center">EXPENSE DETAILS</h2><table><thead><tr><th>S.No.</th><th>Month</th><th>Bill Number</th><th>Expense Date</th><th>Expense Details</th><th>Amount (₹)</th></tr></thead><tbody>';
  let expRows=[];ms.forEach(mo=>{const x=db[mo.split('-')[1]];expenseRows(x||{}).filter(e=>e.month===mo).forEach(e=>expRows.push({...e,_mo:mo}))});html+=expRows.map((e,i)=>'<tr><td>'+esc(e._mo)+'</td><td>'+(i+1)+'</td><td>'+esc(e.bill||'')+'</td><td>'+esc(e.date||'')+'</td><td>'+esc(e.detail||'')+'</td><td>'+money(e.amount)+'</td></tr>').join('');html+='</tbody><tfoot><tr><td colspan="5"><b>TOTAL EXPENSE</b></td><td><b>'+money(expense)+'</b></td></tr></tfoot></table>';
  const donations=allDonations().filter(e=>ms.includes(monthFromDate(e.date))).sort((a,b)=>a.date.localeCompare(b.date));html+='<h2 class="center">DONATION DETAILS</h2><table><thead><tr><th>S.No.</th><th>Month</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th></tr></thead><tbody>'+donations.map((e,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(monthFromDate(e.date))+'</td><td>'+esc(e.date)+'</td><td>'+esc(e.receipt)+'</td><td>'+esc(e.name)+'</td><td>'+esc(e.mobile)+'</td><td>'+esc(e.purpose)+'</td><td>'+money(e.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="7"><b>TOTAL DONATION</b></td><td><b>'+money(donations.reduce((a,e)=>a+(Number(e.amount)||0),0))+'</b></td></tr></tfoot></table>';
- html+='<h2 class="center">GRAND TOTAL SUMMARY</h2><table class="summary"><tbody><tr><td>Opening Balance</td><td>'+money(opening)+'</td></tr><tr><td>Member Collection</td><td>'+money(collection)+'</td></tr><tr><td>Donation</td><td>'+money(donation)+'</td></tr><tr><td>Expense (Minus)</td><td>− '+money(expense)+'</td></tr><tr><td><b>Grand Total / Closing Balance</b></td><td><b>'+money(closing)+'</b></td></tr></tbody></table>';
- html+='<h3 class="center">MONTH-WISE FINANCIAL SUMMARY</h3><table><thead><tr><th>Month</th><th>Member Collection</th><th>Donation</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody>';let bal=opening;monthTotals.forEach(q=>{bal+=q.collection+q.donation-q.expense;html+='<tr><td>'+esc(q.mo)+'</td><td>'+money(q.collection)+'</td><td>'+money(q.donation)+'</td><td>'+money(q.expense)+'</td><td>'+money(bal)+'</td></tr>'});html+='</tbody></table>';
- root.innerHTML=buildPrintableDocument(html);root.style.display='block';document.body.classList.add('print-single');window.print();document.body.classList.remove('print-single');root.style.display='none';
+ const rentRows=allRentCollections().filter(e=>ms.includes(e.month));html+='<h2 class="center">RENT COLLECTION DETAILS</h2><table><thead><tr><th>S.No.</th><th>Collection No.</th><th>Date</th><th>Month</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Qty</th><th>Rate</th><th>Amount</th></tr></thead><tbody>'+rentRows.flatMap(e=>e.items.map(x=>({e,x}))).map((o,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(o.e.no)+'</td><td>'+esc(o.e.date)+'</td><td>'+esc(o.e.month)+'</td><td>'+esc(o.x.consumer)+'</td><td>'+esc(o.x.material)+'</td><td>'+esc(o.x.purpose)+'</td><td>'+o.x.qty+'</td><td>'+money(o.x.rate)+'</td><td>'+money(o.x.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="9">TOTAL RENT</td><td>'+money(rentRows.reduce((a,e)=>a+(Number(e.total)||0),0))+'</td></tr></tfoot></table>';html+='<h2 class="center">GRAND TOTAL SUMMARY</h2><table class="summary"><tbody><tr><td>Opening Balance</td><td>'+money(opening)+'</td></tr><tr><td>Member Collection (Without Late Fee)</td><td>'+money(baseCollection)+'</td></tr><tr><td>Late Payment Charges</td><td>'+money(lateCollection)+'</td></tr><tr><td><b>Total Member Collection (Including Late Fee)</b></td><td><b>'+money(collection)+'</b></td></tr><tr><td>Donation</td><td>'+money(donation)+'</td></tr><tr><td>Rent Collection</td><td>'+money(rent)+'</td></tr><tr><td>Expense (Minus)</td><td>− '+money(expense)+'</td></tr><tr><td><b>Grand Total / Closing Balance</b></td><td><b>'+money(closing)+'</b></td></tr></tbody></table>';
+ html+='<h3 class="center">MONTH-WISE FINANCIAL SUMMARY</h3><table><thead><tr><th>Month</th><th>Member Collection</th><th>Late Payment Charge</th><th>Total Member Collection</th><th>Donation</th><th>Rent</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody>';let bal=opening;monthTotals.forEach(q=>{bal+=q.collection+q.donation+q.rent-q.expense;html+='<tr><td>'+esc(q.mo)+'</td><td>'+money(q.baseCollection)+'</td><td>'+money(q.lateFee)+'</td><td>'+money(q.collection)+'</td><td>'+money(q.donation)+'</td><td>'+money(q.rent)+'</td><td>'+money(q.expense)+'</td><td>'+money(bal)+'</td></tr>'});html+='</tbody></table>';
+ const splitAt=html.indexOf('</table><h2 class="center">EXPENSE DETAILS</h2>');
+ const firstPage=splitAt>=0?html.slice(0,splitAt+8):html;
+ const secondPage=splitAt>=0?html.slice(splitAt+8):'';
+ const letterhead=docBrand.letterhead?'<img class="report-page-bg" src="'+docBrand.letterhead+'" alt="">':'';
+ const page=(body,extra='')=>'<section class="report-page">'+letterhead+'<div class="report-page-content">'+body+extra+'</div></section>';
+ root.innerHTML=page(firstPage)+page(secondPage,buildApprovalHtml());
+ root.style.display='block';document.body.classList.add('print-single');document.body.classList.add('print-combined');window.print();document.body.classList.remove('print-single');document.body.classList.remove('print-combined');root.style.display='none';
 }
 
-function monthData(mo){const y=mo.split('-')[1],x=db[y];return {y,x,collection:(x?.members||[]).reduce((a,mem)=>a+paymentAmount(mem.payments?.[mo]),0),donation:donationTotalForMonth(mo)+(Number(x?.donations?.[mo])||0),expense:x?expenseTotalForMonth(x,mo):0}}
-function balanceBeforeMonth(first){const firstKey=monthKey(first);let years=Object.keys(db).filter(y=>/^\d{4}$/.test(y)).sort((a,b)=>+a-+b);let bal=years.length?(Number(db[years[0]].opening)||0):0;for(const y of years){const x=db[y];for(const mo of yearMonths(x,y).sort((a,b)=>monthKey(a)-monthKey(b))){if(monthKey(mo)>=firstKey)return bal;const q=monthData(mo);bal+=q.collection+q.donation-q.expense}}return bal}
+function monthData(mo){const y=mo.split('-')[1],x=db[y],baseCollection=(x?.members||[]).reduce((a,mem)=>a+(hasPaymentAmount(mem.payments?.[mo])?(Number(mem.payments[mo].amount)||0):0),0),lateFee=(x?.members||[]).reduce((a,mem)=>a+(hasLateFee(mem.payments?.[mo])?(Number(mem.payments[mo].late)||0):0),0);return {y,x,baseCollection,lateFee,collection:baseCollection+lateFee,donation:donationTotalForMonth(mo)+(Number(x?.donations?.[mo])||0),rent:rentTotalForMonth(mo),expense:x?expenseTotalForMonth(x,mo):0}}
+function balanceBeforeMonth(first){const firstKey=monthKey(first);let years=Object.keys(db).filter(y=>/^\d{4}$/.test(y)).sort((a,b)=>+a-+b);let bal=years.length?(Number(db[years[0]].opening)||0):0;for(const y of years){const x=db[y];for(const mo of yearMonths(x,y).sort((a,b)=>monthKey(a)-monthKey(b))){if(monthKey(mo)>=firstKey)return bal;const q=monthData(mo);bal+=q.collection+q.donation+q.rent-q.expense}}return bal}
 function printMonthRange(ms){const root=document.getElementById('singlePrint');let html='<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">MONTH RANGE MEMBER & PAYMENT REGISTER</h2><p class="center"><b>'+esc(ms[0])+' से '+esc(ms[ms.length-1])+'</b></p>';
  const memberMap=new Map();ms.forEach(mo=>{const x=db[mo.split('-')[1]];(x?.members||[]).forEach(mem=>{const id=String(mem.id);if(!memberMap.has(id))memberMap.set(id,mem)})});const mems=[...memberMap.values()];
  html+='<table><thead><tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th>'+esc(v)+'</th>').join('')+'</tr></thead><tbody>';
  mems.forEach((mem,i)=>{html+='<tr><td>'+(i+1)+'</td><td>'+esc(mem.id)+'</td><td>'+esc(mem.name)+'</td><td>'+esc(mem.father)+'</td><td>'+esc(mem.mobile)+'</td>';ms.forEach(mo=>{const y=mo.split('-')[1],actual=(db[y]?.members||[]).find(a=>String(a.id)===String(mem.id)),q=actual?.payments?.[mo]||{},parts=[];if(hasPaymentAmount(q))parts.push(money(q.amount));const label=statusLabel(q);if(label)parts.push(label);html+='<td>'+esc(parts.join(' · ')||'—')+'</td>'});const late=ms.reduce((a,mo)=>{const y=mo.split('-')[1],actual=(db[y]?.members||[]).find(a=>String(a.id)===String(mem.id)),q=actual?.payments?.[mo]||{};return a+(hasLateFee(q)?(+q.late||0):0)},0);html+='<td>'+money(late)+'</td></tr>'});
  html+='</tbody><tfoot><tr><td colspan="5">TOTAL MEMBER MONTHLY COLLECTION</td>'+ms.map(mo=>{const q=monthData(mo);return '<td>'+money(q.collection)+'</td>'}).join('')+'<td>'+money(ms.reduce((a,mo)=>{const q=monthData(mo);return a+(q.x?.members||[]).reduce((b,mem)=>b+(hasLateFee(mem.payments?.[mo])?(+mem.payments[mo].late||0):0),0)},0))+'</td></tr></tfoot></table>';
- let bal=balanceBeforeMonth(ms[0]);html+='<h3>SELECTED PERIOD BALANCE REPORT</h3><table><thead><tr><th>Opening Balance</th><th>Total Collection</th><th>Total Donation</th><th>Total Expense</th><th>Closing Balance</th></tr></thead><tbody><tr><td>'+money(bal)+'</td><td>'+money(ms.reduce((a,m)=>a+monthData(m).collection,0))+'</td><td>'+money(ms.reduce((a,m)=>a+monthData(m).donation,0))+'</td><td>'+money(ms.reduce((a,m)=>a+monthData(m).expense,0))+'</td><td><b>'+money(ms.reduce((a,m)=>{const q=monthData(m);return a+q.collection+q.donation-q.expense},bal))+'</b></td></tr></tbody></table>';
- html+='<h3>MONTH-WISE BALANCE</h3><table><thead><tr><th>Month</th><th>Opening Balance</th><th>Collection</th><th>Donation</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody>';ms.forEach(mo=>{const q=monthData(mo),close=bal+q.collection+q.donation-q.expense;html+='<tr><td>'+mo+'</td><td>'+money(bal)+'</td><td>'+money(q.collection)+'</td><td>'+money(q.donation)+'</td><td>'+money(q.expense)+'</td><td>'+money(close)+'</td></tr>';bal=close});html+='</tbody></table>';root.innerHTML=buildPrintableDocument(html);root.style.display='block';document.body.classList.add('print-single');window.print();document.body.classList.remove('print-single');root.style.display='none'}
+ let bal=balanceBeforeMonth(ms[0]);html+='<h3>SELECTED PERIOD BALANCE REPORT</h3><table><thead><tr><th>Opening Balance</th><th>Total Collection</th><th>Total Donation</th><th>Total Rent</th><th>Total Expense</th><th>Closing Balance</th></tr></thead><tbody><tr><td>'+money(bal)+'</td><td>'+money(ms.reduce((a,m)=>a+monthData(m).collection,0))+'</td><td>'+money(ms.reduce((a,m)=>a+monthData(m).donation,0))+'</td><td>'+money(ms.reduce((a,m)=>a+monthData(m).rent,0))+'</td><td>'+money(ms.reduce((a,m)=>a+monthData(m).expense,0))+'</td><td><b>'+money(ms.reduce((a,m)=>{const q=monthData(m);return a+q.collection+q.donation+q.rent-q.expense},bal))+'</b></td></tr></tbody></table>';
+ html+='<h3>MONTH-WISE BALANCE</h3><table><thead><tr><th>Month</th><th>Opening Balance</th><th>Collection</th><th>Donation</th><th>Rent</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody>';ms.forEach(mo=>{const q=monthData(mo),close=bal+q.collection+q.donation+q.rent-q.expense;html+='<tr><td>'+mo+'</td><td>'+money(bal)+'</td><td>'+money(q.collection)+'</td><td>'+money(q.donation)+'</td><td>'+money(q.rent)+'</td><td>'+money(q.expense)+'</td><td>'+money(close)+'</td></tr>';bal=close});html+='</tbody></table>';root.innerHTML=buildPrintableDocument(html);root.style.display='block';document.body.classList.add('print-single');window.print();document.body.classList.remove('print-single');root.style.display='none'}
 function printSelectedRecord(y,ms){
  const x=db[String(y)],root=document.getElementById('singlePrint');
  let html='<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">MEMBER & MONTHLY PAYMENT REGISTER · '+esc(y)+'</h2><p class="center"><b>'+esc(ms.join(' · '))+'</b></p>';
  html+='<table><thead><tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th>'+esc(v)+'</th>').join('')+'</tr></thead><tbody>';
  (x.members||[]).forEach((mem,i)=>{html+='<tr><td>'+(i+1)+'</td><td>'+esc(mem.id)+'</td><td>'+esc(mem.name)+'</td><td>'+esc(mem.father)+'</td><td>'+esc(mem.mobile)+'</td>';ms.forEach(mo=>{const q=mem.payments?.[mo]||{},parts=[];if(hasPaymentAmount(q))parts.push(money(q.amount));const label=statusLabel(q);if(label)parts.push(label);html+='<td>'+esc(parts.join(' · ')||'—')+'</td>'});const late=ms.reduce((a,mo)=>{const q=mem.payments?.[mo]||{};return a+(hasLateFee(q)?(+q.late||0):0)},0);html+='<td>'+money(late)+'</td></tr>'});
  html+='</tbody><tfoot><tr><td colspan="5">TOTAL MEMBER MONTHLY COLLECTION</td>'+ms.map(mo=>'<td>'+money((x.members||[]).reduce((a,mem)=>a+paymentAmount(mem.payments?.[mo]),0))+'</td>').join('')+'<td>'+money((x.members||[]).reduce((a,mem)=>a+ms.reduce((b,mo)=>b+(hasLateFee(mem.payments?.[mo])?(+mem.payments[mo].late||0):0),0),0))+'</td></tr></tfoot></table>';
- let bal=openingForYear(y);html+='<h3>YEAR BALANCE REPORT</h3><table><thead><tr><th>Opening Balance</th><th>Total Collection</th><th>Total Donation</th><th>Total Expense</th><th>Closing Balance</th></tr></thead><tbody><tr><td>'+money(bal)+'</td><td>'+money(ms.reduce((a,mo)=>a+(x.members||[]).reduce((b,mem)=>b+paymentAmount(mem.payments?.[mo]),0),0))+'</td><td>'+money(ms.reduce((a,mo)=>a+(Number(x.donations?.[mo])||0),0))+'</td><td>'+money(ms.reduce((a,mo)=>a+expenseTotalForMonth(x,mo),0))+'</td><td>'+money(yearClosing(y))+'</td></tr></tbody></table>';
+ let bal=openingForYear(y);html+='<h3>YEAR BALANCE REPORT</h3><table><thead><tr><th>Opening Balance</th><th>Total Collection</th><th>Total Donation</th><th>Total Rent</th><th>Total Expense</th><th>Closing Balance</th></tr></thead><tbody><tr><td>'+money(bal)+'</td><td>'+money(ms.reduce((a,mo)=>a+(x.members||[]).reduce((b,mem)=>b+paymentAmount(mem.payments?.[mo]),0),0))+'</td><td>'+money(ms.reduce((a,mo)=>a+donationTotalForMonth(mo)+(Number(x.donations?.[mo])||0),0))+'</td><td>'+money(ms.reduce((a,mo)=>a+rentTotalForMonth(mo),0))+'</td><td>'+money(ms.reduce((a,mo)=>a+expenseTotalForMonth(x,mo),0))+'</td><td>'+money(yearClosing(y))+'</td></tr></tbody></table>';
  root.innerHTML=buildPrintableDocument(html);root.style.display='block';document.body.classList.add('print-single');window.print();document.body.classList.remove('print-single');root.style.display='none';
 }
 function refreshMemberIdOptions(){
@@ -357,12 +1065,12 @@ function removeMonth(){if(d().months.length<2)return alert('कम से कम
 function closeMonthPicker(){monthModal.style.display='none'}
 function confirmMonthChoice(){let m=monthChoice.value;if(!m)return;if(monthAction==='add'){if(d().months.includes(m))return alert('यह महीना पहले से मौजूद है');d().months.push(m);d().months.sort((a,b)=>{let [am,ay]=a.split('-'),[bm,by]=b.split('-');return (+ay- +by)||months.indexOf(am)-months.indexOf(bm)})}else if(monthAction==='remove'){if(!confirm(m+' और सभी सदस्यों का इसका भुगतान रिकॉर्ड हमेशा के लिए हटाएँ?'))return;d().months=d().months.filter(v=>v!==m);d().members.forEach(a=>{if(a.payments)delete a.payments[m]})}closeMonthPicker();store();render()}
 function openingForYear(y){let prev=String(Number(y)-1);return db[prev]?yearClosing(prev):(Number(db[y]?.opening)||0)}
-function yearClosing(y){let x=db[String(y)];if(!x)return 0;let prev=String(Number(y)-1);let bal=db[prev]?yearClosing(prev):(Number(x.opening)||0);yearMonths(x,y).forEach(m=>{let col=(x.members||[]).reduce((a,mem)=>a+paymentAmount(mem.payments?.[m]),0);bal+=col+(Number(x.donations?.[m])||0)-expenseTotalForMonth(x,m)});return bal}
+function yearClosing(y){let x=db[String(y)];if(!x)return 0;let prev=String(Number(y)-1);let bal=db[prev]?yearClosing(prev):(Number(x.opening)||0);yearMonths(x,y).forEach(m=>{let col=(x.members||[]).reduce((a,mem)=>a+paymentAmount(mem.payments?.[m]),0);bal+=col+donationTotalForMonth(m)+(Number(x.donations?.[m])||0)+rentTotalForMonth(m)-expenseTotalForMonth(x,m)});return bal}
 function switchYear(y){yr=String(y);if(!db[yr])return;syncMembersForYear(yr);syncForwardFrom(yr);store();render()}
 function statusLabel(p){const map={advance:'Advance Paid',late:'With Late Payment',unpaid:'Unpaid',on_join:'Paid on Join',left:'Left the Committee',left_committee:'Left the Committee'};return map[String(p?.status||'').toLowerCase()]||''}
-function printAllYears(){const root=document.getElementById('allPrint');let html='<h1 class="center">ग्राम दहेली युवा समिति · ALL YEARS MEMBER & PAYMENT REGISTER</h1>';const years=Object.keys(db).filter(y=>/^\d{4}$/.test(y)).sort((a,b)=>+a-+b);years.forEach(y=>{const x=db[y];if(!x)return;const ms=yearMonths(x,y);if(!ms.length&&!x.members?.length)return;html+='<section class="panel"><h2 class="center">MEMBER & MONTHLY PAYMENT REGISTER · '+y+'</h2><table><thead><tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th>'+esc(v)+'</th>').join('')+'</tr></thead><tbody>';(x.members||[]).forEach((m,i)=>{html+='<tr><td>'+(i+1)+'</td><td>'+esc(m.id)+'</td><td>'+esc(m.name)+'</td><td>'+esc(m.father)+'</td><td>'+esc(m.mobile)+'</td>';ms.forEach(mo=>{const q=m.payments?.[mo]||{},parts=[];if(hasPaymentAmount(q))parts.push(money(q.amount));const lab=statusLabel(q);if(lab)parts.push(lab);html+='<td>'+esc(parts.join(' · ')||'—')+'</td>'});const late=(Object.entries(m.payments||{}).filter(([mo])=>mo.endsWith('-'+y)).reduce((a,[,q])=>a+(hasLateFee(q)?(+q.late||0):0),0));html+='<td>'+money(late)+'</td></tr>'});html+='</tbody><tfoot><tr><td colspan="5">TOTAL MEMBER MONTHLY COLLECTION</td>'+ms.map(mo=>'<td>'+money((x.members||[]).reduce((a,m)=>a+paymentAmount(m.payments?.[mo]),0))+'</td>').join('')+'<td></td></tr></tfoot></table><h3>MONTH-WISE OPENING & CLOSING BALANCE</h3><table><thead><tr><th>Month</th><th>Opening Balance</th><th>Collection</th><th>Donation</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody>';let bal=openingForYear(y);ms.forEach(mo=>{let col=(x.members||[]).reduce((a,m)=>a+paymentAmount(m.payments?.[mo]),0),don=+x.donations?.[mo]||0,ex=expenseTotalForMonth(x,mo),close=bal+col+don-ex;html+='<tr><td>'+mo+'</td><td>'+money(bal)+'</td><td>'+money(col)+'</td><td>'+money(don)+'</td><td>'+money(ex)+'</td><td>'+money(close)+'</td></tr>';bal=close});html+='</tbody></table></section>'});root.innerHTML=buildPrintableDocument(html);document.body.classList.add('print-all');window.print();setTimeout(()=>document.body.classList.remove('print-all'),500)}
+function printAllYears(){const root=document.getElementById('allPrint');let html='<h1 class="center">ग्राम दहेली युवा समिति · ALL YEARS MEMBER & PAYMENT REGISTER</h1>';const years=Object.keys(db).filter(y=>/^\d{4}$/.test(y)).sort((a,b)=>+a-+b);years.forEach(y=>{const x=db[y];if(!x)return;const ms=yearMonths(x,y);if(!ms.length&&!x.members?.length)return;html+='<section class="panel"><h2 class="center">MEMBER & MONTHLY PAYMENT REGISTER · '+y+'</h2><table><thead><tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th>'+esc(v)+'</th>').join('')+'</tr></thead><tbody>';(x.members||[]).forEach((m,i)=>{html+='<tr><td>'+(i+1)+'</td><td>'+esc(m.id)+'</td><td>'+esc(m.name)+'</td><td>'+esc(m.father)+'</td><td>'+esc(m.mobile)+'</td>';ms.forEach(mo=>{const q=m.payments?.[mo]||{},parts=[];if(hasPaymentAmount(q))parts.push(money(q.amount));const lab=statusLabel(q);if(lab)parts.push(lab);html+='<td>'+esc(parts.join(' · ')||'—')+'</td>'});const late=(Object.entries(m.payments||{}).filter(([mo])=>mo.endsWith('-'+y)).reduce((a,[,q])=>a+(hasLateFee(q)?(+q.late||0):0),0));html+='<td>'+money(late)+'</td></tr>'});html+='</tbody><tfoot><tr><td colspan="5">TOTAL MEMBER MONTHLY COLLECTION</td>'+ms.map(mo=>'<td>'+money((x.members||[]).reduce((a,m)=>a+paymentAmount(m.payments?.[mo]),0))+'</td>').join('')+'<td></td></tr></tfoot></table><h3>MONTH-WISE OPENING & CLOSING BALANCE</h3><table><thead><tr><th>Month</th><th>Opening Balance</th><th>Collection</th><th>Donation</th><th>Rent</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody>';let bal=openingForYear(y);ms.forEach(mo=>{let col=(x.members||[]).reduce((a,m)=>a+paymentAmount(m.payments?.[mo]),0),don=donationTotalForMonth(mo)+(Number(x.donations?.[mo])||0),rent=rentTotalForMonth(mo),ex=expenseTotalForMonth(x,mo),close=bal+col+don+rent-ex;html+='<tr><td>'+mo+'</td><td>'+money(bal)+'</td><td>'+money(col)+'</td><td>'+money(don)+'</td><td>'+money(rent)+'</td><td>'+money(ex)+'</td><td>'+money(close)+'</td></tr>';bal=close});html+='</tbody></table></section>'});root.innerHTML=buildPrintableDocument(html);document.body.classList.add('print-all');window.print();setTimeout(()=>document.body.classList.remove('print-all'),500)}
 
-function printSingleMonth(mo){const x=d();if(!mo||!x.months.includes(mo))return alert('Is year ke liye month available nahi hai');const old=x.months;x.months=[mo];render();document.body.classList.remove('print-all');window.print();x.months=old;render()}
+function printSingleMonth(mo){const x=d();if(!mo||!x.months.includes(mo))return alert('Is year ke liye month available nahi hai');printSelectedRecord(String(yr),[mo])}
 function migrateCrossYearMonths(){Object.keys(db).filter(y=>/^\d{4}$/.test(y)).forEach(y=>{const x=db[y];(x.months||[]).slice().forEach(mo=>{const parts=mo.split('-'),yy=parts[1];if(yy&&yy!==y&&/^\d{4}$/.test(yy)){if(!db[yy])db[yy]=blank(yy);if(!db[yy].months.includes(mo))db[yy].months.push(mo);(x.members||[]).forEach(old=>{let dest=(db[yy].members||[]).find(a=>a.id===old.id);if(!dest){dest=memberCopy(old);db[yy].members.push(dest)}dest.payments=dest.payments||{};if(old.payments?.[mo]&&!dest.payments[mo])dest.payments[mo]=old.payments[mo]});if(x.donations?.[mo]!==undefined)db[yy].donations[mo]=x.donations[mo];if(x.expenses?.[mo]!==undefined)db[yy].expenses[mo]=x.expenses[mo];x.months=x.months.filter(v=>v!==mo);if(x.donations)delete x.donations[mo];if(x.expenses)delete x.expenses[mo]}})})}
 
 // Persistent document branding: letterhead, three signer details, signatures and stamp.
@@ -455,19 +1163,81 @@ function billAttachmentPages(b){const items=b.items||[b];let html='';let seq=0;f
 function printBillDocument(b){const html=billPrintableHtml(b)+buildApprovalHtml()+billAttachmentPages(b);printStandalone(html,false)}
 function printSingleBill(id){const b=allBills().find(x=>x.id===id);if(b)printBillDocument(b)}
 function printBillMonthly(){const mo=document.getElementById('billPrintMonth')?.value;if(!mo||mo==='all'){alert('Monthly print ke liye month select karein.');return;}printBillReport(mo)}
-function printBillReport(monthFilter='all'){const all=allBills().filter(b=>monthFilter==='all'||String(b.date||'').slice(0,7)===monthFilter);let html=`<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">BILL DETAILS REPORT</h2>`;all.forEach((b,i)=>{html+=`<div style="page-break-before:${i?'always':'auto'}">${billPrintableHtml(b)}</div>`});printCustom(html,false)}
+function printBillReport(monthFilter='all'){
+ const all=allBills().filter(b=>monthFilter==='all'||String(b.date||'').slice(0,7)===monthFilter);
+ const period=monthFilter==='all'?'ALL YEARS':monthFromDate(monthFilter+'-01');
+ let html=`<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">BILL DETAILS REPORT</h2><p class="center">${esc(period)}</p>`;
+ all.forEach((b,i)=>{html+=`<div style="page-break-before:${i?'always':'auto'}">${billPrintableHtml(b)}</div>`});
+ printCustom(html,false)
+}
 function buildFinancialFooter(){const table=document.getElementById('summary')?.outerHTML||'';return `<div class="panel"><div class="sub" style="font-size:16px;margin:12px 0">OVERALL FINANCIAL SUMMARY</div><div class="summary">${table}</div>${buildApprovalHtml()}<div class="center" style="margin-top:10px"><b>Gram Daheli Yuva Samiti · Official Record</b></div></div>`}
-function updateSharedFooters(){const html=buildFinancialFooter();const exp=document.getElementById('expenseFooter');if(exp)exp.innerHTML=html;const don=document.getElementById('donationFooter');if(don)don.innerHTML=html;}
+function updateSharedFooters(){const html=buildFinancialFooter();const exp=document.getElementById('expenseFooter');if(exp)exp.innerHTML=html;const don=document.getElementById('donationFooter');if(don)don.innerHTML=html;const rent=document.getElementById('rentFooter');if(rent)rent.innerHTML=html;}
 function showMainTab(id){document.querySelectorAll('[data-tab]').forEach(el=>el.style.display=el.dataset.tab===id?'':'none');document.querySelectorAll('[data-tab-btn]').forEach(b=>b.classList.toggle('active',b.dataset.tabBtn===id));}
 function printDonationMonth(){const y=donYear.value,mo=donMonth.value;if(mo==='all'){alert('Monthly print ke liye Donation Month select karein.');return;}const rows=allDonations().filter(e=>String(e.date||'').startsWith(y+'-')&&monthFromDate(e.date)===mo).sort((a,b)=>a.date.localeCompare(b.date));const html=`<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">MONTHLY DONATION REPORT</h2><p class="center">${mo}</p><table><thead><tr><th>S.No.</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th></tr></thead><tbody>${rows.map((e,i)=>`<tr><td>${i+1}</td><td>${esc(monthFromDate(e.date))}</td><td>${esc(e.date)}</td><td>${esc(e.receipt)}</td><td>${esc(e.name)}</td><td>${esc(e.mobile)}</td><td>${esc(e.purpose)}</td><td>${money(e.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="6">Total Donation Received (₹)</td><td>${money(rows.reduce((a,e)=>a+(+e.amount||0),0))}</td></tr></tfoot></table>`;printCustom(html);}
-function printDonationAll(){const rows=allDonations().slice().sort((a,b)=>(a.date||'').localeCompare(b.date||''));const total=rows.reduce((a,e)=>a+(+e.amount||0),0);const html='<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">ALL DONATION REPORT</h2><table><thead><tr><th>S.No.</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th></tr></thead><tbody>'+rows.map((e,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(e.date)+'</td><td>'+esc(e.receipt)+'</td><td>'+esc(e.name)+'</td><td>'+esc(e.mobile)+'</td><td>'+esc(e.purpose)+'</td><td>'+money(e.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="6">Total Donation Received (₹)</td><td>'+money(total)+'</td></tr></tfoot></table>';printCustom(html);}
+function printDonationAll(){const rows=allDonations().slice().sort((a,b)=>(a.date||'').localeCompare(b.date||''));const total=rows.reduce((a,e)=>a+(+e.amount||0),0);const html='<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">ALL DONATION REPORT</h2><p class="center">ALL YEARS</p><table><thead><tr><th>S.No.</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th></tr></thead><tbody>'+rows.map((e,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(e.date)+'</td><td>'+esc(e.receipt)+'</td><td>'+esc(e.name)+'</td><td>'+esc(e.mobile)+'</td><td>'+esc(e.purpose)+'</td><td>'+money(e.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="6">Total Donation Received (₹)</td><td>'+money(total)+'</td></tr></tfoot></table>';printCustom(html);}
 function printDonationReport(){const y=donYear.value,rows=allDonations().filter(e=>String(e.date||'').startsWith(y+'-'));let html=`<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">DONATION DETAILS</h2><p class="center">${y}</p><table><thead><tr><th>S.No.</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th></tr></thead><tbody>${rows.map((e,i)=>`<tr><td>${i+1}</td><td>${esc(monthFromDate(e.date))}</td><td>${esc(e.date)}</td><td>${esc(e.receipt)}</td><td>${esc(e.name)}</td><td>${esc(e.mobile)}</td><td>${esc(e.purpose)}</td><td>${money(e.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="6">Total Donation Received (₹)</td><td>${money(rows.reduce((a,e)=>a+(+e.amount||0),0))}</td></tr></tfoot></table><h3>MONTH-WISE DONATION TOTAL</h3><table><thead><tr><th>Month</th><th>Total Donation (₹)</th></tr></thead><tbody>${Array.from({length:12},(_,i)=>{const m=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][i]+'-'+y;return `<tr><td>${m}</td><td>${money(rows.filter(e=>monthFromDate(e.date)===m).reduce((a,e)=>a+(+e.amount||0),0))}</td></tr>`}).join('')}</tbody></table>`;printCustom(html);}
 function printBillMonthly(){const mo=document.getElementById('billPrintMonth')?.value;if(!mo||mo==='all'){alert('Monthly print ke liye month select karein.');return;}printBillReport(mo);}
 function printBillReport(monthFilter='all'){const records=allBills().filter(e=>monthFilter==='all'||String(e.date||'').slice(0,7)===monthFilter);let html=`<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">BILL DETAILS REPORT</h2>`;records.forEach((b,i)=>{html+=`<section style="${i?'page-break-before:always;break-before:page;':''}">${billPrintableHtml(b)}${buildApprovalHtml()}${billAttachmentPages(b)}</section>`});printStandalone(html,false)}
-function printStandalone(html,letterhead=true,receipt=false){const root=document.getElementById('singlePrint');const bg=letterhead&&docBrand.letterhead?'<img class="print-letterhead-bg" src="'+docBrand.letterhead+'">':'';root.innerHTML=bg+'<div class="print-content">'+html+'</div>';root.style.display='block';document.body.classList.add('print-single');if(receipt)document.body.classList.add('print-receipt');window.print();document.body.classList.remove('print-single');document.body.classList.remove('print-receipt');root.style.display='none'}
-function printCustom(html,withFooter=true){const root=document.getElementById('singlePrint');const summaryHtml=withFooter?'<h3 class="center">OVERALL FINANCIAL SUMMARY</h3>'+document.getElementById('summary').outerHTML:'';root.innerHTML=buildPrintableDocument(html+summaryHtml+(withFooter?'<div class="center"><b>Gram Daheli Yuva Samiti · Official Record</b></div>':''));root.style.display='block';document.body.classList.add('print-single');window.print();document.body.classList.remove('print-single');root.style.display='none';}
+function printStandalone(html,letterhead=true,receipt=false){const root=document.getElementById('singlePrint');const bg=letterhead&&docBrand.letterhead?'<img class="print-letterhead-bg" src="'+docBrand.letterhead+'">':'';root.innerHTML=bg+'<div class="print-content">'+html+'</div>';root.style.display='block';document.body.classList.add('print-single');if(receipt)document.body.classList.add('print-receipt');window.print();document.body.classList.remove('print-single');document.body.classList.remove('print-receipt');document.body.classList.remove('print-rent-a3');root.style.display='none'}
+function printCustom(html,withFooter=true){
+ const root=document.getElementById('singlePrint');
+ const titleMatch=html.match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/i);
+ const periodMatch=html.match(/<p\b[^>]*>([\s\S]*?)<\/p>/i);
+ const rawTitle=titleMatch?titleMatch[1].replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim():'FINANCIAL REPORT';
+ const rawPeriod=periodMatch?periodMatch[1].replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim():'';
+ let reportName=rawTitle.toUpperCase();
+ if(/DONATION/.test(reportName))reportName='DONATION REPORT';
+ else if(/BILL/.test(reportName))reportName='BILL REPORT';
+ else if(/RENT/.test(reportName))reportName='RENT REPORT';
+ else if(/EXPENSE/.test(reportName))reportName='EXPENSE REPORT';
+ let period=rawPeriod;
+ if(!period){
+  const fromTitle=rawTitle.match(/(?:·|\-|TO)\s*([A-Z]{3}-\d{4}(?:\s+TO\s+[A-Z]{3}-\d{4})?)/i);
+  if(fromTitle)period=fromTitle[1];
+ }
+ if(!period)period='ALL YEARS';
+ const heading='<div class="report-heading"><div class="samiti">GRAM DAHELI YUVA SAMITI</div><div class="report-name">'+esc(reportName)+'</div><div class="period">'+esc(period)+'</div></div>';
+ // Remove the old repeated title lines; the new heading stays within print-content,
+ // between the letterhead's fixed header and footer areas.
+ let bodyHtml=html;
+ if(titleMatch)bodyHtml=bodyHtml.replace(titleMatch[0],'');
+ if(periodMatch)bodyHtml=bodyHtml.replace(periodMatch[0],'');
+ const summaryHtml=withFooter?'<h3 class="center">OVERALL FINANCIAL SUMMARY</h3>'+document.getElementById('summary').outerHTML:'';
+ root.innerHTML=buildPrintableDocument(heading+bodyHtml+summaryHtml+(withFooter?'<div class="center"><b>Gram Daheli Yuva Samiti · Official Record</b></div>':''));
+ root.style.display='block';document.body.classList.add('print-single');window.print();document.body.classList.remove('print-single');root.style.display='none';
+}
 
 if(!db['2026'])db['2026']=blank('2026');migrateCrossYearMonths();allBills().forEach(syncBillExpense);if(!db['2025'])db['2026'].opening=0;if(!/^\d{4}$/.test(yr)||yr==='all')yr='2026';if(!db[yr])yr='2026';/* Seed the starter members BEFORE syncing later years. The old order synced empty 2027 first, then seeded 2026, leaving future years empty. */if(isFirstInstall&&(!db['2026'].members||!db['2026'].members.length))db['2026'].members=[{id:'DYSS-001',name:'Satpal Rawat',father:'Sain Singh',mobile:'9627265112',payments:{'AUG-2026':{status:'paid',amount:200,late:20},'SEP-2026':{status:'paid',amount:800},'OCT-2026':{status:'unpaid'},'NOV-2026':{status:'advance',amount:200},'DEC-2026':{status:'advance',amount:200},'JAN-2027':{status:'advance',amount:200}}},{id:'DYSS-002',name:'Kamal Rawat',father:'Sain Singh',mobile:'9548813587',payments:{'AUG-2026':{status:'paid',amount:200,late:40},'SEP-2026':{status:'paid',amount:800},'OCT-2026':{status:'paid',amount:100},'NOV-2026':{status:'unpaid'},'DEC-2026':{status:'advance',amount:200},'JAN-2027':{status:'unpaid'}}}];if(!db['2027'])db['2027']=blank('2027');Object.keys(db).filter(y=>/^\d{4}$/.test(y)&&Number(y)>2027).forEach(y=>{if(!yearHasData(db[y],y)&&!db[y]._createdEmpty)delete db[y]});Object.keys(db).filter(y=>/^\d{4}$/.test(y)).sort((a,b)=>Number(a)-Number(b)).forEach(y=>{if(Number(y)>2026)syncMembersForYear(y)});// One-time import of the committee's supplied 51-member master list.
+const RENT_KEY='daheli_rent_collections_v1';let editingRentId=null;
+function allRentCollections(){try{return JSON.parse(localStorage.getItem(RENT_KEY)||'[]')}catch(e){return []}}
+function rentTotalForMonth(mo){return allRentCollections().filter(e=>e.month===mo).reduce((a,e)=>a+(Number(e.total)||0),0)}
+function rentTotalForYear(y){return allRentCollections().filter(e=>String(e.month||'').endsWith('-'+y)).reduce((a,e)=>a+(Number(e.total)||0),0)}
+function nextRentNumber(){const used=new Set(allRentCollections().map(e=>String(e.no||'').trim().toUpperCase()).filter(Boolean));let n=1,candidate='';do{candidate='GDYS-RENT-'+String(n).padStart(3,'0').toUpperCase();n++}while(used.has(candidate));return candidate}
+function updateRentMonthDisplay(){rentMonthDisplay.value=rentDate.value?monthFromDate(rentDate.value):''}
+function addRentItemRow(item={}){const body=document.getElementById('rentItemRows'),tr=document.createElement('tr');tr.innerHTML=`<td class="rent-serial"></td><td><input class="ri-consumer" value="${esc(item.consumer||'')}" placeholder="Consumer Name"></td><td><input class="ri-material" value="${esc(item.material||'')}" placeholder="Material Details"></td><td><input class="ri-purpose" value="${esc(item.purpose||'')}" placeholder="Use / Purpose"></td><td><input class="ri-qty" type="number" min="0.01" step="0.01" value="${item.qty??1}"></td><td><input class="ri-rate" type="number" min="0" step="0.01" value="${item.rate??0}"></td><td class="ri-amount">₹0.00</td><td><input class="ri-files" type="file" accept="application/pdf,image/png,image/jpeg" multiple><small class="ri-existing"></small></td><td><button type="button" class="danger" onclick="this.closest('tr').remove();renumberRentRows()">Remove</button></td>`;tr._existingAttachments=(item.attachments||[]).slice();const f=tr.querySelector('.ri-existing');if(tr._existingAttachments.length)f.textContent=tr._existingAttachments.map(x=>x.name).join(', ');tr.querySelectorAll('.ri-qty,.ri-rate').forEach(el=>el.addEventListener('input',()=>updateRentRowTotal(tr)));body.appendChild(tr);renumberRentRows();updateRentRowTotal(tr)}
+function renumberRentRows(){document.querySelectorAll('#rentItemRows tr').forEach((r,i)=>r.querySelector('.rent-serial').textContent=i+1);updateRentFormTotal()}
+function updateRentRowTotal(r){const qty=Number(r.querySelector('.ri-qty').value)||0,rate=Number(r.querySelector('.ri-rate').value)||0;r.querySelector('.ri-amount').textContent=money(qty*rate);updateRentFormTotal()}
+function updateRentFormTotal(){const total=[...document.querySelectorAll('#rentItemRows tr')].reduce((a,r)=>a+(Number(r.querySelector('.ri-qty').value)||0)*(Number(r.querySelector('.ri-rate').value)||0),0);const el=document.getElementById('rentFormTotal');if(el)el.textContent='Total: '+money(total)}
+async function readRentUpload(file){if(file.size>2*1024*1024)throw new Error('Har attachment 2 MB se chhoti honi chahiye: '+file.name);if(!['application/pdf','image/png','image/jpeg'].includes(file.type))throw new Error('Sirf PDF, PNG ya JPG attachment allowed hai.');return await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve({name:file.name,type:file.type,data:r.result});r.onerror=reject;r.readAsDataURL(file)})}
+async function saveRentCollection(){const date=rentDate.value;if(!date)return alert('Collection Date bharein.');const rows=[...document.querySelectorAll('#rentItemRows tr')];if(!rows.length)return alert('Kam se kam ek item add karein.');let items=[];try{for(const r of rows){const item={consumer:r.querySelector('.ri-consumer').value.trim(),material:r.querySelector('.ri-material').value.trim(),purpose:r.querySelector('.ri-purpose').value.trim(),qty:Number(r.querySelector('.ri-qty').value),rate:Number(r.querySelector('.ri-rate').value),attachments:[...(r._existingAttachments||[])]};if(!item.consumer||!item.material||!item.purpose||!Number.isFinite(item.qty)||item.qty<=0||!Number.isFinite(item.rate)||item.rate<0)throw new Error('Har item mein Consumer Name, Material Details, Use / Purpose, valid Qty aur Rate bharein.');for(const f of [...r.querySelector('.ri-files').files])item.attachments.push(await readRentUpload(f));item.amount=Math.round(item.qty*item.rate*100)/100;items.push(item)}}catch(e){return alert(e.message||'Attachment read nahi ho paya.')}let a=allRentCollections(),old=editingRentId?a.find(x=>x.id===editingRentId):null;if(editingRentId&&!old)return alert('Collection record nahi mila.');const total=items.reduce((z,x)=>z+x.amount,0);let number=old?String(old.no||'').toUpperCase():nextRentNumber();if(!old){rentNo.value=number;const display=document.getElementById('rentNoDisplay');if(display)display.value=number;}const rec={id:old?.id||'rent-'+Date.now(),no:number,date,month:monthFromDate(date),items,total};if(old)a=a.map(x=>x.id===old.id?rec:x);else a.push(rec);saveRows(RENT_KEY,a);resetRentForm();renderRentCollections();render();updateSharedFooters();alert((old ? 'Rent Collection Updated: ' : 'Rent Collection Saved: ')+rec.no)}
+function rentNumberOptions(){const used=new Set(allRentCollections().map(x=>String(x.no||'').trim().toUpperCase()));const opts=[];let n=1;while(opts.length<30&&n<10000){const v='GDYS-RENT-'+String(n).padStart(3,'0');if(!used.has(v))opts.push(v);n++;}return opts}
+function openRentNumberChooser(){
+ let modal=document.getElementById('rentNumberPopup');
+ if(!modal){modal=document.createElement('div');modal.id='rentNumberPopup';modal.style.cssText='display:none;position:fixed;inset:0;z-index:99999;background:rgba(15,23,42,.68);align-items:center;justify-content:center;padding:18px';modal.innerHTML=`<div role="dialog" aria-modal="true" style="width:min(420px,100%);background:#fff;border-radius:14px;padding:22px;box-shadow:0 20px 60px #0005;text-align:left"><h2 style="margin:0 0 8px;color:#17324d">Collection Number Select Karein</h2><p style="font-size:13px;color:#64748b;margin:0 0 14px">Available Collection Number select karein. Jo number pehle use ho chuka hai, woh list mein nahi aayega.</p><label for="rentNumberSelect" style="display:block;font-weight:700;margin-bottom:6px">Collection Number</label><select id="rentNumberSelect" style="width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;font-size:16px"></select><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:18px"><button type="button" class="light" onclick="closeRentNumberPopup()">Cancel</button><button type="button" onclick="confirmRentNumberChoice()">Select Number</button></div></div>`;document.body.appendChild(modal)}
+ const select=document.getElementById('rentNumberSelect');const opts=rentNumberOptions();select.innerHTML=opts.map(v=>`<option value="${v}">${v}</option>`).join('');const current=String(rentNo.value||'').toUpperCase();if(opts.includes(current))select.value=current;modal.style.display='flex';
+}
+function confirmRentNumberChoice(){const chosen=document.getElementById('rentNumberSelect')?.value;if(!chosen)return;const used=new Set(allRentCollections().filter(x=>x.id!==editingRentId).map(x=>String(x.no||'').toUpperCase()));if(used.has(chosen)){alert('Yeh number pehle se use ho chuka hai. Dusra number choose karein.');openRentNumberChooser();return;}rentNo.value=chosen;const display=document.getElementById('rentNoDisplay');if(display)display.value=chosen;closeRentNumberPopup();}
+function showRentNumberPopup(number,title='Collection Number'){openRentNumberChooser();}
+function closeRentNumberPopup(){const m=document.getElementById('rentNumberPopup');if(m)m.style.display='none'}
+function resetRentForm(){editingRentId=null;rentDate.value='';rentMonthDisplay.value='';const next=nextRentNumber();rentNo.value=next;const display=document.getElementById('rentNoDisplay');if(display)display.value=next;rentItemRows.innerHTML='';addRentItemRow();rentSaveBtn.textContent='Save Complete Collection'}
+function editRentCollection(id){const e=allRentCollections().find(x=>x.id===id);if(!e)return;editingRentId=id;rentDate.value=e.date;updateRentMonthDisplay();rentNo.value=e.no;const display=document.getElementById('rentNoDisplay');if(display)display.value=e.no;rentItemRows.innerHTML='';(e.items||[]).forEach(x=>addRentItemRow(x));rentSaveBtn.textContent='Save Changes';showMainTab('rentTab')}
+function deleteRentCollection(id){if(!confirm('Yeh poori Rent Collection delete karein?'))return;saveRows(RENT_KEY,allRentCollections().filter(x=>x.id!==id));renderRentCollections();render();updateSharedFooters()}
+function renderRentCollections(){const a=allRentCollections().slice().sort((x,y)=>(y.date||'').localeCompare(x.date||''));const body=document.querySelector('#rentTable tbody');if(!body)return;body.innerHTML=a.map((e,i)=>{const its=e.items||[];const consumers=[...new Set(its.map(x=>x.consumer).filter(Boolean))].join(', ');const materials=its.map(x=>x.material).filter(Boolean).join(', ');const purposes=[...new Set(its.map(x=>x.purpose).filter(Boolean))].join(', ');return `<tr><td>${i+1}</td><td>${esc(e.month)}</td><td>${esc(e.date)}</td><td>${esc(e.no)}</td><td>${esc(consumers)}</td><td>${esc(materials)}</td><td>${esc(purposes)}</td><td>${money(e.total)}</td><td class="no-print"><button class="light" onclick="editRentCollection('${e.id}')">Edit</button> <button class="light" onclick="printRentReceipt('${e.id}')">Receipt</button> <button class="danger" onclick="deleteRentCollection('${e.id}')">Delete</button></td></tr>`}).join('')||'<tr><td colspan="9">No Rent Collections saved</td></tr>';document.querySelector('#rentTable tfoot').innerHTML=`<tr class="total-row"><td colspan="7">Total Rent Received (₹)</td><td>${money(a.reduce((z,e)=>z+(Number(e.total)||0),0))}</td><td></td></tr>`;const sel=document.getElementById('rentPrintMonth'),cur=sel.value,months=[...new Set(a.map(e=>e.month))].sort((x,y)=>monthKey(x)-monthKey(y));sel.innerHTML='<option value="all">All Months</option>'+months.map(m=>`<option value="${m}">${m}</option>`).join('');if(months.includes(cur))sel.value=cur;}
+function rentReceiptHtml(e){const stamp=docBrand.stamp?`<div class="receipt-watermark"><img src="${docBrand.stamp}" alt="Committee stamp watermark"></div>`:'';const rows=(e.items||[]).map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x.consumer)}</td><td>${esc(x.material)}</td><td>${esc(x.purpose)}</td><td>${esc(x.qty)}</td><td>${money(x.rate)}</td><td>${money(x.amount)}</td></tr>`).join('');const signers=[['prepared','PREPARED BY'],['verified','VERIFIED BY'],['approved','APPROVED BY']].map(([k,l])=>`<div class="signer"><div><b>${l}</b></div>${docBrand[k+'Sign']?`<img src="${docBrand[k+'Sign']}" alt="${l} signature">`:''}<div><b>${esc(docBrand[k+'Name']||'________________')}</b></div><small>${esc(docBrand[k+'Post']||'')}</small></div>`).join('');const files=(e.items||[]).flatMap(x=>x.attachments||[]).map(f=>esc(f.name)).filter(Boolean);return `<div class="receipt-card rent-id-card">${stamp}<div class="receipt-head"><h1>ग्राम दहेली युवा समिति</h1><p>OFFICIAL RENT COLLECTION RECEIPT</p></div><div class="receipt-title">RENT COLLECTION RECEIPT</div><div class="rent-receipt-meta"><span><b>Collection Number:</b> ${esc(e.no)}</span><span><b>Collection Date:</b> ${esc(e.date)}</span><span><b>Collection Month:</b> ${esc(e.month)}</span></div><div class="rent-receipt-details"><table><thead><tr><th>S.No.</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Unit / Qty</th><th>Rate / Unit (₹)</th><th>Amount (₹)</th></tr></thead><tbody>${rows}</tbody></table></div><div class="rent-receipt-total">TOTAL AMOUNT RECEIVED: ${money(e.total)}</div>${files.length?`<div class="rent-receipt-files"><b>Attachments:</b> ${files.join(', ')}</div>`:''}<div class="rent-receipt-signers">${signers}</div><div class="receipt-foot">ग्राम दहेली युवा समिति · Official Rent Collection Receipt · धन्यवाद!</div></div>`}
+function printRentReceipt(id){const e=allRentCollections().find(x=>x.id===id);if(!e)return;document.body.classList.add('print-rent-a3');printStandalone(rentReceiptHtml(e),false,true)}
+function printRentMonthly(){const mo=rentPrintMonth.value;if(mo==='all')return printRentAll();const a=allRentCollections().filter(e=>e.month===mo);printRentReport(a,'MONTHLY RENT COLLECTION REPORT · '+mo)}
+function printRentAll(){printRentReport(allRentCollections().slice().sort((a,b)=>(a.date||'').localeCompare(b.date||'')),'ALL RENT COLLECTIONS · ALL YEARS')}
+function printRentReport(a,title){const html=`<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">${title}</h2><table><thead><tr><th>S.No.</th><th>Collection No.</th><th>Date</th><th>Month</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Qty</th><th>Rate</th><th>Amount</th></tr></thead><tbody>${a.flatMap((e)=>e.items.map((x)=>({e,x}))).map((o,i)=>`<tr><td>${i+1}</td><td>${esc(o.e.no)}</td><td>${esc(o.e.date)}</td><td>${esc(o.e.month)}</td><td>${esc(o.x.consumer)}</td><td>${esc(o.x.material)}</td><td>${esc(o.x.purpose)}</td><td>${o.x.qty}</td><td>${money(o.x.rate)}</td><td>${money(o.x.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="9">TOTAL RENT COLLECTION</td><td>${money(a.reduce((z,e)=>z+(Number(e.total)||0),0))}</td></tr></tfoot></table>`;printCustom(html,false)}
 const DYSS_IMPORT_KEY='daheli_member_import_dyss_001_051_v1';
 if(localStorage.getItem(DYSS_IMPORT_KEY)!=='done'){
  const DYSS_MASTER=[{"id":"DYSS-001","name":"Satpal Rawat","father":"Mr. Sain Singh Rawat","mobile":"9627265112"},{"id":"DYSS-002","name":"Kamal Rawat","father":"Mr. Sain Singh Rawat","mobile":"9548813587"},{"id":"DYSS-003","name":"Jagpal Rawat","father":"Mr. Sain Singh Rawat","mobile":"6351153588"},{"id":"DYSS-004","name":"Rahul Rawat","father":"Mr. Pirthvi Singh Rawat","mobile":"8650363435"},{"id":"DYSS-005","name":"Rohit Rawat","father":"Mr. Pirthvi Singh Rawat","mobile":"9997445710"},{"id":"DYSS-006","name":"Rajender Singh Rawat","father":"Mr. Trilok Singh Rawat","mobile":"6395505213"},{"id":"DYSS-007","name":"Narendra Rawat","father":"Mr. Hayat Singh Rawat","mobile":"9315795229"},{"id":"DYSS-008","name":"Virendra singh panasi","father":"Mr. Mangal singh panasi","mobile":"9013368420"},{"id":"DYSS-009","name":"Surendra singh panasi","father":"Mr. Mangal singh panasi","mobile":"9811512178"},{"id":"DYSS-010","name":"Amit Rawat","father":"Mr. Thakur singh rawat","mobile":"9893049534"},{"id":"DYSS-011","name":"Sumit Rawat","father":"Mr. Thakur singh rawat","mobile":"9650513582"},{"id":"DYSS-012","name":"Puneet Negi","father":"Mr. Thakur singh Negi","mobile":"9717027800"},{"id":"DYSS-013","name":"Sanjay Rawat","father":"Mr. Kunwar singh Rawat","mobile":"8433016532"},{"id":"DYSS-014","name":"Harvinder Singh Negi","father":"Mr. Digpal Singh Negi","mobile":"9968322061"},{"id":"DYSS-015","name":"Nirmal Singh Negi","father":"Mr. Yashpal Singh Negi","mobile":"9711725901"},{"id":"DYSS-016","name":"Vinod Singh Negi","father":"Mr. Anand singh Negi","mobile":"9811912590"},{"id":"DYSS-017","name":"Rakesh Singh Negi","father":"Mr. Mahipal singh Negi","mobile":"8506009645"},{"id":"DYSS-018","name":"Harpal Rawat","father":"Mr. Netra singh Rawat","mobile":"7982217225"},{"id":"DYSS-019","name":"Deepak Rawat","father":"Mr. Balam singh Rawat","mobile":"7351848326"},{"id":"DYSS-020","name":"Ankit Negi","father":"Mr. Devendra singh Negi","mobile":"55374335"},{"id":"DYSS-021","name":"Atul Negi","father":"Mr. Devendra singh Negi","mobile":"8810424628"},{"id":"DYSS-022","name":"Puskar Rawat","father":"Mr. Meharban singh Rawat","mobile":"9548733216"},{"id":"DYSS-023","name":"Jagmohan Rawat","father":"Mr. Meharban singh Rawat","mobile":"8130021322"},{"id":"DYSS-024","name":"Hemant Singh Rawat","father":"Mr. Meharban singh Rawat","mobile":"9810928614"},{"id":"DYSS-025","name":"Shubham Rawat","father":"Mr. Amar Singh Rawat","mobile":"9536647699"},{"id":"DYSS-026","name":"Anuj Rawat","father":"Mr. Amar Singh Rawat","mobile":"9548248881"},{"id":"DYSS-027","name":"Khemraj Rawat","father":"Mr. Ripudaman singh Rawat","mobile":"9520668927"},{"id":"DYSS-028","name":"Manvendra Rawat","father":"Mr. Ripudaman singh Rawat","mobile":"8619980592"},{"id":"DYSS-029","name":"Pankaj Singh Rawat","father":"Mr. Manber singh Rawat","mobile":"9821159392"},{"id":"DYSS-030","name":"Manoj Dhondiyal","father":"Mr. Anandmani Dhondiyal","mobile":"6398052892"},{"id":"DYSS-031","name":"Vivekanand","father":"Mr. Ghananand Dhondiyal","mobile":"9990610129"},{"id":"DYSS-032","name":"Vipin Dhondiyal","father":"Mr. Barmanand Dhondiyal","mobile":"9389944258"},{"id":"DYSS-033","name":"Deepak Chand","father":"Mr. Barmanand Dhondiyal","mobile":"8454875299"},{"id":"DYSS-034","name":"Arvind Dhoundiyal","father":"Mr. Ramesh Chand Dhondiyal","mobile":"8802140931"},{"id":"DYSS-035","name":"Ashok Dhoundiyal","father":"Mr. Ramesh Chand Dhondiyal","mobile":"7503052151"},{"id":"DYSS-036","name":"Raghubeer Singh Negi","father":"Mr. Ratan Singh Negi","mobile":"8894788807"},{"id":"DYSS-037","name":"Satyabeer Singh Negi","father":"Mr. Ratan Singh Negi","mobile":"9756731752"},{"id":"DYSS-038","name":"Rishabh Negi","father":"Mr. Dinesh Singh Negi","mobile":"9548262018"},{"id":"DYSS-039","name":"Jitendra Negi","father":"Mr. Bhawan singh negi","mobile":"7505170421"},{"id":"DYSS-040","name":"Satendra Negi","father":"Mr. Bhawan singh negi","mobile":"8527963238"},{"id":"DYSS-041","name":"Pramendra Negi","father":"Mr. Hari singh Negi","mobile":"8869073116"},{"id":"DYSS-042","name":"Kaushal Rawat","father":"Mr. Raje singh Rawat","mobile":"9899389530"},{"id":"DYSS-043","name":"Manish Rawat","father":"Mr. Raje singh Rawat","mobile":"8800109884"},{"id":"DYSS-044","name":"Anil Rawat","father":"Mr. Jogendra singh Rawat","mobile":"9877689615"},{"id":"DYSS-045","name":"Sunil Rawat","father":"Mr. Jogendra singh Rawat","mobile":"7027045072"},{"id":"DYSS-046","name":"Deepak Rawat","father":"Mr. Madan Singh Rawat","mobile":"8954399725"},{"id":"DYSS-047","name":"Mandeep Rawat","father":"Mr. Madan Singh Rawat","mobile":"6397843759"},{"id":"DYSS-048","name":"Kuldeep Singh","father":"Mr. Mahadev Singh","mobile":"9555594088"},{"id":"DYSS-049","name":"Suraj Chandra","father":"Mr. Prakash Chandra","mobile":"9719101877"},{"id":"DYSS-050","name":"Harak Singh","father":"Mr. Veer Singh","mobile":"9690309440"},{"id":"DYSS-051","name":"Thakur Singh Rawat","father":"Mr. Chandan Singh Rawat","mobile":"8449929977"}];
@@ -485,7 +1255,7 @@ if(localStorage.getItem(DYSS_IMPORT_KEY)!=='done'){
  syncForwardFrom(2026);
  localStorage.setItem(DYSS_IMPORT_KEY,'done');
 }
-store();render();initExpenseUI();showMainTab('memberTab');refreshDonationYearOptions();renderDonations();refreshBillDetailNumberOptions();renderBills();if(!document.querySelector("#billItemRows tr"))addBillItemRow();updateBillMonthDisplay();updateSharedFooters();
+store();render();initExpenseUI();showMainTab('memberTab');refreshDonationYearOptions();renderDonations();refreshBillDetailNumberOptions();renderBills();if(!document.querySelector("#billItemRows tr"))addBillItemRow();if(!document.querySelector("#rentItemRows tr"))addRentItemRow();resetRentForm();updateBillMonthDisplay();updateSharedFooters();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -496,7 +1266,7 @@ store();render();initExpenseUI();showMainTab('memberTab');refreshDonationYearOpt
   const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_7cKvIjO6LXkpnFmGj8VaHA_fHQKNsui";
   const TABLE = "member_register";
   const ROW_ID = 1;
-  const APP_KEYS = ["daheli_register_v1", "daheli_selected_year", "daheli_document_branding_v1", "daheli_used_expense_bill_numbers_v1", "daheli_donation_entries_v1", "daheli_bill_entries_v1", "daheli_bill_details_used_numbers_v1", "daheli_member_import_dyss_001_051_v1", "daheli_fresh_reset_51members_v2"];
+  const APP_KEYS = ["daheli_register_v1", "daheli_selected_year", "daheli_document_branding_v1", "daheli_used_expense_bill_numbers_v1", "daheli_donation_entries_v1", "daheli_bill_entries_v1", "daheli_bill_details_used_numbers_v1", "daheli_rent_collections_v1", "daheli_member_import_dyss_001_051_v1", "daheli_fresh_reset_51members_v2"];
   const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
   const loginBox = document.getElementById("cloudLogin");
   const loginBtn = document.getElementById("cloudLoginBtn");
