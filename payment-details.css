@@ -1,4 +1,3 @@
-
 /* =========================================
    GRAM DAHELI YUVA SAMITI
    PAYMENT DETAILS PORTAL
@@ -485,9 +484,7 @@ tfoot td {
   border-color: #e0e5e2;
 }
 
-/* IMPORTANT:
-   Amount + status should remain in one line.
-   No BR or line break between Advance Paid. */
+/* AMOUNT + STATUS ONE LINE */
 
 .payment-cell-content {
   display: inline-flex !important;
@@ -859,6 +856,63 @@ body > footer {
   border-top: 1px solid var(--border);
 }
 
+/* =========================================
+   RENT COLLECTION DETAILS
+========================================= */
+
+#tab-rent .table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+#rentTable {
+  width: 100%;
+  min-width: 1150px;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: auto;
+}
+
+#rentTable th,
+#rentTable td {
+  vertical-align: middle;
+  padding: 10px 8px;
+}
+
+#rentTable th:nth-child(1),
+#rentTable td:nth-child(1),
+#rentTable th:nth-child(2),
+#rentTable td:nth-child(2),
+#rentTable th:nth-child(3),
+#rentTable td:nth-child(3),
+#rentTable th:nth-child(4),
+#rentTable td:nth-child(4),
+#rentTable th:nth-child(8),
+#rentTable td:nth-child(8),
+#rentTable th:nth-child(9),
+#rentTable td:nth-child(9),
+#rentTable th:nth-child(10),
+#rentTable td:nth-child(10) {
+  white-space: nowrap;
+}
+
+#rentTable th:nth-child(5),
+#rentTable td:nth-child(5),
+#rentTable th:nth-child(6),
+#rentTable td:nth-child(6),
+#rentTable th:nth-child(7),
+#rentTable td:nth-child(7) {
+  min-width: 120px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+#rentTable th:last-child,
+#rentTable td:last-child {
+  font-weight: 800;
+  white-space: nowrap;
+}
+
 /* TABLET */
 
 @media (max-width: 1050px) {
@@ -968,7 +1022,6 @@ body > footer {
     font-size: 11px;
   }
 
-  /* Mobile member list uses cards */
   .member-desktop-table {
     display: none !important;
   }
@@ -1019,6 +1072,16 @@ body > footer {
     flex: 1;
     font-size: 8px;
   }
+
+  /* Rent table mobile scrolling */
+
+  #tab-rent .table-wrap {
+    overflow-x: auto;
+  }
+
+  #rentTable {
+    min-width: 1150px;
+  }
 }
 
 /* SMALL MOBILE */
@@ -1060,9 +1123,12 @@ body > footer {
   }
 }
 
-/* PRINT / SAVE PDF */
+/* =========================================
+   PRINT / SAVE PDF
+========================================= */
 
 @media print {
+
   @page {
     size: landscape;
     margin: 10mm;
@@ -1089,8 +1155,21 @@ body > footer {
     margin: 0;
   }
 
-  .tab-panel {
+  /* Print only the selected section */
+
+  #portal .tab-panel {
+    display: none !important;
+  }
+
+  #portal .tab-panel.active {
     display: block !important;
+  }
+
+  #portal .tab-panel[hidden] {
+    display: none !important;
+  }
+
+  .tab-panel {
     box-shadow: none;
     border: 0;
     padding: 10px 0;
@@ -1106,7 +1185,7 @@ body > footer {
   }
 
   .table-wrap {
-    overflow: visible;
+    overflow: visible !important;
   }
 
   table {
@@ -1144,5 +1223,102 @@ body > footer {
 
   .member-mobile-total {
     display: none;
+  }
+
+  /* RENT COLLECTION PRINT LAYOUT */
+
+  #tab-rent {
+    width: 100%;
+    padding: 8px 0;
+    border: 0;
+    box-shadow: none;
+    break-inside: auto;
+  }
+
+  #tab-rent .table-wrap {
+    width: 100%;
+    overflow: visible !important;
+    border: 1px solid #aaa;
+  }
+
+  #rentTable {
+    width: 100% !important;
+    min-width: 0 !important;
+    table-layout: fixed;
+    font-size: 8px;
+  }
+
+  #rentTable th,
+  #rentTable td {
+    padding: 5px 4px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  #rentTable th:nth-child(1),
+  #rentTable td:nth-child(1) {
+    width: 5%;
+  }
+
+  #rentTable th:nth-child(2),
+  #rentTable td:nth-child(2) {
+    width: 9%;
+  }
+
+  #rentTable th:nth-child(3),
+  #rentTable td:nth-child(3) {
+    width: 8%;
+  }
+
+  #rentTable th:nth-child(4),
+  #rentTable td:nth-child(4) {
+    width: 7%;
+  }
+
+  #rentTable th:nth-child(5),
+  #rentTable td:nth-child(5) {
+    width: 13%;
+  }
+
+  #rentTable th:nth-child(6),
+  #rentTable td:nth-child(6) {
+    width: 16%;
+  }
+
+  #rentTable th:nth-child(7),
+  #rentTable td:nth-child(7) {
+    width: 15%;
+  }
+
+  #rentTable th:nth-child(8),
+  #rentTable td:nth-child(8) {
+    width: 7%;
+  }
+
+  #rentTable th:nth-child(9),
+  #rentTable td:nth-child(9) {
+    width: 9%;
+  }
+
+  #rentTable th:nth-child(10),
+  #rentTable td:nth-child(10) {
+    width: 11%;
+  }
+
+  #tab-rent .section-title {
+    break-after: avoid;
+  }
+
+  #rentTable thead {
+    display: table-header-group;
+  }
+
+  #rentTable tfoot {
+    display: table-footer-group;
+  }
+
+  #rentTable tr {
+    break-inside: avoid;
   }
 }
