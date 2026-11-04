@@ -139,6 +139,10 @@
           Donation Details
         </button>
 
+        <button class="tab" data-tab="rent" type="button">
+          Rent Collection
+        </button>
+
         <button class="tab" data-tab="bills" type="button">
           Bill Details
         </button>
@@ -283,6 +287,36 @@
         </div>
 
       </section>
+
+      <section class="tab-panel" id="tab-rent" hidden>
+  <div class="section-title">
+    <div>
+      <h3>Rent Collection</h3>
+      <p>Rent Collection Register entries</p>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table id="rentTable">
+      <thead>
+        <tr>
+          <th>S.No.</th>
+          <th>Collection No.</th>
+          <th>Date</th>
+          <th>Month</th>
+          <th>Consumer Name</th>
+          <th>Material Details</th>
+          <th>Use / Purpose</th>
+          <th>Qty</th>
+          <th>Rate (₹)</th>
+          <th>Amount (₹)</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+      <tfoot></tfoot>
+    </table>
+  </div>
+</section>
 
       <!-- BILL DETAILS -->
       <section class="tab-panel" id="tab-bills" hidden>
