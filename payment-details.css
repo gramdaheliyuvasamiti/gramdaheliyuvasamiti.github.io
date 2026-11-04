@@ -432,15 +432,11 @@ tfoot td {
   line-height: 1.35;
 }
 
-/* ADVANCE PAID */
-
 .status-badge.advance {
   background: var(--blue-light);
   color: #1d4ed8;
   border-color: #cbdcff;
 }
-
-/* UNPAID */
 
 .status-badge.unpaid {
   background: var(--red-light);
@@ -448,23 +444,17 @@ tfoot td {
   border-color: #f5caca;
 }
 
-/* PAID ON JOIN */
-
 .status-badge.on-join {
   background: var(--purple-light);
   color: #6d28d9;
   border-color: #dfd0ff;
 }
 
-/* LATE PAYMENT */
-
 .status-badge.late {
   background: var(--orange-light);
   color: #a45b00;
   border-color: #f3d49d;
 }
-
-/* NORMAL PAID */
 
 .status-badge.paid {
   background: var(--green-light);
@@ -812,8 +802,11 @@ tfoot td {
 
 .signatures {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
+  align-items: flex-end;
   gap: 20px;
+  width: 100%;
   margin-top: 55px;
 }
 
@@ -821,6 +814,7 @@ tfoot td {
   border-top: 1px solid #aab7ae;
   padding-top: 8px;
   min-width: 130px;
+  flex: 1;
   text-align: center;
   font-size: 10px;
   font-weight: 800;
@@ -1064,7 +1058,10 @@ body > footer {
   }
 
   .signatures {
+    flex-direction: row;
     gap: 12px;
+    justify-content: space-between;
+    align-items: flex-end;
   }
 
   .signatures span {
@@ -1319,6 +1316,41 @@ body > footer {
   }
 
   #rentTable tr {
+    break-inside: avoid;
+  }
+
+  /* =====================================
+     SIGNATURE + STAMP PRINT POSITION
+     BOTH AT REPORT BOTTOM - LEFT / RIGHT
+  ===================================== */
+
+  .signatures {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: flex-end !important;
+    width: 100% !important;
+    gap: 30px !important;
+    margin-top: 45px !important;
+    padding: 0 20px !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .signatures span {
+    display: block !important;
+    flex: 0 0 200px !important;
+    width: 200px !important;
+    min-width: 0 !important;
+    text-align: center !important;
+    border-top: 1px solid #333 !important;
+    padding-top: 8px !important;
+    font-size: 10px !important;
+  }
+
+  .official {
+    text-align: center;
+    page-break-inside: avoid;
     break-inside: avoid;
   }
 }
