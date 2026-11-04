@@ -1,7 +1,7 @@
 
 'use strict';
 
-// Public frontend: no service-role key and no database write permissions here.
+// Public frontend: no service-role key and no database write permissions.
 const PAYMENT_FUNCTION_URL = 'https://cmhfmlvxgtwqzbhpjvdx.supabase.co/functions/v1/payment-details';
 
 let accessPassword = '';
@@ -103,7 +103,6 @@ const statusClass = status => ({
 
 
 // PAYMENT CELL
-// Status available ho to uske aage extra dash nahi aayega.
 const paymentCell = p => {
   const amt = paymentAmount(p);
   const status = statusText(p.status);
@@ -125,6 +124,14 @@ const paymentCell = p => {
 
   return `${amount}${badge}${date}`;
 };
+
+
+// MONTHLY BALANCE HELPERS
+const balanceDonation = r =>
+  Number(r?.donation ?? r?.donations ?? r?.legacyDonation ?? 0) || 0;
+
+const balanceRent = r =>
+  Number(r?.rent ?? r?.rentCollection ?? r?.rentCollections ?? 0) || 0;
 
 
 // FETCH DATA FROM SUPABASE EDGE FUNCTION
@@ -224,7 +231,9 @@ $('logoutBtn').addEventListener('click',() => {
 
 
 // PRINT
-$('printBtn').addEventListener('click',()=>window.print());
+$('printBtn').addEventListener('click',()=>{
+  window.print();
+});
 
 
 // FILTER EVENTS
@@ -280,6 +289,8 @@ function populateYearFilter(selected) {
     $('yearFilter').value = String(selected);
   } else if(years.includes('2026')) {
     $('yearFilter').value = '2026';
+  } else if(years.length) {
+    $('yearFilter').value = years[years.length-1];
   }
 
   populateMonthFilter();
@@ -296,11 +307,19 @@ function populateMonthFilter() {
 
   const months = row?.months||[];
 
+  const previous = $('monthFilter').value;
+
   $('monthFilter').innerHTML =
     '<option value="ALL">All Months</option>' +
     months.map(m=>
       `<option value="${esc(m)}">${esc(m)}</option>`
     ).join('');
+
+  if(months.includes(previous)) {
+    $('monthFilter').value = previous;
+  } else {
+    $('monthFilter').value = 'ALL';
+  }
 }
 
 
@@ -338,8 +357,10 @@ function renderAll() {
   renderMembers();
   renderExpenses();
   renderDonations();
+  renderRentDetails();
   renderBills();
   renderSummary();
+  renderSectionSignatures();
 }
 
 
@@ -397,8 +418,6 @@ function renderMembers() {
   }).join('') ||
   `<tr><td colspan="${months.length+4}" class="muted-cell">No member records</td></tr>`;
 
-
-  // TABLE TOTAL
   foot.innerHTML = `
     <tr>
       <td colspan="3">TOTAL COLLECTION</td>
@@ -461,7 +480,6 @@ function renderMembers() {
   }
 
 
-  // FINANCIAL SUMMARY BELOW MEMBER COLLECTION
   renderMemberFinancialSummary();
 }
 
@@ -479,6 +497,7 @@ function renderMemberFinancialSummary() {
     ['Opening Balance',s.opening],
     ['Member Collection',s.memberCollection],
     ['Total Donations',s.donation],
+    ['Rent Collection',s.rent],
     ['Total Expenses',s.expense],
     ['Closing Balance',s.closing]
   ];
@@ -522,7 +541,8 @@ function renderMemberFinancialSummary() {
               <th>Month</th>
               <th>Opening Balance (₹)</th>
               <th>Member Collection (₹)</th>
-              <th>Donation in balance field (₹)</th>
+              <th>Donation (₹)</th>
+              <th>Rent Collection (₹)</th>
               <th>Expense (₹)</th>
               <th>Closing Balance (₹)</th>
             </tr>
@@ -535,12 +555,13 @@ function renderMemberFinancialSummary() {
                 <td>${esc(r.month)}</td>
                 <td>${money(r.opening)}</td>
                 <td>${money(r.collection)}</td>
-                <td>${money(r.legacyDonation)}</td>
+                <td>${money(balanceDonation(r))}</td>
+                <td>${money(balanceRent(r))}</td>
                 <td>${money(r.expense)}</td>
                 <td><b>${money(r.closing)}</b></td>
               </tr>
             `).join('') ||
-            '<tr><td colspan="6">No monthly balance rows</td></tr>'}
+            '<tr><td colspan="7">No monthly balance rows</td></tr>'}
 
           </tbody>
 
@@ -550,7 +571,7 @@ function renderMemberFinancialSummary() {
 
       <p class="footnote warning">
         यह विवरण ग्राम दहेली युवा समिति के आधिकारिक लेखा-जोखा एवं उपलब्ध वित्तीय अभिलेखों पर आधारित है।
-         समिति के वित्तीय रिकॉर्ड में पारदर्शिता बनाए रखने तथा सदस्यों को सही जानकारी उपलब्ध कराने के उद्देश्य से इसे प्रस्तुत किया गया है।
+        समिति के वित्तीय रिकॉर्ड में पारदर्शिता बनाए रखने तथा सदस्यों को सही जानकारी उपलब्ध कराने के उद्देश्य से इसे प्रस्तुत किया गया है।
       </p>
 
     </section>
@@ -628,7 +649,94 @@ function renderDonations() {
 }
 
 
-// 4. BILL DETAILS
+// 4. RENT COLLECTION DATA
+function getRentRecords() {
+  const data = reportData || {};
+
+  const records =
+    data.rentCollections ||
+    data.rents ||
+    data.rent ||
+    [];
+
+  return Array.isArray(records) ? records : [];
+}
+
+
+// RENT COLLECTION RENDER
+function renderRentDetails() {
+
+  const table = $('rentTable');
+  if(!table) return;
+
+  const year = getYear();
+
+  const records = getRentRecords().filter(r=>{
+
+    const recordMonth = r.month || monthFromDate(r.date);
+    const recordYear = String(recordMonth).slice(-4);
+
+    return recordYear === year &&
+      filteredMonth(recordMonth);
+
+  });
+
+  let rows = [];
+  let total = 0;
+  let serial = 1;
+
+  records.forEach(record=>{
+
+    const items = Array.isArray(record.items) ? record.items : [];
+
+    items.forEach(item=>{
+
+      const amount = Number(
+        item.amount ??
+        ((Number(item.qty)||0) * (Number(item.rate)||0))
+      ) || 0;
+
+      total += amount;
+
+      rows.push(`
+        <tr>
+          <td>${serial++}</td>
+          <td>${esc(record.no||'')}</td>
+          <td>${esc(record.date||'')}</td>
+          <td>${esc(record.month||monthFromDate(record.date))}</td>
+          <td>${esc(item.consumer||'')}</td>
+          <td>${esc(item.material||'')}</td>
+          <td>${esc(item.purpose||'')}</td>
+          <td>${esc(item.qty??'')}</td>
+          <td class="money">${money(item.rate)}</td>
+          <td class="money">${money(amount)}</td>
+        </tr>
+      `);
+
+    });
+
+  });
+
+  const body = table.querySelector('tbody');
+  const foot = table.querySelector('tfoot');
+
+  if(body) {
+    body.innerHTML = rows.join('') ||
+      '<tr><td colspan="10" class="muted-cell">No rent records</td></tr>';
+  }
+
+  if(foot) {
+    foot.innerHTML = `
+      <tr>
+        <td colspan="9">Total Rent Collection</td>
+        <td class="money">${money(total)}</td>
+      </tr>
+    `;
+  }
+}
+
+
+// 5. BILL DETAILS
 function renderBills() {
 
   const rows = (reportData.bills||[]).filter(e=>
@@ -685,7 +793,7 @@ function renderBills() {
 }
 
 
-// 5. FINANCIAL SUMMARY TAB
+// 6. FINANCIAL SUMMARY TAB
 function renderSummary() {
 
   const x = currentYear();
@@ -696,6 +804,7 @@ function renderSummary() {
     ['Member Collection',s.memberCollection],
     ['Total Expense',s.expense],
     ['Donation Collection',s.donation],
+    ['Rent Collection',s.rent],
     ['Closing Balance',s.closing]
   ];
 
@@ -712,18 +821,119 @@ function renderSummary() {
     r=>filteredMonth(r.month)
   );
 
-  $('balanceTable').querySelector('tbody').innerHTML =
+  const table = $('balanceTable');
+
+  const head = table.querySelector('thead');
+  if(head) {
+    head.innerHTML = `
+      <tr>
+        <th>Month</th>
+        <th>Opening Balance (₹)</th>
+        <th>Member Collection (₹)</th>
+        <th>Donation (₹)</th>
+        <th>Rent Collection (₹)</th>
+        <th>Expense (₹)</th>
+        <th>Closing Balance (₹)</th>
+      </tr>
+    `;
+  }
+
+  table.querySelector('tbody').innerHTML =
     rows.map(r=>`
       <tr>
         <td>${esc(r.month)}</td>
         <td class="money">${money(r.opening)}</td>
         <td class="money">${money(r.collection)}</td>
-        <td class="money">${money(r.legacyDonation)}</td>
+        <td class="money">${money(balanceDonation(r))}</td>
+        <td class="money">${money(balanceRent(r))}</td>
         <td class="money">${money(r.expense)}</td>
         <td class="money"><b>${money(r.closing)}</b></td>
       </tr>
     `).join('') ||
-    '<tr><td colspan="6" class="muted-cell">No monthly balance rows</td></tr>';
+    '<tr><td colspan="7" class="muted-cell">No monthly balance rows</td></tr>';
+}
+
+
+// DOCUMENT BRANDING / SIGNATURE DATA
+function getDocumentBranding() {
+
+  const data = reportData || {};
+
+  return (
+    data.branding ||
+    data.docBrand ||
+    data.documentBranding ||
+    {}
+  );
+}
+
+
+// SIGNATURE AND STAMP FOOTER
+function renderSectionSignatures() {
+
+  const branding = getDocumentBranding();
+
+  const roles = [
+    ['prepared', 'PREPARED BY'],
+    ['verified', 'VERIFIED BY']
+  ];
+
+  document.querySelectorAll('.tab-panel').forEach(panel=>{
+
+    let footer = panel.querySelector('.member-section-approval');
+
+    if(!footer) {
+      footer = document.createElement('div');
+      footer.className = 'member-section-approval';
+      panel.appendChild(footer);
+    }
+
+    footer.innerHTML = `
+      <div class="member-approval-grid">
+
+        ${roles.map(([key,label])=>`
+          <div class="member-approval-item">
+            <strong>${label}</strong>
+            <span>${esc(branding[key+'Name']||'')}</span>
+            <small>${esc(branding[key+'Post']||'')}</small>
+
+            ${
+              branding[key+'Sign']
+                ? `<img src="${esc(branding[key+'Sign'])}" alt="${label} signature">`
+                : '<div class="signature-space"></div>'
+            }
+          </div>
+        `).join('')}
+
+        <div class="member-approval-stamp">
+          ${
+            branding.stamp
+              ? `<img src="${esc(branding.stamp)}" alt="Committee Stamp">`
+              : ''
+          }
+        </div>
+
+        <div class="member-approval-item">
+          <strong>APPROVED BY</strong>
+          <span>${esc(branding.approvedName||'')}</span>
+          <small>${esc(branding.approvedPost||'')}</small>
+
+          ${
+            branding.approvedSign
+              ? `<img src="${esc(branding.approvedSign)}" alt="Approved signature">`
+              : '<div class="signature-space"></div>'
+          }
+        </div>
+
+      </div>
+
+      <p class="member-official">
+        Gram Daheli Yuva Samiti · Official Record
+      </p>
+    `;
+
+  });
+
 }
 
 
