@@ -1,7 +1,8 @@
 /* =========================================
    GRAM DAHELI YUVA SAMITI
    PAYMENT DETAILS PORTAL
-   Responsive Desktop + Mobile Design
+   RESPONSIVE DESKTOP + MOBILE DESIGN
+   SCREEN SIZE ENLARGED
 ========================================= */
 
 :root {
@@ -1122,6 +1123,7 @@ body > footer {
 
 /* =========================================
    PRINT / SAVE PDF
+   ORIGINAL PRINT SETTINGS
 ========================================= */
 
 @media print {
@@ -1151,8 +1153,6 @@ body > footer {
     width: 100%;
     margin: 0;
   }
-
-  /* Print only the selected section */
 
   #portal .tab-panel {
     display: none !important;
@@ -1254,54 +1254,34 @@ body > footer {
   }
 
   #rentTable th:nth-child(1),
-  #rentTable td:nth-child(1) {
-    width: 5%;
-  }
+  #rentTable td:nth-child(1) { width: 5%; }
 
   #rentTable th:nth-child(2),
-  #rentTable td:nth-child(2) {
-    width: 9%;
-  }
+  #rentTable td:nth-child(2) { width: 9%; }
 
   #rentTable th:nth-child(3),
-  #rentTable td:nth-child(3) {
-    width: 8%;
-  }
+  #rentTable td:nth-child(3) { width: 8%; }
 
   #rentTable th:nth-child(4),
-  #rentTable td:nth-child(4) {
-    width: 7%;
-  }
+  #rentTable td:nth-child(4) { width: 7%; }
 
   #rentTable th:nth-child(5),
-  #rentTable td:nth-child(5) {
-    width: 13%;
-  }
+  #rentTable td:nth-child(5) { width: 13%; }
 
   #rentTable th:nth-child(6),
-  #rentTable td:nth-child(6) {
-    width: 16%;
-  }
+  #rentTable td:nth-child(6) { width: 16%; }
 
   #rentTable th:nth-child(7),
-  #rentTable td:nth-child(7) {
-    width: 15%;
-  }
+  #rentTable td:nth-child(7) { width: 15%; }
 
   #rentTable th:nth-child(8),
-  #rentTable td:nth-child(8) {
-    width: 7%;
-  }
+  #rentTable td:nth-child(8) { width: 7%; }
 
   #rentTable th:nth-child(9),
-  #rentTable td:nth-child(9) {
-    width: 9%;
-  }
+  #rentTable td:nth-child(9) { width: 9%; }
 
   #rentTable th:nth-child(10),
-  #rentTable td:nth-child(10) {
-    width: 11%;
-  }
+  #rentTable td:nth-child(10) { width: 11%; }
 
   #tab-rent .section-title {
     break-after: avoid;
@@ -1319,10 +1299,7 @@ body > footer {
     break-inside: avoid;
   }
 
-  /* =====================================
-     SIGNATURE + STAMP PRINT POSITION
-     BOTH AT REPORT BOTTOM - LEFT / RIGHT
-  ===================================== */
+  /* SIGNATURE + STAMP PRINT POSITION */
 
   .signatures {
     display: flex !important;
@@ -1352,5 +1329,675 @@ body > footer {
     text-align: center;
     page-break-inside: avoid;
     break-inside: avoid;
+  }
+}
+
+/* =========================================
+   SCREEN DISPLAY ENLARGEMENT
+   DESKTOP + MOBILE
+   PRINT / PDF NOT AFFECTED
+========================================= */
+
+@media screen {
+
+  /* GENERAL TEXT */
+  body {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .topbar {
+    padding: 23px 5%;
+  }
+
+  .brand {
+    gap: 16px;
+  }
+
+  .mark {
+    width: 62px;
+    height: 62px;
+    font-size: 17px;
+    border-radius: 14px;
+  }
+
+  .brand h1 {
+    font-size: 25px;
+  }
+
+  .brand p {
+    font-size: 16px;
+  }
+
+  .back-link {
+    font-size: 16px;
+    padding: 12px 17px;
+  }
+
+  /* MAIN WRAPPER */
+  .wrap {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  /* LOGIN */
+  .login-card {
+    max-width: 540px;
+    padding: 38px;
+  }
+
+  .eyebrow {
+    font-size: 15px;
+  }
+
+  .login-card h2 {
+    font-size: 34px;
+  }
+
+  .login-card p,
+  .login-card label {
+    font-size: 18px;
+  }
+
+  .login-card input {
+    font-size: 19px;
+    padding: 17px;
+  }
+
+  .security-note {
+    font-size: 15px;
+  }
+
+  /* BUTTONS */
+  .btn {
+    font-size: 17px;
+    padding: 14px 20px;
+  }
+
+  .small {
+    font-size: 15px;
+    padding: 11px 15px;
+  }
+
+  /* PORTAL HEADING */
+  .portal-heading h2 {
+    font-size: 35px;
+  }
+
+  .portal-heading p {
+    font-size: 16px;
+  }
+
+  .heading-actions {
+    gap: 11px;
+  }
+
+  /* FILTERS */
+  .filters {
+    padding: 20px;
+    gap: 18px;
+  }
+
+  .filters label {
+    font-size: 16px;
+    gap: 8px;
+  }
+
+  .filters select {
+    font-size: 17px;
+    padding: 13px 15px;
+    min-width: 165px;
+  }
+
+  .status-text {
+    font-size: 16px;
+  }
+
+  /* TABS */
+  .tabs {
+    gap: 10px;
+    padding-bottom: 15px;
+  }
+
+  .tab {
+    font-size: 16px;
+    padding: 15px 20px;
+  }
+
+  /* SECTIONS */
+  .tab-panel {
+    padding: 27px;
+    margin-bottom: 28px;
+  }
+
+  .section-title {
+    margin-bottom: 22px;
+  }
+
+  .section-title h3 {
+    font-size: 26px;
+  }
+
+  .section-title p {
+    font-size: 16px;
+  }
+
+  /* TABLES */
+  table {
+    font-size: 16px;
+  }
+
+  thead th {
+    font-size: 16px;
+    padding: 17px 14px;
+  }
+
+  tbody td,
+  tfoot td {
+    font-size: 16px;
+    padding: 16px 13px;
+  }
+
+  .member-name {
+    min-width: 170px;
+    font-size: 18px;
+  }
+
+  .money {
+    font-size: 17px;
+  }
+
+  .muted-cell {
+    padding: 28px !important;
+  }
+
+  /* PAYMENT BADGES */
+  .amount-badge {
+    font-size: 15px;
+    padding: 8px 12px;
+  }
+
+  .status-badge {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .payment-cell-content {
+    gap: 7px;
+  }
+
+  .payment-date {
+    font-size: 13px;
+  }
+
+  .late-fee-badge {
+    font-size: 14px;
+    padding: 8px 11px;
+  }
+
+  /* MOBILE MEMBER CARDS */
+  .member-mobile-card {
+    padding: 19px;
+    margin-bottom: 15px;
+  }
+
+  .member-card-head {
+    gap: 12px;
+    padding-bottom: 14px;
+  }
+
+  .member-card-number {
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
+  }
+
+  .member-card-identity strong {
+    font-size: 19px;
+  }
+
+  .member-card-identity small {
+    font-size: 14px;
+  }
+
+  .member-card-payments {
+    padding-top: 12px;
+  }
+
+  .mobile-payment {
+    min-height: 49px;
+    gap: 12px;
+  }
+
+  .mobile-month {
+    font-size: 15px;
+  }
+
+  .mobile-payment-value {
+    gap: 7px;
+  }
+
+  /* MOBILE TOTAL */
+  .member-mobile-total {
+    padding: 21px;
+  }
+
+  .member-mobile-total-heading span {
+    font-size: 16px;
+  }
+
+  .member-mobile-total-heading strong {
+    font-size: 25px;
+  }
+
+  .member-mobile-total-months {
+    gap: 10px;
+    padding: 16px 0;
+  }
+
+  .mobile-total-month {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .member-mobile-total-foot {
+    font-size: 16px;
+  }
+
+  /* FINANCIAL SUMMARY */
+  .member-financial-summary {
+    padding: 25px;
+    margin-top: 28px;
+  }
+
+  .member-financial-heading h4 {
+    font-size: 27px;
+  }
+
+  .member-financial-heading p {
+    font-size: 16px;
+  }
+
+  .member-financial-grid {
+    gap: 13px;
+  }
+
+  .member-financial-card {
+    padding: 18px;
+  }
+
+  .member-financial-card span,
+  .summary-card span {
+    font-size: 15px;
+  }
+
+  .member-financial-card strong,
+  .summary-card strong {
+    font-size: 24px;
+  }
+
+  .member-balance-title {
+    font-size: 21px;
+  }
+
+  .member-financial-note {
+    font-size: 15px;
+  }
+
+  /* SUMMARY TAB */
+  .summary-grid {
+    gap: 15px;
+  }
+
+  .summary-card {
+    padding: 20px;
+  }
+
+  .subheading {
+    font-size: 21px;
+  }
+
+  /* NOTES AND FOOTER */
+  .footnote {
+    font-size: 15px;
+  }
+
+  .warning {
+    padding: 16px;
+    font-size: 16px;
+  }
+
+  .signatures span {
+    font-size: 14px;
+  }
+
+  .official,
+  body > footer {
+    font-size: 14px;
+  }
+
+  .message {
+    font-size: 16px;
+  }
+
+  /* RENT TABLE */
+  #rentTable th,
+  #rentTable td {
+    padding: 13px 10px;
+    font-size: 15px;
+  }
+}
+
+/* =========================================
+   MOBILE SCREEN SIZE ENLARGEMENT
+========================================= */
+
+@media screen and (max-width: 700px) {
+
+  body {
+    font-size: 16px;
+  }
+
+  .topbar {
+    padding: 16px 4%;
+    gap: 10px;
+  }
+
+  .brand {
+    gap: 10px;
+  }
+
+  .brand h1 {
+    font-size: 18px;
+  }
+
+  .brand p {
+    font-size: 13px;
+  }
+
+  .mark {
+    width: 47px;
+    height: 47px;
+    font-size: 14px;
+  }
+
+  .back-link {
+    font-size: 13px;
+    padding: 9px 11px;
+  }
+
+  .wrap {
+    width: 94%;
+    margin: 19px auto;
+  }
+
+  .login-card {
+    margin: 38px auto;
+    padding: 25px 19px;
+  }
+
+  .login-card h2 {
+    font-size: 27px;
+  }
+
+  .login-card p,
+  .login-card label {
+    font-size: 16px;
+  }
+
+  .login-card input {
+    font-size: 17px;
+    padding: 15px;
+  }
+
+  .security-note {
+    font-size: 13px;
+  }
+
+  .portal-heading h2 {
+    font-size: 27px;
+  }
+
+  .portal-heading p {
+    font-size: 14px;
+  }
+
+  .heading-actions {
+    gap: 8px;
+  }
+
+  .heading-actions .btn {
+    font-size: 13px;
+    padding: 12px 9px;
+  }
+
+  .filters {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .filters label {
+    font-size: 14px;
+    min-width: 120px;
+  }
+
+  .filters select {
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  .status-text {
+    font-size: 14px;
+  }
+
+  .tabs {
+    gap: 7px;
+    padding-bottom: 13px;
+  }
+
+  .tab {
+    font-size: 14px;
+    padding: 12px 14px;
+  }
+
+  .tab-panel {
+    padding: 16px;
+    margin-bottom: 18px;
+  }
+
+  .section-title h3 {
+    font-size: 20px;
+  }
+
+  .section-title p {
+    font-size: 13px;
+  }
+
+  .member-desktop-table {
+    display: none !important;
+  }
+
+  .member-mobile-cards {
+    display: block !important;
+  }
+
+  .member-mobile-card {
+    padding: 16px;
+    margin-bottom: 13px;
+  }
+
+  .member-card-number {
+    width: 34px;
+    height: 34px;
+    font-size: 13px;
+  }
+
+  .member-card-identity strong {
+    font-size: 17px;
+  }
+
+  .member-card-identity small {
+    font-size: 12px;
+  }
+
+  .mobile-payment {
+    min-height: 45px;
+  }
+
+  .mobile-month {
+    font-size: 13px;
+  }
+
+  .amount-badge,
+  .status-badge {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  .late-fee-badge {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  .member-mobile-total {
+    padding: 17px;
+  }
+
+  .member-mobile-total-heading span {
+    font-size: 14px;
+  }
+
+  .member-mobile-total-heading strong {
+    font-size: 22px;
+  }
+
+  .mobile-total-month {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .member-financial-summary {
+    padding: 15px;
+    margin-top: 20px;
+  }
+
+  .member-financial-heading h4 {
+    font-size: 20px;
+  }
+
+  .member-financial-heading p {
+    font-size: 13px;
+  }
+
+  .member-financial-grid,
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .member-financial-card {
+    padding: 13px;
+  }
+
+  .member-financial-card span,
+  .summary-card span {
+    font-size: 12px;
+  }
+
+  .member-financial-card strong,
+  .summary-card strong {
+    font-size: 19px;
+  }
+
+  .summary-card {
+    padding: 14px;
+  }
+
+  .member-balance-title,
+  .subheading {
+    font-size: 18px;
+  }
+
+  .member-financial-note,
+  .footnote {
+    font-size: 13px;
+  }
+
+  .warning {
+    font-size: 14px;
+    padding: 13px;
+  }
+
+  .signatures {
+    gap: 12px;
+  }
+
+  .signatures span {
+    font-size: 10px;
+  }
+
+  .official,
+  body > footer {
+    font-size: 12px;
+  }
+
+  .message {
+    font-size: 14px;
+  }
+
+  #rentTable {
+    min-width: 1150px;
+  }
+}
+
+/* SMALL MOBILE */
+
+@media screen and (max-width: 380px) {
+
+  .brand h1 {
+    font-size: 15px;
+  }
+
+  .brand p {
+    font-size: 11px;
+  }
+
+  .back-link {
+    font-size: 11px;
+    padding: 8px;
+  }
+
+  .portal-heading h2 {
+    font-size: 24px;
+  }
+
+  .tab {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .member-card-identity strong {
+    font-size: 15px;
+  }
+
+  .member-card-head .late-fee-badge {
+    font-size: 10px;
+    padding: 5px 6px;
+  }
+
+  .amount-badge,
+  .status-badge {
+    font-size: 11px;
+    padding: 5px 7px;
+  }
+
+  .mobile-total-month {
+    font-size: 11px;
+  }
+
+  .member-financial-card strong,
+  .summary-card strong {
+    font-size: 17px;
   }
 }
