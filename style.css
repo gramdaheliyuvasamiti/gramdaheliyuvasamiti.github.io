@@ -852,14 +852,40 @@ footer p {
 
 
 /* =====================================================
-   ZOOM / RESPONSIVE LAYOUT FIX
-   Original CSS above is preserved; only responsive
-   adjustments are added below.
+   FINAL ZOOM LAYOUT CORRECTION
+   Only header navigation and hero positioning are adjusted.
 ===================================================== */
 
-@media (min-width: 901px) and (max-width: 1150px) {
+/* Use the available screen width instead of limiting
+   the header content to 1200px. */
+.header-inner {
+  width: min(1600px, 98%);
+  gap: 12px;
+}
+
+/* Keep navigation labels from breaking into narrow columns
+   on desktop and while browser zoom reduces viewport width. */
+.nav {
+  flex: 1 1 auto;
+  min-width: 0;
+  justify-content: space-between;
+}
+
+.nav > a,
+.dropbtn {
+  padding-left: clamp(7px, 0.8vw, 16px);
+  padding-right: clamp(7px, 0.8vw, 16px);
+  white-space: normal;
+  text-align: center;
+}
+
+/* Switch to the existing mobile menu before the desktop
+   navigation becomes too crowded at higher zoom levels. */
+@media (max-width: 1150px) {
   .header-inner {
-    gap: 12px;
+    width: 94%;
+    min-height: 68px;
+    gap: 10px;
   }
 
   .logo {
@@ -876,117 +902,58 @@ footer p {
     font-size: 17px;
   }
 
+  .logo-area p {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  .nav {
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    background: #2c2133;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+  }
+
+  .nav.show {
+    display: flex;
+  }
+
   .nav > a,
   .dropbtn {
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: 14px;
+    width: 100%;
+    text-align: left;
+    padding: 14px 22px;
+  }
+
+  .dropdown-menu {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+  }
+
+  .dropdown.open .dropdown-menu {
+    display: block;
   }
 }
 
-@media (max-width: 900px) {
-  .header-inner,
-  .container,
-  .hero-content {
-    min-width: 0;
-  }
-
-  .hero-content {
-    margin-bottom: 0;
-    padding: 35px 0;
-  }
-
-  .member-grid,
-  .photo-gallery {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .member-card,
-  .photo-card,
-  .document,
-  .upload-panel,
-  .gallery-admin-box,
-  .file-list,
-  .admin-login,
-  .admin-panel {
-    min-width: 0;
-    max-width: 100%;
-  }
-
-  .file-item {
-    min-width: 0;
-    flex-wrap: wrap;
-  }
-
-  .file-name,
-  .photo-name {
-    overflow-wrap: anywhere;
-  }
-
-  .file-actions {
-    flex-wrap: wrap;
-  }
-
-  img {
-    max-width: 100%;
-  }
+/* Correct the hero text position: remove the large negative
+   margin that pushes the heading and tagline downward. */
+.hero-content {
+  margin-bottom: 0;
 }
 
 @media (max-width: 600px) {
-  .header-inner {
-    gap: 8px;
-  }
-
-  .logo {
-    width: 54px;
-    height: 54px;
-    flex: 0 0 54px;
-  }
-
-  .logo-area {
-    min-width: 0;
-    gap: 8px;
-  }
-
-  .logo-area h1 {
-    font-size: 15px;
-    overflow-wrap: anywhere;
-  }
-
-  .hero {
-    min-height: 400px;
-  }
-
   .hero-content {
     width: 92%;
     margin-bottom: 0;
-  }
-
-  .hero h2 {
-    font-size: clamp(30px, 9vw, 39px);
-    overflow-wrap: anywhere;
-  }
-
-  .member-grid,
-  .photo-gallery {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .content-section {
-    padding: 45px 0;
-  }
-
-  .content-section h2 {
-    font-size: clamp(24px, 7vw, 32px);
-    overflow-wrap: anywhere;
-  }
-
-  .file-actions {
-    width: 100%;
-  }
-
-  .download-btn,
-  .delete-btn {
-    min-width: 0;
   }
 }
