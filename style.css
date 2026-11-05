@@ -849,3 +849,144 @@ footer p {
 }
 
 }
+
+
+/* =====================================================
+   ZOOM / RESPONSIVE LAYOUT FIX
+   Original CSS above is preserved; only responsive
+   adjustments are added below.
+===================================================== */
+
+@media (min-width: 901px) and (max-width: 1150px) {
+  .header-inner {
+    gap: 12px;
+  }
+
+  .logo {
+    width: 58px;
+    height: 58px;
+    flex: 0 0 58px;
+  }
+
+  .logo-area {
+    gap: 8px;
+  }
+
+  .logo-area h1 {
+    font-size: 17px;
+  }
+
+  .nav > a,
+  .dropbtn {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 900px) {
+  .header-inner,
+  .container,
+  .hero-content {
+    min-width: 0;
+  }
+
+  .hero-content {
+    margin-bottom: 0;
+    padding: 35px 0;
+  }
+
+  .member-grid,
+  .photo-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .member-card,
+  .photo-card,
+  .document,
+  .upload-panel,
+  .gallery-admin-box,
+  .file-list,
+  .admin-login,
+  .admin-panel {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .file-item {
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+
+  .file-name,
+  .photo-name {
+    overflow-wrap: anywhere;
+  }
+
+  .file-actions {
+    flex-wrap: wrap;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-inner {
+    gap: 8px;
+  }
+
+  .logo {
+    width: 54px;
+    height: 54px;
+    flex: 0 0 54px;
+  }
+
+  .logo-area {
+    min-width: 0;
+    gap: 8px;
+  }
+
+  .logo-area h1 {
+    font-size: 15px;
+    overflow-wrap: anywhere;
+  }
+
+  .hero {
+    min-height: 400px;
+  }
+
+  .hero-content {
+    width: 92%;
+    margin-bottom: 0;
+  }
+
+  .hero h2 {
+    font-size: clamp(30px, 9vw, 39px);
+    overflow-wrap: anywhere;
+  }
+
+  .member-grid,
+  .photo-gallery {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .content-section {
+    padding: 45px 0;
+  }
+
+  .content-section h2 {
+    font-size: clamp(24px, 7vw, 32px);
+    overflow-wrap: anywhere;
+  }
+
+  .file-actions {
+    width: 100%;
+  }
+
+  .download-btn,
+  .delete-btn {
+    min-width: 0;
+  }
+}
