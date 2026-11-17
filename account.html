@@ -803,6 +803,12 @@
 
 
 
+
+/* PDF and print: light-yellow emphasis for late payment amount + late fee */
+.late-payment-highlight{display:inline-block;background:#fff2b3!important;color:#765400!important;border:1px solid #f0d76a!important;border-radius:3px;padding:1px 4px;font-weight:800!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.late-payment-row td{background:#fff2b3!important;color:#765400!important;font-weight:800!important}
+@media print{.late-payment-highlight,.late-payment-row td{background:#fff2b3!important;color:#765400!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}}
+
 /* FINAL RESPONSIVE + A3 PRINT REFINEMENTS (non-destructive layout overrides) */
 html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 @media screen and (max-width: 760px) {
@@ -1112,13 +1118,13 @@ function printCombinedReport(ms,periodTitle){
    ms.forEach(mo=>{
      const actual=(db[mo.split('-')[1]]?.members||[]).find(z=>String(z.id)===String(m.id));
      const q=actual?.payments?.[mo]||{},v=[];
-     if(hasPaymentAmount(q))v.push(money(q.amount));
+     if(hasPaymentAmount(q))v.push('<span class="payment-value '+(String(q?.status||'').toLowerCase()==='late'?'late-payment-highlight':'')+'">'+money(q.amount)+'</span>');
      const label=statusLabel(q),cls=statusClass(q);
      if(label)v.push('<span class="print-status '+cls+'">'+esc(label)+'</span>');
      row+='<td>'+ (v.length?v.join(' · '):'—')+'</td>';
    });
    const late=ms.reduce((a,mo)=>{const z=(db[mo.split('-')[1]]?.members||[]).find(z=>String(z.id)===String(m.id)),q=z?.payments?.[mo]||{};return a+(hasLateFee(q)?Number(q.late)||0:0)},0);
-   return row+'<td>'+money(late)+'</td></tr>';
+   return row+'<td>'+(late>0?'<span class="late-payment-highlight">'+money(late)+'</span>':money(late))+'</td></tr>';
  }).join('');
  const memberTable=(list,offset,showTotals)=>'<table class="member-print-table"><thead><tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th>'+esc(v)+'</th>').join('')+'</tr></thead><tbody>'+memberRows(list,offset)+'</tbody>'+(showTotals?'<tfoot><tr><td colspan="5"><b>TOTAL MEMBER COLLECTION (INCLUDING LATE FEE)</b></td>'+ms.map(mo=>'<td>'+money(monthData(mo).collection)+'</td>').join('')+'<td>'+money(monthTotals.reduce((a,q)=>a+q.lateFee,0))+'</td></tr></tfoot>':'')+'</table>';
  // A3 landscape: split the member register into two readable sheets (26 + remainder for a 51-member register).
@@ -1137,8 +1143,8 @@ function printCombinedReport(ms,periodTitle){
  finance+='<h2 class="center">DONATION DETAILS</h2><table><thead><tr><th>S.No.</th><th>Month</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th></tr></thead><tbody>'+donations.map((e,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(monthFromDate(e.date))+'</td><td>'+esc(e.date)+'</td><td>'+esc(e.receipt)+'</td><td>'+esc(e.name)+'</td><td>'+esc(e.mobile)+'</td><td>'+esc(e.purpose)+'</td><td>'+money(e.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="7"><b>TOTAL DONATION</b></td><td><b>'+money(donations.reduce((a,e)=>a+(Number(e.amount)||0),0))+'</b></td></tr></tfoot></table>';
  const rentRows=allRentCollections().filter(e=>ms.includes(e.month));
  finance+='<h2 class="center">RENT COLLECTION DETAILS</h2><table><thead><tr><th>S.No.</th><th>Collection No.</th><th>Date</th><th>Month</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Qty</th><th>Rate</th><th>Amount</th></tr></thead><tbody>'+rentRows.flatMap(e=>(e.items||[]).map(x=>({e,x}))).map((o,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(o.e.no)+'</td><td>'+esc(o.e.date)+'</td><td>'+esc(o.e.month)+'</td><td>'+esc(o.x.consumer)+'</td><td>'+esc(o.x.material)+'</td><td>'+esc(o.x.purpose)+'</td><td>'+o.x.qty+'</td><td>'+money(o.x.rate)+'</td><td>'+money(o.x.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="9">TOTAL RENT</td><td>'+money(rentRows.reduce((a,e)=>a+(Number(e.total)||0),0))+'</td></tr></tfoot></table>';
- finance+='<h2 class="center">GRAND TOTAL SUMMARY</h2><table class="summary"><tbody><tr><td>Opening Balance</td><td>'+money(opening)+'</td></tr><tr><td>Member Collection (Without Late Fee)</td><td>'+money(baseCollection)+'</td></tr><tr><td>Late Payment Charges</td><td>'+money(lateCollection)+'</td></tr><tr><td><b>Total Member Collection (Including Late Fee)</b></td><td><b>'+money(collection)+'</b></td></tr><tr><td>Donation</td><td>'+money(donation)+'</td></tr><tr><td>Rent Collection</td><td>'+money(rent)+'</td></tr><tr><td>Expense (Minus)</td><td>− '+money(expense)+'</td></tr><tr><td><b>Grand Total / Closing Balance</b></td><td><b>'+money(closing)+'</b></td></tr></tbody></table>';
- finance+='<h3 class="center">MONTH-WISE FINANCIAL SUMMARY</h3><table><thead><tr><th>Month</th><th>Member Collection</th><th>Late Payment Charge</th><th>Total Member Collection</th><th>Donation</th><th>Rent</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody>';let bal=opening;monthTotals.forEach(q=>{bal+=q.collection+q.donation+q.rent-q.expense;finance+='<tr><td>'+esc(q.mo)+'</td><td>'+money(q.baseCollection)+'</td><td>'+money(q.lateFee)+'</td><td>'+money(q.collection)+'</td><td>'+money(q.donation)+'</td><td>'+money(q.rent)+'</td><td>'+money(q.expense)+'</td><td>'+money(bal)+'</td></tr>'});finance+='</tbody></table>';
+ finance+='<h2 class="center">GRAND TOTAL SUMMARY</h2><table class="summary"><tbody><tr><td>Opening Balance</td><td>'+money(opening)+'</td></tr><tr><td>Member Collection (Without Late Fee)</td><td>'+money(baseCollection)+'</td></tr><tr class="late-payment-row"><td>Late Payment Charges</td><td>'+money(lateCollection)+'</td></tr><tr><td><b>Total Member Collection (Including Late Fee)</b></td><td><b>'+money(collection)+'</b></td></tr><tr><td>Donation</td><td>'+money(donation)+'</td></tr><tr><td>Rent Collection</td><td>'+money(rent)+'</td></tr><tr><td>Expense (Minus)</td><td>− '+money(expense)+'</td></tr><tr><td><b>Grand Total / Closing Balance</b></td><td><b>'+money(closing)+'</b></td></tr></tbody></table>';
+ finance+='<h3 class="center">MONTH-WISE FINANCIAL SUMMARY</h3><table><thead><tr><th>Month</th><th>Member Collection</th><th>Late Payment Charge</th><th>Total Member Collection</th><th>Donation</th><th>Rent</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody>';let bal=opening;monthTotals.forEach(q=>{bal+=q.collection+q.donation+q.rent-q.expense;finance+='<tr><td>'+esc(q.mo)+'</td><td>'+money(q.baseCollection)+'</td><td>'+(q.lateFee>0?'<span class="late-payment-highlight">'+money(q.lateFee)+'</span>':money(q.lateFee))+'</td><td>'+money(q.collection)+'</td><td>'+money(q.donation)+'</td><td>'+money(q.rent)+'</td><td>'+money(q.expense)+'</td><td>'+money(bal)+'</td></tr>'});finance+='</tbody></table>';
  pagesHtml+=page(finance,buildApprovalHtml());
  root.innerHTML=pagesHtml;
  root.style.display='block';document.body.classList.add('print-combined');window.print();
@@ -1420,6 +1426,7 @@ store();render();initExpenseUI();showMainTab('memberTab');refreshDonationYearOpt
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" referrerpolicy="no-referrer"></script>
 <script>
 (() => {
   "use strict";
@@ -1642,4 +1649,186 @@ store();render();initExpenseUI();showMainTab('memberTab');refreshDonationYearOpt
   })();
 })();
 </script>
+
+<style id="portalPdfUiStyles">
+#portalPdfModal{display:none;position:fixed;inset:0;z-index:999999;background:rgba(15,23,42,.78);padding:12px;box-sizing:border-box}
+#portalPdfModal.open{display:flex;flex-direction:column}
+#portalPdfModal .pdf-toolbar{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#fff;padding:10px;border-radius:10px 10px 0 0}
+#portalPdfModal .pdf-toolbar strong{color:#17324d;font-size:14px}
+#portalPdfModal .pdf-actions{display:flex;gap:7px;flex-wrap:wrap}
+#portalPdfModal button{min-height:40px;padding:9px 14px}
+#portalPdfModal iframe{width:100%;flex:1;min-height:0;border:0;background:#e5e7eb;border-radius:0 0 10px 10px}
+#portalPdfModal .pdf-loading{background:#fff;flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:#17324d}
+#portalPdfModal .pdf-download{background:#16794b}
+#portalPdfModal .pdf-close{background:#475569}
+#portalPdfRenderStage{position:fixed;left:0;top:0;width:420mm;min-height:297mm;background:#fff;color:#111;z-index:999998;overflow:visible;font-family:Arial,sans-serif}
+#portalPdfRenderStage .report-page{position:relative;display:block;box-sizing:border-box;width:420mm;min-height:297mm;height:297mm;margin:0;padding:30mm 9mm 30mm;overflow:hidden;background:#fff;break-after:page;page-break-after:always}
+#portalPdfRenderStage .report-page:last-child{break-after:auto;page-break-after:auto}
+#portalPdfRenderStage .report-page-bg{position:absolute;inset:0;width:420mm;height:297mm;max-width:none;object-fit:fill;z-index:0}
+#portalPdfRenderStage .report-page-content{position:relative;z-index:1;width:100%;height:237mm;overflow:hidden;box-sizing:border-box}
+#portalPdfRenderStage .report-heading{display:flex;flex-flow:row nowrap;align-items:center;justify-content:center;white-space:nowrap;line-height:1.1;margin:0 0 4mm;text-align:center}
+#portalPdfRenderStage .report-heading .samiti{font-size:13px;font-weight:900}
+#portalPdfRenderStage .report-heading .report-name{font-size:12px;font-weight:900}
+#portalPdfRenderStage .report-heading .period{font-size:11px;font-weight:800}
+#portalPdfRenderStage .report-heading .heading-separator{white-space:pre;font-size:11px;font-weight:700}
+#portalPdfRenderStage table{width:100%;max-width:100%;min-width:0;border-collapse:collapse;table-layout:fixed;margin:0 auto 2mm}
+#portalPdfRenderStage th,#portalPdfRenderStage td{border:1px solid #cbd5e1;padding:3px;font-size:8.8px;line-height:1.22;text-align:center;vertical-align:middle;overflow-wrap:anywhere}
+#portalPdfRenderStage th{background:#eaf0f5;color:#17324d;font-weight:800}
+#portalPdfRenderStage .member-print-table th,#portalPdfRenderStage .member-print-table td{font-size:9px;padding:3.2px 3px}
+#portalPdfRenderStage .summary{width:72%;margin:2mm auto}
+#portalPdfRenderStage .print-approval{display:grid;grid-template-columns:1fr 1fr 20mm 1fr;gap:2mm;align-items:end;margin:3mm 2mm 0;text-align:center;font-size:7px;break-inside:avoid}
+#portalPdfRenderStage .print-approval .approval-item{min-height:14mm;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+#portalPdfRenderStage .print-approval .sig-image{display:block;max-width:25mm;max-height:7mm;object-fit:contain;margin:1mm auto}
+#portalPdfRenderStage .print-approval .stamp-image{display:block;width:15mm;height:15mm;object-fit:contain}
+#portalPdfRenderStage .print-letterhead-bg{position:absolute;left:0;top:0;width:420mm;height:297mm;max-width:none;object-fit:fill;z-index:0}
+#portalPdfRenderStage .print-content{position:relative;z-index:1;box-sizing:border-box;width:100%;padding:45mm 9mm 30mm;background:transparent}
+#portalPdfRenderStage .print-content table{width:100%;min-width:0;max-width:100%;border-collapse:collapse}
+#portalPdfRenderStage .print-content th,#portalPdfRenderStage .print-content td{border:1px solid #cbd5e1;padding:2px 3px;font-size:7px;line-height:1.15}
+#portalPdfRenderStage .print-content img{max-width:100%;object-fit:contain}
+#portalPdfRenderStage .receipt-card{max-width:none;margin:0;padding:10mm;border:1px solid #17324d;position:relative;background:#fff}
+#portalPdfRenderStage .receipt-head{background:#17324d;color:#fff;text-align:center;padding:7mm}
+#portalPdfRenderStage .rent-id-card .receipt-head{margin:-12mm -12mm 8mm;padding:9mm}
+#portalPdfRenderStage .rent-receipt-signers{display:grid;grid-template-columns:repeat(3,1fr);gap:12mm;text-align:center;margin:14mm 0 5mm;align-items:end}
+#portalPdfRenderStage img{max-width:100%;height:auto}
+@media(max-width:700px){#portalPdfModal{padding:5px}#portalPdfModal .pdf-toolbar{padding:7px}#portalPdfModal .pdf-toolbar strong{width:100%}#portalPdfModal button{flex:1 1 auto;font-size:12px}}
+</style>
+<div id="portalPdfModal" aria-modal="true" role="dialog" aria-label="PDF Preview">
+  <div class="pdf-toolbar">
+    <strong>A3 Landscape · PDF Preview</strong>
+    <div class="pdf-actions">
+      <button type="button" class="pdf-download" id="portalPdfDownload" disabled>⬇ DOWNLOAD PDF</button>
+      <button type="button" id="portalPdfPrint" disabled>🖨 PRINT</button>
+      <button type="button" class="pdf-close" id="portalPdfClose">CLOSE</button>
+    </div>
+  </div>
+  <div class="pdf-loading" id="portalPdfLoading">PDF तैयार हो रही है… कृपया प्रतीक्षा करें।</div>
+  <iframe id="portalPdfFrame" title="PDF Preview" style="display:none"></iframe>
+</div>
+<div id="portalPdfRenderStage" aria-hidden="true"></div>
+<script>
+(function(){
+  if(window.__portalPdfPreviewInstalled) return;
+  window.__portalPdfPreviewInstalled=true;
+  const nativePrint=window.print.bind(window);
+  let currentBlob=null,currentUrl=null,currentName='Gram-Daheli-Yuva-Samiti-Report.pdf';
+  const modal=document.getElementById('portalPdfModal');
+  const frame=document.getElementById('portalPdfFrame');
+  const loading=document.getElementById('portalPdfLoading');
+  const download=document.getElementById('portalPdfDownload');
+  const printBtn=document.getElementById('portalPdfPrint');
+  const stage=document.getElementById('portalPdfRenderStage');
+  function activeRoot(){
+    if(document.body.classList.contains('print-combined')) return document.getElementById('singlePrint');
+    if(document.body.classList.contains('print-expense')) return document.getElementById('expensePrint');
+    if(document.body.classList.contains('print-all')) return document.getElementById('allPrint');
+    return document.getElementById('singlePrint')||document.getElementById('expensePrint')||document.getElementById('allPrint');
+  }
+  function makeFilename(root){
+    const text=(root?.innerText||'').replace(/\s+/g,' ').trim().slice(0,120);
+    let base='Gram-Daheli-Yuva-Samiti-Report';
+    if(/BILL/i.test(text))base='Gram-Daheli-Yuva-Samiti-Bill';
+    else if(/RENT/i.test(text))base='Gram-Daheli-Yuva-Samiti-Rent-Report';
+    else if(/EXPENSE/i.test(text))base='Gram-Daheli-Yuva-Samiti-Expense-Report';
+    else if(/MEMBER/i.test(text))base='Gram-Daheli-Yuva-Samiti-Member-Collection';
+    const date=new Date().toISOString().slice(0,10);
+    return base+'-'+date+'.pdf';
+  }
+  function openModal(){
+    modal.classList.add('open');loading.style.display='flex';loading.textContent='PDF तैयार हो रही है… कृपया प्रतीक्षा करें।';
+    frame.style.display='none';download.disabled=true;printBtn.disabled=true;
+    if(currentUrl){URL.revokeObjectURL(currentUrl);currentUrl=null}
+    currentBlob=null;
+  }
+  function closeModal(){
+    modal.classList.remove('open');
+    if(currentUrl){URL.revokeObjectURL(currentUrl);currentUrl=null}
+    currentBlob=null;stage.innerHTML='';
+  }
+  document.getElementById('portalPdfClose').addEventListener('click',closeModal);
+  download.addEventListener('click',function(){
+    if(!currentBlob)return;
+    const url=currentUrl||URL.createObjectURL(currentBlob);
+    const a=document.createElement('a');a.href=url;a.download=currentName;a.style.display='none';
+    document.body.appendChild(a);a.click();a.remove();
+  });
+  printBtn.addEventListener('click',function(){
+    if(!currentUrl&&currentBlob)currentUrl=URL.createObjectURL(currentBlob);
+    if(!currentUrl)return;
+    try{frame.contentWindow.focus();frame.contentWindow.print()}
+    catch(e){window.open(currentUrl,'_blank','noopener')}
+  });
+  async function waitForImages(root){
+    const imgs=[...root.querySelectorAll('img')];
+    await Promise.all(imgs.map(img=>{
+      if(img.complete&&img.naturalWidth>0)return Promise.resolve();
+      if(typeof img.decode==='function')return img.decode().catch(()=>{});
+      return new Promise(resolve=>{img.onload=resolve;img.onerror=resolve;setTimeout(resolve,12000)});
+    }));
+  }
+  function prepareStage(root){
+    stage.innerHTML='';
+    const clone=root.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.style.display='block';
+    clone.style.visibility='visible';
+    clone.style.position='relative';
+    clone.style.width='420mm';
+    clone.style.maxWidth='none';
+    clone.style.minWidth='0';
+    clone.style.margin='0';
+    clone.style.padding='0';
+    clone.style.overflow='visible';
+    const isCombined=document.body.classList.contains('print-combined');
+    const isReceipt=document.body.classList.contains('print-receipt');
+    stage.dataset.mode=isCombined?'combined':(isReceipt?'receipt':'report');
+    stage.appendChild(clone);
+    if(isCombined){
+      clone.querySelectorAll('.report-page').forEach((page,i)=>{
+        page.style.width='420mm';page.style.height='297mm';page.style.minHeight='297mm';page.style.maxHeight='297mm';
+        page.style.padding='30mm 9mm 30mm';page.style.boxSizing='border-box';page.style.overflow='hidden';
+        page.style.position='relative';page.style.breakAfter=i===clone.querySelectorAll('.report-page').length-1?'auto':'page';
+        page.style.pageBreakAfter=i===clone.querySelectorAll('.report-page').length-1?'auto':'always';
+      });
+    } else {
+      clone.style.width='420mm';
+      clone.querySelectorAll('.print-letterhead-bg').forEach(img=>{
+        img.style.position='absolute';img.style.left='0';img.style.top='0';img.style.width='420mm';img.style.height='297mm';img.style.maxWidth='none';img.style.zIndex='0';
+      });
+      clone.querySelectorAll('.print-content').forEach(el=>{
+        el.style.position='relative';el.style.zIndex='1';el.style.width='100%';el.style.boxSizing='border-box';el.style.padding='45mm 9mm 30mm';el.style.background='transparent';
+      });
+      clone.querySelectorAll('.print-approval').forEach(el=>{el.style.breakInside='avoid';el.style.pageBreakInside='avoid'});
+    }
+    return clone;
+  }
+  async function showPdfPreview(){
+    const root=activeRoot();
+    if(!root||!root.innerHTML.trim()){alert('पहले कोई रिपोर्ट या बिल खोलें।');return}
+    openModal();
+    try{
+      if(!window.html2pdf)throw new Error('PDF library load नहीं हुई। Internet चालू करके पेज refresh करें।');
+      currentName=makeFilename(root);
+      const clone=prepareStage(root);
+      await waitForImages(clone);
+      const options={
+        margin:0,filename:currentName,image:{type:'jpeg',quality:.98},
+        html2canvas:{scale:1.35,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,windowWidth:Math.ceil(420*96/25.4)},
+        jsPDF:{unit:'mm',format:'a3',orientation:'landscape',compress:true},
+        pagebreak:{mode:['css','legacy'],before:'.page-break-before',after:'.page-break-after',avoid:'tr,.print-approval'}
+      };
+      const blob=await window.html2pdf().set(options).from(stage).outputPdf('blob');
+      if(!(blob instanceof Blob)||!blob.size)throw new Error('PDF फाइल तैयार नहीं हो पाई।');
+      currentBlob=blob;currentUrl=URL.createObjectURL(blob);
+      frame.src=currentUrl;frame.style.display='block';loading.style.display='none';
+      download.disabled=false;printBtn.disabled=false;
+    }catch(err){
+      console.error('PDF preview error:',err);
+      loading.textContent='PDF तैयार नहीं हुई: '+(err.message||'अज्ञात समस्या')+' — पेज refresh करके दोबारा कोशिश करें।';
+    }
+  }
+  window.print=function(){showPdfPreview()};
+  window.__portalNativePrint=nativePrint;
+})();
+</script>
+
 </body></html>
