@@ -940,7 +940,7 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 <section class="panel screen-only" data-tab="memberTab"><h2>MONTH-WISE OPENING & CLOSING BALANCE</h2><div class="scroll"><table id="balances"><thead><tr><th>Month</th><th>Opening Balance</th><th>Collection</th><th>Donation</th><th>Rent</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody></tbody></table></div><p class="muted no-print">यह केवल रिपोर्ट है। Opening और Closing Balance पिछले साल के Closing तथा उपलब्ध Member Collection, Donation और Expense रिकॉर्ड से अपने-आप दिखेंगे। Donation, Rent और Expense की एंट्री अलग मॉड्यूल में जोड़ी जाएगी।</p></section>
 <section class="panel" id="memberSummarySection" data-tab="memberTab"><div class="sub">OVERALL FINANCIAL SUMMARY</div><div class="summary"><table id="summary"></table></div><div class="sign"><div>PREPARED BY</div><div>VERIFIED BY</div><div>APPROVED BY</div></div><div class="center"><b>Gram Daheli Yuva Samiti · Official Record</b></div></section>
 
-<section class="panel module-panel" id="expensePanel" data-tab="expenseTab"><h2>Expense Details</h2><div class="module-subtitle">MONTH-WISE EXPENSE REGISTER</div><div class="bar no-print" style="padding:0;border:0;justify-content:center"><label>Expense Month</label><select id="expenseMonth" onchange="renderExpenses()"><option value="ALL">All</option></select><button class="light" onclick="printExpenseMonth()">Print Monthly</button><button class="light" onclick="printExpenseAll()">Print All</button><span class="muted">Month Range</span><select id="expenseFromMonth"></select><select id="expenseToMonth"></select><button class="light" onclick="printExpenseMonthRange()">Print Month Range</button><span class="muted">Year Range</span><select id="expenseFromYear"></select><select id="expenseToYear"></select><button class="light" onclick="printExpenseYearRange()">Print Year Range</button></div><div class="module-table-wrap"><table id="expenseTable" class="module-table"><thead><tr><th>S.No.</th><th>Month</th><th>Bill Number</th><th>Expense Date</th><th>Expense Details</th><th>Expense Amount (₹)</th><th>Action</th></tr></thead><tbody></tbody><tfoot></tfoot></table></div><p class="muted">हर महीने का खर्च अलग रहेगा। सभी महीने के खर्च का योग मुख्य Expenses में अपने-आप जुड़ेगा। हटाए गए Bill Number दोबारा इस्तेमाल नहीं होंगे।</p><div class="module-footer" id="expenseFooter"></div></section>
+<section class="panel module-panel" id="expensePanel" data-tab="expenseTab"><h2>Expense Details</h2><div class="module-subtitle">MONTH-WISE EXPENSE REGISTER</div><div class="bar no-print" style="padding:0;border:0;justify-content:center"><label>Expense Month</label><select id="expenseMonth" onchange="renderExpenses()"><option value="ALL">All</option></select><button class="light" onclick="printExpenseMonth()">Print Monthly</button><button class="light" onclick="printExpenseAll()">Print All</button><button class="light" onclick="printModuleSection('expense','preview')">Preview</button><button class="green" onclick="printModuleSection('expense','download')">Download PDF</button><span class="muted">Month Range</span><select id="expenseFromMonth"></select><select id="expenseToMonth"></select><button class="light" onclick="printExpenseMonthRange()">Print Month Range</button><span class="muted">Year Range</span><select id="expenseFromYear"></select><select id="expenseToYear"></select><button class="light" onclick="printExpenseYearRange()">Print Year Range</button></div><div class="module-table-wrap"><table id="expenseTable" class="module-table"><thead><tr><th>S.No.</th><th>Month</th><th>Bill Number</th><th>Expense Date</th><th>Expense Details</th><th>Expense Amount (₹)</th><th>Action</th></tr></thead><tbody></tbody><tfoot></tfoot></table></div><p class="muted">हर महीने का खर्च अलग रहेगा। सभी महीने के खर्च का योग मुख्य Expenses में अपने-आप जुड़ेगा। हटाए गए Bill Number दोबारा इस्तेमाल नहीं होंगे।</p><div class="module-footer" id="expenseFooter"></div></section>
 
 <section class="panel module-panel" id="donationPanel" data-tab="donationTab">
 <h2>Donation Details</h2><div class="module-subtitle">DONATION COLLECTION REGISTER</div>
@@ -953,7 +953,7 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 <div><label>Purpose</label><input id="donPurpose" placeholder="Donation purpose"></div>
 <div><label>Amount (₹)</label><input type="number" min="1" step="0.01" id="donAmount" placeholder="Amount"></div>
 </div>
-<div class="bar no-print module-toolbar" style="padding:8px 0;border:0"><button class="green" onclick="saveDonation()" id="donSaveBtn">Add Donation</button><button class="light" onclick="printDonationMonth()">Print Monthly</button><button class="light" onclick="printDonationAll()">Print All</button><label>Record Year</label><select id="donYear" onchange="refreshDonationMonthOptions();renderDonations()"></select><label>Donation Month</label><select id="donMonth" onchange="renderDonations()"><option value="all">All Months</option></select></div>
+<div class="bar no-print module-toolbar" style="padding:8px 0;border:0"><button class="green" onclick="saveDonation()" id="donSaveBtn">Add Donation</button><button class="light" onclick="printDonationMonth()">Print Monthly</button><button class="light" onclick="printDonationAll()">Print All</button><button class="light" onclick="printModuleSection('donation','preview')">Preview</button><button class="green" onclick="printModuleSection('donation','download')">Download PDF</button><label>Record Year</label><select id="donYear" onchange="refreshDonationMonthOptions();renderDonations()"></select><label>Donation Month</label><select id="donMonth" onchange="renderDonations()"><option value="all">All Months</option></select></div>
 <div class="module-table-wrap"><table id="donationTable" class="module-table"><thead><tr><th>S.No.</th><th>Month</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th><th class="no-print">Action</th></tr></thead><tbody></tbody><tfoot></tfoot></table></div>
 <div class="module-footer" id="donationFooter"></div>
 </section>
@@ -968,7 +968,7 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 <div class="module-table-wrap no-print"><table class="module-table" style="min-width:1050px"><thead><tr><th>S.No.</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Unit / Qty</th><th>Rate / Unit (₹)</th><th>Amount (₹)</th><th>Attachment (PDF / PNG / JPG)</th><th>Action</th></tr></thead><tbody id="rentItemRows"></tbody></table></div>
 <div class="bar no-print"><button type="button" class="light" onclick="addRentItemRow()">+ Add Item / Column</button><b id="rentFormTotal">Total: ₹0.00</b></div>
 <p class="muted no-print">हर Item के साथ PDF / PNG / JPG attachment जोड़ सकते हैं। Attachment न होने पर भी Item save होगा। प्रति फाइल अधिकतम 2 MB।</p>
-<div class="bar no-print module-toolbar" style="padding:8px 0;border:0"><button class="green" onclick="saveRentCollection()" id="rentSaveBtn">Save Complete Collection</button><label>Print Month</label><select id="rentPrintMonth"><option value="all">All Months</option></select><button class="light" onclick="printRentMonthly()">Print Month</button><button class="light" onclick="printRentAll()">Print All Collections</button></div>
+<div class="bar no-print module-toolbar" style="padding:8px 0;border:0"><button class="green" onclick="saveRentCollection()" id="rentSaveBtn">Save Complete Collection</button><label>Print Month</label><select id="rentPrintMonth"><option value="all">All Months</option></select><button class="light" onclick="printRentMonthly()">Print Month</button><button class="light" onclick="printRentAll()">Print All Collections</button><button class="light" onclick="printModuleSection('rent','preview')">Preview</button><button class="green" onclick="printModuleSection('rent','download')">Download PDF</button></div>
 <div class="module-table-wrap"><table id="rentTable" class="module-table" style="min-width:1100px"><thead><tr><th>S.No.</th><th>Month</th><th>Date</th><th>Collection Number</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Amount (₹)</th><th class="no-print">Action</th></tr></thead><tbody></tbody><tfoot></tfoot></table></div>
 <div class="module-footer" id="rentFooter"></div>
 </section>
@@ -980,7 +980,7 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 <div class="module-table-wrap no-print"><table class="module-table" style="min-width:900px"><thead><tr><th>S.No</th><th>Category</th><th>Material / Work Details</th><th>Use / Purpose</th><th>Unit / Qty</th><th>Rate / Unit (₹)</th><th>Amount (₹)</th><th>Attachment (PDF / PNG / JPG)</th><th>Action</th></tr></thead><tbody id="billItemRows"></tbody></table></div>
 <div class="bar no-print"><button type="button" class="light" onclick="addBillItemRow()">+ Add Item / Column</button><b id="billFormTotal">Total: ₹0.00</b></div>
 <p class="muted no-print">हर Item की अपनी row में PDF / PNG / JPG attachment जोड़ें। Attachment न होने पर भी Item save होगा। प्रति फाइल अधिकतम 2 MB।</p>
-<div class="bar no-print module-toolbar" style="padding:8px 0;border:0"><button class="green" onclick="saveBill()" id="billSaveBtn">Save Complete Bill</button><label>Print Month</label><select id="billPrintMonth"><option value="all">All Months</option></select><button class="light" onclick="printBillMonthly()">Print Monthly</button><button class="light" onclick="printBillReport()">Print All</button><label>Bill Title</label><input id="billTitle" value="BILL DETAILS"></div>
+<div class="bar no-print module-toolbar" style="padding:8px 0;border:0"><button class="green" onclick="saveBill()" id="billSaveBtn">Save Complete Bill</button><label>Print Month</label><select id="billPrintMonth"><option value="all">All Months</option></select><button class="light" onclick="printBillMonthly()">Print Monthly</button><button class="light" onclick="printBillReport()">Print All</button><button class="light" onclick="printModuleSection('bill','preview')">Preview</button><button class="green" onclick="printModuleSection('bill','download')">Download PDF</button><label>Bill Title</label><input id="billTitle" value="BILL DETAILS"></div>
 <div class="module-table-wrap"><table id="billTable" class="module-table" style="min-width:1000px"><thead><tr><th>S.No</th><th>Bill Number</th><th>Category</th><th>Material / Work Details</th><th>Use / Purpose</th><th>Unit</th><th>Rate / Unit (₹)</th><th>Amount (₹)</th><th>Attachments</th><th class="no-print">Action</th></tr></thead><tbody></tbody><tfoot></tfoot></table></div>
 <p class="muted">Bill Details अलग रहेगा। इसमें Overall Financial Summary और Prepared / Verified / Approved footer शामिल नहीं होगा।</p>
 </section>
@@ -1760,5 +1760,84 @@ store();render();initExpenseUI();showMainTab('memberTab');refreshDonationYearOpt
     if (data.session) await openAfterAuth(); else showLogin("");
   })();
 })();
+
+
+// Section-wise preview and PDF download. Uses the portal's saved letterhead and approval assets.
+async function printModuleSection(section, action='preview'){
+ let html='', filename='';
+ const escCell=v=>esc(v==null?'':v);
+ if(section==='expense'){
+  const selected=document.getElementById('expenseMonth')?.value||'ALL';
+  let rows=selected==='ALL'?collectExpenseRows():collectExpenseRows().filter(e=>e.month===selected);
+  rows=rows.slice().sort((a,b)=>String(a.month||'').localeCompare(String(b.month||''))||String(a.date||'').localeCompare(String(b.date||'')));
+  const total=rows.reduce((a,e)=>a+(Number(e.amount)||0),0);
+  const period=selected==='ALL'?'ALL AVAILABLE MONTHS':selected;
+  html=`<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">EXPENSE DETAILS REPORT</h2><p class="center">${escCell(period)}</p><table><thead><tr><th>S.No.</th><th>Month</th><th>Bill Number</th><th>Expense Date</th><th>Expense Details</th><th>Amount (₹)</th></tr></thead><tbody>${rows.map((e,i)=>`<tr><td>${i+1}</td><td>${escCell(e.month)}</td><td>${escCell(e.bill)}</td><td>${escCell(e.date)}</td><td>${escCell(e.detail)}</td><td>${money(e.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="5"><b>TOTAL EXPENSE</b></td><td><b>${money(total)}</b></td></tr></tfoot></table>`;
+  filename='Gram-Daheli-Yuva-Samiti-Expense-Details';
+ }else if(section==='donation'){
+  const y=String(document.getElementById('donYear')?.value||yr), mo=document.getElementById('donMonth')?.value||'all';
+  let rows=allDonations().filter(e=>String(e.date||'').startsWith(y+'-')&&(mo==='all'||monthFromDate(e.date)===mo)).sort((a,b)=>String(a.date||'').localeCompare(String(b.date||'')));
+  const total=rows.reduce((a,e)=>a+(Number(e.amount)||0),0),period=mo==='all'?y:mo;
+  html=`<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">DONATION DETAILS REPORT</h2><p class="center">${escCell(period)}</p><table><thead><tr><th>S.No.</th><th>Month</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th></tr></thead><tbody>${rows.map((e,i)=>`<tr><td>${i+1}</td><td>${escCell(monthFromDate(e.date))}</td><td>${escCell(e.date)}</td><td>${escCell(e.receipt)}</td><td>${escCell(e.name)}</td><td>${escCell(e.mobile)}</td><td>${escCell(e.purpose)}</td><td>${money(e.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="7"><b>TOTAL DONATION</b></td><td><b>${money(total)}</b></td></tr></tfoot></table>`;
+  filename='Gram-Daheli-Yuva-Samiti-Donation-Details';
+ }else if(section==='rent'){
+  const mo=document.getElementById('rentPrintMonth')?.value||'all';
+  const rows=allRentCollections().filter(e=>mo==='all'||e.month===mo).slice().sort((a,b)=>String(a.date||'').localeCompare(String(b.date||'')));
+  const flat=rows.flatMap(e=>(e.items||[]).map(x=>({e,x}))),total=rows.reduce((a,e)=>a+(Number(e.total)||0),0);
+  html=`<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">RENT COLLECTION DETAILS REPORT</h2><p class="center">${escCell(mo==='all'?'ALL COLLECTIONS':mo)}</p><table><thead><tr><th>S.No.</th><th>Collection No.</th><th>Date</th><th>Month</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Qty</th><th>Rate</th><th>Amount (₹)</th></tr></thead><tbody>${flat.map((o,i)=>`<tr><td>${i+1}</td><td>${escCell(o.e.no)}</td><td>${escCell(o.e.date)}</td><td>${escCell(o.e.month)}</td><td>${escCell(o.x.consumer)}</td><td>${escCell(o.x.material)}</td><td>${escCell(o.x.purpose)}</td><td>${escCell(o.x.qty)}</td><td>${money(o.x.rate)}</td><td>${money(o.x.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="9"><b>TOTAL RENT COLLECTION</b></td><td><b>${money(total)}</b></td></tr></tfoot></table>`;
+  filename='Gram-Daheli-Yuva-Samiti-Rent-Collection-Details';
+ }else if(section==='bill'){
+  const mo=document.getElementById('billPrintMonth')?.value||'all';
+  const rows=allBills().filter(b=>mo==='all'||String(b.date||'').slice(0,7)===mo).slice().sort((a,b)=>String(a.date||'').localeCompare(String(b.date||'')));
+  if(!rows.length){alert('Print ke liye koi Bill record nahi mila.');return;}
+  html=`<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">BILL DETAILS REPORT</h2><p class="center">${escCell(mo==='all'?'ALL YEARS':monthFromDate(mo+'-01'))}</p>`+rows.map((b,i)=>`<section class="module-bill-page" style="${i?'break-before:page;page-break-before:always;':''}">${billPrintableHtml(b)}${buildApprovalHtml()}</section>`).join('');
+  filename='Gram-Daheli-Yuva-Samiti-Bill-Details';
+ }else{return;}
+ if(!html.includes('<tbody>')){alert('Print ke liye record nahi mila.');return;}
+ const root=document.getElementById('singlePrint');
+ const letterhead=docBrand.letterhead||'';
+ const reportHtml=html+(section==='bill'?'':buildApprovalHtml());
+ const css=`
+  @page{size:A3 landscape;margin:0}
+  html,body{margin:0!important;padding:0!important;background:#e5e7eb;color:#1e293b;font-family:Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #moduleReport{display:block;position:relative;width:420mm;max-width:420mm;margin:0 auto;padding:32mm 9mm 30mm;box-sizing:border-box;background-color:#fff;${letterhead?`background-image:url("${letterhead}");`:''}background-size:420mm 297mm;background-position:top left;background-repeat:repeat-y;z-index:1}
+  #moduleReport h1{font-size:11pt;text-align:center;margin:0 0 2mm}#moduleReport h2{font-size:9pt;text-align:center;margin:1mm 0 2mm}#moduleReport p{text-align:center;margin:1mm 0 3mm;font-size:8pt}
+  #moduleReport table{width:100%!important;min-width:0!important;max-width:100%!important;table-layout:fixed!important;border-collapse:collapse!important;margin:0 auto 3mm;background:transparent!important;font-size:6.5pt!important}
+  #moduleReport th,#moduleReport td{border:1px solid #64748b!important;padding:1.2mm .7mm!important;text-align:center!important;vertical-align:middle!important;font-size:6.5pt!important;line-height:1.15!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;background:transparent}
+  #moduleReport th{background:#eaf0f5!important;color:#17324d!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #moduleReport thead{display:table-header-group}#moduleReport tfoot{display:table-row-group}#moduleReport tr{break-inside:avoid!important;page-break-inside:avoid!important}
+  #moduleReport .module-bill-page{break-inside:avoid;page-break-inside:avoid;margin:0;padding:0}
+  #moduleReport .print-approval{display:grid!important;grid-template-columns:1fr 1fr 20mm 1fr;gap:2mm;align-items:end;margin:3mm 2mm 0;break-inside:avoid!important;page-break-inside:avoid!important;text-align:center;font-size:7px}
+  #moduleReport .approval-item{min-height:17mm;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+  #moduleReport .sig-image{display:block!important;max-width:25mm;max-height:8mm;object-fit:contain;margin:1mm auto}
+  #moduleReport .stamp-image{display:block!important;width:20mm;height:20mm;object-fit:contain}
+  #moduleReport .stamp-date{font-size:8.5px;margin-top:1mm}
+  #moduleReport img{max-width:100%;}
+  @media screen{#moduleReport{margin:12px auto;box-shadow:0 2px 12px #999;min-height:296mm}}
+  @media print{html,body{background:#fff!important}#moduleReport{margin:0!important;box-shadow:none!important}}
+ `;
+ const restore=()=>{root.style.display='none';root.removeAttribute('style');document.body.classList.remove('print-single');};
+ if(action==='download'){
+  try{
+   if(!window.html2pdf)throw new Error('PDF Download ke liye internet connection aur PDF engine load hona zaroori hai.');
+   root.innerHTML=`<style>${css}</style><div id="moduleReport">${reportHtml}</div>`;
+   // Match the proven Member Collection PDF capture geometry: render at the
+   // real A3-landscape width in normal document flow (not fixed/off-screen).
+   root.style.cssText='display:block!important;width:420mm!important;max-width:none!important;margin:0!important;padding:0!important;background:#fff!important;overflow:visible!important;';
+   const report=root.querySelector('#moduleReport');
+   report.style.cssText+=';display:block!important;position:relative!important;width:420mm!important;max-width:420mm!important;margin:0!important;box-sizing:border-box!important;';
+   if(letterhead){const headImage=new Image();headImage.src=letterhead;await (headImage.decode?headImage.decode().catch(()=>{}):Promise.resolve());}
+   await Promise.all([...root.querySelectorAll('img')].map(img=>img.decode?img.decode().catch(()=>{}):Promise.resolve()));
+   await window.html2pdf().set({margin:0,filename:filename+'.pdf',image:{type:'jpeg',quality:0.96},html2canvas:{scale:1.35,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false},jsPDF:{unit:'mm',format:[420,297],orientation:'landscape',compress:true},pagebreak:{mode:['css']}}).from(root).save();
+  }catch(err){alert('PDF Download नहीं हुआ: '+(err.message||err));}
+  finally{restore();}
+ }else{
+  const preview=window.open('','_blank');
+  if(!preview){alert('Preview खोलने के लिए browser में pop-up allow करें।');return;}
+  preview.document.open();
+  preview.document.write(`<!doctype html><html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${filename} Preview</title><style>${css}</style></head><body><div id="moduleReport">${reportHtml}</div></body></html>`);
+  preview.document.close();
+ }
+}
 </script>
 </body></html>
