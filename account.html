@@ -797,7 +797,9 @@
   body.print-combined .print-approval { margin:3mm 2mm 0 !important; gap:2mm !important; }
   body.print-combined .print-approval .approval-item { min-height:14mm !important; }
   body.print-combined .print-approval .sig-image { max-height:7mm !important; }
-  body.print-combined .print-approval .stamp-image { width:15mm !important; height:15mm !important; }
+  body.print-combined .print-approval .stamp-image { width:19mm !important; height:19mm !important; }
+  body.print-combined .print-approval .stamp-date { font-size:8.5px !important; margin-top:1mm !important; }
+  body.print-combined .print-approval .approval-item:nth-child(4) { transform:translateX(5mm) !important; }
   body.print-combined img { max-width:100% !important; }
 }
 
@@ -888,7 +890,20 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
   body.print-combined .print-status.status-left_committee { background:#fecaca !important; color:#7f1d1d !important; border:1px solid #f87171 !important; }
 }
 
-</style></head><body>
+/* Targeted final fixes: right-align Approved By and preserve late-payment yellow in combined print. */
+@media print {
+  body.print-combined .print-approval .approval-item:nth-child(4) {
+    justify-self:end !important; align-items:flex-end !important; text-align:right !important;
+    transform:none !important; margin-right:1mm !important;
+  }
+  body.print-combined .report-page-content .print-status.status-late {
+    background:#fef3c7 !important; background-color:#fef3c7 !important;
+    border:1px solid #fcd34d !important; color:#92400e !important;
+    -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;
+  }
+}
+</style><script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
+</head><body>
 
 <div id="cloudLogin" style="max-width:430px;margin:8vh auto;padding:24px;background:#fff;border:1px solid #d9e1e8;border-radius:12px;box-shadow:0 8px 30px #17324d18;font:14px Arial,sans-serif;color:#1e293b">
   <h2 style="margin:0 0 8px;color:#17324d">ग्राम दहेली युवा समिति — Admin Login</h2>
@@ -1097,7 +1112,7 @@ function runPrint(action='preview'){
  if(fi<0||ti<0||fi>ti)return alert('From Month aur To Month sahi select karein');
  const ms=all.filter(m=>monthKey(m)>=monthKey(from)&&monthKey(m)<=monthKey(to));closePrintOptions();printCombinedReport(ms,ms.length===1?ms[0]:ms[0]+' से '+ms[ms.length-1],action);
 }
-function printCombinedReport(ms,periodTitle,action='preview'){
+async function printCombinedReport(ms,periodTitle,action='preview'){
  const root=document.getElementById('singlePrint');
  const monthTotals=ms.map(mo=>{const q=monthData(mo);return {mo,...q}});
  const memberMap=new Map();
@@ -1107,29 +1122,53 @@ function printCombinedReport(ms,periodTitle,action='preview'){
  const page=(body,extra='')=>'<section class="report-page">'+letterhead+'<div class="report-page-content">'+body+extra+'</div></section>';
  const memberHeading=(continued=false)=>'<div class="report-heading"><span class="samiti">GRAM DAHELI YUVA SAMITI</span><span class="heading-separator"> | </span><span class="report-name">MEMBER COLLECTION REPORT'+(continued?' · CONTINUED':'')+'</span><span class="heading-separator"> | </span><span class="period">'+esc(periodTitle)+'</span></div>';
  const statusClass=q=>{const st=String(q?.status||'').toLowerCase();return ['advance','late','unpaid','on_join','left','left_committee'].includes(st)?'status-'+st:''};
- let nextMemberSerial=1;
- const memberRows=(list)=>list.map((m)=>{
-   let row='<tr><td>'+(nextMemberSerial++)+'</td><td>'+esc(m.id)+'</td><td>'+esc(m.name)+'</td><td>'+esc(m.father)+'</td><td>'+esc(m.mobile)+'</td>';
+ const memberRows=(list,startIndex=0)=>list.map((m,index)=>{
+   let row='<tr><td>'+(startIndex+index+1)+'</td><td>'+esc(m.id)+'</td><td>'+esc(m.name)+'</td><td>'+esc(m.father)+'</td><td>'+esc(m.mobile)+'</td>';
    ms.forEach(mo=>{
      const actual=(db[mo.split('-')[1]]?.members||[]).find(z=>String(z.id)===String(m.id));
      const q=actual?.payments?.[mo]||{},v=[];
      if(hasPaymentAmount(q))v.push(money(q.amount));
      const label=statusLabel(q),cls=statusClass(q);
-     if(label)v.push('<span class="print-status '+cls+'">'+esc(label)+'</span>');
+     if(label){const statusStyles={ 'status-unpaid':'background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;', 'status-late':'background:#fef3c7;color:#92400e;border:1px solid #fcd34d;', 'status-advance':'background:#dcfce7;color:#166534;border:1px solid #86efac;', 'status-on_join':'background:#dcfce7;color:#166534;border:1px solid #86efac;', 'status-left':'background:#fecaca;color:#7f1d1d;border:1px solid #f87171;', 'status-left_committee':'background:#fecaca;color:#7f1d1d;border:1px solid #f87171;' };v.push('<span class="print-status '+cls+'" style="'+(statusStyles[cls]||'')+'display:inline-block;padding:1px 3px;border-radius:3px;font-weight:700;-webkit-print-color-adjust:exact;print-color-adjust:exact;">'+esc(label)+'</span>')}
      row+='<td>'+ (v.length?v.join(' · '):'—')+'</td>';
    });
    const late=ms.reduce((a,mo)=>{const z=(db[mo.split('-')[1]]?.members||[]).find(z=>String(z.id)===String(m.id)),q=z?.payments?.[mo]||{};return a+(hasLateFee(q)?Number(q.late)||0:0)},0);
-   return row+'<td>'+money(late)+'</td></tr>';
+   return row+'<td>'+(late>0?'<span style="display:inline-block;padding:1px 4px;border-radius:3px;background:#fef3c7;color:#92400e;border:1px solid #fcd34d;-webkit-print-color-adjust:exact;print-color-adjust:exact;">'+money(late)+'</span>':money(late))+'</td></tr>';
  }).join('');
- const memberTable=(list,showTotals)=>'<table class="member-print-table"><thead><tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th>'+esc(v)+'</th>').join('')+'</tr></thead><tbody>'+memberRows(list)+'</tbody>'+(showTotals?'<tfoot><tr><td colspan="5"><b>TOTAL MEMBER COLLECTION (INCLUDING LATE FEE)</b></td>'+ms.map(mo=>'<td>'+money(monthData(mo).collection)+'</td>').join('')+'<td>'+money(monthTotals.reduce((a,q)=>a+q.lateFee,0))+'</td></tr></tfoot>':'')+'</table>';
- // A3 landscape: keep each member sheet within the printable letterhead area.
- // 18 rows per sheet matches the tested A3 register layout; all remaining members continue on following sheets.
- const pageSize=18,memberPages=[];
- for(let i=0;i<memberList.length;i+=pageSize)memberPages.push(memberList.slice(i,i+pageSize));
- if(!memberPages.length)memberPages.push([]);
+ const memberTable=(list,showTotals,startIndex=0,fillPage=true)=>'<table class="member-print-table'+(fillPage?' fill-member-page':'')+'"'+(fillPage?' style="height:225mm;min-height:225mm;"':'')+'><thead><tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th>'+esc(v)+'</th>').join('')+'</tr></thead><tbody>'+memberRows(list,startIndex)+'</tbody>'+(showTotals?'<tfoot><tr><td colspan="5"><b>TOTAL MEMBER COLLECTION (INCLUDING LATE FEE)</b></td>'+ms.map(mo=>'<td>'+money(monthData(mo).collection)+'</td>').join('')+'<td>'+money(monthTotals.reduce((a,q)=>a+q.lateFee,0))+'</td></tr></tfoot>':'')+'</table>';
+ // Dynamic A3 pagination: measure actual rendered rows at the report's print width.
+ // No fixed member count per page; a member is moved only when the current sheet is full.
+ const memberPages=[];
+ if(memberList.length){
+   const probe=document.createElement('div');
+   probe.style.cssText='position:absolute;left:-20000px;top:0;width:402mm;visibility:hidden;';
+   const probeHeading=document.createElement('div');probeHeading.innerHTML=memberHeading(false);
+   probe.appendChild(probeHeading);
+   const probeTable=document.createElement('table');probeTable.className='member-print-table';
+   probeTable.style.cssText='width:100%;table-layout:fixed;border-collapse:collapse;font:9.5px Arial,sans-serif;';
+   const head=document.createElement('thead');head.innerHTML='<tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th style="font-size:9.5px;padding:3px 2.6px;line-height:1.2">'+esc(v)+'</th>').join('')+'</tr>';
+   const body=document.createElement('tbody');probeTable.append(head,body);probe.appendChild(probeTable);document.body.appendChild(probe);
+   const maxHeight=237*96/25.4; // A3 content height after letterhead and bottom safe margin.
+   let current=[];
+   memberList.forEach((m,index)=>{
+     const rowHtml=memberRows([m],index);
+     const temp=document.createElement('tbody');temp.innerHTML=rowHtml;
+     const row=temp.firstElementChild;body.appendChild(row);
+     const headingHeight=probeHeading.getBoundingClientRect().height+18;
+     if(current.length && (probeTable.getBoundingClientRect().height+headingHeight)>maxHeight){
+       body.removeChild(row);memberPages.push(current);current=[];body.innerHTML='';body.appendChild(row);
+     }
+     current.push(m);
+   });
+   if(current.length)memberPages.push(current);
+   probe.remove();
+ } else memberPages.push([]);
  let pagesHtml='';
+ let memberOffset=0;
  memberPages.forEach((chunk,i)=>{
-   pagesHtml+=page(memberHeading(i>0)+memberTable(chunk,i===memberPages.length-1));
+   const tableHtml=memberTable(chunk,i===memberPages.length-1,memberOffset,i<memberPages.length-1);
+   pagesHtml+=page(memberHeading(i>0)+tableHtml);
+   memberOffset+=chunk.length;
  });
  const baseCollection=monthTotals.reduce((a,q)=>a+q.baseCollection,0),lateCollection=monthTotals.reduce((a,q)=>a+q.lateFee,0),collection=baseCollection+lateCollection,donation=monthTotals.reduce((a,q)=>a+q.donation,0),rent=monthTotals.reduce((a,q)=>a+q.rent,0),expense=monthTotals.reduce((a,q)=>a+q.expense,0),opening=balanceBeforeMonth(ms[0]),closing=opening+collection+donation+rent-expense;
  let expRows=[];ms.forEach(mo=>{const x=db[mo.split('-')[1]];expenseRows(x||{}).filter(e=>e.month===mo).forEach(e=>expRows.push({...e,_mo:mo}))});
@@ -1139,15 +1178,90 @@ function printCombinedReport(ms,periodTitle,action='preview'){
  const rentRows=allRentCollections().filter(e=>ms.includes(e.month));
  finance+='<h2 class="center">RENT COLLECTION DETAILS</h2><table><thead><tr><th>S.No.</th><th>Collection No.</th><th>Date</th><th>Month</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Qty</th><th>Rate</th><th>Amount</th></tr></thead><tbody>'+rentRows.flatMap(e=>(e.items||[]).map(x=>({e,x}))).map((o,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(o.e.no)+'</td><td>'+esc(o.e.date)+'</td><td>'+esc(o.e.month)+'</td><td>'+esc(o.x.consumer)+'</td><td>'+esc(o.x.material)+'</td><td>'+esc(o.x.purpose)+'</td><td>'+o.x.qty+'</td><td>'+money(o.x.rate)+'</td><td>'+money(o.x.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="9">TOTAL RENT</td><td>'+money(rentRows.reduce((a,e)=>a+(Number(e.total)||0),0))+'</td></tr></tfoot></table>';
  finance+='<h2 class="center">GRAND TOTAL SUMMARY</h2><table class="summary"><tbody><tr><td>Opening Balance</td><td>'+money(opening)+'</td></tr><tr><td>Member Collection (Without Late Fee)</td><td>'+money(baseCollection)+'</td></tr><tr><td>Late Payment Charges</td><td>'+money(lateCollection)+'</td></tr><tr><td><b>Total Member Collection (Including Late Fee)</b></td><td><b>'+money(collection)+'</b></td></tr><tr><td>Donation</td><td>'+money(donation)+'</td></tr><tr><td>Rent Collection</td><td>'+money(rent)+'</td></tr><tr><td>Expense (Minus)</td><td>− '+money(expense)+'</td></tr><tr><td><b>Grand Total / Closing Balance</b></td><td><b>'+money(closing)+'</b></td></tr></tbody></table>';
- finance+='<h3 class="center">MONTH-WISE FINANCIAL SUMMARY</h3><table><thead><tr><th>Month</th><th>Member Collection</th><th>Late Payment Charge</th><th>Total Member Collection</th><th>Donation</th><th>Rent</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody>';let bal=opening;monthTotals.forEach(q=>{bal+=q.collection+q.donation+q.rent-q.expense;finance+='<tr><td>'+esc(q.mo)+'</td><td>'+money(q.baseCollection)+'</td><td>'+money(q.lateFee)+'</td><td>'+money(q.collection)+'</td><td>'+money(q.donation)+'</td><td>'+money(q.rent)+'</td><td>'+money(q.expense)+'</td><td>'+money(bal)+'</td></tr>'});finance+='</tbody></table>';
- pagesHtml+=page(finance,buildApprovalHtml());
+ let monthWise='<h3 class="center" style="font-size:14px;margin:0 0 3mm!important;">MONTH-WISE FINANCIAL SUMMARY</h3><table class="month-wise-summary-table"><thead><tr><th>Month</th><th>Member Collection</th><th>Late Payment Charge</th><th>Total Member Collection</th><th>Donation</th><th>Rent</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody>';let bal=opening;monthTotals.forEach(q=>{bal+=q.collection+q.donation+q.rent-q.expense;monthWise+='<tr><td>'+esc(q.mo)+'</td><td>'+money(q.baseCollection)+'</td><td>'+money(q.lateFee)+'</td><td>'+money(q.collection)+'</td><td>'+money(q.donation)+'</td><td>'+money(q.rent)+'</td><td>'+money(q.expense)+'</td><td>'+money(bal)+'</td></tr>'});monthWise+='</tbody></table>';
+ // Signatures and committee stamp stay directly below the month-wise summary on the same sheet.
+ monthWise+='<h2 class="center" style="font-size:11px;font-weight:800;margin:3mm 0 1mm!important;">APPROVAL &amp; SIGNATURES</h2>'+buildApprovalHtml();
+ // Build complete financial sections as indivisible blocks. A section is placed
+ // only when its full heading + table fits; otherwise it starts on the next sheet.
+ const financeBlocks=[];
+ const financeParser=document.createElement('div');financeParser.innerHTML=finance;
+ let pending=null;
+ [...financeParser.children].forEach(node=>{
+   if(node.tagName==='H2'){
+     if(pending)financeBlocks.push(pending);
+     pending=document.createElement('div');pending.className='finance-section-block';
+     pending.appendChild(node);
+   }else{
+     if(!pending){pending=document.createElement('div');pending.className='finance-section-block';}
+     pending.appendChild(node);
+   }
+ });
+ if(pending)financeBlocks.push(pending);
+ const summaryBlock=document.createElement('div');summaryBlock.className='finance-section-block monthwise-approval-block';
+ summaryBlock.innerHTML=monthWise;financeBlocks.push(summaryBlock);
  root.innerHTML=pagesHtml;
  root.style.display='block';document.body.classList.add('print-combined');
- const oldTitle=document.title;
- if(action==='download')document.title='Gram-Daheli-Yuva-Samiti-Member-Collection-'+String(periodTitle).replace(/[^A-Za-z0-9-]+/g,'-')+'.pdf';
- window.print();
- document.title=oldTitle;
- document.body.classList.remove('print-combined');root.style.display='none';
+ // Apply the A3 sheet geometry directly so the PDF renderer does not depend on print-only CSS.
+ root.style.cssText='display:block;width:420mm;margin:0;padding:0;background:#fff;';
+ const applyReportSheetStyles=()=>root.querySelectorAll('.report-page').forEach((sheet,index)=>{
+   Object.assign(sheet.style,{position:'relative',display:'block',boxSizing:'border-box',width:'420mm',height:'296mm',minHeight:'296mm',maxHeight:'296mm',margin:'0',padding:'30mm 9mm 30mm',overflow:'hidden',background:'#fff',pageBreakAfter:index===root.querySelectorAll('.report-page').length-1?'auto':'always',breakAfter:'auto'});
+   const bg=sheet.querySelector('.report-page-bg');if(bg)Object.assign(bg.style,{position:'absolute',inset:'0',width:'420mm',height:'296mm',maxWidth:'none',maxHeight:'none',objectFit:'fill',zIndex:'0'});
+   const content=sheet.querySelector('.report-page-content');if(content)Object.assign(content.style,{position:'relative',zIndex:'1',display:'block',boxSizing:'border-box',width:'100%',height:'237mm',maxHeight:'237mm',overflow:index===root.querySelectorAll('.report-page').length-1?'visible':'hidden',margin:'0',padding:'0'});
+   sheet.querySelectorAll('table').forEach(t=>Object.assign(t.style,{width:'100%',maxWidth:'100%',tableLayout:'fixed',borderCollapse:'collapse',breakInside:'avoid'}));
+   sheet.querySelectorAll('.member-print-table').forEach(t=>Object.assign(t.style,{height:t.classList.contains('fill-member-page')?'225mm':'auto',minHeight:t.classList.contains('fill-member-page')?'225mm':'0',WebkitPrintColorAdjust:'exact',printColorAdjust:'exact'}));
+   sheet.querySelectorAll('.month-wise-summary-table th,.month-wise-summary-table td').forEach(c=>Object.assign(c.style,{fontSize:'8.8px',lineHeight:'1.22',padding:'2px 3px',verticalAlign:'middle'}));
+   sheet.querySelectorAll('.month-wise-summary-table').forEach(t=>Object.assign(t.style,{margin:'0 auto 2mm',width:'100%',height:'auto',tableLayout:'fixed',verticalAlign:'middle'}));
+   sheet.querySelectorAll('th,td').forEach(c=>Object.assign(c.style,{fontSize:'9px',lineHeight:'1.2',padding:'3px 2.6px',textAlign:'center',overflowWrap:'anywhere',border:'1px solid #64748b'}));
+   sheet.querySelectorAll('.print-approval').forEach(a=>Object.assign(a.style,{display:'grid',gridTemplateColumns:'1fr 1fr 20mm 1fr',gap:'2mm',alignItems:'end',width:'100%',minHeight:'25mm',height:'auto',margin:'1mm 2mm 0',padding:'0',overflow:'visible',breakInside:'avoid',pageBreakInside:'avoid'}));
+   sheet.querySelectorAll('.print-approval .sig-image').forEach(img=>Object.assign(img.style,{display:'block',maxWidth:'25mm',maxHeight:'10mm',width:'auto',height:'auto',objectFit:'contain'}));
+   sheet.querySelectorAll('.print-approval .stamp-image').forEach(img=>Object.assign(img.style,{display:'block',width:'20mm',height:'20mm',objectFit:'contain'}));
+   sheet.querySelectorAll('.print-approval .stamp-date').forEach(el=>Object.assign(el.style,{fontSize:'8.5px',marginTop:'1mm'}));
+   sheet.querySelectorAll('.print-approval .approval-item:nth-child(4)').forEach(item=>Object.assign(item.style,{justifySelf:'end',alignItems:'flex-end',textAlign:'right',transform:'none',marginRight:'1mm'}));
+   sheet.querySelectorAll('.print-status.status-late').forEach(el=>Object.assign(el.style,{backgroundColor:'#fef3c7',color:'#92400e',border:'1px solid #fcd34d',WebkitPrintColorAdjust:'exact',printColorAdjust:'exact'}));
+   sheet.querySelectorAll('.print-approval .stamp-item').forEach(item=>Object.assign(item.style,{transform:'translateX(-3mm)'}));
+   sheet.querySelectorAll('tr').forEach(r=>{r.style.breakInside='avoid';r.style.pageBreakInside='avoid'});
+ });
+ applyReportSheetStyles();
+ // Flow complete financial sections into the remaining space after the final
+ // member page. Never split a section's table between two pages.
+ const maxContentHeight=237*96/25.4;
+ let currentSheet=root.querySelector('.report-page:last-child');
+ let currentContent=currentSheet?.querySelector('.report-page-content');
+ const makeFinancePage=()=>{
+   const holder=document.createElement('div');holder.innerHTML=page('');
+   const sheet=holder.firstElementChild;root.appendChild(sheet);applyReportSheetStyles();
+   currentSheet=sheet;currentContent=sheet.querySelector('.report-page-content');
+ };
+ financeBlocks.forEach((block,index)=>{
+   block.style.marginTop=index===0?'4mm':'2mm';
+   block.style.breakInside='avoid';block.style.pageBreakInside='avoid';
+   currentContent.appendChild(block);
+   if(currentContent.scrollHeight>maxContentHeight+2){
+     currentContent.removeChild(block);
+     makeFinancePage();
+     currentContent.appendChild(block);
+   }
+ });
+ applyReportSheetStyles();
+ const originalRootStyle=root.getAttribute('style');
+ const restore=()=>{document.body.classList.remove('print-combined');if(originalRootStyle===null)root.removeAttribute('style');else root.setAttribute('style',originalRootStyle);};
+ if(action==='download'){
+   try{
+     if(!window.html2pdf)throw new Error('PDF engine load नहीं हुआ। Internet connection जाँचकर दोबारा कोशिश करें।');
+     const images=[...root.querySelectorAll('img')];
+     await Promise.all(images.map(img=>img.decode?img.decode().catch(()=>{}):new Promise(resolve=>{if(img.complete)resolve();else{img.onload=resolve;img.onerror=resolve}})));
+     const filename='Gram-Daheli-Yuva-Samiti-Member-Collection-'+String(periodTitle).replace(/[^A-Za-z0-9-]+/g,'-')+'.pdf';
+     await window.html2pdf().set({margin:0,filename,image:{type:'jpeg',quality:0.96},html2canvas:{scale:1.35,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false},jsPDF:{unit:'mm',format:[420,297],orientation:'landscape',compress:true},pagebreak:{mode:['css']}}).from(root).save();
+   }catch(err){alert('PDF Download नहीं हुआ: '+(err.message||err));}
+   finally{restore();}
+ }else{
+   // Preview is an HTML preview tab; it does not require a browser PDF viewer.
+   const preview=window.open('','_blank');
+   if(!preview){alert('Preview खोलने के लिए browser में pop-up allow करें।');restore();return;}
+   const styles=[...document.querySelectorAll('style')].map(x=>x.outerHTML).join('');
+   preview.document.open();preview.document.write('<!doctype html><html><head><meta charset="utf-8"><title>Member Collection Preview</title>'+styles+'<style>@page{size:420mm 297mm;margin:0}body{margin:0;background:#e5e7eb}.report-page{margin:12px auto!important;box-shadow:0 2px 12px #999}@media print{body{background:#fff}.report-page{margin:0!important;box-shadow:none}}</style></head><body>'+root.innerHTML+'</body></html>');preview.document.close();
+   restore();
+ }
 }
 
 function monthData(mo){const y=mo.split('-')[1],x=db[y],baseCollection=(x?.members||[]).reduce((a,mem)=>a+(hasPaymentAmount(mem.payments?.[mo])?(Number(mem.payments[mo].amount)||0):0),0),lateFee=(x?.members||[]).reduce((a,mem)=>a+(hasLateFee(mem.payments?.[mo])?(Number(mem.payments[mo].late)||0):0),0);return {y,x,baseCollection,lateFee,collection:baseCollection+lateFee,donation:donationTotalForMonth(mo)+(Number(x?.donations?.[mo])||0),rent:rentTotalForMonth(mo),expense:x?expenseTotalForMonth(x,mo):0}}
