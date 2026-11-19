@@ -250,8 +250,7 @@ if (loginBtn) {
 
   loginBtn.addEventListener("click", async function () {
 
-    const password =
-      adminPassword.value.trim();
+    const password = adminPassword.value.trim();
 
     if (await verifySitePassword("admin", password)) {
 
@@ -259,20 +258,29 @@ if (loginBtn) {
 
       sessionStorage.setItem("daheliAdmin", "true");
 
-      loginMessage.textContent = "✅ Login सफल हुआ।";
+      loginMessage.textContent = "✅ Admin Login Successful!";
       loginMessage.style.color = "#28633b";
 
       adminPassword.value = "";
 
-      window.location.href = "account.html";
+      setTimeout(() => {
+
+        if (adminLogin) {
+          adminLogin.style.display = "none";
+        }
+
+        if (adminPanel) {
+          adminPanel.style.display = "block";
+        }
+
+        updateAdminUI();
+
+      }, 1000);
 
     } else {
 
-      loginMessage.textContent =
-        "❌ Admin Password गलत है।";
-
-      loginMessage.style.color =
-        "#a94442";
+      loginMessage.textContent = "❌ Admin Password गलत है।";
+      loginMessage.style.color = "#a94442";
 
     }
 
