@@ -780,6 +780,7 @@
   body.print-combined .report-page-content table { width:100% !important; min-width:0 !important; max-width:100% !important; table-layout:fixed !important; border-collapse:collapse !important; margin:0 auto 2mm !important; break-inside:avoid !important; page-break-inside:avoid !important; }
   body.print-combined .report-page-content th, body.print-combined .report-page-content td { font-size:8.8px !important; line-height:1.22 !important; padding:3px 3px !important; vertical-align:middle !important; text-align:center !important; overflow-wrap:anywhere !important; word-break:normal !important; }
   body.print-combined .report-page-content .member-print-table th, body.print-combined .report-page-content .member-print-table td { font-size:9px !important; line-height:1.25 !important; padding:3.2px 3px !important; }
+  body.print-combined .report-page-content .member-print-table tbody td { color:#1e293b !important; }
   body.print-combined .report-page-content .member-print-table th { background:#eaf0f5 !important; color:#17324d !important; font-weight:800 !important; }
   body.print-combined .report-page-content .member-print-table tfoot td { font-weight:900 !important; background:#e8eef4 !important; }
   body.print-combined .report-page-content thead { display:table-header-group !important; }
@@ -1251,7 +1252,7 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
      const images=[...root.querySelectorAll('img')];
      await Promise.all(images.map(img=>img.decode?img.decode().catch(()=>{}):new Promise(resolve=>{if(img.complete)resolve();else{img.onload=resolve;img.onerror=resolve}})));
      const filename='Gram-Daheli-Yuva-Samiti-Member-Collection-'+String(periodTitle).replace(/[^A-Za-z0-9-]+/g,'-')+'.pdf';
-     await window.html2pdf().set({margin:0,filename,image:{type:'jpeg',quality:0.96},html2canvas:{scale:1.35,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false},jsPDF:{unit:'mm',format:[420,297],orientation:'landscape',compress:true},pagebreak:{mode:['css']}}).from(root).save();
+     await window.html2pdf().set({margin:0,filename,image:{type:'jpeg',quality:1.0},html2canvas:{scale:2.5,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false},jsPDF:{unit:'mm',format:[420,297],orientation:'landscape',compress:true},pagebreak:{mode:['css']}}).from(root).save();
    }catch(err){alert('PDF Download नहीं हुआ: '+(err.message||err));}
    finally{restore();}
  }else{
@@ -1439,6 +1440,7 @@ function removeBillExpense(id){Object.keys(db).forEach(y=>{if(Array.isArray(db[y
 function editBill(id){const b=allBills().find(x=>x.id===id);if(!b)return;editingBillId=id;refreshBillDetailNumberOptions(b.no);billDate.value=b.date||'';updateBillMonthDisplay();billTitleInput.value=b.title||'';billItemRows.innerHTML='';(b.items||[b]).forEach((x,i)=>addBillItemRow({...x,attachments:[...(x.attachments||[]),...(i===0?(b.attachments||[]):[])]}));billSaveBtn.textContent='Save Bill Changes';}
 function deleteBill(id){const b=allBills().find(x=>x.id===id);if(!b)return;if(!confirm('Poora Bill '+b.no+' aur uske sabhi items/attachments delete karein? Bill number dobara use nahi hoga.'))return;saveRows(BILL_KEY,allBills().filter(x=>x.id!==id));removeBillExpense(id);if(editingBillId===id)resetBillForm();renderBills();}
 function billPrintableHtml(b){const items=b.items||[b],total=items.reduce((s,e)=>s+(+e.amount||0),0);return `<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">${esc(b.title||'BILL')}</h2><p><b>Bill Number:</b> ${esc(b.no)} &nbsp; <b>Date:</b> ${esc(b.date||'')}</p><table><thead><tr><th>S.No</th><th>Category</th><th>Material / Work Details</th><th>Use / Purpose</th><th>Unit</th><th>Rate / Unit (₹)</th><th>Amount (₹)</th></tr></thead><tbody>${items.map((e,i)=>`<tr><td>${i+1}</td><td>${esc(e.category)}</td><td>${esc(e.work)}</td><td>${esc(e.purpose)}</td><td>${esc(e.unit)}</td><td>${money(e.rate)}</td><td>${money(e.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="6"><b>Total Bill Amount</b></td><td><b>${money(total)}</b></td></tr></tfoot></table>`}
+function billAttachmentInlineHtml(b){const items=b.items||[b];let html='';for(let i=0;i<items.length;i++){const files=(items[i].attachments||[]).concat(i===0?(b.attachments||[]):[]);for(const f of files){if(!f||!f.data)continue;const name=esc(f.name||'Bill Attachment');const isImage=String(f.type||'').startsWith('image/')||/^data:image\//i.test(String(f.data));html+=`<div class="bill-attachment-inline"><div class="bill-attachment-name">Item ${i+1} — ${name}</div>${isImage?`<img src="${f.data}" alt="${name}">`:`<iframe src="${f.data}" title="${name}"></iframe>`}</div>`}}return html}
 function billAttachmentPages(b){const items=b.items||[b];let html='';let seq=0;for(let i=0;i<items.length;i++){for(const f of (items[i].attachments||[]).concat(i===0?(b.attachments||[]):[])){seq++;const stamp=docBrand.stamp?`<div class="stamp-only"><img src="${docBrand.stamp}" alt="Committee Stamp"></div>`:'';html+=`<div style="page-break-before:always;break-before:page;text-align:center"><h3>Item ${i+1} — Attachment ${seq} — ${esc(f.name||'')}</h3>${f.type&&f.type.startsWith('image/')?`<img src="${f.data}" style="max-width:95%;max-height:155mm;object-fit:contain">`:`<iframe src="${f.data}" style="width:100%;height:165mm;border:0"></iframe>`}${stamp}</div>`}}return html}
 function printBillDocument(b){const html=billPrintableHtml(b)+buildApprovalHtml()+billAttachmentPages(b);printStandalone(html,false)}
 function printSingleBill(id){const b=allBills().find(x=>x.id===id);if(b)printBillDocument(b)}
@@ -1790,7 +1792,7 @@ async function printModuleSection(section, action='preview'){
   const mo=document.getElementById('billPrintMonth')?.value||'all';
   const rows=allBills().filter(b=>mo==='all'||String(b.date||'').slice(0,7)===mo).slice().sort((a,b)=>String(a.date||'').localeCompare(String(b.date||'')));
   if(!rows.length){alert('Print ke liye koi Bill record nahi mila.');return;}
-  html=`<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">BILL DETAILS REPORT</h2><p class="center">${escCell(mo==='all'?'ALL YEARS':monthFromDate(mo+'-01'))}</p>`+rows.map((b,i)=>`<section class="module-bill-page" style="${i?'break-before:page;page-break-before:always;':''}">${billPrintableHtml(b)}${buildApprovalHtml()}</section>`).join('');
+  html=`<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">BILL DETAILS REPORT</h2><p class="center">${escCell(mo==='all'?'ALL YEARS':monthFromDate(mo+'-01'))}</p>`+rows.map((b,i)=>`<section class="module-bill-page" style="${i?'break-before:page;page-break-before:always;':''}">${billPrintableHtml(b)}${billAttachmentInlineHtml(b)}${buildApprovalHtml()}</section>`).join('');
   filename='Gram-Daheli-Yuva-Samiti-Bill-Details';
  }else{return;}
  if(!html.includes('<tbody>')){alert('Print ke liye record nahi mila.');return;}
@@ -1813,6 +1815,10 @@ async function printModuleSection(section, action='preview'){
   #moduleReport .stamp-image{display:block!important;width:20mm;height:20mm;object-fit:contain}
   #moduleReport .stamp-date{font-size:8.5px;margin-top:1mm}
   #moduleReport img{max-width:100%;}
+  #moduleReport .bill-attachment-inline{display:block;text-align:center;margin:2mm auto 3mm;break-inside:avoid;page-break-inside:avoid;}
+  #moduleReport .bill-attachment-name{font-size:7.5pt;font-weight:700;margin:1mm 0;text-align:left;}
+  #moduleReport .bill-attachment-inline img{display:block;max-width:95%!important;max-height:85mm;object-fit:contain;margin:1mm auto;}
+  #moduleReport .bill-attachment-inline iframe{display:block;width:100%;height:85mm;border:0;margin:1mm auto;}
   @media screen{#moduleReport{margin:12px auto;box-shadow:0 2px 12px #999;min-height:296mm}}
   @media print{html,body{background:#fff!important}#moduleReport{margin:0!important;box-shadow:none!important}}
  `;
@@ -1828,7 +1834,7 @@ async function printModuleSection(section, action='preview'){
    report.style.cssText+=';display:block!important;position:relative!important;width:420mm!important;max-width:420mm!important;margin:0!important;box-sizing:border-box!important;';
    if(letterhead){const headImage=new Image();headImage.src=letterhead;await (headImage.decode?headImage.decode().catch(()=>{}):Promise.resolve());}
    await Promise.all([...root.querySelectorAll('img')].map(img=>img.decode?img.decode().catch(()=>{}):Promise.resolve()));
-   await window.html2pdf().set({margin:0,filename:filename+'.pdf',image:{type:'jpeg',quality:0.96},html2canvas:{scale:1.35,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false},jsPDF:{unit:'mm',format:[420,297],orientation:'landscape',compress:true},pagebreak:{mode:['css']}}).from(root).save();
+   await window.html2pdf().set({margin:0,filename:filename+'.pdf',image:{type:'jpeg',quality:1.0},html2canvas:{scale:2.5,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false},jsPDF:{unit:'mm',format:[420,297],orientation:'landscape',compress:true},pagebreak:{mode:['css']}}).from(root).save();
   }catch(err){alert('PDF Download नहीं हुआ: '+(err.message||err));}
   finally{restore();}
  }else{
