@@ -15,8 +15,13 @@ const supabaseClient = supabase.createClient(
 
 
 /* =====================================================
-   PASSWORD VERIFICATION
+   ADMIN PASSWORD VERIFICATION
 ===================================================== */
+
+/*
+   Passwords are stored in Supabase Edge Function secrets.
+   Do not put real passwords in this JavaScript file.
+*/
 
 async function verifySitePassword(type, password) {
   try {
@@ -37,10 +42,8 @@ async function verifySitePassword(type, password) {
   }
 }
 
-
 async function secureDownload(url) {
-  const pass = prompt("📥 Enter Password");
-
+  const pass = prompt("📥 Enter Password ");
   if (pass === null) return;
 
   if (await verifySitePassword("download", pass)) {
@@ -50,8 +53,12 @@ async function secureDownload(url) {
   }
 }
 
-
 let isAdmin = sessionStorage.getItem("daheliAdmin") === "true";
+
+
+/* =====================================================
+   LOCAL STORAGE
+===================================================== */
 
 
 /* =====================================================
@@ -65,9 +72,13 @@ const mainNav =
   document.getElementById("mainNav");
 
 if (menuToggle) {
+
   menuToggle.addEventListener("click", function () {
+
     mainNav.classList.toggle("show");
+
   });
+
 }
 
 
@@ -83,28 +94,33 @@ dropdowns.forEach(function (dropdown) {
   const button =
     dropdown.querySelector(".dropbtn");
 
-  if (!button) return;
-
   button.addEventListener("click", function (event) {
 
     event.stopPropagation();
 
     dropdowns.forEach(function (other) {
+
       if (other !== dropdown) {
         other.classList.remove("open");
       }
+
     });
 
     dropdown.classList.toggle("open");
+
   });
 
 });
 
 
 document.addEventListener("click", function () {
+
   dropdowns.forEach(function (dropdown) {
+
     dropdown.classList.remove("open");
+
   });
+
 });
 
 
@@ -257,6 +273,7 @@ if (loginBtn) {
 
       loginMessage.style.color =
         "#a94442";
+
     }
 
   });
@@ -273,13 +290,14 @@ if (adminPassword) {
   adminPassword.addEventListener("keydown", function (event) {
 
     if (event.key === "Enter") {
+
       loginBtn.click();
+
     }
 
   });
 
 }
-
 
 /* =====================================================
    LOGOUT
@@ -291,7 +309,9 @@ if (logoutBtn) {
 
     isAdmin = false;
 
-    sessionStorage.removeItem("daheliAdmin");
+    sessionStorage.removeItem(
+      "daheliAdmin"
+    );
 
     updateAdminUI();
 
@@ -312,6 +332,21 @@ function createId() {
     + Math.random().toString(36).substring(2);
 
 }
+
+
+/* =====================================================
+   PHOTO UPLOAD
+===================================================== */
+
+
+/* =====================================================
+   RENDER PHOTOS
+===================================================== */
+
+
+/* =====================================================
+   DELETE PHOTO
+===================================================== */
 
 
 /* =====================================================
@@ -370,6 +405,9 @@ async function loadGallery() {
         .from("Photo Gallery")
         .getPublicUrl(file.name);
 
+    console.log(file.name);
+    console.log(urlData.publicUrl);
+
     const card =
       document.createElement("div");
 
@@ -414,10 +452,6 @@ async function loadGallery() {
 }
 
 
-/* =====================================================
-   PHOTO UPLOAD
-===================================================== */
-
 const galleryInput =
   document.getElementById("galleryInput");
 
@@ -432,7 +466,11 @@ if (galleryUploadBtn) {
     async function () {
 
       if (!isAdmin) {
-        alert("🔐 केवल Admin ही फोटो Upload कर सकता है।");
+
+        alert(
+          "🔐 केवल Admin ही फोटो Upload कर सकता है।"
+        );
+
         return;
       }
 
@@ -440,7 +478,9 @@ if (galleryUploadBtn) {
         galleryInput.files;
 
       if (!files.length) {
+
         alert("फोटो चुनें");
+
         return;
       }
 
@@ -461,8 +501,11 @@ if (galleryUploadBtn) {
             .upload(fileName, file);
 
         if (error) {
+
           console.error(error);
+
           alert(error.message);
+
           return;
         }
 
@@ -472,7 +515,9 @@ if (galleryUploadBtn) {
 
       await loadGallery();
 
-      alert("✅ फोटो सफलतापूर्वक Upload हो गई।");
+      alert(
+        "✅ फोटो सफलतापूर्वक Upload हो गई।"
+      );
 
     }
   );
@@ -480,15 +525,15 @@ if (galleryUploadBtn) {
 }
 
 
-/* =====================================================
-   DELETE PHOTO
-===================================================== */
-
 async function deletePhoto(fileName) {
 
   if (!isAdmin) return;
 
-  if (!confirm("क्या आप यह फोटो Delete करना चाहते हैं?")) {
+  if (
+    !confirm(
+      "क्या आप यह फोटो Delete करना चाहते हैं?"
+    )
+  ) {
     return;
   }
 
@@ -498,7 +543,9 @@ async function deletePhoto(fileName) {
       .remove([fileName]);
 
   if (error) {
+
     alert(error.message);
+
     return;
   }
 
@@ -589,6 +636,10 @@ async function setupFileUpload(
 
 }
 
+/* =====================================================
+   GET FILE ARRAY
+===================================================== */
+
 
 /* =====================================================
    RENDER FILES
@@ -630,6 +681,11 @@ async function renderFiles(category) {
 
   files.forEach((file) => {
 
+    const { data: urlData } =
+      supabaseClient.storage
+        .from(category)
+        .getPublicUrl(file.name);
+
     const item = document.createElement("div");
 
     item.className = "file-item";
@@ -669,6 +725,7 @@ async function renderFiles(category) {
 
 async function downloadFile(category, fileName) {
 
+  // PDF, Word और Excel के लिए पासवर्ड पूछें।
   const extension = fileName.split(".").pop().toLowerCase();
 
   const protectedExtensions = [
@@ -685,6 +742,7 @@ async function downloadFile(category, fileName) {
       "📥 Download ke liye password enter karein:"
     );
 
+    // गलत पासवर्ड या Cancel करने पर डाउनलोड बंद।
     if (
       enteredPassword === null ||
       !(await verifySitePassword("download", enteredPassword))
@@ -749,6 +807,50 @@ async function deleteFile(category, fileName) {
   }
 
   renderFiles(category);
+
+}
+
+
+/* =====================================================
+   DELETE FILE
+===================================================== */
+
+async function deleteFile(category, fileName) {
+
+  if (!isAdmin) return;
+
+  if (!confirm("क्या आप यह file Delete करना चाहते हैं?")) {
+    return;
+  }
+
+  const { error } =
+    await supabaseClient.storage
+      .from(category)
+      .remove([fileName]);
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  renderFiles(category);
+
+}
+
+
+/* =====================================================
+   HTML ESCAPE
+===================================================== */
+
+function escapeHTML(text) {
+
+  const div =
+    document.createElement("div");
+
+  div.textContent =
+    text;
+
+  return div.innerHTML;
 
 }
 
