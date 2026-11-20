@@ -1534,6 +1534,7 @@ async function printDonationReceipt(id){
  const e=allDonations().find(x=>x.id===id);if(!e)return;
  try{await ensureDonationCanvasLibrary()}catch(err){return alert(err.message||'Image download library load नहीं हुई। Internet connection check करके दोबारा कोशिश करें।')}
  const escAttr=v=>String(v??'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+ const receiptDate=(()=>{const raw=String(e.date||'');const m=raw.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);if(!m)return raw;const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return `${m[3].padStart(2,'0')}-${months[Number(m[2])-1]||''}-${m[1]}`})();
  const sign=docBrand.approvedSign||'',stamp=docBrand.stamp||'',background=docBrand.receiptBackground||'';
  if(!background)return alert('पहले Letterhead & Sign Settings में Donation Receipt Background JPG/PNG अपलोड करके Save Settings करें।');
  if(!sign)return alert('पहले Document Settings में Approved E-Sign सेव करें।');
@@ -1549,7 +1550,7 @@ async function printDonationReceipt(id){
   <img src="${background}" alt="Donation Receipt Background" style="position:absolute;inset:0;width:100%;height:100%;object-fit:fill;z-index:0">
   <div style="position:absolute;inset:0;z-index:1;font-size:${F(35)}px;line-height:1.08;color:#087A36;font-weight:900;text-shadow:0 0 0.35px #075E2B">
    <span style="position:absolute;left:${X(350)}px;top:${Y(296)}px;width:${X(1320)}px;height:${Y(44)}px;font-size:${F(35)}px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escAttr(e.receipt)}</span>
-   <span style="position:absolute;left:${X(1810)}px;top:${Y(266)}px;width:${X(230)}px;height:${Y(42)}px;font-size:${F(24.5)}px;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escAttr(e.date)}</span>
+   <span style="position:absolute;left:${X(1840)}px;top:${Y(266)}px;width:${X(230)}px;height:${Y(42)}px;font-size:${F(24.5)}px;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escAttr(receiptDate)}</span>
    <span style="position:absolute;left:${X(350)}px;top:${Y(360)}px;width:${X(1320)}px;height:${Y(46)}px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escAttr(e.name)}</span>
    <span style="position:absolute;left:${X(385)}px;top:${Y(418)}px;width:${X(1280)}px;height:${Y(46)}px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escAttr(e.mobile||'—')}</span>
    <span style="position:absolute;left:${X(425)}px;top:${Y(474)}px;width:${X(1120)}px;height:${Y(46)}px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escAttr(e.purpose||'—')}</span>
@@ -1613,7 +1614,7 @@ async function billAttachmentGalleryHtml(records){
    else tiles.push({label:`${billLabel} · Item ${i+1} · ${fileName}`,src:''});
   }
  }}
- let html='';for(let start=0;start<tiles.length;start+=6){const group=tiles.slice(start,start+6);html+=`<section class=\"bill-attachment-sheet\"><div class=\"bill-attachment-sheet-heading\">BILL ATTACHMENTS · ${Math.floor(start/6)+1}</div><div class=\"bill-attachment-grid\">${group.map(t=>`<div class=\"bill-attachment-tile\"><div class=\"bill-attachment-tile-name\">${t.label}</div>${t.src?`<img src=\"${t.src}\" alt=\"${t.label}\">`:'<div class=\"bill-attachment-unavailable\">Attachment preview unavailable</div>'}</div>`).join('')}</div></section>`}
+ let html='';for(let start=0;start<tiles.length;start+=6){const group=tiles.slice(start,start+6);html+=`<section class=\"bill-attachment-sheet\" style=\"${start+6<tiles.length?'break-after:page;page-break-after:always;':''}\"><div class=\"bill-attachment-sheet-heading\">BILL ATTACHMENTS · ${Math.floor(start/6)+1}</div><div class=\"bill-attachment-grid\">${group.map(t=>`<div class=\"bill-attachment-tile\"><div class=\"bill-attachment-tile-name\">${t.label}</div>${t.src?`<img src=\"${t.src}\" alt=\"${t.label}\">`:'<div class=\"bill-attachment-unavailable\">Attachment preview unavailable</div>'}</div>`).join('')}</div></section>`}
  return html;
 }
 function billAttachmentPages(b){const items=b.items||[b];let html='';let seq=0;for(let i=0;i<items.length;i++){for(const f of (items[i].attachments||[]).concat(i===0?(b.attachments||[]):[])){seq++;const stamp=docBrand.stamp?`<div class="stamp-only"><img src="${docBrand.stamp}" alt="Committee Stamp"></div>`:'';html+=`<div style="page-break-before:always;break-before:page;text-align:center"><h3>Item ${i+1} — Attachment ${seq} — ${esc(f.name||'')}</h3>${f.type&&f.type.startsWith('image/')?`<img src="${f.data}" style="max-width:95%;max-height:155mm;object-fit:contain">`:`<iframe src="${f.data}" style="width:100%;height:165mm;border:0"></iframe>`}${stamp}</div>`}}return html}
@@ -1967,7 +1968,8 @@ async function printModuleSection(section, action='preview'){
   const rows=allBills().filter(b=>mo==='all'||String(b.date||'').slice(0,7)===mo).slice().sort((a,b)=>String(a.date||'').localeCompare(String(b.date||'')));
   if(!rows.length){alert('Print ke liye koi Bill record nahi mila.');return;}
   const reportHeading=`<div class="report-heading"><span class="samiti">ग्राम दहेली युवा समिति</span><span class="heading-separator"> | </span><span class="report-name">BILL DETAILS REPORT</span><span class="heading-separator"> | </span><span class="period">${escCell(mo==='all'?'ALL YEARS':monthFromDate(mo+'-01'))}</span></div>`;
-  html=rows.map((b,i)=>`<section class="bill-report-page bill-details-page" style="${i?'break-before:page;page-break-before:always;':''}">${i===0?reportHeading:''}${billPrintableHtml(b).replace('<h1 class="center">ग्राम दहेली युवा समिति</h1>','')}${buildApprovalHtml()}</section>`).join('')+await billAttachmentGalleryHtml(rows);
+  const attachmentHtml=await billAttachmentGalleryHtml(rows);
+  html=rows.map((b,i)=>`<section class="bill-report-page bill-details-page" style="${i<rows.length-1||attachmentHtml?'break-after:page;page-break-after:always;':''}">${i===0?reportHeading:''}${billPrintableHtml(b).replace('<h1 class="center">ग्राम दहेली युवा समिति</h1>','')}${buildApprovalHtml()}</section>`).join('')+attachmentHtml;
   filename='Gram-Daheli-Yuva-Samiti-Bill-Details';
  }else{return;}
  if(!html.includes('<tbody>')){alert('Print ke liye record nahi mila.');return;}
@@ -2000,7 +2002,8 @@ async function printModuleSection(section, action='preview'){
   #moduleReport .bill-attachment-name{font-size:7.5pt;font-weight:700;margin:1mm 0;text-align:left;}
   #moduleReport .bill-attachment-inline img{display:block;max-width:95%!important;max-height:85mm;object-fit:contain;margin:1mm auto;}
   #moduleReport .bill-attachment-inline iframe{display:block;width:100%;height:85mm;border:0;margin:1mm auto;}
-  #moduleReport .bill-attachment-sheet{display:block!important;position:relative!important;width:420mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;box-sizing:border-box!important;overflow:hidden!important;margin:0!important;padding:32mm 9mm 30mm!important;break-before:page!important;page-break-before:always!important;break-after:page!important;page-break-after:always!important;background-color:#fff!important;${letterhead?`background-image:url(\"${letterhead}\")!important;`:''}background-size:420mm 297mm!important;background-position:top center!important;background-repeat:no-repeat!important;}
+  #moduleReport .bill-attachment-sheet{display:block!important;position:relative!important;width:420mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;box-sizing:border-box!important;overflow:hidden!important;margin:0!important;padding:32mm 9mm 30mm!important;break-before:auto!important;page-break-before:auto!important;background-color:#fff!important;${letterhead?`background-image:url(\"${letterhead}\")!important;`:''}background-size:420mm 297mm!important;background-position:top center!important;background-repeat:no-repeat!important;}
+  #moduleReport .bill-attachment-sheet:last-child{break-after:auto!important;page-break-after:auto!important;}
   #moduleReport .bill-attachment-sheet-heading{height:7mm;text-align:center;font-size:10pt;font-weight:900;color:#17324d;}
   #moduleReport .bill-attachment-grid{height:228mm;display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-rows:repeat(3,minmax(0,1fr))!important;gap:3mm;}
   #moduleReport .bill-attachment-tile{min-width:0;min-height:0;border:1px solid #64748b;box-sizing:border-box;padding:1.5mm;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:hidden;break-inside:avoid;page-break-inside:avoid;background:#fff;}
@@ -2020,9 +2023,24 @@ async function printModuleSection(section, action='preview'){
    root.style.cssText='display:block!important;width:420mm!important;max-width:none!important;margin:0!important;padding:0!important;background:#fff!important;overflow:visible!important;';
    const report=root.querySelector('#moduleReport');
    report.style.cssText+=';display:block!important;position:relative!important;width:420mm!important;max-width:420mm!important;margin:0!important;box-sizing:border-box!important;';
+   // Bill preview is composed of full A3 sheets. For direct PDF export, keep
+   // each sheet just inside the PDF page boundary and let html2pdf place the
+   // next sheet on the next page. This avoids the extra blank page caused by
+   // combining an exact 297mm element height with an explicit break-after.
+   if(section==='bill'){
+    report.querySelectorAll('.bill-report-page,.bill-attachment-sheet').forEach(page=>{
+     page.style.setProperty('height','296mm','important');
+     page.style.setProperty('min-height','296mm','important');
+     page.style.setProperty('max-height','296mm','important');
+     page.style.setProperty('break-after','auto','important');
+     page.style.setProperty('page-break-after','auto','important');
+     page.style.setProperty('break-inside','avoid','important');
+     page.style.setProperty('page-break-inside','avoid','important');
+    });
+   }
    if(letterhead){const headImage=new Image();headImage.src=letterhead;await (headImage.decode?headImage.decode().catch(()=>{}):Promise.resolve());}
    await Promise.all([...root.querySelectorAll('img')].map(img=>img.decode?img.decode().catch(()=>{}):Promise.resolve()));
-   await window.html2pdf().set({margin:0,filename:filename+'.pdf',image:{type:'jpeg',quality:1.0},html2canvas:{scale:2.5,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false},jsPDF:{unit:'mm',format:[420,297],orientation:'landscape',compress:true},pagebreak:{mode:['css']}}).from(root).save();
+   await window.html2pdf().set({margin:0,filename:filename+'.pdf',image:{type:'jpeg',quality:1.0},html2canvas:{scale:section==='bill'?3:2.5,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false},jsPDF:{unit:'mm',format:[420,297],orientation:'landscape',compress:true},pagebreak:section==='bill'?{mode:['css'],avoid:['.bill-report-page','.bill-attachment-sheet']}:{mode:['css']}}).from(report).save();
   }catch(err){alert('PDF Download नहीं हुआ: '+(err.message||err));}
   finally{restore();}
  }else{
