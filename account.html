@@ -618,7 +618,7 @@
   body.print-combined .report-page {
     position:relative !important; display:block !important; box-sizing:border-box !important;
     width:420mm !important; height:297mm !important; min-height:297mm !important;
-    margin:0 !important; padding:45mm 9mm 30mm !important;
+    margin:0 !important; padding:45mm 9mm 10mm !important;
     overflow:hidden !important; page-break-after:always !important; break-after:page !important;
     background:#fff !important;
   }
@@ -630,7 +630,7 @@
   }
   body.print-combined .report-page-content {
     position:relative !important; z-index:1 !important; width:100% !important;
-    height:222mm !important; max-height:222mm !important; min-height:0 !important;
+    height:242mm !important; max-height:242mm !important; min-height:0 !important;
     margin:0 !important; padding:0 !important; overflow:hidden !important;
     display:flex !important; flex-direction:column !important; justify-content:center !important;
     background:transparent !important; box-sizing:border-box !important;
@@ -697,7 +697,7 @@
     position: relative !important; display: block !important;
     box-sizing: border-box !important; width: 420mm !important; height: 297mm !important;
     min-height: 297mm !important; max-height: 297mm !important;
-    margin: 0 !important; padding: 45mm 9mm 30mm !important;
+    margin: 0 !important; padding: 45mm 9mm 10mm !important;
     overflow: hidden !important; background: transparent !important;
     break-inside: avoid !important; page-break-inside: avoid !important;
     break-after: page !important; page-break-after: always !important;
@@ -717,8 +717,8 @@
   body.print-combined .report-page-content {
     position: relative !important; z-index: 1 !important;
     display: flex !important; flex-direction: column !important; justify-content: center !important;
-    box-sizing: border-box !important; width: 100% !important; height: 222mm !important;
-    min-height: 0 !important; max-height: 222mm !important;
+    box-sizing: border-box !important; width: 100% !important; height: 242mm !important;
+    min-height: 0 !important; max-height: 242mm !important;
     margin: 0 !important; padding: 0 !important; overflow: hidden !important;
     background: transparent !important;
   }
@@ -769,10 +769,10 @@
   body.print-combined #appShell > main > #expensePrint,
   body.print-combined .modal, body.print-combined .no-print,
   body.print-combined button { display:none !important; }
-  body.print-combined .report-page { position:relative !important; display:block !important; box-sizing:border-box !important; width:420mm !important; height:297mm !important; min-height:297mm !important; max-height:297mm !important; margin:0 !important; padding:32mm 9mm 18mm !important; overflow:hidden !important; background:transparent !important; break-after:page !important; page-break-after:always !important; break-inside:avoid !important; page-break-inside:avoid !important; }
+  body.print-combined .report-page { position:relative !important; display:block !important; box-sizing:border-box !important; width:420mm !important; height:297mm !important; min-height:297mm !important; max-height:297mm !important; margin:0 !important; padding:45mm 9mm 10mm !important; overflow:hidden !important; background:transparent !important; break-after:page !important; page-break-after:always !important; break-inside:avoid !important; page-break-inside:avoid !important; }
   body.print-combined .report-page:last-child { break-after:auto !important; page-break-after:auto !important; }
   body.print-combined .report-page-bg { position:absolute !important; inset:0 !important; display:block !important; width:420mm !important; height:297mm !important; max-width:none !important; max-height:none !important; object-fit:fill !important; z-index:0 !important; pointer-events:none !important; }
-  body.print-combined .report-page-content { position:relative !important; z-index:1 !important; display:block !important; box-sizing:border-box !important; width:100% !important; height:247mm !important; max-height:247mm !important; min-height:0 !important; margin:0 !important; padding:0 !important; overflow:hidden !important; background:transparent !important; }
+  body.print-combined .report-page-content { position:relative !important; z-index:1 !important; display:block !important; box-sizing:border-box !important; width:100% !important; height:242mm !important; max-height:242mm !important; min-height:0 !important; margin:0 !important; padding:0 !important; overflow:hidden !important; background:transparent !important; }
   body.print-combined .report-heading { margin:0 0 3mm !important; line-height:1.2 !important; }
   body.print-combined .report-heading .samiti { font-size:17px !important; margin-bottom:1mm !important; }
   body.print-combined .report-heading .report-name { font-size:14px !important; margin-bottom:1mm !important; }
@@ -904,6 +904,32 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
   }
 }
 </style><script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
+
+<style id="member-collection-footer-overlap-fix">
+@media print {
+  body.print-combined .report-page {
+    height:297mm !important; min-height:297mm !important; max-height:297mm !important;
+    padding:30mm 9mm 15mm !important; box-sizing:border-box !important;
+  }
+  body.print-combined .report-page-content {
+    height:252mm !important; min-height:0 !important; max-height:252mm !important;
+    justify-content:flex-start !important; overflow:hidden !important; box-sizing:border-box !important;
+  }
+  body.print-combined .report-page-content h2,
+  body.print-combined .report-page-content h3 { margin-top:1mm !important; margin-bottom:.5mm !important; }
+  body.print-combined .report-page-content table { margin-top:0 !important; margin-bottom:1mm !important; }
+  body.print-combined .member-print-table {
+    height:auto !important; min-height:0 !important; max-height:none !important; margin-bottom:0 !important;
+  }
+  body.print-combined .member-print-table th,
+  body.print-combined .member-print-table td { line-height:1.18 !important; padding:2.6px 2.4px !important; }
+  body.print-combined .finance-section-block {
+    break-inside:avoid !important; page-break-inside:avoid !important;
+    margin-top:.8mm !important; margin-bottom:0 !important; padding:0 !important;
+  }
+}
+</style>
+
 </head><body>
 
 <div id="cloudLogin" style="max-width:430px;margin:8vh auto;padding:24px;background:#fff;border:1px solid #d9e1e8;border-radius:12px;box-shadow:0 8px 30px #17324d18;font:14px Arial,sans-serif;color:#1e293b">
@@ -1115,6 +1141,23 @@ function runPrint(action='preview'){
  if(fi<0||ti<0||fi>ti)return alert('From Month aur To Month sahi select karein');
  const ms=all.filter(m=>monthKey(m)>=monthKey(from)&&monthKey(m)<=monthKey(to));closePrintOptions();printCombinedReport(ms,ms.length===1?ms[0]:ms[0]+' से '+ms[ms.length-1],action);
 }
+function pdfMonthLabel(value){
+ const s=String(value||'').trim();
+ if(/^\d{4}-\d{2}$/.test(s))return monthFromDate(s+'-01');
+ if(/^\d{4}-\d{2}-\d{2}$/.test(s))return monthFromDate(s);
+ if(/^[A-Z]{3}-\d{4}$/i.test(s))return s.toUpperCase();
+ return s;
+}
+function pdfRangeLabel(monthList){
+ const list=[...new Set((monthList||[]).filter(Boolean))].sort((a,b)=>monthKey(a)-monthKey(b));
+ if(!list.length)return 'ALL';
+ const first=pdfMonthLabel(list[0]),last=pdfMonthLabel(list[list.length-1]);
+ return first===last?first:first+' TO '+last;
+}
+function pdfSafeName(value){return String(value||'Report').replace(/[\\/:*?"<>|]+/g,' ').replace(/\s+/g,' ').trim();}
+function pdfMonthsFromRows(rows,getMonth=e=>e.month||monthFromDate(e.date||'')){
+ return [...new Set((rows||[]).map(getMonth).filter(x=>/^\d{3}-\d{4}$/.test(String(x||''))))].sort((a,b)=>monthKey(a)-monthKey(b));
+}
 async function printCombinedReport(ms,periodTitle,action='preview'){
  const root=document.getElementById('singlePrint');
  const monthTotals=ms.map(mo=>{const q=monthData(mo);return {mo,...q}});
@@ -1138,7 +1181,7 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
    const late=ms.reduce((a,mo)=>{const z=(db[mo.split('-')[1]]?.members||[]).find(z=>String(z.id)===String(m.id)),q=z?.payments?.[mo]||{};return a+(hasLateFee(q)?Number(q.late)||0:0)},0);
    return row+'<td>'+(late>0?'<span style="display:inline-block;padding:1px 4px;border-radius:3px;background:#fef3c7;color:#92400e;border:1px solid #fcd34d;-webkit-print-color-adjust:exact;print-color-adjust:exact;">'+money(late)+'</span>':money(late))+'</td></tr>';
  }).join('');
- const memberTable=(list,showTotals,startIndex=0,fillPage=true)=>'<table class="member-print-table'+(fillPage?' fill-member-page':'')+'"'+(fillPage?' style="height:225mm;min-height:225mm;"':'')+'><thead><tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th>'+esc(v)+'</th>').join('')+'</tr></thead><tbody>'+memberRows(list,startIndex)+'</tbody>'+(showTotals?'<tfoot><tr><td colspan="5"><b>TOTAL MEMBER COLLECTION (INCLUDING LATE FEE)</b></td>'+ms.map(mo=>'<td>'+money(monthData(mo).collection)+'</td>').join('')+'<td>'+money(monthTotals.reduce((a,q)=>a+q.lateFee,0))+'</td></tr></tfoot>':'')+'</table>';
+ const memberTable=(list,showTotals,startIndex=0,fillPage=true)=>'<table class="member-print-table"><thead><tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th>'+esc(v)+'</th>').join('')+'</tr></thead><tbody>'+memberRows(list,startIndex)+'</tbody>'+(showTotals?'<tfoot><tr><td colspan="5"><b>TOTAL MEMBER COLLECTION (INCLUDING LATE FEE)</b></td>'+ms.map(mo=>'<td>'+money(monthData(mo).collection)+'</td>').join('')+'<td>'+money(monthTotals.reduce((a,q)=>a+q.lateFee,0))+'</td></tr></tfoot>':'')+'</table>';
  // Dynamic A3 pagination: measure actual rendered rows at the report's print width.
  // No fixed member count per page; a member is moved only when the current sheet is full.
  const memberPages=[];
@@ -1151,7 +1194,7 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
    probeTable.style.cssText='width:100%;table-layout:fixed;border-collapse:collapse;font:9.5px Arial,sans-serif;';
    const head=document.createElement('thead');head.innerHTML='<tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th style="font-size:9.5px;padding:3px 2.6px;line-height:1.2">'+esc(v)+'</th>').join('')+'</tr>';
    const body=document.createElement('tbody');probeTable.append(head,body);probe.appendChild(probeTable);document.body.appendChild(probe);
-   const maxHeight=237*96/25.4; // A3 content height after letterhead and bottom safe margin.
+   const maxHeight=252*96/25.4; // A3 sheet: 30mm top and 15mm bottom clearance.
    let current=[];
    memberList.forEach((m,index)=>{
      const rowHtml=memberRows([m],index);
@@ -1200,18 +1243,27 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
    }
  });
  if(pending)financeBlocks.push(pending);
- const summaryBlock=document.createElement('div');summaryBlock.className='finance-section-block monthwise-approval-block';
- summaryBlock.innerHTML=monthWise;financeBlocks.push(summaryBlock);
+ // Keep the month-wise financial summary and approvals immediately below
+ // GRAND TOTAL SUMMARY. Treat this complete closing section as one block so
+ // it moves together to the next page instead of leaving excessive blank space.
+ const closingSummaryBlock=document.createElement('div');
+ closingSummaryBlock.className='finance-section-block monthwise-approval-block';
+ closingSummaryBlock.innerHTML=monthWise;
+ if(financeBlocks.length){
+   financeBlocks[financeBlocks.length-1].appendChild(closingSummaryBlock);
+ }else{
+   financeBlocks.push(closingSummaryBlock);
+ }
  root.innerHTML=pagesHtml;
  root.style.display='block';document.body.classList.add('print-combined');
  // Apply the A3 sheet geometry directly so the PDF renderer does not depend on print-only CSS.
  root.style.cssText='display:block;width:420mm;margin:0;padding:0;background:#fff;';
  const applyReportSheetStyles=()=>root.querySelectorAll('.report-page').forEach((sheet,index)=>{
-   Object.assign(sheet.style,{position:'relative',display:'block',boxSizing:'border-box',width:'420mm',height:'296mm',minHeight:'296mm',maxHeight:'296mm',margin:'0',padding:'30mm 9mm 30mm',overflow:'hidden',background:'#fff',pageBreakAfter:index===root.querySelectorAll('.report-page').length-1?'auto':'always',breakAfter:'auto'});
+   Object.assign(sheet.style,{position:'relative',display:'block',boxSizing:'border-box',width:'420mm',height:'297mm',minHeight:'297mm',maxHeight:'297mm',margin:'0',padding:'30mm 9mm 15mm',overflow:'hidden',background:'#fff',pageBreakAfter:index===root.querySelectorAll('.report-page').length-1?'auto':'always',breakAfter:'auto'});
    const bg=sheet.querySelector('.report-page-bg');if(bg)Object.assign(bg.style,{position:'absolute',inset:'0',width:'420mm',height:'296mm',maxWidth:'none',maxHeight:'none',objectFit:'fill',zIndex:'0'});
-   const content=sheet.querySelector('.report-page-content');if(content)Object.assign(content.style,{position:'relative',zIndex:'1',display:'block',boxSizing:'border-box',width:'100%',height:'237mm',maxHeight:'237mm',overflow:index===root.querySelectorAll('.report-page').length-1?'visible':'hidden',margin:'0',padding:'0'});
+   const content=sheet.querySelector('.report-page-content');if(content)Object.assign(content.style,{position:'relative',zIndex:'1',display:'block',boxSizing:'border-box',width:'100%',height:'252mm',maxHeight:'252mm',overflow:'hidden',margin:'0',padding:'0'});
    sheet.querySelectorAll('table').forEach(t=>Object.assign(t.style,{width:'100%',maxWidth:'100%',tableLayout:'fixed',borderCollapse:'collapse',breakInside:'avoid'}));
-   sheet.querySelectorAll('.member-print-table').forEach(t=>Object.assign(t.style,{height:t.classList.contains('fill-member-page')?'225mm':'auto',minHeight:t.classList.contains('fill-member-page')?'225mm':'0',WebkitPrintColorAdjust:'exact',printColorAdjust:'exact'}));
+   sheet.querySelectorAll('.member-print-table').forEach(t=>Object.assign(t.style,{height:'auto',minHeight:'0',maxHeight:'none',WebkitPrintColorAdjust:'exact',printColorAdjust:'exact'}));
    sheet.querySelectorAll('.month-wise-summary-table th,.month-wise-summary-table td').forEach(c=>Object.assign(c.style,{fontSize:'8.8px',lineHeight:'1.22',padding:'2px 3px',verticalAlign:'middle'}));
    sheet.querySelectorAll('.month-wise-summary-table').forEach(t=>Object.assign(t.style,{margin:'0 auto 2mm',width:'100%',height:'auto',tableLayout:'fixed',verticalAlign:'middle'}));
    sheet.querySelectorAll('th,td').forEach(c=>Object.assign(c.style,{fontSize:'9px',lineHeight:'1.2',padding:'3px 2.6px',textAlign:'center',overflowWrap:'anywhere',border:'1px solid #64748b'}));
@@ -1227,7 +1279,7 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
  applyReportSheetStyles();
  // Flow complete financial sections into the remaining space after the final
  // member page. Never split a section's table between two pages.
- const maxContentHeight=237*96/25.4;
+ const maxContentHeight=252*96/25.4;
  let currentSheet=root.querySelector('.report-page:last-child');
  let currentContent=currentSheet?.querySelector('.report-page-content');
  const makeFinancePage=()=>{
@@ -1236,7 +1288,8 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
    currentSheet=sheet;currentContent=sheet.querySelector('.report-page-content');
  };
  financeBlocks.forEach((block,index)=>{
-   block.style.marginTop=index===0?'4mm':'2mm';
+   block.style.marginTop=index===0?'1mm':'0.8mm';
+  block.style.marginBottom='0';
    block.style.breakInside='avoid';block.style.pageBreakInside='avoid';
    currentContent.appendChild(block);
    if(currentContent.scrollHeight>maxContentHeight+2){
@@ -1253,7 +1306,7 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
      if(!window.html2pdf)throw new Error('PDF engine load नहीं हुआ। Internet connection जाँचकर दोबारा कोशिश करें।');
      const images=[...root.querySelectorAll('img')];
      await Promise.all(images.map(img=>img.decode?img.decode().catch(()=>{}):new Promise(resolve=>{if(img.complete)resolve();else{img.onload=resolve;img.onerror=resolve}})));
-     const filename='Gram-Daheli-Yuva-Samiti-Member-Collection-'+String(periodTitle).replace(/[^A-Za-z0-9-]+/g,'-')+'.pdf';
+     const filename=pdfSafeName('Monthly Member Collection Details '+pdfRangeLabel(ms))+'.pdf';
      await window.html2pdf().set({margin:0,filename,image:{type:'jpeg',quality:1.0},html2canvas:{scale:2.5,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false},jsPDF:{unit:'mm',format:[420,297],orientation:'landscape',compress:true},pagebreak:{mode:['css']}}).from(root).save();
    }catch(err){alert('PDF Download नहीं हुआ: '+(err.message||err));}
    finally{restore();}
@@ -1949,37 +2002,42 @@ async function printModuleSection(section, action='preview'){
   rows=rows.slice().sort((a,b)=>String(a.month||'').localeCompare(String(b.month||''))||String(a.date||'').localeCompare(String(b.date||'')));
   const total=rows.reduce((a,e)=>a+(Number(e.amount)||0),0);
   const period=selected==='ALL'?'ALL AVAILABLE MONTHS':selected;
+   var sectionRange=pdfRangeLabel(pdfMonthsFromRows(rows));
   html=`<div class="report-heading"><span class="samiti">ग्राम दहेली युवा समिति</span><span class="heading-separator"> | </span><span class="report-name">EXPENSE DETAILS REPORT</span><span class="heading-separator"> | </span><span class="period">${escCell(period)}</span></div><table><thead><tr><th>S.No.</th><th>Month</th><th>Bill Number</th><th>Expense Date</th><th>Expense Details</th><th>Amount (₹)</th></tr></thead><tbody>${rows.map((e,i)=>`<tr><td>${i+1}</td><td>${escCell(e.month)}</td><td>${escCell(e.bill)}</td><td>${escCell(e.date)}</td><td>${escCell(e.detail)}</td><td>${money(e.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="5"><b>TOTAL EXPENSE</b></td><td><b>${money(total)}</b></td></tr></tfoot></table>`;
-  filename='Gram-Daheli-Yuva-Samiti-Expense-Details';
+  filename='Expense Details';
  }else if(section==='donation'){
   const y=String(document.getElementById('donYear')?.value||yr), mo=document.getElementById('donMonth')?.value||'all';
   let rows=allDonations().filter(e=>String(e.date||'').startsWith(y+'-')&&(mo==='all'||monthFromDate(e.date)===mo)).sort((a,b)=>String(a.date||'').localeCompare(String(b.date||'')));
   const total=rows.reduce((a,e)=>a+(Number(e.amount)||0),0),period=mo==='all'?y:mo;
+   var sectionRange=pdfRangeLabel(pdfMonthsFromRows(rows,e=>monthFromDate(e.date||'')));
   html=`<div class="report-heading"><span class="samiti">ग्राम दहेली युवा समिति</span><span class="heading-separator"> | </span><span class="report-name">DONATION DETAILS REPORT</span><span class="heading-separator"> | </span><span class="period">${escCell(period)}</span></div><table><thead><tr><th>S.No.</th><th>Month</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th></tr></thead><tbody>${rows.map((e,i)=>`<tr><td>${i+1}</td><td>${escCell(monthFromDate(e.date))}</td><td>${escCell(e.date)}</td><td>${escCell(e.receipt)}</td><td>${escCell(e.name)}</td><td>${escCell(e.mobile)}</td><td>${escCell(e.purpose)}</td><td>${money(e.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="7"><b>TOTAL DONATION</b></td><td><b>${money(total)}</b></td></tr></tfoot></table>`;
-  filename='Gram-Daheli-Yuva-Samiti-Donation-Details';
+  filename='Donation Details';
  }else if(section==='rent'){
   const mo=document.getElementById('rentPrintMonth')?.value||'all';
   const rows=allRentCollections().filter(e=>mo==='all'||e.month===mo).slice().sort((a,b)=>String(a.date||'').localeCompare(String(b.date||'')));
   const flat=rows.flatMap(e=>(e.items||[]).map(x=>({e,x}))),total=rows.reduce((a,e)=>a+(Number(e.total)||0),0);
+   var sectionRange=pdfRangeLabel(pdfMonthsFromRows(rows,e=>e.month||monthFromDate(e.date||'')));
   html=`<div class="report-heading"><span class="samiti">ग्राम दहेली युवा समिति</span><span class="heading-separator"> | </span><span class="report-name">RENT COLLECTION DETAILS REPORT</span><span class="heading-separator"> | </span><span class="period">${escCell(mo==='all'?'ALL COLLECTIONS':mo)}</span></div><table><thead><tr><th>S.No.</th><th>Collection No.</th><th>Date</th><th>Month</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Qty</th><th>Rate</th><th>Amount (₹)</th></tr></thead><tbody>${flat.map((o,i)=>`<tr><td>${i+1}</td><td>${escCell(o.e.no)}</td><td>${escCell(o.e.date)}</td><td>${escCell(o.e.month)}</td><td>${escCell(o.x.consumer)}</td><td>${escCell(o.x.material)}</td><td>${escCell(o.x.purpose)}</td><td>${escCell(o.x.qty)}</td><td>${money(o.x.rate)}</td><td>${money(o.x.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="9"><b>TOTAL RENT COLLECTION</b></td><td><b>${money(total)}</b></td></tr></tfoot></table>`;
-  filename='Gram-Daheli-Yuva-Samiti-Rent-Collection-Details';
+  filename='Rent Collection';
  }else if(section==='bill'){
   const mo=document.getElementById('billPrintMonth')?.value||'all';
   const rows=allBills().filter(b=>mo==='all'||String(b.date||'').slice(0,7)===mo).slice().sort((a,b)=>String(a.date||'').localeCompare(String(b.date||'')));
+   var sectionRange=pdfRangeLabel(pdfMonthsFromRows(rows,e=>monthFromDate(e.date||'')));
   if(!rows.length){alert('Print ke liye koi Bill record nahi mila.');return;}
   const reportHeading=`<div class="report-heading"><span class="samiti">ग्राम दहेली युवा समिति</span><span class="heading-separator"> | </span><span class="report-name">BILL DETAILS REPORT</span><span class="heading-separator"> | </span><span class="period">${escCell(mo==='all'?'ALL YEARS':monthFromDate(mo+'-01'))}</span></div>`;
   const attachmentHtml=await billAttachmentGalleryHtml(rows);
   html=rows.map((b,i)=>`<section class="bill-report-page bill-details-page" style="${i<rows.length-1||attachmentHtml?'break-after:page;page-break-after:always;':''}">${i===0?reportHeading:''}${billPrintableHtml(b).replace('<h1 class="center">ग्राम दहेली युवा समिति</h1>','')}${buildApprovalHtml()}</section>`).join('')+attachmentHtml;
-  filename='Gram-Daheli-Yuva-Samiti-Bill-Details';
+  filename='Bill Details';
  }else{return;}
  if(!html.includes('<tbody>')){alert('Print ke liye record nahi mila.');return;}
  const root=document.getElementById('singlePrint');
  const letterhead=docBrand.letterhead||'';
  const reportHtml=html+(section==='bill'?'':buildApprovalHtml());
+ const rangeForName=sectionRange||'ALL';
  const css=`
   @page{size:A3 landscape;margin:0}
   html,body{margin:0!important;padding:0!important;background:#e5e7eb;color:#1e293b;font-family:Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  #moduleReport{display:block;position:relative;width:420mm;max-width:420mm;margin:0 auto;${section==='bill'?'padding:0!important;background-image:none!important;':'padding:32mm 9mm 30mm;'}box-sizing:border-box;background-color:#fff;${section==='bill'?'':(letterhead?`background-image:url("${letterhead}");`:'' )}background-size:420mm 297mm;background-position:top center;background-repeat:repeat-y;z-index:1}
+  #moduleReport{display:block;position:relative;width:420mm;max-width:420mm;margin:0 auto;${section==='bill'?'padding:0!important;background-image:none!important;':'padding:45mm 9mm 30mm;'}box-sizing:border-box;background-color:#fff;${section==='bill'?'':(letterhead?`background-image:url("${letterhead}");`:'' )}background-size:420mm 297mm;background-position:top center;background-repeat:repeat-y;z-index:1}
   #moduleReport h1{font-size:11pt;text-align:center;margin:0 0 2mm}#moduleReport h2{font-size:9pt;text-align:center;margin:1mm 0 2mm}#moduleReport p{text-align:center;margin:1mm 0 3mm;font-size:8pt}
   #moduleReport .report-heading{display:flex;flex-flow:row nowrap;align-items:center;justify-content:center;gap:1.5mm;width:100%;margin:0 0 3mm;padding:0;text-align:center;white-space:nowrap;line-height:1.15;color:#17324d}
   #moduleReport .report-heading .samiti{font-size:11pt;font-weight:900;white-space:nowrap}
@@ -1990,7 +2048,7 @@ async function printModuleSection(section, action='preview'){
   #moduleReport th,#moduleReport td{border:1px solid #64748b!important;padding:1.2mm .7mm!important;text-align:center!important;vertical-align:middle!important;font-size:6.5pt!important;line-height:1.15!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;background:transparent}
   #moduleReport th{background:#eaf0f5!important;color:#17324d!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   #moduleReport thead{display:table-header-group}#moduleReport tfoot{display:table-row-group}#moduleReport tr{break-inside:avoid!important;page-break-inside:avoid!important}
-  #moduleReport .bill-report-page{display:block!important;position:relative!important;width:420mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;box-sizing:border-box!important;overflow:hidden!important;margin:0!important;padding:32mm 9mm 30mm!important;background-color:#fff!important;${letterhead?`background-image:url(\"${letterhead}\")!important;`:''}background-size:420mm 297mm!important;background-position:top center!important;background-repeat:no-repeat!important;}
+  #moduleReport .bill-report-page{display:block!important;position:relative!important;width:420mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;box-sizing:border-box!important;overflow:hidden!important;margin:0!important;padding:45mm 9mm 30mm!important;background-color:#fff!important;${letterhead?`background-image:url(\"${letterhead}\")!important;`:''}background-size:420mm 297mm!important;background-position:top center!important;background-repeat:no-repeat!important;}
   #moduleReport .bill-details-page{break-inside:avoid!important;page-break-inside:avoid!important;}
   #moduleReport .print-approval{display:grid!important;grid-template-columns:1fr 1fr 20mm 1fr;gap:2mm;align-items:end;margin:3mm 2mm 0;break-inside:avoid!important;page-break-inside:avoid!important;text-align:center;font-size:7px}
   #moduleReport .approval-item{min-height:17mm;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
@@ -2002,7 +2060,7 @@ async function printModuleSection(section, action='preview'){
   #moduleReport .bill-attachment-name{font-size:7.5pt;font-weight:700;margin:1mm 0;text-align:left;}
   #moduleReport .bill-attachment-inline img{display:block;max-width:95%!important;max-height:85mm;object-fit:contain;margin:1mm auto;}
   #moduleReport .bill-attachment-inline iframe{display:block;width:100%;height:85mm;border:0;margin:1mm auto;}
-  #moduleReport .bill-attachment-sheet{display:block!important;position:relative!important;width:420mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;box-sizing:border-box!important;overflow:hidden!important;margin:0!important;padding:32mm 9mm 30mm!important;break-before:auto!important;page-break-before:auto!important;background-color:#fff!important;${letterhead?`background-image:url(\"${letterhead}\")!important;`:''}background-size:420mm 297mm!important;background-position:top center!important;background-repeat:no-repeat!important;}
+  #moduleReport .bill-attachment-sheet{display:block!important;position:relative!important;width:420mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;box-sizing:border-box!important;overflow:hidden!important;margin:0!important;padding:45mm 9mm 30mm!important;break-before:auto!important;page-break-before:auto!important;background-color:#fff!important;${letterhead?`background-image:url(\"${letterhead}\")!important;`:''}background-size:420mm 297mm!important;background-position:top center!important;background-repeat:no-repeat!important;}
   #moduleReport .bill-attachment-sheet:last-child{break-after:auto!important;page-break-after:auto!important;}
   #moduleReport .bill-attachment-sheet-heading{height:7mm;text-align:center;font-size:10pt;font-weight:900;color:#17324d;}
   #moduleReport .bill-attachment-grid{height:228mm;display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-rows:repeat(3,minmax(0,1fr))!important;gap:3mm;}
@@ -2040,7 +2098,25 @@ async function printModuleSection(section, action='preview'){
    }
    if(letterhead){const headImage=new Image();headImage.src=letterhead;await (headImage.decode?headImage.decode().catch(()=>{}):Promise.resolve());}
    await Promise.all([...root.querySelectorAll('img')].map(img=>img.decode?img.decode().catch(()=>{}):Promise.resolve()));
-   await window.html2pdf().set({margin:0,filename:filename+'.pdf',image:{type:'jpeg',quality:1.0},html2canvas:{scale:section==='bill'?3:2.5,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false},jsPDF:{unit:'mm',format:[420,297],orientation:'landscape',compress:true},pagebreak:section==='bill'?{mode:['css'],avoid:['.bill-report-page','.bill-attachment-sheet']}:{mode:['css']}}).from(report).save();
+   const exportOptions={margin:0,image:{type:'png'},html2canvas:{scale:3,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,letterRendering:true},jsPDF:{unit:'mm',format:[420,297],orientation:'landscape',compress:true},pagebreak:{mode:['css']}};
+   if(section==='bill'){
+    const selectedMonth=document.getElementById('billPrintMonth')?.value||'all';
+    const billRows=allBills().filter(b=>selectedMonth==='all'||String(b.date||'').slice(0,7)===selectedMonth).slice().sort((a,b)=>String(a.date||'').localeCompare(String(b.date||'')));
+    for(const bill of billRows){
+     const gallery=await billAttachmentGalleryHtml([bill]);
+     const oneBillHeading=`<div class="report-heading"><span class="samiti">GRAM DAHELI YUVA SAMITI</span><span class="heading-separator"> | </span><span class="report-name">BILL DETAILS REPORT · BILL NO. ${escCell(bill.no||bill.billNo||'')}</span><span class="heading-separator"> | </span><span class="period">${escCell(rangeForName)}</span></div>`;
+     const oneBillHtml=`<section class="bill-report-page bill-details-page">${oneBillHeading}<div>${billPrintableHtml(bill).replace('<h1 class="center">ग्राम दहेली युवा समिति</h1>','')}</div>${buildApprovalHtml()}</section>${gallery}`;
+     root.innerHTML=`<style>${css}</style><div id="moduleReport">${oneBillHtml}</div>`;
+     const oneReport=root.querySelector('#moduleReport');
+     oneReport.style.cssText+=';display:block!important;position:relative!important;width:420mm!important;max-width:420mm!important;margin:0!important;box-sizing:border-box!important;';
+     await Promise.all([...root.querySelectorAll('img')].map(img=>img.decode?img.decode().catch(()=>{}):Promise.resolve()));
+     const billFile=pdfSafeName(`Bill No. ${bill.no||bill.billNo||'NA'} ${rangeForName}`)+'.pdf';
+     await window.html2pdf().set({...exportOptions,filename:billFile,pagebreak:{mode:['css'],avoid:['.bill-report-page','.bill-attachment-sheet']}}).from(oneReport).save();
+    }
+   }else{
+    const finalFilename=pdfSafeName(filename+' '+rangeForName)+'.pdf';
+    await window.html2pdf().set({...exportOptions,filename:finalFilename}).from(report).save();
+   }
   }catch(err){alert('PDF Download नहीं हुआ: '+(err.message||err));}
   finally{restore();}
  }else{
