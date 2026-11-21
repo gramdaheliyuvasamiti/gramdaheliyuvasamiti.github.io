@@ -57,11 +57,11 @@
 }
 
 /* Member payment status colours — display only; does not change saved data */
-.cell.status-unpaid{background:#fee2e2!important;border:1px solid #fca5a5!important;color:#991b1b!important}
+.cell.status-unpaid{background:#8b0000!important;border:1px solid #640000!important;color:#ffffff!important}
 .cell.status-late{background:#fef3c7!important;border:1px solid #fcd34d!important;color:#92400e!important}
 .cell.status-advance,.cell.status-on_join,.cell.status-rejoined{background:#dcfce7!important;border:1px solid #86efac!important;color:#166534!important}
 .cell.status-left,.cell.status-left_committee{background:#fecaca!important;border:1px solid #f87171!important;color:#7f1d1d!important}
-.printval.status-unpaid{background:#fee2e2;color:#991b1b;padding:3px 5px;border:1px solid #fca5a5;border-radius:4px}
+.printval.status-unpaid{background:#8b0000;color:#ffffff;padding:3px 5px;border:1px solid #640000;border-radius:4px}
 .printval.status-late{background:#fef3c7;color:#92400e;padding:3px 5px;border:1px solid #fcd34d;border-radius:4px}
 .printval.status-advance,.printval.status-on_join,.printval.status-rejoined{background:#dcfce7;color:#166534;padding:3px 5px;border:1px solid #86efac;border-radius:4px}
 .printval.status-left,.printval.status-left_committee{background:#fecaca;color:#7f1d1d;padding:3px 5px;border:1px solid #f87171;border-radius:4px}
@@ -791,7 +791,7 @@
   body.print-combined .report-page-content .summary { width:72% !important; margin:2mm auto !important; }
   body.print-combined .report-page-content .summary td { font-size:9px !important; padding:2px 4px !important; }
   body.print-combined .print-status { display:inline-block !important; padding:1px 3px !important; border:1px solid transparent !important; border-radius:3px !important; font-weight:700 !important; white-space:normal !important; }
-  body.print-combined .print-status.status-unpaid { background:#fee2e2 !important; border-color:#fca5a5 !important; color:#991b1b !important; }
+  body.print-combined .print-status.status-unpaid { background:#8b0000 !important; border-color:#640000 !important; color:#ffffff !important; }
   body.print-combined .print-status.status-late { background:#fef3c7 !important; border-color:#fcd34d !important; color:#92400e !important; }
   body.print-combined .print-status.status-advance, body.print-combined .print-status.status-on_join, body.print-combined .print-status.status-rejoined { background:#dcfce7 !important; border-color:#86efac !important; color:#166534 !important; }
   body.print-combined .print-status.status-left, body.print-combined .print-status.status-left_committee { background:#fecaca !important; border-color:#f87171 !important; color:#7f1d1d !important; }
@@ -800,7 +800,7 @@
   body.print-combined .print-approval .sig-image { max-height:7mm !important; }
   body.print-combined .print-approval .stamp-image { width:19mm !important; height:19mm !important; }
   body.print-combined .print-approval .stamp-date { font-size:8.5px !important; margin-top:1mm !important; }
-  body.print-combined .print-approval .approval-item:nth-child(4) { transform:translateX(5mm) !important; }
+  body.print-combined .print-approval .approval-item:nth-child(4) { transform:translateX(-15mm) !important; }
   body.print-combined img { max-width:100% !important; }
 }
 
@@ -883,7 +883,7 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
     font-size:9.5px !important; line-height:1.2 !important; padding:3px 2.6px !important;
   }
   body.print-combined .print-status { display:inline-block !important; padding:1px 2px !important; border-radius:2px !important; font-weight:700 !important; }
-  body.print-combined .print-status.status-unpaid { background:#fee2e2 !important; color:#991b1b !important; border:1px solid #fca5a5 !important; }
+  body.print-combined .print-status.status-unpaid { background:#8b0000 !important; color:#ffffff !important; border:1px solid #640000 !important; }
   body.print-combined .print-status.status-late { background:#fef3c7 !important; color:#92400e !important; border:1px solid #fcd34d !important; }
   body.print-combined .print-status.status-advance,
   body.print-combined .print-status.status-on_join, body.print-combined .print-status.status-rejoined { background:#dcfce7 !important; color:#166534 !important; border:1px solid #86efac !important; }
@@ -895,7 +895,7 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 @media print {
   body.print-combined .print-approval .approval-item:nth-child(4) {
     justify-self:end !important; align-items:flex-end !important; text-align:right !important;
-    transform:none !important; margin-right:1mm !important;
+    transform:translateX(-15mm) !important; margin-right:1mm !important;
   }
   body.print-combined .report-page-content .print-status.status-late {
     background:#fef3c7 !important; background-color:#fef3c7 !important;
@@ -925,7 +925,7 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
   body.print-combined .member-print-table td { line-height:1.18 !important; padding:2.6px 2.4px !important; }
   body.print-combined .finance-section-block {
     break-inside:avoid !important; page-break-inside:avoid !important;
-    margin-top:.8mm !important; margin-bottom:0 !important; padding:0 !important;
+    margin-top:.8mm !important; margin-bottom:10mm !important; padding:0 !important;
   }
 }
 </style>
@@ -1175,7 +1175,7 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
      const q=actual?.payments?.[mo]||{},v=[];
      if(hasPaymentAmount(q))v.push(money(q.amount));
      const label=statusLabel(q),cls=statusClass(q);
-     if(label){const statusStyles={ 'status-unpaid':'background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;', 'status-late':'background:#fef3c7;color:#92400e;border:1px solid #fcd34d;', 'status-advance':'background:#dcfce7;color:#166534;border:1px solid #86efac;', 'status-on_join':'background:#dcfce7;color:#166534;border:1px solid #86efac;', 'status-rejoined':'background:#dcfce7;color:#166534;border:1px solid #86efac;', 'status-left':'background:#fecaca;color:#7f1d1d;border:1px solid #f87171;', 'status-left_committee':'background:#fecaca;color:#7f1d1d;border:1px solid #f87171;' };v.push('<span class="print-status '+cls+'" style="'+(statusStyles[cls]||'')+'display:inline-block;padding:1px 3px;border-radius:3px;font-weight:700;-webkit-print-color-adjust:exact;print-color-adjust:exact;">'+esc(label)+'</span>')}
+     if(label){const statusStyles={ 'status-unpaid':'background:#8b0000;color:#ffffff;border:1px solid #640000;', 'status-late':'background:#fef3c7;color:#92400e;border:1px solid #fcd34d;', 'status-advance':'background:#dcfce7;color:#166534;border:1px solid #86efac;', 'status-on_join':'background:#dcfce7;color:#166534;border:1px solid #86efac;', 'status-rejoined':'background:#dcfce7;color:#166534;border:1px solid #86efac;', 'status-left':'background:#fecaca;color:#7f1d1d;border:1px solid #f87171;', 'status-left_committee':'background:#fecaca;color:#7f1d1d;border:1px solid #f87171;' };v.push('<span class="print-status '+cls+'" style="'+(statusStyles[cls]||'')+'display:inline-block;padding:1px 3px;border-radius:3px;font-weight:700;-webkit-print-color-adjust:exact;print-color-adjust:exact;">'+esc(label)+'</span>')}
      row+='<td>'+ (v.length?v.join(' · '):'—')+'</td>';
    });
    const late=ms.reduce((a,mo)=>{const z=(db[mo.split('-')[1]]?.members||[]).find(z=>String(z.id)===String(m.id)),q=z?.payments?.[mo]||{};return a+(hasLateFee(q)?Number(q.late)||0:0)},0);
@@ -1224,7 +1224,7 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
  const rentRows=allRentCollections().filter(e=>ms.includes(e.month));
  finance+='<h2 class="center">RENT COLLECTION DETAILS</h2><table><thead><tr><th>S.No.</th><th>Collection No.</th><th>Date</th><th>Month</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Qty</th><th>Rate</th><th>Amount</th></tr></thead><tbody>'+rentRows.flatMap(e=>(e.items||[]).map(x=>({e,x}))).map((o,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(o.e.no)+'</td><td>'+esc(o.e.date)+'</td><td>'+esc(o.e.month)+'</td><td>'+esc(o.x.consumer)+'</td><td>'+esc(o.x.material)+'</td><td>'+esc(o.x.purpose)+'</td><td>'+o.x.qty+'</td><td>'+money(o.x.rate)+'</td><td>'+money(o.x.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="9">TOTAL RENT</td><td>'+money(rentRows.reduce((a,e)=>a+(Number(e.total)||0),0))+'</td></tr></tfoot></table>';
  finance+='<h2 class="center">GRAND TOTAL SUMMARY</h2><table class="summary"><tbody><tr><td>Opening Balance</td><td>'+money(opening)+'</td></tr><tr><td>Member Collection (Without Late Fee)</td><td>'+money(baseCollection)+'</td></tr><tr><td>Late Payment Charges</td><td>'+money(lateCollection)+'</td></tr><tr><td><b>Total Member Collection (Including Late Fee)</b></td><td><b>'+money(collection)+'</b></td></tr><tr><td>Donation</td><td>'+money(donation)+'</td></tr><tr><td>Rent Collection</td><td>'+money(rent)+'</td></tr><tr><td>Expense (Minus)</td><td>− '+money(expense)+'</td></tr><tr><td><b>Grand Total / Closing Balance</b></td><td><b>'+money(closing)+'</b></td></tr></tbody></table>';
- let monthWise='<h3 class="center" style="font-size:14px;margin:0 0 3mm!important;">MONTH-WISE FINANCIAL SUMMARY</h3><table class="month-wise-summary-table"><thead><tr><th>Month</th><th>Member Collection</th><th>Late Payment Charge</th><th>Total Member Collection</th><th>Donation</th><th>Rent</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody>';let bal=opening;monthTotals.forEach(q=>{bal+=q.collection+q.donation+q.rent-q.expense;monthWise+='<tr><td>'+esc(q.mo)+'</td><td>'+money(q.baseCollection)+'</td><td>'+money(q.lateFee)+'</td><td>'+money(q.collection)+'</td><td>'+money(q.donation)+'</td><td>'+money(q.rent)+'</td><td>'+money(q.expense)+'</td><td>'+money(bal)+'</td></tr>'});monthWise+='</tbody></table>';
+ let monthWise='<h2 class="center">MONTH-WISE FINANCIAL SUMMARY</h2><table class="month-wise-summary-table"><thead><tr><th>Month</th><th>Member Collection</th><th>Late Payment Charge</th><th>Total Member Collection</th><th>Donation</th><th>Rent</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody>';let bal=opening;monthTotals.forEach(q=>{bal+=q.collection+q.donation+q.rent-q.expense;monthWise+='<tr><td>'+esc(q.mo)+'</td><td>'+money(q.baseCollection)+'</td><td>'+money(q.lateFee)+'</td><td>'+money(q.collection)+'</td><td>'+money(q.donation)+'</td><td>'+money(q.rent)+'</td><td>'+money(q.expense)+'</td><td>'+money(bal)+'</td></tr>'});monthWise+='</tbody></table>';
  // Signatures and committee stamp stay directly below the month-wise summary on the same sheet.
  monthWise+='<h2 class="center" style="font-size:11px;font-weight:800;margin:3mm 0 1mm!important;">APPROVAL &amp; SIGNATURES</h2>'+buildApprovalHtml();
  // Build complete financial sections as indivisible blocks. A section is placed
@@ -1249,11 +1249,7 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
  const closingSummaryBlock=document.createElement('div');
  closingSummaryBlock.className='finance-section-block monthwise-approval-block';
  closingSummaryBlock.innerHTML=monthWise;
- if(financeBlocks.length){
-   financeBlocks[financeBlocks.length-1].appendChild(closingSummaryBlock);
- }else{
-   financeBlocks.push(closingSummaryBlock);
- }
+ financeBlocks.push(closingSummaryBlock);
  root.innerHTML=pagesHtml;
  root.style.display='block';document.body.classList.add('print-combined');
  // Apply the A3 sheet geometry directly so the PDF renderer does not depend on print-only CSS.
@@ -1271,7 +1267,7 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
    sheet.querySelectorAll('.print-approval .sig-image').forEach(img=>Object.assign(img.style,{display:'block',maxWidth:'25mm',maxHeight:'10mm',width:'auto',height:'auto',objectFit:'contain'}));
    sheet.querySelectorAll('.print-approval .stamp-image').forEach(img=>Object.assign(img.style,{display:'block',width:'20mm',height:'20mm',objectFit:'contain'}));
    sheet.querySelectorAll('.print-approval .stamp-date').forEach(el=>Object.assign(el.style,{fontSize:'8.5px',marginTop:'1mm'}));
-   sheet.querySelectorAll('.print-approval .approval-item:nth-child(4)').forEach(item=>Object.assign(item.style,{justifySelf:'end',alignItems:'flex-end',textAlign:'right',transform:'none',marginRight:'1mm'}));
+   sheet.querySelectorAll('.print-approval .approval-item:nth-child(4)').forEach(item=>Object.assign(item.style,{justifySelf:'end',alignItems:'flex-end',textAlign:'right',transform:'translateX(-15mm)',marginRight:'1mm'}));
    sheet.querySelectorAll('.print-status.status-late').forEach(el=>Object.assign(el.style,{backgroundColor:'#fef3c7',color:'#92400e',border:'1px solid #fcd34d',WebkitPrintColorAdjust:'exact',printColorAdjust:'exact'}));
    sheet.querySelectorAll('.print-approval .stamp-item').forEach(item=>Object.assign(item.style,{transform:'translateX(-3mm)'}));
    sheet.querySelectorAll('tr').forEach(r=>{r.style.breakInside='avoid';r.style.pageBreakInside='avoid'});
@@ -1288,8 +1284,8 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
    currentSheet=sheet;currentContent=sheet.querySelector('.report-page-content');
  };
  financeBlocks.forEach((block,index)=>{
-   block.style.marginTop=index===0?'1mm':'0.8mm';
-  block.style.marginBottom='0';
+   block.style.marginTop=index===0?'10mm':'0.8mm';
+  block.style.marginBottom='10mm';
    block.style.breakInside='avoid';block.style.pageBreakInside='avoid';
    currentContent.appendChild(block);
    if(currentContent.scrollHeight>maxContentHeight+2){
