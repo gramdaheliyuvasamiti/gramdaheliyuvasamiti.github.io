@@ -11,472 +11,299 @@
 
 <body>
 
-  <header class="topbar">
-    <div class="brand">
-      <div class="mark">GDYS</div>
+<header class="topbar">
+  <div class="brand">
+    <div class="mark">GDYS</div>
+    <div>
+      <h1>ग्राम दहेली युवा समिति</h1>
+      <p>Member Payment & Financial Details</p>
+    </div>
+  </div>
+  <a class="back-link" href="index.html">← मुख्य वेबसाइट</a>
+</header>
+
+<main class="wrap">
+
+  <section id="loginPanel" class="login-card">
+    <div class="eyebrow">MEMBER VIEW · READ ONLY</div>
+    <h2>Payment Details Portal</h2>
+    <p>रिकॉर्ड देखने के लिए समिति द्वारा दिया गया Member Password दर्ज करें।</p>
+
+    <form id="loginForm">
+      <label for="memberPassword">Member Password</label>
+      <div style="position:relative;width:100%;">
+        <input id="memberPassword" type="password"
+          autocomplete="current-password" required
+          placeholder="Password दर्ज करें"
+          style="width:100%;padding-right:85px;">
+        <button type="button" id="togglePassword"
+          style="position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;cursor:pointer;padding:7px;"
+          aria-label="Show password" aria-pressed="false">
+          <span id="passwordToggleText">Show</span> 👁
+        </button>
+      </div>
+      <button class="btn primary" id="loginBtn" type="submit">
+        View Payment Details
+      </button>
+    </form>
+
+    <p id="loginMessage" class="message" role="status"></p>
+    <p class="security-note">
+      यह पेज केवल रिकॉर्ड देखने और प्रिंट/PDF बनाने के लिए है।
+      यहाँ से कोई entry add, edit या delete नहीं की जा सकती।
+    </p>
+  </section>
+
+  <section id="portal" hidden>
+
+    <div class="portal-heading">
       <div>
-        <h1>ग्राम दहेली युवा समिति</h1>
-        <p>Member Payment & Financial Details</p>
+        <div class="eyebrow">OFFICIAL MEMBER RECORD</div>
+        <h2>Payment Details</h2>
+        <p id="lastUpdated">Live data from committee accounting register</p>
+      </div>
+      <div class="heading-actions">
+        <button class="btn secondary" id="refreshBtn" type="button">↻ Refresh</button>
+        <button class="btn secondary" id="printBtn" type="button">Print / Save PDF</button>
+        <button class="btn outline" id="logoutBtn" type="button">Logout</button>
       </div>
     </div>
 
-    <a class="back-link" href="index.html">← मुख्य वेबसाइट</a>
-  </header>
+    <div class="filters no-print">
+      <label>Record Year
+        <select id="yearFilter"></select>
+      </label>
+      <label>Month
+        <select id="monthFilter">
+          <option value="ALL">All Months</option>
+        </select>
+      </label>
+      <span id="statusText" class="status-text">Connected</span>
+    </div>
 
-  <main class="wrap">
+    <nav class="tabs no-print" aria-label="Payment details sections">
+      <button class="tab active" data-tab="members" type="button">Monthly Member Collection</button>
+      <button class="tab" data-tab="expenses" type="button">Expense Details</button>
+      <button class="tab" data-tab="donations" type="button">Donation Details</button>
+      <button class="tab" data-tab="rent" type="button">Rent Collection</button>
+      <button class="tab" data-tab="bills" type="button">Bill Details</button>
+      <button class="tab" data-tab="summary" type="button">Financial Summary</button>
+    </nav>
 
-    <!-- LOGIN SECTION -->
-    <section id="loginPanel" class="login-card">
-
-      <div class="eyebrow">MEMBER VIEW · READ ONLY</div>
-
-      <h2>Payment Details Portal</h2>
-
-      <p>रिकॉर्ड देखने के लिए समिति द्वारा दिया गया Member Password दर्ज करें।</p>
-
-      <form id="loginForm">
-
-        <label for="memberPassword">Member Password</label>
-
-        <div style="position:relative; width:100%;">
-
-          <input
-            id="memberPassword"
-            type="password"
-            autocomplete="current-password"
-            required
-            placeholder="Password दर्ज करें"
-            style="width:100%; padding-right:85px;"
-          >
-
-          <button
-            type="button"
-            id="togglePassword"
-            style="position:absolute; right:8px; top:50%; transform:translateY(-50%); border:0; background:transparent; cursor:pointer; padding:7px;"
-            aria-label="Show password"
-            aria-pressed="false"
-          >
-            <span id="passwordToggleText">Show</span> 👁
-          </button>
-
+    <!-- MEMBER COLLECTION -->
+    <section class="tab-panel active" id="tab-members">
+      <div class="section-title">
+        <div>
+          <h3>Monthly Member Collection</h3>
+          <p>Member-wise payment status and collection</p>
         </div>
+        <button class="btn small secondary no-print"
+          data-export="memberTable" type="button">Export CSV</button>
+      </div>
 
-        <button class="btn primary" id="loginBtn" type="submit">
-          View Payment Details
-        </button>
+      <div class="table-wrap member-desktop-table">
+        <table id="memberTable">
+          <thead></thead><tbody></tbody><tfoot></tfoot>
+        </table>
+      </div>
 
-      </form>
+      <div id="memberMobileCards" class="member-mobile-cards"
+        aria-label="Member-wise monthly payment cards"></div>
 
-      <p id="loginMessage" class="message" role="status"></p>
-
-      <p class="security-note">
-        यह पेज केवल रिकॉर्ड देखने और प्रिंट/PDF बनाने के लिए है।
-        यहाँ से कोई entry add, edit या delete नहीं की जा सकती।
+      <p class="footnote">
+        Monthly amount में दर्ज payment amount और late fee शामिल हैं।
+        Status वही दिखाया गया है जो Accounting Register में सेव है।
       </p>
 
+      <div id="memberFinancialSummary"></div>
+      <div class="section-approval-slot" data-approval-for="members"></div>
     </section>
 
-    <!-- MAIN PORTAL -->
-    <section id="portal" hidden>
-
-      <div class="portal-heading">
-
+    <!-- EXPENSE DETAILS -->
+    <section class="tab-panel" id="tab-expenses" hidden>
+      <div class="section-title">
         <div>
-          <div class="eyebrow">OFFICIAL MEMBER RECORD</div>
-          <h2>Payment Details</h2>
-          <p id="lastUpdated">Live data from committee accounting register</p>
+          <h3>Expense Details</h3>
+          <p>Accounting Register के expense entries</p>
         </div>
-
-        <div class="heading-actions">
-
-          <button class="btn secondary" id="refreshBtn" type="button">
-            ↻ Refresh
-          </button>
-
-          <button class="btn secondary" id="printBtn" type="button">
-            Print / Save PDF
-          </button>
-
-          <button class="btn outline" id="logoutBtn" type="button">
-            Logout
-          </button>
-
-        </div>
-
+        <button class="btn small secondary no-print"
+          data-export="expenseTable" type="button">Export CSV</button>
       </div>
 
-      <!-- FILTERS -->
-      <div class="filters no-print">
-
-        <label>
-          Record Year
-          <select id="yearFilter"></select>
-        </label>
-
-        <label>
-          Month
-          <select id="monthFilter">
-            <option value="ALL">All Months</option>
-          </select>
-        </label>
-
-        <span id="statusText" class="status-text">Connected</span>
-
+      <div class="table-wrap">
+        <table id="expenseTable">
+          <thead>
+            <tr>
+              <th>S.No.</th><th>Month</th><th>Bill No.</th>
+              <th>Date</th><th>Expense Details</th>
+              <th>Amount (₹)</th><th class="no-print">View</th>
+            </tr>
+          </thead>
+          <tbody></tbody><tfoot></tfoot>
+        </table>
       </div>
-
-      <!-- TABS -->
-      <nav class="tabs no-print" aria-label="Payment details sections">
-
-        <button class="tab active" data-tab="members" type="button">
-          Monthly Member Collection
-        </button>
-
-        <button class="tab" data-tab="expenses" type="button">
-          Expense Details
-        </button>
-
-        <button class="tab" data-tab="donations" type="button">
-          Donation Details
-        </button>
-
-        <button class="tab" data-tab="rent" type="button">
-          Rent Collection
-        </button>
-
-        <button class="tab" data-tab="bills" type="button">
-          Bill Details
-        </button>
-
-        <button class="tab" data-tab="summary" type="button">
-          Financial Summary
-        </button>
-
-      </nav>
-
-      <!-- MEMBER COLLECTION -->
-      <section class="tab-panel active" id="tab-members">
-
-        <div class="section-title">
-
-          <div>
-            <h3>Monthly Member Collection</h3>
-            <p>Member-wise payment status and collection</p>
-          </div>
-
-          <button
-            class="btn small secondary no-print"
-            data-export="memberTable"
-            type="button"
-          >
-            Export CSV
-          </button>
-
-        </div>
-
-        <div class="table-wrap member-desktop-table">
-
-          <table id="memberTable">
-            <thead></thead>
-            <tbody></tbody>
-            <tfoot></tfoot>
-          </table>
-
-        </div>
-
-        <div
-          id="memberMobileCards"
-          class="member-mobile-cards"
-          aria-label="Member-wise monthly payment cards"
-        ></div>
-
-        <p class="footnote">
-          Monthly amount में दर्ज payment amount और late fee शामिल हैं।
-          Status वही दिखाया गया है जो Accounting Register में सेव है।
-        </p>
-
-        <!-- MEMBER FINANCIAL SUMMARY -->
-        <div id="memberFinancialSummary"></div>
-
-      </section>
-
-      <!-- EXPENSE DETAILS -->
-      <section class="tab-panel" id="tab-expenses" hidden>
-
-        <div class="section-title">
-
-          <div>
-            <h3>Expense Details</h3>
-            <p>Accounting Register के expense entries</p>
-          </div>
-
-          <button
-            class="btn small secondary no-print"
-            data-export="expenseTable"
-            type="button"
-          >
-            Export CSV
-          </button>
-
-        </div>
-
-        <div class="table-wrap">
-
-          <table id="expenseTable">
-
-            <thead>
-              <tr>
-                <th>S.No.</th>
-                <th>Month</th>
-                <th>Bill No.</th>
-                <th>Date</th>
-                <th>Expense Details</th>
-                <th>Amount (₹)</th>
-              </tr>
-            </thead>
-
-            <tbody></tbody>
-            <tfoot></tfoot>
-
-          </table>
-
-        </div>
-
-      </section>
-
-      <!-- DONATION DETAILS -->
-      <section class="tab-panel" id="tab-donations" hidden>
-
-        <div class="section-title">
-
-          <div>
-            <h3>Donation Details</h3>
-            <p>Donation register entries</p>
-          </div>
-
-          <button
-            class="btn small secondary no-print"
-            data-export="donationTable"
-            type="button"
-          >
-            Export CSV
-          </button>
-
-        </div>
-
-        <div class="table-wrap">
-
-          <table id="donationTable">
-
-            <thead>
-              <tr>
-                <th>S.No.</th>
-                <th>Date</th>
-                <th>Month</th>
-                <th>Receipt No.</th>
-                <th>Donor Name</th>
-                <th>Purpose</th>
-                <th>Amount (₹)</th>
-              </tr>
-            </thead>
-
-            <tbody></tbody>
-            <tfoot></tfoot>
-
-          </table>
-
-        </div>
-
-      </section>
-
-      <!-- RENT COLLECTION -->
-      <section class="tab-panel" id="tab-rent" hidden>
-
-        <div class="section-title">
-
-          <div>
-            <h3>Rent Collection</h3>
-            <p>Rent Collection Register entries</p>
-          </div>
-
-        </div>
-
-        <div class="table-wrap">
-
-          <table id="rentTable">
-
-            <thead>
-              <tr>
-                <th>S.No.</th>
-                <th>Collection No.</th>
-                <th>Date</th>
-                <th>Month</th>
-                <th>Consumer Name</th>
-                <th>Material Details</th>
-                <th>Use / Purpose</th>
-                <th>Qty</th>
-                <th>Rate (₹)</th>
-                <th>Amount (₹)</th>
-              </tr>
-            </thead>
-
-            <tbody></tbody>
-            <tfoot></tfoot>
-
-          </table>
-
-        </div>
-
-      </section>
-
-      <!-- BILL DETAILS -->
-      <section class="tab-panel" id="tab-bills" hidden>
-
-        <div class="section-title">
-
-          <div>
-            <h3>Bill Details</h3>
-            <p>Bill-wise work/material details and amount</p>
-          </div>
-
-          <button
-            class="btn small secondary no-print"
-            data-export="billTable"
-            type="button"
-          >
-            Export CSV
-          </button>
-
-        </div>
-
-        <div class="table-wrap">
-
-          <table id="billTable">
-
-            <thead>
-              <tr>
-                <th>S.No.</th>
-                <th>Bill No.</th>
-                <th>Date</th>
-                <th>Bill Title</th>
-                <th>Item Details</th>
-                <th>Amount (₹)</th>
-              </tr>
-            </thead>
-
-            <tbody></tbody>
-            <tfoot></tfoot>
-
-          </table>
-
-        </div>
-
-      </section>
-
-      <!-- FINANCIAL SUMMARY -->
-      <section class="tab-panel" id="tab-summary" hidden>
-
-        <div class="section-title">
-
-          <div>
-            <h3>Financial Summary</h3>
-            <p>Year-wise totals from the current Accounting Register</p>
-          </div>
-
-        </div>
-
-        <div id="summaryCards" class="summary-grid"></div>
-
-        <h4 class="subheading">
-          Month-wise Opening & Closing Balance
-        </h4>
-
-        <div class="table-wrap">
-
-          <table id="balanceTable">
-
-            <thead>
-              <tr>
-                <th>Month</th>
-                <th>Opening Balance (₹)</th>
-                <th>Member Collection (₹)</th>
-                <th>Donation in balance field (₹)</th>
-                <th>Expense (₹)</th>
-                <th>Closing Balance (₹)</th>
-              </tr>
-            </thead>
-
-            <tbody></tbody>
-
-          </table>
-
-        </div>
-
-        <p class="footnote official-note">
-          यह विवरण ग्राम दहेली युवा समिति के आधिकारिक लेखा-जोखा एवं उपलब्ध अभिलेखों के आधार पर तैयार किया गया है। समिति के वित्तीय रिकॉर्ड में पारदर्शिता एवं जानकारी की सुविधा हेतु इसे सदस्यों के अवलोकन के लिए प्रस्तुत किया गया है। यह विवरण समिति के आधिकारिक रिकॉर्ड का हिस्सा है।
-        </p>
-
-        <!-- SIGNATURE & STAMP: REPORT BOTTOM -->
-        <div class="signatures">
-
-          <span>AUTHORIZED SIGNATURE</span>
-
-          <span>OFFICIAL STAMP</span>
-
-        </div>
-
-        <p class="official">
-          Gram Daheli Yuva Samiti · Official Record
-        </p>
-
-      </section>
-
-      <p id="dataMessage" class="message" role="status"></p>
-
+      <div class="section-approval-slot" data-approval-for="expenses"></div>
     </section>
 
-  </main>
+    <!-- DONATION DETAILS -->
+    <section class="tab-panel" id="tab-donations" hidden>
+      <div class="section-title">
+        <div>
+          <h3>Donation Details</h3>
+          <p>Donation register entries</p>
+        </div>
+        <button class="btn small secondary no-print"
+          data-export="donationTable" type="button">Export CSV</button>
+      </div>
 
-  <footer>
-    ग्राम दहेली युवा समिति · Official Payment Details Portal
-  </footer>
+      <div class="table-wrap">
+        <table id="donationTable">
+          <thead>
+            <tr>
+              <th>S.No.</th><th>Date</th><th>Month</th>
+              <th>Receipt No.</th><th>Donor Name</th>
+              <th>Purpose</th><th>Amount (₹)</th>
+              <th class="no-print">View Bill</th>
+            </tr>
+          </thead>
+          <tbody></tbody><tfoot></tfoot>
+        </table>
+      </div>
+      <div class="section-approval-slot" data-approval-for="donations"></div>
+    </section>
 
-  <!-- SHOW / HIDE PASSWORD -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    <!-- RENT COLLECTION -->
+    <section class="tab-panel" id="tab-rent" hidden>
+      <div class="section-title">
+        <div>
+          <h3>Rent Collection</h3>
+          <p>Rent Collection Register entries</p>
+        </div>
+      </div>
 
-      const passwordInput = document.getElementById("memberPassword");
-      const toggleButton = document.getElementById("togglePassword");
-      const toggleText = document.getElementById("passwordToggleText");
+      <div class="table-wrap">
+        <table id="rentTable">
+          <thead>
+            <tr>
+              <th>S.No.</th><th>Collection No.</th><th>Date</th>
+              <th>Month</th><th>Consumer Name</th>
+              <th>Material Details</th><th>Use / Purpose</th>
+              <th>Qty</th><th>Rate (₹)</th><th>Amount (₹)</th>
+            </tr>
+          </thead>
+          <tbody></tbody><tfoot></tfoot>
+        </table>
+      </div>
+      <div class="section-approval-slot" data-approval-for="rent"></div>
+    </section>
 
-      if (passwordInput && toggleButton && toggleText) {
+    <!-- BILL DETAILS -->
+    <section class="tab-panel" id="tab-bills" hidden>
+      <div class="section-title">
+        <div>
+          <h3>Bill Details</h3>
+          <p>Bill-wise work/material details and amount</p>
+        </div>
+        <button class="btn small secondary no-print"
+          data-export="billTable" type="button">Export CSV</button>
+      </div>
 
-        toggleButton.addEventListener("click", function () {
+      <div class="table-wrap">
+        <table id="billTable">
+          <thead>
+            <tr>
+              <th>S.No.</th><th>Bill No.</th><th>Date</th>
+              <th>Bill Title</th><th>Item Details</th><th>Amount (₹)</th>
+            </tr>
+          </thead>
+          <tbody></tbody><tfoot></tfoot>
+        </table>
+      </div>
+      <div class="section-approval-slot" data-approval-for="bills"></div>
+    </section>
 
-          if (passwordInput.type === "password") {
+    <!-- FINANCIAL SUMMARY -->
+    <section class="tab-panel" id="tab-summary" hidden>
+      <div class="section-title">
+        <div>
+          <h3>Financial Summary</h3>
+          <p>Year-wise totals from the current Accounting Register</p>
+        </div>
+      </div>
 
-            passwordInput.type = "text";
-            toggleText.textContent = "Hide";
-            toggleButton.setAttribute("aria-label", "Hide password");
-            toggleButton.setAttribute("aria-pressed", "true");
+      <div id="summaryCards" class="summary-grid"></div>
 
-          } else {
+      <h4 class="subheading">Month-wise Opening & Closing Balance</h4>
 
-            passwordInput.type = "password";
-            toggleText.textContent = "Show";
-            toggleButton.setAttribute("aria-label", "Show password");
-            toggleButton.setAttribute("aria-pressed", "false");
+      <div class="table-wrap">
+        <table id="balanceTable">
+          <thead>
+            <tr>
+              <th>Month</th><th>Opening Balance (₹)</th>
+              <th>Member Collection (₹)</th>
+              <th>Donation in balance field (₹)</th>
+              <th>Expense (₹)</th><th>Closing Balance (₹)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
 
-          }
+      <p class="footnote official-note">
+        यह विवरण ग्राम दहेली युवा समिति के आधिकारिक लेखा-जोखा एवं उपलब्ध अभिलेखों के आधार पर तैयार किया गया है। समिति के वित्तीय रिकॉर्ड में पारदर्शिता एवं जानकारी की सुविधा हेतु इसे सदस्यों के अवलोकन के लिए प्रस्तुत किया गया है। यह विवरण समिति के आधिकारिक रिकॉर्ड का हिस्सा है।
+      </p>
 
-        });
+      <div class="section-approval-slot" data-approval-for="summary"></div>
+    </section>
 
+    <p id="dataMessage" class="message" role="status"></p>
+  </section>
+
+  <!-- READ-ONLY FULL BILL VIEW -->
+  <section id="billViewModal" class="bill-view-modal no-print"
+    hidden aria-modal="true" role="dialog"
+    aria-labelledby="billViewHeading">
+    <div class="bill-view-dialog">
+      <div class="bill-view-toolbar">
+        <h2 id="billViewHeading">Complete Bill</h2>
+        <div class="bill-view-actions">
+          <button type="button" class="btn secondary" id="billViewPrintBtn">Print / Save PDF</button>
+          <button type="button" class="btn outline" id="billViewCloseBtn">Close</button>
+        </div>
+      </div>
+      <div id="billViewContent" class="bill-view-content"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>ग्राम दहेली युवा समिति · Official Payment Details Portal</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const passwordInput = document.getElementById("memberPassword");
+  const toggleButton = document.getElementById("togglePassword");
+  const toggleText = document.getElementById("passwordToggleText");
+
+  if (passwordInput && toggleButton && toggleText) {
+    toggleButton.addEventListener("click", function () {
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleText.textContent = "Hide";
+        toggleButton.setAttribute("aria-label", "Hide password");
+        toggleButton.setAttribute("aria-pressed", "true");
+      } else {
+        passwordInput.type = "password";
+        toggleText.textContent = "Show";
+        toggleButton.setAttribute("aria-label", "Show password");
+        toggleButton.setAttribute("aria-pressed", "false");
       }
-
     });
-  </script>
+  }
+});
+</script>
 
-  <!-- MAIN JAVASCRIPT -->
-  <script src="payment-details.js"></script>
+<script src="payment-details.js?v=20261123-3"></script>
 
 </body>
 </html>
