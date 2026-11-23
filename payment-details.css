@@ -2329,3 +2329,140 @@ body > footer {
   }
 
 }
+
+/* =========================================
+   VIEW BILL - MOBILE RESPONSIVE
+   ONLY SCREEN VIEW - PRINT UNCHANGED
+========================================= */
+
+@media screen and (max-width: 700px) {
+
+  #billViewModal {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 8px !important;
+    box-sizing: border-box !important;
+  }
+
+  #billViewContent {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 auto !important;
+    padding: 8px !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .bill-view-paper {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 auto !important;
+    padding: 12px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    box-shadow: none !important;
+  }
+
+  .bill-view-letterhead {
+    max-width: 100% !important;
+    background-size: 100% auto !important;
+    background-repeat: no-repeat !important;
+  }
+
+  .bill-view-paper-body {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .bill-view-paper h1 {
+    font-size: 21px !important;
+    line-height: 1.4 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .bill-view-paper h2 {
+    font-size: 17px !important;
+    line-height: 1.4 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .bill-view-meta {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 7px !important;
+    width: 100% !important;
+    font-size: 12px !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .bill-view-items {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    white-space: nowrap !important;
+    font-size: 11px !important;
+  }
+
+  .bill-view-items th,
+  .bill-view-items td {
+    padding: 8px 7px !important;
+    white-space: nowrap !important;
+    font-size: 11px !important;
+  }
+
+  #billViewPrintBtn,
+  #billViewCloseBtn {
+    min-height: 42px !important;
+    padding: 10px 14px !important;
+    font-size: 14px !important;
+  }
+
+  .bill-view-toolbar {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    justify-content: center !important;
+  }
+}
+
+@media screen and (max-width: 380px) {
+
+  #billViewModal {
+    padding: 5px !important;
+  }
+
+  #billViewContent {
+    padding: 5px !important;
+  }
+
+  .bill-view-paper {
+    padding: 9px !important;
+  }
+
+  .bill-view-paper h1 {
+    font-size: 18px !important;
+  }
+
+  .bill-view-paper h2 {
+    font-size: 15px !important;
+  }
+
+  .bill-view-items th,
+  .bill-view-items td {
+    padding: 7px 5px !important;
+    font-size: 10px !important;
+  }
+}
