@@ -2466,3 +2466,45 @@ body > footer {
     font-size: 10px !important;
   }
 }
+
+/* FIX: VIEW BILL OVERLAY TRANSPARENCY */
+
+@media screen and (max-width: 700px) {
+
+  #billViewModal {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 999999 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    min-height: 100vh !important;
+    background: rgba(0, 0, 0, 0.65) !important;
+    opacity: 1 !important;
+    isolation: isolate !important;
+    overflow-y: auto !important;
+  }
+
+  #billViewModal::before {
+    content: none !important;
+  }
+
+  #billViewContent {
+    position: relative !important;
+    z-index: 1 !important;
+    background: #ffffff !important;
+    opacity: 1 !important;
+    isolation: isolate !important;
+  }
+
+  .bill-view-paper {
+    position: relative !important;
+    z-index: 2 !important;
+    background: #ffffff !important;
+    opacity: 1 !important;
+    color: #26352d !important;
+  }
+
+  .bill-view-paper * {
+    opacity: 1 !important;
+  }
+}
