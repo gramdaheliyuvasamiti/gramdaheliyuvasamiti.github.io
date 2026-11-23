@@ -2269,3 +2269,63 @@ body > footer {
     padding: 5px 6px;
   }
 }
+/* REMOVE ALL STAMPS AND SIGNATURES */
+
+.section-approval-slot,
+.section-approval,
+.bill-view-approval,
+.bill-view-signer,
+.bill-view-stamp {
+  display: none !important;
+}
+
+/* PRINT ONLY THE OPENED VIEW BILL */
+
+@media print {
+
+  body.bill-view-printing * {
+    visibility: hidden !important;
+  }
+
+  body.bill-view-printing #billViewModal,
+  body.bill-view-printing #billViewModal * {
+    visibility: visible !important;
+  }
+
+  body.bill-view-printing #billViewModal.no-print {
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    overflow: visible !important;
+  }
+
+  body.bill-view-printing .bill-view-toolbar {
+    display: none !important;
+  }
+
+  body.bill-view-printing .bill-view-content {
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  body.bill-view-printing .bill-view-approval,
+  body.bill-view-printing .bill-view-signer,
+  body.bill-view-printing .bill-view-stamp,
+  body.bill-view-printing .section-approval-slot,
+  body.bill-view-printing .section-approval {
+    display: none !important;
+  }
+
+  body.bill-view-printing .bill-view-paper {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    break-after: auto !important;
+    page-break-after: auto !important;
+  }
+
+}
