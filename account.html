@@ -1323,7 +1323,9 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
      await Promise.all(images.map(img=>img.decode?img.decode().catch(()=>{}):new Promise(resolve=>{if(img.complete)resolve();else{img.onload=resolve;img.onerror=resolve}})));
      downloadProgress.update('PDF बनाई जा रही है…','बड़ी रिपोर्ट में थोड़ा समय लग सकता है।');
      const filename=pdfSafeName('Monthly Member Collection Details '+pdfRangeLabel(ms))+'.pdf';
-     await window.html2pdf().set({margin:0,filename,image:{type:'png'},html2canvas:{scale:3,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,letterRendering:true},jsPDF:{unit:'mm',format:[420,297],orientation:'landscape',compress:true},pagebreak:{mode:['css']}}).from(root).save();
+     const mobilePrintView=window.matchMedia&&window.matchMedia('(max-width: 760px)').matches;
+     const canvasOptions={scale:3,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,letterRendering:true,...(mobilePrintView?{windowWidth:1587,windowHeight:1123,scrollX:0,scrollY:0}: {})};
+     await window.html2pdf().set({margin:0,filename,image:{type:'png'},html2canvas:canvasOptions,jsPDF:{unit:'mm',format:[420,297],orientation:'landscape',compress:true},pagebreak:{mode:['css']}}).from(root).save();
      downloadProgress.finish();
    }catch(err){downloadProgress.fail();alert('PDF Download नहीं हुआ: '+(err.message||err));}
    finally{restore();}
