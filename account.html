@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title> ग्राम दहेली युवा समिति - लेखा पोर्टल | V2</title>
+<title> GRAM DAHELI YUVA SAMITI - लेखा पोर्टल | V2</title>
 <!-- PORTAL RELEASE: V3 | Rent register donation-style table + number chooser popup -->
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f3f6f9;color:#1e293b;font:14px Arial,sans-serif}header{background:#17324d;color:white;padding:20px}header h1{margin:0}.wrap{max-width:1400px;margin:auto;padding:16px}.bar,.panel{background:white;border:1px solid #d9e1e8;border-radius:10px;padding:14px;margin-bottom:14px}.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}button{border:0;border-radius:6px;padding:9px 12px;background:#245b83;color:white;cursor:pointer;font-weight:bold}.danger{background:#b42318}.green{background:#16794b}.light{background:#e8eef4;color:#17324d}input,select{padding:8px;border:1px solid #cbd5e1;border-radius:5px;max-width:100%}h2{color:#17324d;font-size:17px;margin:0 0 12px}.center{text-align:center}.muted{color:#64748b;font-size:12px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.grid label{display:block;font-size:12px;color:#64748b;font-weight:bold}table{border-collapse:collapse;width:100%;min-width:950px;background:white}th,td{border:1px solid #cbd5e1;padding:7px;text-align:center}th{background:#eaf0f5;color:#17324d;font-size:12px}.scroll{overflow:auto}.cell{background:#eef4f8;color:#17324d;border:1px solid #cbd5e1;padding:5px;font-size:12px}.sub{font-weight:bold;text-align:center;color:#17324d;margin:12px}.summary{max-width:700px;margin:auto}.summary td:first-child{text-align:left;font-weight:bold}.summary td:last-child{text-align:right;font-weight:bold}.sign{display:grid;grid-template-columns:repeat(3,1fr);gap:25px;margin:42px 10px 15px;text-align:center;font-weight:bold}.sign div{border-top:0!important;padding-top:8px}.records{display:flex;gap:10px;flex-wrap:wrap}.record{padding:12px;border:1px solid #d9e1e8;border-radius:8px;background:#f8fafc}.modal{display:none;position:fixed;inset:0;background:#0008;align-items:center;justify-content:center;padding:15px}.box{background:white;padding:20px;border-radius:10px;width:min(400px,100%)}.box label{display:block;margin-top:8px}.box input,.box select{width:100%}
@@ -70,7 +70,7 @@
 @media print {
   @page {
     size: A3 landscape;
-    margin: 45mm 9mm 30mm 9mm;
+    margin: 45mm 9mm 50mm 9mm;
   }
 
   html, body {
@@ -198,7 +198,7 @@
 @media print {
   @page {
     size: A3 landscape;
-    margin: 45mm 9mm 30mm 9mm;
+    margin: 45mm 9mm 50mm 9mm;
   }
 
   html, body {
@@ -514,9 +514,9 @@
 }
 
 
-/* FINAL V6: A3 landscape report area between 45mm header and 30mm footer */
+/* FINAL V6: A3 landscape report area between 45mm header and 50mm footer */
 @media print {
-  @page { size: A3 landscape; margin: 45mm 9mm 30mm 9mm; }
+  @page { size: A3 landscape; margin: 45mm 9mm 50mm 9mm; }
 
   html, body {
     margin: 0 !important; padding: 0 !important;
@@ -618,7 +618,7 @@
   body.print-combined .report-page {
     position:relative !important; display:block !important; box-sizing:border-box !important;
     width:420mm !important; height:297mm !important; min-height:297mm !important;
-    margin:0 !important; padding:45mm 9mm 10mm !important;
+    margin:0 !important; padding:40mm 9mm 50mm !important;
     overflow:hidden !important; page-break-after:always !important; break-after:page !important;
     background:#fff !important;
   }
@@ -630,7 +630,7 @@
   }
   body.print-combined .report-page-content {
     position:relative !important; z-index:1 !important; width:100% !important;
-    height:242mm !important; max-height:242mm !important; min-height:0 !important;
+    height:207mm !important; max-height:207mm !important; min-height:0 !important;
     margin:0 !important; padding:0 !important; overflow:hidden !important;
     display:flex !important; flex-direction:column !important; justify-content:center !important;
     background:transparent !important; box-sizing:border-box !important;
@@ -769,10 +769,10 @@
   body.print-combined #appShell > main > #expensePrint,
   body.print-combined .modal, body.print-combined .no-print,
   body.print-combined button { display:none !important; }
-  body.print-combined .report-page { position:relative !important; display:block !important; box-sizing:border-box !important; width:420mm !important; height:297mm !important; min-height:297mm !important; max-height:297mm !important; margin:0 !important; padding:45mm 9mm 10mm !important; overflow:hidden !important; background:transparent !important; break-after:page !important; page-break-after:always !important; break-inside:avoid !important; page-break-inside:avoid !important; }
+  body.print-combined .report-page { position:relative !important; display:block !important; box-sizing:border-box !important; width:420mm !important; height:297mm !important; min-height:297mm !important; max-height:297mm !important; margin:0 !important; padding:40mm 9mm 50mm !important; overflow:hidden !important; background:transparent !important; break-after:page !important; page-break-after:always !important; break-inside:avoid !important; page-break-inside:avoid !important; }
   body.print-combined .report-page:last-child { break-after:auto !important; page-break-after:auto !important; }
   body.print-combined .report-page-bg { position:absolute !important; inset:0 !important; display:block !important; width:420mm !important; height:297mm !important; max-width:none !important; max-height:none !important; object-fit:fill !important; z-index:0 !important; pointer-events:none !important; }
-  body.print-combined .report-page-content { position:relative !important; z-index:1 !important; display:block !important; box-sizing:border-box !important; width:100% !important; height:242mm !important; max-height:242mm !important; min-height:0 !important; margin:0 !important; padding:0 !important; overflow:hidden !important; background:transparent !important; }
+  body.print-combined .report-page-content { position:relative !important; z-index:1 !important; display:block !important; box-sizing:border-box !important; width:100% !important; height:207mm !important; max-height:207mm !important; min-height:0 !important; margin:0 !important; padding:0 !important; overflow:hidden !important; background:transparent !important; }
   body.print-combined .report-heading { margin:0 0 3mm !important; line-height:1.2 !important; }
   body.print-combined .report-heading .samiti { font-size:17px !important; margin-bottom:1mm !important; }
   body.print-combined .report-heading .report-name { font-size:14px !important; margin-bottom:1mm !important; }
@@ -847,18 +847,17 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
   .sign { font-size:9px !important; }
 }
 
-/* The letterhead's printed header area is 30mm high. Keep a matching 30mm
-   top content offset and 30mm bottom safe area on every combined A3 sheet. */
+/* Combined A3 sheets: 40mm top header space and 50mm bottom footer space. */
 @media print {
   @page { size:420mm 297mm; margin:0 !important; }
   html, body { width:420mm !important; min-width:420mm !important; max-width:420mm !important; }
   body.print-combined .report-page {
     width:420mm !important; height:297mm !important; min-height:297mm !important; max-height:297mm !important;
-    padding:30mm 9mm 30mm !important;
+    padding:40mm 9mm 50mm !important;
     box-sizing:border-box !important; overflow:hidden !important;
   }
   body.print-combined .report-page-content {
-    height:237mm !important; min-height:237mm !important; max-height:237mm !important;
+    height:207mm !important; min-height:207mm !important; max-height:207mm !important;
     justify-content:flex-start !important; overflow:hidden !important;
     box-sizing:border-box !important;
   }
@@ -903,37 +902,27 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
     -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;
   }
 }
+
+/* Member collection details: force all ordinary cell text to pure black
+   in on-screen preview, canvas rendering, and direct PDF download. */
+.member-print-table tbody td {
+  color: #000000 !important;
+}
+/* FINAL A3 FOOTER STANDARD: 50mm on every ordinary report page. */
+@media print {
+  @page reportA3 { size: A3 landscape; margin: 45mm 9mm 50mm 9mm; }
+  body.print-single:not(.print-receipt),
+  body.print-all,
+  body.print-expense { page: reportA3 !important; }
+}
+
 </style><script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
 
-<style id="member-collection-footer-overlap-fix">
-@media print {
-  body.print-combined .report-page {
-    height:297mm !important; min-height:297mm !important; max-height:297mm !important;
-    padding:30mm 9mm 15mm !important; box-sizing:border-box !important;
-  }
-  body.print-combined .report-page-content {
-    height:252mm !important; min-height:0 !important; max-height:252mm !important;
-    justify-content:flex-start !important; overflow:hidden !important; box-sizing:border-box !important;
-  }
-  body.print-combined .report-page-content h2,
-  body.print-combined .report-page-content h3 { margin-top:1mm !important; margin-bottom:.5mm !important; }
-  body.print-combined .report-page-content table { margin-top:0 !important; margin-bottom:1mm !important; }
-  body.print-combined .member-print-table {
-    height:auto !important; min-height:0 !important; max-height:none !important; margin-bottom:0 !important;
-  }
-  body.print-combined .member-print-table th,
-  body.print-combined .member-print-table td { line-height:1.18 !important; padding:2.6px 2.4px !important; }
-  body.print-combined .finance-section-block {
-    break-inside:avoid !important; page-break-inside:avoid !important;
-    margin-top:.8mm !important; margin-bottom:10mm !important; padding:0 !important;
-  }
-}
-</style>
 
 </head><body>
 
 <div id="cloudLogin" style="max-width:430px;margin:8vh auto;padding:24px;background:#fff;border:1px solid #d9e1e8;border-radius:12px;box-shadow:0 8px 30px #17324d18;font:14px Arial,sans-serif;color:#1e293b">
-  <h2 style="margin:0 0 8px;color:#17324d">ग्राम दहेली युवा समिति — Admin Login</h2>
+  <h2 style="margin:0 0 8px;color:#17324d">GRAM DAHELI YUVA SAMITI — Admin Login</h2>
   <p style="color:#64748b;line-height:1.5">Member Register खोलने के लिए अपने Supabase Admin Email और Password से लॉगिन करें।</p>
   <label style="display:block;margin:14px 0 5px">Admin Email</label>
   <input id="cloudEmail" type="email" autocomplete="username" style="width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:6px">
@@ -947,7 +936,7 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
   <button id="cloudLogoutBtn" style="float:right;background:#17324d;color:white;border:0;border-radius:4px;padding:3px 9px;cursor:pointer">Logout</button>
 </div>
 <div id="appShell" style="display:none">
-<header><div class="wrap" style="padding:0"><h1>ग्राम दहेली युवा समिति</h1><p>समिति लेखा पोर्टल · हिसाब-किताब और रिपोर्ट</p></div></header>
+<header><div class="wrap" style="padding:0"><h1>GRAM DAHELI YUVA SAMITI</h1><p>समिति लेखा पोर्टल · हिसाब-किताब और रिपोर्ट</p></div></header>
 <main class="wrap">
 <nav class="tab-nav no-print">
 <button class="active" data-tab-btn="memberTab" onclick="showMainTab('memberTab')">Monthly Member Collection Details</button>
@@ -958,7 +947,7 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 </nav>
 <section class="bar no-print" data-tab="memberTab">
 <button onclick="addYear()">+ Add Year</button><button class="danger" onclick="removeEmptyYear()">Remove Empty Year</button><button onclick="addMonth()">+ Add Month</button><button class="danger" onclick="removeMonth()">Remove Month</button>
-<span style="flex:1"></span><label>Record Year</label><select id="year" onchange="selectYear(this.value)"></select><button onclick="openPrintOptions()">PDF / Print</button><button class="light" onclick="openDocumentSettings()">Letterhead & Sign Settings</button>
+<span style="flex:1"></span><label>Record Year</label><select id="year" onchange="selectYear(this.value)"></select><button onclick="openPrintOptions()">Preview / PDF</button><button class="light" onclick="openDocumentSettings()">Letterhead & Sign Settings</button>
 </section>
 <section class="panel no-print" data-tab="memberTab"><h2>Member Entry</h2><div class="grid">
 <div><label>Member ID</label><select id="mid"></select></div><div><label>Name</label><input id="mname"></div><div><label>Father's Name</label><input id="father"></div><div><label>Mobile</label><input id="mobile"></div></div><p><button onclick="addMember()">Add Member</button> <button class="green" onclick="openRejoinMember()">Rejoin Member</button></p></section>
@@ -995,7 +984,7 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 <div class="module-table-wrap no-print"><table class="module-table" style="min-width:1050px"><thead><tr><th>S.No.</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Unit / Qty</th><th>Rate / Unit (₹)</th><th>Amount (₹)</th><th>Attachment (PDF / PNG / JPG)</th><th>Action</th></tr></thead><tbody id="rentItemRows"></tbody></table></div>
 <div class="bar no-print"><button type="button" class="light" onclick="addRentItemRow()">+ Add Item / Column</button><b id="rentFormTotal">Total: ₹0.00</b></div>
 <p class="muted no-print">हर Item के साथ PDF / PNG / JPG attachment जोड़ सकते हैं। Attachment न होने पर भी Item save होगा। प्रति फाइल अधिकतम 2 MB।</p>
-<div class="bar no-print module-toolbar" style="padding:8px 0;border:0"><button class="green" onclick="saveRentCollection()" id="rentSaveBtn">Save Complete Collection</button><label>Print Month</label><select id="rentPrintMonth"><option value="all">All Months</option></select><button class="light" onclick="printRentMonthly()">Print Month</button><button class="light" onclick="printRentAll()">Print All Collections</button><button class="light" onclick="printModuleSection('rent','preview')">Preview</button><button class="green" onclick="printModuleSection('rent','download')">Download PDF</button></div>
+<div class="bar no-print module-toolbar" style="padding:8px 0;border:0"><button class="green" onclick="saveRentCollection()" id="rentSaveBtn">Save Complete Collection</button><label>Print Month</label><select id="rentPrintMonth"><option value="all">All Months</option></select><button class="light" onclick="printRentMonthly()">Preview Month</button><button class="light" onclick="printRentAll()">Preview All Collections</button><button class="light" onclick="printModuleSection('rent','preview')">Preview</button><button class="green" onclick="printModuleSection('rent','download')">Download PDF</button></div>
 <div class="module-table-wrap"><table id="rentTable" class="module-table" style="min-width:1100px"><thead><tr><th>S.No.</th><th>Month</th><th>Date</th><th>Collection Number</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Amount (₹)</th><th class="no-print">Action</th></tr></thead><tbody></tbody><tfoot></tfoot></table></div>
 <div class="module-footer" id="rentFooter"></div>
 </section>
@@ -1181,38 +1170,57 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
    const late=ms.reduce((a,mo)=>{const z=(db[mo.split('-')[1]]?.members||[]).find(z=>String(z.id)===String(m.id)),q=z?.payments?.[mo]||{};return a+(hasLateFee(q)?Number(q.late)||0:0)},0);
    return row+'<td>'+(late>0?'<span style="display:inline-block;padding:1px 4px;border-radius:3px;background:#fef3c7;color:#92400e;border:1px solid #fcd34d;-webkit-print-color-adjust:exact;print-color-adjust:exact;">'+money(late)+'</span>':money(late))+'</td></tr>';
  }).join('');
- const memberTable=(list,showTotals,startIndex=0,fillPage=true)=>'<table class="member-print-table"><thead><tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th>'+esc(v)+'</th>').join('')+'</tr></thead><tbody>'+memberRows(list,startIndex)+'</tbody>'+(showTotals?'<tfoot><tr><td colspan="5"><b>TOTAL MEMBER COLLECTION (INCLUDING LATE FEE)</b></td>'+ms.map(mo=>'<td>'+money(monthData(mo).collection)+'</td>').join('')+'<td>'+money(monthTotals.reduce((a,q)=>a+q.lateFee,0))+'</td></tr></tfoot>':'')+'</table>';
- // Dynamic A3 pagination: measure actual rendered rows at the report's print width.
- // No fixed member count per page; a member is moved only when the current sheet is full.
+ const memberTable=(list,showTotals,startIndex=0)=>{
+   // Print only real member rows. Do not insert empty filler rows or placeholder totals.
+   // The actual total is rendered immediately after the final member record.
+   const footer=showTotals
+     ?'<tfoot><tr><td colspan="5"><b>TOTAL MEMBER COLLECTION (INCLUDING LATE FEE)</b></td>'+ms.map(mo=>'<td>'+money(monthData(mo).collection)+'</td>').join('')+'<td>'+money(monthTotals.reduce((a,q)=>a+q.lateFee,0))+'</td></tr></tfoot>'
+     :'';
+   return '<table class="member-print-table"><thead><tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th>'+esc(v)+'</th>').join('')+'</tr></thead><tbody>'+memberRows(list,startIndex)+'</tbody>'+footer+'</table>';
+ };
+ // Measure every member row at the real A3 report width, then use ONE shared row height.
+ // The last page is padded with empty rows (not stretched member rows), so every page
+ // has the same row height and the same table depth without hiding actual details.
  const memberPages=[];
- if(memberList.length){
-   const probe=document.createElement('div');
-   probe.style.cssText='position:absolute;left:-20000px;top:0;width:402mm;visibility:hidden;';
-   const probeHeading=document.createElement('div');probeHeading.innerHTML=memberHeading(false);
-   probe.appendChild(probeHeading);
-   const probeTable=document.createElement('table');probeTable.className='member-print-table';
-   probeTable.style.cssText='width:100%;table-layout:fixed;border-collapse:collapse;font:9.5px Arial,sans-serif;';
-   const head=document.createElement('thead');head.innerHTML='<tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th style="font-size:9.5px;padding:3px 2.6px;line-height:1.2">'+esc(v)+'</th>').join('')+'</tr>';
-   const body=document.createElement('tbody');probeTable.append(head,body);probe.appendChild(probeTable);document.body.appendChild(probe);
-   const maxHeight=252*96/25.4; // A3 sheet: 30mm top and 15mm bottom clearance.
-   let current=[];
-   memberList.forEach((m,index)=>{
-     const rowHtml=memberRows([m],index);
-     const temp=document.createElement('tbody');temp.innerHTML=rowHtml;
-     const row=temp.firstElementChild;body.appendChild(row);
-     const headingHeight=probeHeading.getBoundingClientRect().height+18;
-     if(current.length && (probeTable.getBoundingClientRect().height+headingHeight)>maxHeight){
-       body.removeChild(row);memberPages.push(current);current=[];body.innerHTML='';body.appendChild(row);
-     }
-     current.push(m);
-   });
-   if(current.length)memberPages.push(current);
-   probe.remove();
- } else memberPages.push([]);
+ document.body.classList.add('print-combined');
+ const probe=document.createElement('div');probe.className='report-page-content';
+ probe.style.cssText='position:absolute;left:-20000px;top:0;width:402mm;height:207mm;visibility:hidden;overflow:hidden;';
+ const probeHeading=document.createElement('div');probeHeading.innerHTML=memberHeading(false);
+ probeHeading.style.margin='0 0 3mm';
+ probe.appendChild(probeHeading);
+ const probeTable=document.createElement('table');probeTable.className='member-print-table';
+ probeTable.style.cssText='width:100%;table-layout:fixed;border-collapse:collapse;font:9px Arial,sans-serif;margin:0 auto 2mm;';
+ const head=document.createElement('thead');
+ head.innerHTML='<tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th style="font-size:9px;padding:3.2px 3px;line-height:1.25">'+esc(v)+'</th>').join('')+'</tr>';
+ const body=document.createElement('tbody');
+ const foot=document.createElement('tfoot');
+ foot.innerHTML='<tr><td colspan="5">TOTAL MEMBER COLLECTION</td>'+ms.map(()=>'<td>₹0.00</td>').join('')+'<td>₹0.00</td></tr>';
+ probeTable.append(head,body,foot);probe.appendChild(probeTable);document.body.appendChild(probe);
+ const maxHeight=207*96/25.4;
+ const headingHeight=probeHeading.getBoundingClientRect().height+parseFloat(getComputedStyle(probeHeading).marginBottom||0);
+ const headHeight=head.getBoundingClientRect().height;
+ const footHeight=foot.getBoundingClientRect().height;
+ let maxNaturalRowHeight=18;
+ memberList.forEach((m,index)=>{
+   const temp=document.createElement('tbody');temp.innerHTML=memberRows([m],index);
+   const row=temp.firstElementChild;body.appendChild(row);
+   maxNaturalRowHeight=Math.max(maxNaturalRowHeight,row.getBoundingClientRect().height);
+   body.removeChild(row);
+ });
+ const tableMargins=4*96/25.4;
+ const safeGap=6;
+ const usableRowsHeight=Math.max(maxNaturalRowHeight,maxHeight-headingHeight-headHeight-footHeight-tableMargins-safeGap);
+ // Keep the agreed pagination fixed at 17 real members per A3 sheet.
+ // This keeps row height identical even when the register grows to 100+ members.
+ const memberPageCapacity=17;
+ const memberTargetRowHeight=Math.max(maxNaturalRowHeight,(maxHeight-headingHeight-headHeight-footHeight-tableMargins-safeGap)/memberPageCapacity);
+ for(let i=0;i<memberList.length;i+=memberPageCapacity)memberPages.push(memberList.slice(i,i+memberPageCapacity));
+ if(!memberPages.length)memberPages.push([]);
+ probe.remove();document.body.classList.remove('print-combined');
  let pagesHtml='';
  let memberOffset=0;
  memberPages.forEach((chunk,i)=>{
-   const tableHtml=memberTable(chunk,i===memberPages.length-1,memberOffset,i<memberPages.length-1);
+   const tableHtml=memberTable(chunk,i===memberPages.length-1,memberOffset);
    pagesHtml+=page(memberHeading(i>0)+tableHtml);
    memberOffset+=chunk.length;
  });
@@ -1255,15 +1263,15 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
  // Apply the A3 sheet geometry directly so the PDF renderer does not depend on print-only CSS.
  root.style.cssText='display:block;width:420mm;margin:0;padding:0;background:#fff;';
  const applyReportSheetStyles=()=>root.querySelectorAll('.report-page').forEach((sheet,index)=>{
-   Object.assign(sheet.style,{position:'relative',display:'block',boxSizing:'border-box',width:'420mm',height:'297mm',minHeight:'297mm',maxHeight:'297mm',margin:'0',padding:'30mm 9mm 15mm',overflow:'hidden',background:'#fff',pageBreakAfter:index===root.querySelectorAll('.report-page').length-1?'auto':'always',breakAfter:'auto'});
+   Object.assign(sheet.style,{position:'relative',display:'block',boxSizing:'border-box',width:'420mm',height:'297mm',minHeight:'297mm',maxHeight:'297mm',margin:'0',padding:'40mm 9mm 50mm',overflow:'hidden',background:'#fff',pageBreakAfter:index===root.querySelectorAll('.report-page').length-1?'auto':'always',breakAfter:'auto'});
    const bg=sheet.querySelector('.report-page-bg');if(bg)Object.assign(bg.style,{position:'absolute',inset:'0',width:'420mm',height:'296mm',maxWidth:'none',maxHeight:'none',objectFit:'fill',zIndex:'0'});
-   const content=sheet.querySelector('.report-page-content');if(content)Object.assign(content.style,{position:'relative',zIndex:'1',display:'block',boxSizing:'border-box',width:'100%',height:'252mm',maxHeight:'252mm',overflow:'hidden',margin:'0',padding:'0'});
+   const content=sheet.querySelector('.report-page-content');if(content)Object.assign(content.style,{position:'relative',zIndex:'1',display:'block',boxSizing:'border-box',width:'100%',height:'207mm',maxHeight:'207mm',overflow:'hidden',margin:'0',padding:'0'});
    sheet.querySelectorAll('table').forEach(t=>Object.assign(t.style,{width:'100%',maxWidth:'100%',tableLayout:'fixed',borderCollapse:'collapse',breakInside:'avoid'}));
    sheet.querySelectorAll('.member-print-table').forEach(t=>Object.assign(t.style,{height:'auto',minHeight:'0',maxHeight:'none',WebkitPrintColorAdjust:'exact',printColorAdjust:'exact'}));
    sheet.querySelectorAll('.month-wise-summary-table th,.month-wise-summary-table td').forEach(c=>Object.assign(c.style,{fontSize:'8.8px',lineHeight:'1.22',padding:'2px 3px',verticalAlign:'middle'}));
    sheet.querySelectorAll('.month-wise-summary-table').forEach(t=>Object.assign(t.style,{margin:'0 auto 2mm',width:'100%',height:'auto',tableLayout:'fixed',verticalAlign:'middle'}));
    sheet.querySelectorAll('th,td').forEach(c=>Object.assign(c.style,{fontSize:'9px',lineHeight:'1.2',padding:'3px 2.6px',textAlign:'center',overflowWrap:'anywhere',border:'1px solid #64748b'}));
-   sheet.querySelectorAll('.print-approval').forEach(a=>Object.assign(a.style,{display:'grid',gridTemplateColumns:'1fr 1fr 20mm 1fr',gap:'2mm',alignItems:'end',width:'100%',minHeight:'25mm',height:'auto',margin:'1mm 2mm 0',padding:'0',overflow:'visible',breakInside:'avoid',pageBreakInside:'avoid'}));
+   sheet.querySelectorAll('.print-approval').forEach(a=>Object.assign(a.style,{display:'grid',gridTemplateColumns:'1fr 1fr 20mm 1fr',gap:'2mm',alignItems:'end',width:'100%',minHeight:'45mm',height:'auto',margin:'1mm 2mm 0',padding:'0',overflow:'visible',breakInside:'avoid',pageBreakInside:'avoid'}));
    sheet.querySelectorAll('.print-approval .sig-image').forEach(img=>Object.assign(img.style,{display:'block',maxWidth:'25mm',maxHeight:'10mm',width:'auto',height:'auto',objectFit:'contain'}));
    sheet.querySelectorAll('.print-approval .stamp-image').forEach(img=>Object.assign(img.style,{display:'block',width:'20mm',height:'20mm',objectFit:'contain'}));
    sheet.querySelectorAll('.print-approval .stamp-date').forEach(el=>Object.assign(el.style,{fontSize:'8.5px',marginTop:'1mm'}));
@@ -1273,9 +1281,17 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
    sheet.querySelectorAll('tr').forEach(r=>{r.style.breakInside='avoid';r.style.pageBreakInside='avoid'});
  });
  applyReportSheetStyles();
+ // Enforce one measured row height across every member page; blank filler rows
+ // occupy unused slots on the final page without enlarging real member records.
+ root.querySelectorAll('.member-print-table').forEach(table=>{
+   table.querySelectorAll('tbody tr').forEach(row=>{
+     row.style.height=memberTargetRowHeight+'px';
+     row.querySelectorAll('td').forEach(cell=>{cell.style.height=memberTargetRowHeight+'px';cell.style.verticalAlign='middle';});
+   });
+ });
  // Flow complete financial sections into the remaining space after the final
  // member page. Never split a section's table between two pages.
- const maxContentHeight=252*96/25.4;
+ const maxContentHeight=207*96/25.4;
  let currentSheet=root.querySelector('.report-page:last-child');
  let currentContent=currentSheet?.querySelector('.report-page-content');
  const makeFinancePage=()=>{
@@ -1295,16 +1311,21 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
    }
  });
  applyReportSheetStyles();
+ // Keep every member row at its natural, consistent height on all pages.
  const originalRootStyle=root.getAttribute('style');
  const restore=()=>{document.body.classList.remove('print-combined');if(originalRootStyle===null)root.removeAttribute('style');else root.setAttribute('style',originalRootStyle);};
  if(action==='download'){
+   const downloadProgress=showPdfDownloadProgress();
    try{
+     downloadProgress.update('PDF तैयार हो रही है…','कृपया इस दौरान पेज बंद न करें।');
      if(!window.html2pdf)throw new Error('PDF engine load नहीं हुआ। Internet connection जाँचकर दोबारा कोशिश करें।');
      const images=[...root.querySelectorAll('img')];
      await Promise.all(images.map(img=>img.decode?img.decode().catch(()=>{}):new Promise(resolve=>{if(img.complete)resolve();else{img.onload=resolve;img.onerror=resolve}})));
+     downloadProgress.update('PDF बनाई जा रही है…','बड़ी रिपोर्ट में थोड़ा समय लग सकता है।');
      const filename=pdfSafeName('Monthly Member Collection Details '+pdfRangeLabel(ms))+'.pdf';
-     await window.html2pdf().set({margin:0,filename,image:{type:'jpeg',quality:1.0},html2canvas:{scale:2.5,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false},jsPDF:{unit:'mm',format:[420,297],orientation:'landscape',compress:true},pagebreak:{mode:['css']}}).from(root).save();
-   }catch(err){alert('PDF Download नहीं हुआ: '+(err.message||err));}
+     await window.html2pdf().set({margin:0,filename,image:{type:'png'},html2canvas:{scale:3,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,letterRendering:true},jsPDF:{unit:'mm',format:[420,297],orientation:'landscape',compress:true},pagebreak:{mode:['css']}}).from(root).save();
+     downloadProgress.finish();
+   }catch(err){downloadProgress.fail();alert('PDF Download नहीं हुआ: '+(err.message||err));}
    finally{restore();}
  }else{
    // Preview is an HTML preview tab; it does not require a browser PDF viewer.
@@ -1318,7 +1339,50 @@ async function printCombinedReport(ms,periodTitle,action='preview'){
 
 function monthData(mo){const y=mo.split('-')[1],x=db[y],baseCollection=(x?.members||[]).reduce((a,mem)=>a+(hasPaymentAmount(mem.payments?.[mo])?(Number(mem.payments[mo].amount)||0):0),0),lateFee=(x?.members||[]).reduce((a,mem)=>a+(hasLateFee(mem.payments?.[mo])?(Number(mem.payments[mo].late)||0):0),0);return {y,x,baseCollection,lateFee,collection:baseCollection+lateFee,donation:donationTotalForMonth(mo)+(Number(x?.donations?.[mo])||0),rent:rentTotalForMonth(mo),expense:x?expenseTotalForMonth(x,mo):0}}
 function balanceBeforeMonth(first){const firstKey=monthKey(first);let years=Object.keys(db).filter(y=>/^\d{4}$/.test(y)).sort((a,b)=>+a-+b);let bal=years.length?(Number(db[years[0]].opening)||0):0;for(const y of years){const x=db[y];for(const mo of yearMonths(x,y).sort((a,b)=>monthKey(a)-monthKey(b))){if(monthKey(mo)>=firstKey)return bal;const q=monthData(mo);bal+=q.collection+q.donation+q.rent-q.expense}}return bal}
-function printMonthRange(ms){const root=document.getElementById('singlePrint');let html='<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">MONTH RANGE MEMBER & PAYMENT REGISTER</h2><p class="center"><b>'+esc(ms[0])+' से '+esc(ms[ms.length-1])+'</b></p>';
+
+// Cross-browser visual feedback for direct PDF exports.
+// Browser APIs do not expose a reliable "file fully saved" event, so the
+// indicator stays visible while PDF generation runs and briefly confirms
+// that the browser download has been triggered.
+function showPdfDownloadProgress(){
+  const overlay=document.createElement('div');
+  overlay.setAttribute('role','status');
+  overlay.setAttribute('aria-live','polite');
+  overlay.style.cssText='position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,.48);padding:16px;font-family:Arial,sans-serif;';
+  const card=document.createElement('div');
+  card.style.cssText='width:min(340px,100%);box-sizing:border-box;background:#fff;border-radius:12px;padding:22px 20px;text-align:center;box-shadow:0 12px 36px rgba(0,0,0,.25);color:#17324d;';
+  const spinner=document.createElement('div');
+  spinner.style.cssText='width:34px;height:34px;margin:0 auto 14px;border:4px solid #dbe5ee;border-top-color:#245b83;border-radius:50%;animation:pdfProgressSpin .8s linear infinite;';
+  const message=document.createElement('div');
+  message.style.cssText='font-size:15px;font-weight:700;line-height:1.5;';
+  message.textContent='PDF तैयार हो रही है…';
+  const detail=document.createElement('div');
+  detail.style.cssText='font-size:12px;color:#64748b;margin-top:6px;';
+  detail.textContent='कृपया इस दौरान पेज बंद न करें।';
+  const style=document.createElement('style');
+  style.textContent='@keyframes pdfProgressSpin{to{transform:rotate(360deg)}}';
+  card.append(spinner,message,detail);
+  overlay.appendChild(card);
+  (document.head||document.documentElement).appendChild(style);
+  document.body.appendChild(overlay);
+  return {
+    update(text,sub){message.textContent=text;if(sub!==undefined)detail.textContent=sub;},
+    finish(){
+      spinner.style.display='none';
+      message.textContent='Download शुरू हो गया';
+      detail.textContent='ब्राउज़र के Downloads में PDF देखें।';
+      setTimeout(()=>{overlay.remove();style.remove();},1400);
+    },
+    fail(){
+      spinner.style.display='none';
+      message.textContent='PDF डाउनलोड नहीं हो पाया';
+      detail.textContent='कृपया दोबारा कोशिश करें।';
+      setTimeout(()=>{overlay.remove();style.remove();},1600);
+    }
+  };
+}
+
+function printMonthRange(ms){const root=document.getElementById('singlePrint');let html='<h1 class="center">GRAM DAHELI YUVA SAMITI</h1><h2 class="center">MONTH RANGE MEMBER & PAYMENT REGISTER</h2><p class="center"><b>'+esc(ms[0])+' से '+esc(ms[ms.length-1])+'</b></p>';
  const memberMap=new Map();ms.forEach(mo=>{const x=db[mo.split('-')[1]];(x?.members||[]).forEach(mem=>{const id=String(mem.id);if(!memberMap.has(id))memberMap.set(id,mem)})});const mems=[...memberMap.values()];
  html+='<table><thead><tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th>'+esc(v)+'</th>').join('')+'</tr></thead><tbody>';
  mems.forEach((mem,i)=>{html+='<tr><td>'+(i+1)+'</td><td>'+esc(mem.id)+'</td><td>'+esc(mem.name)+'</td><td>'+esc(mem.father)+'</td><td>'+esc(mem.mobile)+'</td>';ms.forEach(mo=>{const y=mo.split('-')[1],actual=(db[y]?.members||[]).find(a=>String(a.id)===String(mem.id)),q=actual?.payments?.[mo]||{},parts=[];if(hasPaymentAmount(q))parts.push(money(q.amount));const label=statusLabel(q);if(label)parts.push(label);html+='<td>'+esc(parts.join(' · ')||'—')+'</td>'});const late=ms.reduce((a,mo)=>{const y=mo.split('-')[1],actual=(db[y]?.members||[]).find(a=>String(a.id)===String(mem.id)),q=actual?.payments?.[mo]||{};return a+(hasLateFee(q)?(+q.late||0):0)},0);html+='<td>'+money(late)+'</td></tr>'});
@@ -1327,12 +1391,17 @@ function printMonthRange(ms){const root=document.getElementById('singlePrint');l
  html+='<h3>MONTH-WISE BALANCE</h3><table><thead><tr><th>Month</th><th>Opening Balance</th><th>Collection</th><th>Donation</th><th>Rent</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody>';ms.forEach(mo=>{const q=monthData(mo),close=bal+q.collection+q.donation+q.rent-q.expense;html+='<tr><td>'+mo+'</td><td>'+money(bal)+'</td><td>'+money(q.collection)+'</td><td>'+money(q.donation)+'</td><td>'+money(q.rent)+'</td><td>'+money(q.expense)+'</td><td>'+money(close)+'</td></tr>';bal=close});html+='</tbody></table>';root.innerHTML=buildPrintableDocument(html);root.style.display='block';document.body.classList.add('print-single');window.print();document.body.classList.remove('print-single');root.style.display='none'}
 function printSelectedRecord(y,ms){
  const x=db[String(y)],root=document.getElementById('singlePrint');
- let html='<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">MEMBER & MONTHLY PAYMENT REGISTER · '+esc(y)+'</h2><p class="center"><b>'+esc(ms.join(' · '))+'</b></p>';
+ let html='<h1 class="center">GRAM DAHELI YUVA SAMITI</h1><h2 class="center">MEMBER & MONTHLY PAYMENT REGISTER · '+esc(y)+'</h2><p class="center"><b>'+esc(ms.join(' · '))+'</b></p>';
  html+='<table><thead><tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th>'+esc(v)+'</th>').join('')+'</tr></thead><tbody>';
  (x.members||[]).forEach((mem,i)=>{html+='<tr><td>'+(i+1)+'</td><td>'+esc(mem.id)+'</td><td>'+esc(mem.name)+'</td><td>'+esc(mem.father)+'</td><td>'+esc(mem.mobile)+'</td>';ms.forEach(mo=>{const q=mem.payments?.[mo]||{},parts=[];if(hasPaymentAmount(q))parts.push(money(q.amount));const label=statusLabel(q);if(label)parts.push(label);html+='<td>'+esc(parts.join(' · ')||'—')+'</td>'});const late=ms.reduce((a,mo)=>{const q=mem.payments?.[mo]||{};return a+(hasLateFee(q)?(+q.late||0):0)},0);html+='<td>'+money(late)+'</td></tr>'});
  html+='</tbody><tfoot><tr><td colspan="5">TOTAL MEMBER MONTHLY COLLECTION</td>'+ms.map(mo=>'<td>'+money((x.members||[]).reduce((a,mem)=>a+paymentAmount(mem.payments?.[mo]),0))+'</td>').join('')+'<td>'+money((x.members||[]).reduce((a,mem)=>a+ms.reduce((b,mo)=>b+(hasLateFee(mem.payments?.[mo])?(+mem.payments[mo].late||0):0),0),0))+'</td></tr></tfoot></table>';
  let bal=openingForYear(y);html+='<h3>YEAR BALANCE REPORT</h3><table><thead><tr><th>Opening Balance</th><th>Total Collection</th><th>Total Donation</th><th>Total Rent</th><th>Total Expense</th><th>Closing Balance</th></tr></thead><tbody><tr><td>'+money(bal)+'</td><td>'+money(ms.reduce((a,mo)=>a+(x.members||[]).reduce((b,mem)=>b+paymentAmount(mem.payments?.[mo]),0),0))+'</td><td>'+money(ms.reduce((a,mo)=>a+donationTotalForMonth(mo)+(Number(x.donations?.[mo])||0),0))+'</td><td>'+money(ms.reduce((a,mo)=>a+rentTotalForMonth(mo),0))+'</td><td>'+money(ms.reduce((a,mo)=>a+expenseTotalForMonth(x,mo),0))+'</td><td>'+money(yearClosing(y))+'</td></tr></tbody></table>';
- root.innerHTML=buildPrintableDocument(html);root.style.display='block';document.body.classList.add('print-single');window.print();document.body.classList.remove('print-single');root.style.display='none';
+ root.innerHTML=buildPrintableDocument(html);root.style.display='block';document.body.classList.add('print-single');window.addEventListener('afterprint', function cleanupPrint() {
+  document.body.classList.remove('print-single');
+  root.style.display = 'none';
+}, { once: true });
+
+window.print();
 }
 function refreshMemberIdOptions(){
  const el=document.getElementById('mid'); if(!el)return;
@@ -1483,7 +1552,7 @@ function openingForYear(y){let prev=String(Number(y)-1);return db[prev]?yearClos
 function yearClosing(y){let x=db[String(y)];if(!x)return 0;let prev=String(Number(y)-1);let bal=db[prev]?yearClosing(prev):(Number(x.opening)||0);yearMonths(x,y).forEach(m=>{let col=(x.members||[]).reduce((a,mem)=>a+paymentAmount(mem.payments?.[m]),0);bal+=col+donationTotalForMonth(m)+(Number(x.donations?.[m])||0)+rentTotalForMonth(m)-expenseTotalForMonth(x,m)});return bal}
 function switchYear(y){yr=String(y);if(!db[yr])return;syncMembersForYear(yr);syncForwardFrom(yr);store();render()}
 function statusLabel(p){const map={advance:'Advance Paid',late:'With Late Payment',unpaid:'Unpaid',on_join:'Paid on Join',rejoined:'Rejoined',left:'Left the Committee',left_committee:'Left the Committee'};return map[String(p?.status||'').toLowerCase()]||''}
-function printAllYears(){const root=document.getElementById('allPrint');let html='<h1 class="center">ग्राम दहेली युवा समिति · ALL YEARS MEMBER & PAYMENT REGISTER</h1>';const years=Object.keys(db).filter(y=>/^\d{4}$/.test(y)).sort((a,b)=>+a-+b);years.forEach(y=>{const x=db[y];if(!x)return;const ms=yearMonths(x,y);if(!ms.length&&!x.members?.length)return;html+='<section class="panel"><h2 class="center">MEMBER & MONTHLY PAYMENT REGISTER · '+y+'</h2><table><thead><tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th>'+esc(v)+'</th>').join('')+'</tr></thead><tbody>';(x.members||[]).forEach((m,i)=>{html+='<tr><td>'+(i+1)+'</td><td>'+esc(m.id)+'</td><td>'+esc(m.name)+'</td><td>'+esc(m.father)+'</td><td>'+esc(m.mobile)+'</td>';ms.forEach(mo=>{const q=m.payments?.[mo]||{},parts=[];if(hasPaymentAmount(q))parts.push(money(q.amount));const lab=statusLabel(q);if(lab)parts.push(lab);html+='<td>'+esc(parts.join(' · ')||'—')+'</td>'});const late=(Object.entries(m.payments||{}).filter(([mo])=>mo.endsWith('-'+y)).reduce((a,[,q])=>a+(hasLateFee(q)?(+q.late||0):0),0));html+='<td>'+money(late)+'</td></tr>'});html+='</tbody><tfoot><tr><td colspan="5">TOTAL MEMBER MONTHLY COLLECTION</td>'+ms.map(mo=>'<td>'+money((x.members||[]).reduce((a,m)=>a+paymentAmount(m.payments?.[mo]),0))+'</td>').join('')+'<td></td></tr></tfoot></table><h3>MONTH-WISE OPENING & CLOSING BALANCE</h3><table><thead><tr><th>Month</th><th>Opening Balance</th><th>Collection</th><th>Donation</th><th>Rent</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody>';let bal=openingForYear(y);ms.forEach(mo=>{let col=(x.members||[]).reduce((a,m)=>a+paymentAmount(m.payments?.[mo]),0),don=donationTotalForMonth(mo)+(Number(x.donations?.[mo])||0),rent=rentTotalForMonth(mo),ex=expenseTotalForMonth(x,mo),close=bal+col+don+rent-ex;html+='<tr><td>'+mo+'</td><td>'+money(bal)+'</td><td>'+money(col)+'</td><td>'+money(don)+'</td><td>'+money(rent)+'</td><td>'+money(ex)+'</td><td>'+money(close)+'</td></tr>';bal=close});html+='</tbody></table></section>'});root.innerHTML=buildPrintableDocument(html);document.body.classList.add('print-all');window.print();setTimeout(()=>document.body.classList.remove('print-all'),500)}
+function printAllYears(){const root=document.getElementById('allPrint');let html='<h1 class="center">GRAM DAHELI YUVA SAMITI · ALL YEARS MEMBER & PAYMENT REGISTER</h1>';const years=Object.keys(db).filter(y=>/^\d{4}$/.test(y)).sort((a,b)=>+a-+b);years.forEach(y=>{const x=db[y];if(!x)return;const ms=yearMonths(x,y);if(!ms.length&&!x.members?.length)return;html+='<section class="panel"><h2 class="center">MEMBER & MONTHLY PAYMENT REGISTER · '+y+'</h2><table><thead><tr>'+['S.No','Member ID','Name',"Father's Name",'Mobile',...ms,'Late Fee (₹)'].map(v=>'<th>'+esc(v)+'</th>').join('')+'</tr></thead><tbody>';(x.members||[]).forEach((m,i)=>{html+='<tr><td>'+(i+1)+'</td><td>'+esc(m.id)+'</td><td>'+esc(m.name)+'</td><td>'+esc(m.father)+'</td><td>'+esc(m.mobile)+'</td>';ms.forEach(mo=>{const q=m.payments?.[mo]||{},parts=[];if(hasPaymentAmount(q))parts.push(money(q.amount));const lab=statusLabel(q);if(lab)parts.push(lab);html+='<td>'+esc(parts.join(' · ')||'—')+'</td>'});const late=(Object.entries(m.payments||{}).filter(([mo])=>mo.endsWith('-'+y)).reduce((a,[,q])=>a+(hasLateFee(q)?(+q.late||0):0),0));html+='<td>'+money(late)+'</td></tr>'});html+='</tbody><tfoot><tr><td colspan="5">TOTAL MEMBER MONTHLY COLLECTION</td>'+ms.map(mo=>'<td>'+money((x.members||[]).reduce((a,m)=>a+paymentAmount(m.payments?.[mo]),0))+'</td>').join('')+'<td></td></tr></tfoot></table><h3>MONTH-WISE OPENING & CLOSING BALANCE</h3><table><thead><tr><th>Month</th><th>Opening Balance</th><th>Collection</th><th>Donation</th><th>Rent</th><th>Expense</th><th>Closing Balance</th></tr></thead><tbody>';let bal=openingForYear(y);ms.forEach(mo=>{let col=(x.members||[]).reduce((a,m)=>a+paymentAmount(m.payments?.[mo]),0),don=donationTotalForMonth(mo)+(Number(x.donations?.[mo])||0),rent=rentTotalForMonth(mo),ex=expenseTotalForMonth(x,mo),close=bal+col+don+rent-ex;html+='<tr><td>'+mo+'</td><td>'+money(bal)+'</td><td>'+money(col)+'</td><td>'+money(don)+'</td><td>'+money(rent)+'</td><td>'+money(ex)+'</td><td>'+money(close)+'</td></tr>';bal=close});html+='</tbody></table></section>'});root.innerHTML=buildPrintableDocument(html);document.body.classList.add('print-all');window.print();setTimeout(()=>document.body.classList.remove('print-all'),500)}
 
 function printSingleMonth(mo){const x=d();if(!mo||!x.months.includes(mo))return alert('Is year ke liye month available nahi hai');printSelectedRecord(String(yr),[mo])}
 function migrateCrossYearMonths(){Object.keys(db).filter(y=>/^\d{4}$/.test(y)).forEach(y=>{const x=db[y];(x.months||[]).slice().forEach(mo=>{const parts=mo.split('-'),yy=parts[1];if(yy&&yy!==y&&/^\d{4}$/.test(yy)){if(!db[yy])db[yy]=blank(yy);if(!db[yy].months.includes(mo))db[yy].months.push(mo);(x.members||[]).forEach(old=>{let dest=(db[yy].members||[]).find(a=>a.id===old.id);if(!dest){dest=memberCopy(old);db[yy].members.push(dest)}dest.payments=dest.payments||{};if(old.payments?.[mo]&&!dest.payments[mo])dest.payments[mo]=old.payments[mo]});if(x.donations?.[mo]!==undefined)db[yy].donations[mo]=x.donations[mo];if(x.expenses?.[mo]!==undefined)db[yy].expenses[mo]=x.expenses[mo];x.months=x.months.filter(v=>v!==mo);if(x.donations)delete x.donations[mo];if(x.expenses)delete x.expenses[mo]}})})}
@@ -1525,14 +1594,14 @@ function initExpenseUI(preferredMonth=''){const sel=document.getElementById('exp
 function refreshExpenseBillOptions(){}
 function collectExpenseRows(){let rows=[];Object.keys(db).filter(y=>/^\d{4}$/.test(y)).forEach(y=>expenseRows(db[y]).forEach(e=>rows.push({...e,year:y,month:e.month||monthFromDate(e.date)})));return rows.sort((a,b)=>(a.month||'').localeCompare(b.month||'')||(a.date||'').localeCompare(b.date||''))}
 function renderExpenses(){const mo=document.getElementById('expenseMonth')?.value||'ALL';const all=collectExpenseRows();const rows=mo==='ALL'?all:all.filter(e=>e.month===mo);const body=document.querySelector('#expenseTable tbody');body.innerHTML=rows.map((e,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(e.month||'')+'</td><td>'+esc(e.bill||'')+'</td><td>'+esc(e.date||'')+'</td><td>'+esc(e.detail||'')+'</td><td>'+money(e.amount)+'</td><td>'+(e.autoBill?'<span class="muted">Bill Details se managed</span>':'<button class="light" onclick="editExpenseEntry(\''+e.id+'\')">✎ Edit</button> <button class="danger" onclick="deleteExpenseEntry(\''+e.id+'\')">Delete</button>')+'</td></tr>').join('')||'<tr><td colspan="7">No expense entries</td></tr>';const total=rows.reduce((a,e)=>a+(Number(e.amount)||0),0);document.querySelector('#expenseTable tfoot').innerHTML='<tr><td colspan="5"><b>'+(mo==='ALL'?'All Months Total Expense':'Total Expense')+'</b></td><td><b>'+money(total)+'</b></td><td></td></tr>';}
-function printExpenseAll(){let rows=[];Object.keys(db).filter(y=>/^\d{4}$/.test(y)).sort().forEach(y=>{const x=db[y];rows=rows.concat(expenseRows(x).filter(e=>e.month).map(e=>({...e,year:y})));});rows.sort((a,b)=>(a.month||'').localeCompare(b.month||'')||(a.date||'').localeCompare(b.date||''));const total=rows.reduce((a,e)=>a+(+e.amount||0),0);const html='<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">ALL EXPENSE REPORT</h2><table><thead><tr><th>S.No.</th><th>Month</th><th>Bill Number</th><th>Date</th><th>Details</th><th>Amount (₹)</th></tr></thead><tbody>'+rows.map((e,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(e.month)+'</td><td>'+esc(e.bill)+'</td><td>'+esc(e.date||'')+'</td><td>'+esc(e.detail||'')+'</td><td>'+money(e.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="4">Grand Total Expense</td><td>'+money(total)+'</td></tr></tfoot></table>';printCustom(html);}
-function printExpenseMonth(){const mo=document.getElementById('expenseMonth').value;if(!mo||mo==='ALL')return printExpenseAll();const x=db[mo.split('-')[1]]||d(),rows=expenseRows(x).filter(e=>e.month===mo);let html='<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">MONTHLY EXPENSE REPORT</h2><p class="center"><b>'+esc(mo)+'</b></p><table><thead><tr><th>S.No.</th><th>Bill Number</th><th>Expense Date</th><th>Expense Details</th><th>Expense Amount (₹)</th></tr></thead><tbody>'+rows.map((e,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(e.bill)+'</td><td>'+esc(e.date)+'</td><td>'+esc(e.detail)+'</td><td>'+money(e.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="3"><b>Total Expense</b></td><td><b>'+money(expenseTotalForMonth(x,mo))+'</b></td></tr></tfoot></table><h3 class="center">OVERALL FINANCIAL SUMMARY</h3>'+document.getElementById('summary').outerHTML;const root=document.getElementById('expensePrint');root.innerHTML=buildPrintableDocument(html);root.style.display='block';document.body.classList.add('print-expense');window.print();document.body.classList.remove('print-expense');root.style.display='none';}
+function printExpenseAll(){let rows=[];Object.keys(db).filter(y=>/^\d{4}$/.test(y)).sort().forEach(y=>{const x=db[y];rows=rows.concat(expenseRows(x).filter(e=>e.month).map(e=>({...e,year:y})));});rows.sort((a,b)=>(a.month||'').localeCompare(b.month||'')||(a.date||'').localeCompare(b.date||''));const total=rows.reduce((a,e)=>a+(+e.amount||0),0);const html='<h1 class="center">GRAM DAHELI YUVA SAMITI</h1><h2 class="center">ALL EXPENSE REPORT</h2><table><thead><tr><th>S.No.</th><th>Month</th><th>Bill Number</th><th>Date</th><th>Details</th><th>Amount (₹)</th></tr></thead><tbody>'+rows.map((e,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(e.month)+'</td><td>'+esc(e.bill)+'</td><td>'+esc(e.date||'')+'</td><td>'+esc(e.detail||'')+'</td><td>'+money(e.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="4">Grand Total Expense</td><td>'+money(total)+'</td></tr></tfoot></table>';printCustom(html);}
+function printExpenseMonth(){const mo=document.getElementById('expenseMonth').value;if(!mo||mo==='ALL')return printExpenseAll();const x=db[mo.split('-')[1]]||d(),rows=expenseRows(x).filter(e=>e.month===mo);let html='<h1 class="center">GRAM DAHELI YUVA SAMITI</h1><h2 class="center">MONTHLY EXPENSE REPORT</h2><p class="center"><b>'+esc(mo)+'</b></p><table><thead><tr><th>S.No.</th><th>Bill Number</th><th>Expense Date</th><th>Expense Details</th><th>Expense Amount (₹)</th></tr></thead><tbody>'+rows.map((e,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(e.bill)+'</td><td>'+esc(e.date)+'</td><td>'+esc(e.detail)+'</td><td>'+money(e.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="3"><b>Total Expense</b></td><td><b>'+money(expenseTotalForMonth(x,mo))+'</b></td></tr></tfoot></table><h3 class="center">OVERALL FINANCIAL SUMMARY</h3>'+document.getElementById('summary').outerHTML;const root=document.getElementById('expensePrint');root.innerHTML=buildPrintableDocument(html);root.style.display='block';document.body.classList.add('print-expense');window.print();document.body.classList.remove('print-expense');root.style.display='none';}
 
 
-function printExpenseYear(){const y=String(document.getElementById('expenseMonth').value||'').split('-')[1]||yr;const x=db[y]||d(),rows=expenseRows(x).filter(e=>String(e.month||'').endsWith('-'+y)).sort((a,b)=>(a.month||'').localeCompare(b.month||'')||(a.date||'').localeCompare(b.date||''));let html='<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">YEAR-WISE EXPENSE REPORT</h2><p class="center"><b>'+esc(y)+'</b></p><table><thead><tr><th>S.No.</th><th>Month</th><th>Bill Number</th><th>Expense Date</th><th>Expense Details</th><th>Expense Amount (₹)</th></tr></thead><tbody>'+rows.map((e,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(e.month)+'</td><td>'+esc(e.bill)+'</td><td>'+esc(e.date||'')+'</td><td>'+esc(e.detail||'')+'</td><td>'+money(e.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="4"><b>Total Yearly Expense</b></td><td><b>'+money(rows.reduce((a,e)=>a+(+e.amount||0),0)+(x.months||[]).reduce((a,m)=>a+(Number(x.expenses?.[m])||0),0))+'</b></td></tr></tfoot></table><h3 class="center">OVERALL FINANCIAL SUMMARY</h3>'+document.getElementById('summary').outerHTML;const root=document.getElementById('expensePrint');root.innerHTML=buildPrintableDocument(html);root.style.display='block';document.body.classList.add('print-expense');window.print();document.body.classList.remove('print-expense');root.style.display='none';}
+function printExpenseYear(){const y=String(document.getElementById('expenseMonth').value||'').split('-')[1]||yr;const x=db[y]||d(),rows=expenseRows(x).filter(e=>String(e.month||'').endsWith('-'+y)).sort((a,b)=>(a.month||'').localeCompare(b.month||'')||(a.date||'').localeCompare(b.date||''));let html='<h1 class="center">GRAM DAHELI YUVA SAMITI</h1><h2 class="center">YEAR-WISE EXPENSE REPORT</h2><p class="center"><b>'+esc(y)+'</b></p><table><thead><tr><th>S.No.</th><th>Month</th><th>Bill Number</th><th>Expense Date</th><th>Expense Details</th><th>Expense Amount (₹)</th></tr></thead><tbody>'+rows.map((e,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(e.month)+'</td><td>'+esc(e.bill)+'</td><td>'+esc(e.date||'')+'</td><td>'+esc(e.detail||'')+'</td><td>'+money(e.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="4"><b>Total Yearly Expense</b></td><td><b>'+money(rows.reduce((a,e)=>a+(+e.amount||0),0)+(x.months||[]).reduce((a,m)=>a+(Number(x.expenses?.[m])||0),0))+'</b></td></tr></tfoot></table><h3 class="center">OVERALL FINANCIAL SUMMARY</h3>'+document.getElementById('summary').outerHTML;const root=document.getElementById('expensePrint');root.innerHTML=buildPrintableDocument(html);root.style.display='block';document.body.classList.add('print-expense');window.print();document.body.classList.remove('print-expense');root.style.display='none';}
 
 
-function printExpenseRowsReport(rows,title){const total=rows.reduce((a,e)=>a+(Number(e.amount)||0),0);const html='<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">'+esc(title)+'</h2><table><thead><tr><th>S.No.</th><th>Month</th><th>Bill Number</th><th>Expense Date</th><th>Expense Details</th><th>Expense Amount (₹)</th></tr></thead><tbody>'+rows.map((e,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(e.month||'')+'</td><td>'+esc(e.bill||'')+'</td><td>'+esc(e.date||'')+'</td><td>'+esc(e.detail||'')+'</td><td>'+money(e.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="5"><b>Total Expense</b></td><td><b>'+money(total)+'</b></td></tr></tfoot></table>';printCustom(html,false)}
+function printExpenseRowsReport(rows,title){const total=rows.reduce((a,e)=>a+(Number(e.amount)||0),0);const html='<h1 class="center">GRAM DAHELI YUVA SAMITI</h1><h2 class="center">'+esc(title)+'</h2><table><thead><tr><th>S.No.</th><th>Month</th><th>Bill Number</th><th>Expense Date</th><th>Expense Details</th><th>Expense Amount (₹)</th></tr></thead><tbody>'+rows.map((e,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(e.month||'')+'</td><td>'+esc(e.bill||'')+'</td><td>'+esc(e.date||'')+'</td><td>'+esc(e.detail||'')+'</td><td>'+money(e.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="5"><b>Total Expense</b></td><td><b>'+money(total)+'</b></td></tr></tfoot></table>';printCustom(html,false)}
 function printExpenseMonthRange(){let from=document.getElementById('expenseFromMonth').value,to=document.getElementById('expenseToMonth').value;if(!from||!to)return alert('Month range select karein.');let a=monthKey(from),b=monthKey(to);if(a>b)[from,to]=[to,from], [a,b]=[b,a];const rows=collectExpenseRows().filter(e=>monthKey(e.month)>=a&&monthKey(e.month)<=b);printExpenseRowsReport(rows,'EXPENSE REPORT · '+from+' TO '+to)}
 function printExpenseYearRange(){let from=Number(document.getElementById('expenseFromYear').value),to=Number(document.getElementById('expenseToYear').value);if(!from||!to)return alert('Year range select karein.');if(from>to)[from,to]=[to,from];const rows=collectExpenseRows().filter(e=>{const y=Number(String(e.month||'').slice(-4));return y>=from&&y<=to});printExpenseRowsReport(rows,'EXPENSE REPORT · '+from+' TO '+to)}
 
@@ -1630,7 +1699,7 @@ function syncBillExpense(b){const y=String(b.date||'').slice(0,4),mo=monthFromDa
 function removeBillExpense(id){Object.keys(db).forEach(y=>{if(Array.isArray(db[y].expenseEntries))db[y].expenseEntries=db[y].expenseEntries.filter(e=>e.sourceBillId!==id)});store();}
 function editBill(id){const b=allBills().find(x=>x.id===id);if(!b)return;editingBillId=id;refreshBillDetailNumberOptions(b.no);billDate.value=b.date||'';updateBillMonthDisplay();billTitleInput.value=b.title||'';billItemRows.innerHTML='';(b.items||[b]).forEach((x,i)=>addBillItemRow({...x,attachments:[...(x.attachments||[]),...(i===0?(b.attachments||[]):[])]}));billSaveBtn.textContent='Save Bill Changes';}
 function deleteBill(id){const b=allBills().find(x=>x.id===id);if(!b)return;if(!confirm('Poora Bill '+b.no+' aur uske sabhi items/attachments delete karein? Bill number dobara use nahi hoga.'))return;saveRows(BILL_KEY,allBills().filter(x=>x.id!==id));removeBillExpense(id);if(editingBillId===id)resetBillForm();renderBills();}
-function billPrintableHtml(b){const items=b.items||[b],total=items.reduce((s,e)=>s+(+e.amount||0),0);return `<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">${esc(b.title||'BILL')}</h2><p><b>Bill Number:</b> ${esc(b.no)} &nbsp; <b>Date:</b> ${esc(b.date||'')}</p><table><thead><tr><th>S.No</th><th>Category</th><th>Material / Work Details</th><th>Use / Purpose</th><th>Unit</th><th>Rate / Unit (₹)</th><th>Amount (₹)</th></tr></thead><tbody>${items.map((e,i)=>`<tr><td>${i+1}</td><td>${esc(e.category)}</td><td>${esc(e.work)}</td><td>${esc(e.purpose)}</td><td>${esc(e.unit)}</td><td>${money(e.rate)}</td><td>${money(e.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="6"><b>Total Bill Amount</b></td><td><b>${money(total)}</b></td></tr></tfoot></table>`}
+function billPrintableHtml(b){const items=b.items||[b],total=items.reduce((s,e)=>s+(+e.amount||0),0);return `<h1 class="center">GRAM DAHELI YUVA SAMITI</h1><h2 class="center">${esc(b.title||'BILL')}</h2><p><b>Bill Number:</b> ${esc(b.no)} &nbsp; <b>Date:</b> ${esc(b.date||'')}</p><table><thead><tr><th>S.No</th><th>Category</th><th>Material / Work Details</th><th>Use / Purpose</th><th>Unit</th><th>Rate / Unit (₹)</th><th>Amount (₹)</th></tr></thead><tbody>${items.map((e,i)=>`<tr><td>${i+1}</td><td>${esc(e.category)}</td><td>${esc(e.work)}</td><td>${esc(e.purpose)}</td><td>${esc(e.unit)}</td><td>${money(e.rate)}</td><td>${money(e.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="6"><b>Total Bill Amount</b></td><td><b>${money(total)}</b></td></tr></tfoot></table>`}
 function billAttachmentInlineHtml(b){const items=b.items||[b];let html='';for(let i=0;i<items.length;i++){const files=(items[i].attachments||[]).concat(i===0?(b.attachments||[]):[]);for(const f of files){if(!f||!f.data)continue;const name=esc(f.name||'Bill Attachment');const isImage=String(f.type||'').startsWith('image/')||/^data:image\//i.test(String(f.data));html+=`<div class="bill-attachment-inline"><div class="bill-attachment-name">Item ${i+1} — ${name}</div>${isImage?`<img src="${f.data}" alt="${name}">`:`<iframe src="${f.data}" title="${name}"></iframe>`}</div>`}}return html}
 async function ensureBillPdfJs(){
  if(window.pdfjsLib)return window.pdfjsLib;
@@ -1679,9 +1748,9 @@ function printBillReport(monthFilter='all'){const sel=document.getElementById('b
 function buildFinancialFooter(){const table=document.getElementById('summary')?.outerHTML||'';return `<div class="panel"><div class="sub" style="font-size:16px;margin:12px 0">OVERALL FINANCIAL SUMMARY</div><div class="summary">${table}</div>${buildApprovalHtml()}<div class="center" style="margin-top:10px"><b>Gram Daheli Yuva Samiti · Official Record</b></div></div>`}
 function updateSharedFooters(){const html=buildFinancialFooter();const exp=document.getElementById('expenseFooter');if(exp)exp.innerHTML=html;const don=document.getElementById('donationFooter');if(don)don.innerHTML=html;const rent=document.getElementById('rentFooter');if(rent)rent.innerHTML=html;}
 function showMainTab(id){document.querySelectorAll('[data-tab]').forEach(el=>el.style.display=el.dataset.tab===id?'':'none');document.querySelectorAll('[data-tab-btn]').forEach(b=>b.classList.toggle('active',b.dataset.tabBtn===id));}
-function printDonationMonth(){const y=donYear.value,mo=donMonth.value;if(mo==='all'){alert('Monthly print ke liye Donation Month select karein.');return;}const rows=allDonations().filter(e=>String(e.date||'').startsWith(y+'-')&&monthFromDate(e.date)===mo).sort((a,b)=>a.date.localeCompare(b.date));const html=`<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">MONTHLY DONATION REPORT</h2><p class="center">${mo}</p><table><thead><tr><th>S.No.</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th></tr></thead><tbody>${rows.map((e,i)=>`<tr><td>${i+1}</td><td>${esc(monthFromDate(e.date))}</td><td>${esc(e.date)}</td><td>${esc(e.receipt)}</td><td>${esc(e.name)}</td><td>${esc(e.mobile)}</td><td>${esc(e.purpose)}</td><td>${money(e.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="6">Total Donation Received (₹)</td><td>${money(rows.reduce((a,e)=>a+(+e.amount||0),0))}</td></tr></tfoot></table>`;printCustom(html);}
-function printDonationAll(){const rows=allDonations().slice().sort((a,b)=>(a.date||'').localeCompare(b.date||''));const total=rows.reduce((a,e)=>a+(+e.amount||0),0);const html='<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">ALL DONATION REPORT</h2><p class="center">ALL YEARS</p><table><thead><tr><th>S.No.</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th></tr></thead><tbody>'+rows.map((e,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(e.date)+'</td><td>'+esc(e.receipt)+'</td><td>'+esc(e.name)+'</td><td>'+esc(e.mobile)+'</td><td>'+esc(e.purpose)+'</td><td>'+money(e.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="6">Total Donation Received (₹)</td><td>'+money(total)+'</td></tr></tfoot></table>';printCustom(html);}
-function printDonationReport(){const y=donYear.value,rows=allDonations().filter(e=>String(e.date||'').startsWith(y+'-'));let html=`<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">DONATION DETAILS</h2><p class="center">${y}</p><table><thead><tr><th>S.No.</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th></tr></thead><tbody>${rows.map((e,i)=>`<tr><td>${i+1}</td><td>${esc(monthFromDate(e.date))}</td><td>${esc(e.date)}</td><td>${esc(e.receipt)}</td><td>${esc(e.name)}</td><td>${esc(e.mobile)}</td><td>${esc(e.purpose)}</td><td>${money(e.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="6">Total Donation Received (₹)</td><td>${money(rows.reduce((a,e)=>a+(+e.amount||0),0))}</td></tr></tfoot></table><h3>MONTH-WISE DONATION TOTAL</h3><table><thead><tr><th>Month</th><th>Total Donation (₹)</th></tr></thead><tbody>${Array.from({length:12},(_,i)=>{const m=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][i]+'-'+y;return `<tr><td>${m}</td><td>${money(rows.filter(e=>monthFromDate(e.date)===m).reduce((a,e)=>a+(+e.amount||0),0))}</td></tr>`}).join('')}</tbody></table>`;printCustom(html);}
+function printDonationMonth(){const y=donYear.value,mo=donMonth.value;if(mo==='all'){alert('Monthly print ke liye Donation Month select karein.');return;}const rows=allDonations().filter(e=>String(e.date||'').startsWith(y+'-')&&monthFromDate(e.date)===mo).sort((a,b)=>a.date.localeCompare(b.date));const html=`<h1 class="center">GRAM DAHELI YUVA SAMITI</h1><h2 class="center">MONTHLY DONATION REPORT</h2><p class="center">${mo}</p><table><thead><tr><th>S.No.</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th></tr></thead><tbody>${rows.map((e,i)=>`<tr><td>${i+1}</td><td>${esc(monthFromDate(e.date))}</td><td>${esc(e.date)}</td><td>${esc(e.receipt)}</td><td>${esc(e.name)}</td><td>${esc(e.mobile)}</td><td>${esc(e.purpose)}</td><td>${money(e.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="6">Total Donation Received (₹)</td><td>${money(rows.reduce((a,e)=>a+(+e.amount||0),0))}</td></tr></tfoot></table>`;printCustom(html);}
+function printDonationAll(){const rows=allDonations().slice().sort((a,b)=>(a.date||'').localeCompare(b.date||''));const total=rows.reduce((a,e)=>a+(+e.amount||0),0);const html='<h1 class="center">GRAM DAHELI YUVA SAMITI</h1><h2 class="center">ALL DONATION REPORT</h2><p class="center">ALL YEARS</p><table><thead><tr><th>S.No.</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th></tr></thead><tbody>'+rows.map((e,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(e.date)+'</td><td>'+esc(e.receipt)+'</td><td>'+esc(e.name)+'</td><td>'+esc(e.mobile)+'</td><td>'+esc(e.purpose)+'</td><td>'+money(e.amount)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="6">Total Donation Received (₹)</td><td>'+money(total)+'</td></tr></tfoot></table>';printCustom(html);}
+function printDonationReport(){const y=donYear.value,rows=allDonations().filter(e=>String(e.date||'').startsWith(y+'-'));let html=`<h1 class="center">GRAM DAHELI YUVA SAMITI</h1><h2 class="center">DONATION DETAILS</h2><p class="center">${y}</p><table><thead><tr><th>S.No.</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th></tr></thead><tbody>${rows.map((e,i)=>`<tr><td>${i+1}</td><td>${esc(monthFromDate(e.date))}</td><td>${esc(e.date)}</td><td>${esc(e.receipt)}</td><td>${esc(e.name)}</td><td>${esc(e.mobile)}</td><td>${esc(e.purpose)}</td><td>${money(e.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="6">Total Donation Received (₹)</td><td>${money(rows.reduce((a,e)=>a+(+e.amount||0),0))}</td></tr></tfoot></table><h3>MONTH-WISE DONATION TOTAL</h3><table><thead><tr><th>Month</th><th>Total Donation (₹)</th></tr></thead><tbody>${Array.from({length:12},(_,i)=>{const m=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][i]+'-'+y;return `<tr><td>${m}</td><td>${money(rows.filter(e=>monthFromDate(e.date)===m).reduce((a,e)=>a+(+e.amount||0),0))}</td></tr>`}).join('')}</tbody></table>`;printCustom(html);}
 function printBillMonthly(){const mo=document.getElementById('billPrintMonth')?.value;if(!mo||mo==='all'){alert('Monthly print ke liye month select karein.');return;}printBillReport(mo);}
 function printBillReport(monthFilter='all'){const sel=document.getElementById('billPrintMonth');if(sel)sel.value=monthFilter;return printModuleSection('bill','preview')}
 function printStandalone(html,letterhead=true,receipt=false){const root=document.getElementById('singlePrint');const bg=letterhead&&docBrand.letterhead?'<img class="print-letterhead-bg" src="'+docBrand.letterhead+'">':'';root.innerHTML=bg+'<div class="print-content">'+html+'</div>';root.style.display='block';document.body.classList.add('print-single');if(receipt)document.body.classList.add('print-receipt');window.print();document.body.classList.remove('print-single');document.body.classList.remove('print-receipt');document.body.classList.remove('print-rent-a3');root.style.display='none'}
@@ -1739,11 +1808,11 @@ function resetRentForm(){editingRentId=null;rentDate.value='';rentMonthDisplay.v
 function editRentCollection(id){const e=allRentCollections().find(x=>x.id===id);if(!e)return;editingRentId=id;rentDate.value=e.date;updateRentMonthDisplay();rentNo.value=e.no;const display=document.getElementById('rentNoDisplay');if(display)display.value=e.no;rentItemRows.innerHTML='';(e.items||[]).forEach(x=>addRentItemRow(x));rentSaveBtn.textContent='Save Changes';showMainTab('rentTab')}
 function deleteRentCollection(id){if(!confirm('Yeh poori Rent Collection delete karein?'))return;saveRows(RENT_KEY,allRentCollections().filter(x=>x.id!==id));renderRentCollections();render();updateSharedFooters()}
 function renderRentCollections(){const a=allRentCollections().slice().sort((x,y)=>(y.date||'').localeCompare(x.date||''));const body=document.querySelector('#rentTable tbody');if(!body)return;body.innerHTML=a.map((e,i)=>{const its=e.items||[];const consumers=[...new Set(its.map(x=>x.consumer).filter(Boolean))].join(', ');const materials=its.map(x=>x.material).filter(Boolean).join(', ');const purposes=[...new Set(its.map(x=>x.purpose).filter(Boolean))].join(', ');return `<tr><td>${i+1}</td><td>${esc(e.month)}</td><td>${esc(e.date)}</td><td>${esc(e.no)}</td><td>${esc(consumers)}</td><td>${esc(materials)}</td><td>${esc(purposes)}</td><td>${money(e.total)}</td><td class="no-print"><button class="light" onclick="editRentCollection('${e.id}')">Edit</button> <button class="light" onclick="printRentReceipt('${e.id}')">Receipt</button> <button class="danger" onclick="deleteRentCollection('${e.id}')">Delete</button></td></tr>`}).join('')||'<tr><td colspan="9">No Rent Collections saved</td></tr>';document.querySelector('#rentTable tfoot').innerHTML=`<tr class="total-row"><td colspan="7">Total Rent Received (₹)</td><td>${money(a.reduce((z,e)=>z+(Number(e.total)||0),0))}</td><td></td></tr>`;const sel=document.getElementById('rentPrintMonth'),cur=sel.value,months=[...new Set(a.map(e=>e.month))].sort((x,y)=>monthKey(x)-monthKey(y));sel.innerHTML='<option value="all">All Months</option>'+months.map(m=>`<option value="${m}">${m}</option>`).join('');if(months.includes(cur))sel.value=cur;}
-function rentReceiptHtml(e){const stamp=docBrand.stamp?`<div class="receipt-watermark"><img src="${docBrand.stamp}" alt="Committee stamp watermark"></div>`:'';const rows=(e.items||[]).map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x.consumer)}</td><td>${esc(x.material)}</td><td>${esc(x.purpose)}</td><td>${esc(x.qty)}</td><td>${money(x.rate)}</td><td>${money(x.amount)}</td></tr>`).join('');const signers=[['prepared','PREPARED BY'],['verified','VERIFIED BY'],['approved','APPROVED BY']].map(([k,l])=>`<div class="signer"><div><b>${l}</b></div>${docBrand[k+'Sign']?`<img src="${docBrand[k+'Sign']}" alt="${l} signature">`:''}<div><b>${esc(docBrand[k+'Name']||'________________')}</b></div><small>${esc(docBrand[k+'Post']||'')}</small></div>`).join('');const files=(e.items||[]).flatMap(x=>x.attachments||[]).map(f=>esc(f.name)).filter(Boolean);return `<div class="receipt-card rent-id-card">${stamp}<div class="receipt-head"><h1>ग्राम दहेली युवा समिति</h1><p>OFFICIAL RENT COLLECTION RECEIPT</p></div><div class="receipt-title">RENT COLLECTION RECEIPT</div><div class="rent-receipt-meta"><span><b>Collection Number:</b> ${esc(e.no)}</span><span><b>Collection Date:</b> ${esc(e.date)}</span><span><b>Collection Month:</b> ${esc(e.month)}</span></div><div class="rent-receipt-details"><table><thead><tr><th>S.No.</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Unit / Qty</th><th>Rate / Unit (₹)</th><th>Amount (₹)</th></tr></thead><tbody>${rows}</tbody></table></div><div class="rent-receipt-total">TOTAL AMOUNT RECEIVED: ${money(e.total)}</div>${files.length?`<div class="rent-receipt-files"><b>Attachments:</b> ${files.join(', ')}</div>`:''}<div class="rent-receipt-signers">${signers}</div><div class="receipt-foot">ग्राम दहेली युवा समिति · Official Rent Collection Receipt · धन्यवाद!</div></div>`}
+function rentReceiptHtml(e){const stamp=docBrand.stamp?`<div class="receipt-watermark"><img src="${docBrand.stamp}" alt="Committee stamp watermark"></div>`:'';const rows=(e.items||[]).map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x.consumer)}</td><td>${esc(x.material)}</td><td>${esc(x.purpose)}</td><td>${esc(x.qty)}</td><td>${money(x.rate)}</td><td>${money(x.amount)}</td></tr>`).join('');const signers=[['prepared','PREPARED BY'],['verified','VERIFIED BY'],['approved','APPROVED BY']].map(([k,l])=>`<div class="signer"><div><b>${l}</b></div>${docBrand[k+'Sign']?`<img src="${docBrand[k+'Sign']}" alt="${l} signature">`:''}<div><b>${esc(docBrand[k+'Name']||'________________')}</b></div><small>${esc(docBrand[k+'Post']||'')}</small></div>`).join('');const files=(e.items||[]).flatMap(x=>x.attachments||[]).map(f=>esc(f.name)).filter(Boolean);return `<div class="receipt-card rent-id-card">${stamp}<div class="receipt-head"><h1>GRAM DAHELI YUVA SAMITI</h1><p>OFFICIAL RENT COLLECTION RECEIPT</p></div><div class="receipt-title">RENT COLLECTION RECEIPT</div><div class="rent-receipt-meta"><span><b>Collection Number:</b> ${esc(e.no)}</span><span><b>Collection Date:</b> ${esc(e.date)}</span><span><b>Collection Month:</b> ${esc(e.month)}</span></div><div class="rent-receipt-details"><table><thead><tr><th>S.No.</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Unit / Qty</th><th>Rate / Unit (₹)</th><th>Amount (₹)</th></tr></thead><tbody>${rows}</tbody></table></div><div class="rent-receipt-total">TOTAL AMOUNT RECEIVED: ${money(e.total)}</div>${files.length?`<div class="rent-receipt-files"><b>Attachments:</b> ${files.join(', ')}</div>`:''}<div class="rent-receipt-signers">${signers}</div><div class="receipt-foot">GRAM DAHELI YUVA SAMITI · Official Rent Collection Receipt · धन्यवाद!</div></div>`}
 function printRentReceipt(id){const e=allRentCollections().find(x=>x.id===id);if(!e)return;document.body.classList.add('print-rent-a3');printStandalone(rentReceiptHtml(e),false,true)}
-function printRentMonthly(){const mo=rentPrintMonth.value;if(mo==='all')return printRentAll();const a=allRentCollections().filter(e=>e.month===mo);printRentReport(a,'MONTHLY RENT COLLECTION REPORT · '+mo)}
-function printRentAll(){printRentReport(allRentCollections().slice().sort((a,b)=>(a.date||'').localeCompare(b.date||'')),'ALL RENT COLLECTIONS · ALL YEARS')}
-function printRentReport(a,title){const html=`<h1 class="center">ग्राम दहेली युवा समिति</h1><h2 class="center">${title}</h2><table><thead><tr><th>S.No.</th><th>Collection No.</th><th>Date</th><th>Month</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Qty</th><th>Rate</th><th>Amount</th></tr></thead><tbody>${a.flatMap((e)=>e.items.map((x)=>({e,x}))).map((o,i)=>`<tr><td>${i+1}</td><td>${esc(o.e.no)}</td><td>${esc(o.e.date)}</td><td>${esc(o.e.month)}</td><td>${esc(o.x.consumer)}</td><td>${esc(o.x.material)}</td><td>${esc(o.x.purpose)}</td><td>${o.x.qty}</td><td>${money(o.x.rate)}</td><td>${money(o.x.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="9">TOTAL RENT COLLECTION</td><td>${money(a.reduce((z,e)=>z+(Number(e.total)||0),0))}</td></tr></tfoot></table>`;printCustom(html,false)}
+function printRentMonthly(){const mo=rentPrintMonth.value;if(mo==='all')return printRentAll();return printModuleSection('rent','preview')}
+function printRentAll(){const sel=document.getElementById('rentPrintMonth');if(sel)sel.value='all';return printModuleSection('rent','preview')}
+function printRentReport(a,title){const sel=document.getElementById('rentPrintMonth');if(sel)sel.value=(a||[]).length?(a[0].month||'all'):'all';return printModuleSection('rent','preview')}
 const DYSS_IMPORT_KEY='daheli_member_import_dyss_001_051_v1';
 if(localStorage.getItem(DYSS_IMPORT_KEY)!=='done'){
  const DYSS_MASTER=[{"id":"DYSS-001","name":"Satpal Rawat","father":"Mr. Sain Singh Rawat","mobile":"9627265112"},{"id":"DYSS-002","name":"Kamal Rawat","father":"Mr. Sain Singh Rawat","mobile":"9548813587"},{"id":"DYSS-003","name":"Jagpal Rawat","father":"Mr. Sain Singh Rawat","mobile":"6351153588"},{"id":"DYSS-004","name":"Rahul Rawat","father":"Mr. Pirthvi Singh Rawat","mobile":"8650363435"},{"id":"DYSS-005","name":"Rohit Rawat","father":"Mr. Pirthvi Singh Rawat","mobile":"9997445710"},{"id":"DYSS-006","name":"Rajender Singh Rawat","father":"Mr. Trilok Singh Rawat","mobile":"6395505213"},{"id":"DYSS-007","name":"Narendra Rawat","father":"Mr. Hayat Singh Rawat","mobile":"9315795229"},{"id":"DYSS-008","name":"Virendra singh panasi","father":"Mr. Mangal singh panasi","mobile":"9013368420"},{"id":"DYSS-009","name":"Surendra singh panasi","father":"Mr. Mangal singh panasi","mobile":"9811512178"},{"id":"DYSS-010","name":"Amit Rawat","father":"Mr. Thakur singh rawat","mobile":"9893049534"},{"id":"DYSS-011","name":"Sumit Rawat","father":"Mr. Thakur singh rawat","mobile":"9650513582"},{"id":"DYSS-012","name":"Puneet Negi","father":"Mr. Thakur singh Negi","mobile":"9717027800"},{"id":"DYSS-013","name":"Sanjay Rawat","father":"Mr. Kunwar singh Rawat","mobile":"8433016532"},{"id":"DYSS-014","name":"Harvinder Singh Negi","father":"Mr. Digpal Singh Negi","mobile":"9968322061"},{"id":"DYSS-015","name":"Nirmal Singh Negi","father":"Mr. Yashpal Singh Negi","mobile":"9711725901"},{"id":"DYSS-016","name":"Vinod Singh Negi","father":"Mr. Anand singh Negi","mobile":"9811912590"},{"id":"DYSS-017","name":"Rakesh Singh Negi","father":"Mr. Mahipal singh Negi","mobile":"8506009645"},{"id":"DYSS-018","name":"Harpal Rawat","father":"Mr. Netra singh Rawat","mobile":"7982217225"},{"id":"DYSS-019","name":"Deepak Rawat","father":"Mr. Balam singh Rawat","mobile":"7351848326"},{"id":"DYSS-020","name":"Ankit Negi","father":"Mr. Devendra singh Negi","mobile":"55374335"},{"id":"DYSS-021","name":"Atul Negi","father":"Mr. Devendra singh Negi","mobile":"8810424628"},{"id":"DYSS-022","name":"Puskar Rawat","father":"Mr. Meharban singh Rawat","mobile":"9548733216"},{"id":"DYSS-023","name":"Jagmohan Rawat","father":"Mr. Meharban singh Rawat","mobile":"8130021322"},{"id":"DYSS-024","name":"Hemant Singh Rawat","father":"Mr. Meharban singh Rawat","mobile":"9810928614"},{"id":"DYSS-025","name":"Shubham Rawat","father":"Mr. Amar Singh Rawat","mobile":"9536647699"},{"id":"DYSS-026","name":"Anuj Rawat","father":"Mr. Amar Singh Rawat","mobile":"9548248881"},{"id":"DYSS-027","name":"Khemraj Rawat","father":"Mr. Ripudaman singh Rawat","mobile":"9520668927"},{"id":"DYSS-028","name":"Manvendra Rawat","father":"Mr. Ripudaman singh Rawat","mobile":"8619980592"},{"id":"DYSS-029","name":"Pankaj Singh Rawat","father":"Mr. Manber singh Rawat","mobile":"9821159392"},{"id":"DYSS-030","name":"Manoj Dhondiyal","father":"Mr. Anandmani Dhondiyal","mobile":"6398052892"},{"id":"DYSS-031","name":"Vivekanand","father":"Mr. Ghananand Dhondiyal","mobile":"9990610129"},{"id":"DYSS-032","name":"Vipin Dhondiyal","father":"Mr. Barmanand Dhondiyal","mobile":"9389944258"},{"id":"DYSS-033","name":"Deepak Chand","father":"Mr. Barmanand Dhondiyal","mobile":"8454875299"},{"id":"DYSS-034","name":"Arvind Dhoundiyal","father":"Mr. Ramesh Chand Dhondiyal","mobile":"8802140931"},{"id":"DYSS-035","name":"Ashok Dhoundiyal","father":"Mr. Ramesh Chand Dhondiyal","mobile":"7503052151"},{"id":"DYSS-036","name":"Raghubeer Singh Negi","father":"Mr. Ratan Singh Negi","mobile":"8894788807"},{"id":"DYSS-037","name":"Satyabeer Singh Negi","father":"Mr. Ratan Singh Negi","mobile":"9756731752"},{"id":"DYSS-038","name":"Rishabh Negi","father":"Mr. Dinesh Singh Negi","mobile":"9548262018"},{"id":"DYSS-039","name":"Jitendra Negi","father":"Mr. Bhawan singh negi","mobile":"7505170421"},{"id":"DYSS-040","name":"Satendra Negi","father":"Mr. Bhawan singh negi","mobile":"8527963238"},{"id":"DYSS-041","name":"Pramendra Negi","father":"Mr. Hari singh Negi","mobile":"8869073116"},{"id":"DYSS-042","name":"Kaushal Rawat","father":"Mr. Raje singh Rawat","mobile":"9899389530"},{"id":"DYSS-043","name":"Manish Rawat","father":"Mr. Raje singh Rawat","mobile":"8800109884"},{"id":"DYSS-044","name":"Anil Rawat","father":"Mr. Jogendra singh Rawat","mobile":"9877689615"},{"id":"DYSS-045","name":"Sunil Rawat","father":"Mr. Jogendra singh Rawat","mobile":"7027045072"},{"id":"DYSS-046","name":"Deepak Rawat","father":"Mr. Madan Singh Rawat","mobile":"8954399725"},{"id":"DYSS-047","name":"Mandeep Rawat","father":"Mr. Madan Singh Rawat","mobile":"6397843759"},{"id":"DYSS-048","name":"Kuldeep Singh","father":"Mr. Mahadev Singh","mobile":"9555594088"},{"id":"DYSS-049","name":"Suraj Chandra","father":"Mr. Prakash Chandra","mobile":"9719101877"},{"id":"DYSS-050","name":"Harak Singh","father":"Mr. Veer Singh","mobile":"9690309440"},{"id":"DYSS-051","name":"Thakur Singh Rawat","father":"Mr. Chandan Singh Rawat","mobile":"8449929977"}];
@@ -1999,30 +2068,30 @@ async function printModuleSection(section, action='preview'){
   const total=rows.reduce((a,e)=>a+(Number(e.amount)||0),0);
   const period=selected==='ALL'?'ALL AVAILABLE MONTHS':selected;
    var sectionRange=pdfRangeLabel(pdfMonthsFromRows(rows));
-  html=`<div class="report-heading"><span class="samiti">ग्राम दहेली युवा समिति</span><span class="heading-separator"> | </span><span class="report-name">EXPENSE DETAILS REPORT</span><span class="heading-separator"> | </span><span class="period">${escCell(period)}</span></div><table><thead><tr><th>S.No.</th><th>Month</th><th>Bill Number</th><th>Expense Date</th><th>Expense Details</th><th>Amount (₹)</th></tr></thead><tbody>${rows.map((e,i)=>`<tr><td>${i+1}</td><td>${escCell(e.month)}</td><td>${escCell(e.bill)}</td><td>${escCell(e.date)}</td><td>${escCell(e.detail)}</td><td>${money(e.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="5"><b>TOTAL EXPENSE</b></td><td><b>${money(total)}</b></td></tr></tfoot></table>`;
+  html=`<div class="report-heading"><span class="samiti">GRAM DAHELI YUVA SAMITI</span><span class="heading-separator"> | </span><span class="report-name">EXPENSE DETAILS REPORT</span><span class="heading-separator"> | </span><span class="period">${escCell(period)}</span></div><table><thead><tr><th>S.No.</th><th>Month</th><th>Bill Number</th><th>Expense Date</th><th>Expense Details</th><th>Amount (₹)</th></tr></thead><tbody>${rows.map((e,i)=>`<tr><td>${i+1}</td><td>${escCell(e.month)}</td><td>${escCell(e.bill)}</td><td>${escCell(e.date)}</td><td>${escCell(e.detail)}</td><td>${money(e.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="5"><b>TOTAL EXPENSE</b></td><td><b>${money(total)}</b></td></tr></tfoot></table>`;
   filename='Expense Details';
  }else if(section==='donation'){
   const y=String(document.getElementById('donYear')?.value||yr), mo=document.getElementById('donMonth')?.value||'all';
   let rows=allDonations().filter(e=>String(e.date||'').startsWith(y+'-')&&(mo==='all'||monthFromDate(e.date)===mo)).sort((a,b)=>String(a.date||'').localeCompare(String(b.date||'')));
   const total=rows.reduce((a,e)=>a+(Number(e.amount)||0),0),period=mo==='all'?y:mo;
    var sectionRange=pdfRangeLabel(pdfMonthsFromRows(rows,e=>monthFromDate(e.date||'')));
-  html=`<div class="report-heading"><span class="samiti">ग्राम दहेली युवा समिति</span><span class="heading-separator"> | </span><span class="report-name">DONATION DETAILS REPORT</span><span class="heading-separator"> | </span><span class="period">${escCell(period)}</span></div><table><thead><tr><th>S.No.</th><th>Month</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th></tr></thead><tbody>${rows.map((e,i)=>`<tr><td>${i+1}</td><td>${escCell(monthFromDate(e.date))}</td><td>${escCell(e.date)}</td><td>${escCell(e.receipt)}</td><td>${escCell(e.name)}</td><td>${escCell(e.mobile)}</td><td>${escCell(e.purpose)}</td><td>${money(e.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="7"><b>TOTAL DONATION</b></td><td><b>${money(total)}</b></td></tr></tfoot></table>`;
+  html=`<div class="report-heading"><span class="samiti">GRAM DAHELI YUVA SAMITI</span><span class="heading-separator"> | </span><span class="report-name">DONATION DETAILS REPORT</span><span class="heading-separator"> | </span><span class="period">${escCell(period)}</span></div><table><thead><tr><th>S.No.</th><th>Month</th><th>Date</th><th>Receipt No.</th><th>Donor Name</th><th>Mobile No.</th><th>Purpose</th><th>Amount (₹)</th></tr></thead><tbody>${rows.map((e,i)=>`<tr><td>${i+1}</td><td>${escCell(monthFromDate(e.date))}</td><td>${escCell(e.date)}</td><td>${escCell(e.receipt)}</td><td>${escCell(e.name)}</td><td>${escCell(e.mobile)}</td><td>${escCell(e.purpose)}</td><td>${money(e.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="7"><b>TOTAL DONATION</b></td><td><b>${money(total)}</b></td></tr></tfoot></table>`;
   filename='Donation Details';
  }else if(section==='rent'){
   const mo=document.getElementById('rentPrintMonth')?.value||'all';
   const rows=allRentCollections().filter(e=>mo==='all'||e.month===mo).slice().sort((a,b)=>String(a.date||'').localeCompare(String(b.date||'')));
   const flat=rows.flatMap(e=>(e.items||[]).map(x=>({e,x}))),total=rows.reduce((a,e)=>a+(Number(e.total)||0),0);
    var sectionRange=pdfRangeLabel(pdfMonthsFromRows(rows,e=>e.month||monthFromDate(e.date||'')));
-  html=`<div class="report-heading"><span class="samiti">ग्राम दहेली युवा समिति</span><span class="heading-separator"> | </span><span class="report-name">RENT COLLECTION DETAILS REPORT</span><span class="heading-separator"> | </span><span class="period">${escCell(mo==='all'?'ALL COLLECTIONS':mo)}</span></div><table><thead><tr><th>S.No.</th><th>Collection No.</th><th>Date</th><th>Month</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Qty</th><th>Rate</th><th>Amount (₹)</th></tr></thead><tbody>${flat.map((o,i)=>`<tr><td>${i+1}</td><td>${escCell(o.e.no)}</td><td>${escCell(o.e.date)}</td><td>${escCell(o.e.month)}</td><td>${escCell(o.x.consumer)}</td><td>${escCell(o.x.material)}</td><td>${escCell(o.x.purpose)}</td><td>${escCell(o.x.qty)}</td><td>${money(o.x.rate)}</td><td>${money(o.x.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="9"><b>TOTAL RENT COLLECTION</b></td><td><b>${money(total)}</b></td></tr></tfoot></table>`;
+  html=`<div class="report-heading"><span class="samiti">GRAM DAHELI YUVA SAMITI</span><span class="heading-separator"> | </span><span class="report-name">RENT COLLECTION DETAILS REPORT</span><span class="heading-separator"> | </span><span class="period">${escCell(mo==='all'?'ALL COLLECTIONS':mo)}</span></div><table><thead><tr><th>S.No.</th><th>Collection No.</th><th>Date</th><th>Month</th><th>Consumer Name</th><th>Material Details</th><th>Use / Purpose</th><th>Qty</th><th>Rate</th><th>Amount (₹)</th></tr></thead><tbody>${flat.map((o,i)=>`<tr><td>${i+1}</td><td>${escCell(o.e.no)}</td><td>${escCell(o.e.date)}</td><td>${escCell(o.e.month)}</td><td>${escCell(o.x.consumer)}</td><td>${escCell(o.x.material)}</td><td>${escCell(o.x.purpose)}</td><td>${escCell(o.x.qty)}</td><td>${money(o.x.rate)}</td><td>${money(o.x.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="9"><b>TOTAL RENT COLLECTION</b></td><td><b>${money(total)}</b></td></tr></tfoot></table>`;
   filename='Rent Collection';
  }else if(section==='bill'){
   const mo=document.getElementById('billPrintMonth')?.value||'all';
   const rows=allBills().filter(b=>mo==='all'||String(b.date||'').slice(0,7)===mo).slice().sort((a,b)=>String(a.date||'').localeCompare(String(b.date||'')));
    var sectionRange=pdfRangeLabel(pdfMonthsFromRows(rows,e=>monthFromDate(e.date||'')));
   if(!rows.length){alert('Print ke liye koi Bill record nahi mila.');return;}
-  const reportHeading=`<div class="report-heading"><span class="samiti">ग्राम दहेली युवा समिति</span><span class="heading-separator"> | </span><span class="report-name">BILL DETAILS REPORT</span><span class="heading-separator"> | </span><span class="period">${escCell(mo==='all'?'ALL YEARS':monthFromDate(mo+'-01'))}</span></div>`;
+  const reportHeading=`<div class="report-heading"><span class="samiti">GRAM DAHELI YUVA SAMITI</span><span class="heading-separator"> | </span><span class="report-name">BILL DETAILS REPORT</span><span class="heading-separator"> | </span><span class="period">${escCell(mo==='all'?'ALL YEARS':monthFromDate(mo+'-01'))}</span></div>`;
   const attachmentHtml=await billAttachmentGalleryHtml(rows);
-  html=rows.map((b,i)=>`<section class="bill-report-page bill-details-page" style="${i<rows.length-1||attachmentHtml?'break-after:page;page-break-after:always;':''}">${i===0?reportHeading:''}${billPrintableHtml(b).replace('<h1 class="center">ग्राम दहेली युवा समिति</h1>','')}${buildApprovalHtml()}</section>`).join('')+attachmentHtml;
+  html=rows.map((b,i)=>`<section class="bill-report-page bill-details-page" style="${i<rows.length-1||attachmentHtml?'break-after:page;page-break-after:always;':''}">${i===0?reportHeading:''}${billPrintableHtml(b).replace('<h1 class="center">GRAM DAHELI YUVA SAMITI</h1>','')}${buildApprovalHtml()}</section>`).join('')+attachmentHtml;
   filename='Bill Details';
  }else{return;}
  if(!html.includes('<tbody>')){alert('Print ke liye record nahi mila.');return;}
@@ -2033,7 +2102,7 @@ async function printModuleSection(section, action='preview'){
  const css=`
   @page{size:A3 landscape;margin:0}
   html,body{margin:0!important;padding:0!important;background:#e5e7eb;color:#1e293b;font-family:Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  #moduleReport{display:block;position:relative;width:420mm;max-width:420mm;margin:0 auto;${section==='bill'?'padding:0!important;background-image:none!important;':'padding:45mm 9mm 30mm;'}box-sizing:border-box;background-color:#fff;${section==='bill'?'':(letterhead?`background-image:url("${letterhead}");`:'' )}background-size:420mm 297mm;background-position:top center;background-repeat:repeat-y;z-index:1}
+  #moduleReport{display:block;position:relative;width:420mm;max-width:420mm;margin:0 auto;${section==='bill'?'padding:0!important;background-image:none!important;':'padding:45mm 9mm 50mm;'}box-sizing:border-box;background-color:#fff;${section==='bill'?'':(letterhead?`background-image:url("${letterhead}");`:'' )}background-size:420mm 297mm;background-position:top center;background-repeat:repeat-y;z-index:1}
   #moduleReport h1{font-size:11pt;text-align:center;margin:0 0 2mm}#moduleReport h2{font-size:9pt;text-align:center;margin:1mm 0 2mm}#moduleReport p{text-align:center;margin:1mm 0 3mm;font-size:8pt}
   #moduleReport .report-heading{display:flex;flex-flow:row nowrap;align-items:center;justify-content:center;gap:1.5mm;width:100%;margin:0 0 3mm;padding:0;text-align:center;white-space:nowrap;line-height:1.15;color:#17324d}
   #moduleReport .report-heading .samiti{font-size:11pt;font-weight:900;white-space:nowrap}
@@ -2044,7 +2113,7 @@ async function printModuleSection(section, action='preview'){
   #moduleReport th,#moduleReport td{border:1px solid #64748b!important;padding:1.2mm .7mm!important;text-align:center!important;vertical-align:middle!important;font-size:6.5pt!important;line-height:1.15!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;background:transparent}
   #moduleReport th{background:#eaf0f5!important;color:#17324d!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   #moduleReport thead{display:table-header-group}#moduleReport tfoot{display:table-row-group}#moduleReport tr{break-inside:avoid!important;page-break-inside:avoid!important}
-  #moduleReport .bill-report-page{display:block!important;position:relative!important;width:420mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;box-sizing:border-box!important;overflow:hidden!important;margin:0!important;padding:45mm 9mm 30mm!important;background-color:#fff!important;${letterhead?`background-image:url(\"${letterhead}\")!important;`:''}background-size:420mm 297mm!important;background-position:top center!important;background-repeat:no-repeat!important;}
+  #moduleReport .bill-report-page{display:block!important;position:relative!important;width:420mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;box-sizing:border-box!important;overflow:hidden!important;margin:0!important;padding:45mm 9mm 50mm!important;background-color:#fff!important;${letterhead?`background-image:url(\"${letterhead}\")!important;`:''}background-size:420mm 297mm!important;background-position:top center!important;background-repeat:no-repeat!important;}
   #moduleReport .bill-details-page{break-inside:avoid!important;page-break-inside:avoid!important;}
   #moduleReport .print-approval{display:grid!important;grid-template-columns:1fr 1fr 20mm 1fr;gap:2mm;align-items:end;margin:3mm 2mm 0;break-inside:avoid!important;page-break-inside:avoid!important;text-align:center;font-size:7px}
   #moduleReport .approval-item{min-height:17mm;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
@@ -2056,7 +2125,7 @@ async function printModuleSection(section, action='preview'){
   #moduleReport .bill-attachment-name{font-size:7.5pt;font-weight:700;margin:1mm 0;text-align:left;}
   #moduleReport .bill-attachment-inline img{display:block;max-width:95%!important;max-height:85mm;object-fit:contain;margin:1mm auto;}
   #moduleReport .bill-attachment-inline iframe{display:block;width:100%;height:85mm;border:0;margin:1mm auto;}
-  #moduleReport .bill-attachment-sheet{display:block!important;position:relative!important;width:420mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;box-sizing:border-box!important;overflow:hidden!important;margin:0!important;padding:45mm 9mm 30mm!important;break-before:auto!important;page-break-before:auto!important;background-color:#fff!important;${letterhead?`background-image:url(\"${letterhead}\")!important;`:''}background-size:420mm 297mm!important;background-position:top center!important;background-repeat:no-repeat!important;}
+  #moduleReport .bill-attachment-sheet{display:block!important;position:relative!important;width:420mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;box-sizing:border-box!important;overflow:hidden!important;margin:0!important;padding:45mm 9mm 50mm!important;break-before:auto!important;page-break-before:auto!important;background-color:#fff!important;${letterhead?`background-image:url(\"${letterhead}\")!important;`:''}background-size:420mm 297mm!important;background-position:top center!important;background-repeat:no-repeat!important;}
   #moduleReport .bill-attachment-sheet:last-child{break-after:auto!important;page-break-after:auto!important;}
   #moduleReport .bill-attachment-sheet-heading{height:7mm;text-align:center;font-size:10pt;font-weight:900;color:#17324d;}
   #moduleReport .bill-attachment-grid{height:228mm;display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-rows:repeat(3,minmax(0,1fr))!important;gap:3mm;}
@@ -2069,7 +2138,9 @@ async function printModuleSection(section, action='preview'){
  `;
  const restore=()=>{root.style.display='none';root.removeAttribute('style');document.body.classList.remove('print-single');};
  if(action==='download'){
+  const downloadProgress=showPdfDownloadProgress();
   try{
+   downloadProgress.update('PDF तैयार हो रही है…','कृपया इस दौरान पेज बंद न करें।');
    if(!window.html2pdf)throw new Error('PDF Download ke liye internet connection aur PDF engine load hona zaroori hai.');
    root.innerHTML=`<style>${css}</style><div id="moduleReport">${reportHtml}</div>`;
    // Match the proven Member Collection PDF capture geometry: render at the
@@ -2095,13 +2166,14 @@ async function printModuleSection(section, action='preview'){
    if(letterhead){const headImage=new Image();headImage.src=letterhead;await (headImage.decode?headImage.decode().catch(()=>{}):Promise.resolve());}
    await Promise.all([...root.querySelectorAll('img')].map(img=>img.decode?img.decode().catch(()=>{}):Promise.resolve()));
    const exportOptions={margin:0,image:{type:'png'},html2canvas:{scale:3,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,letterRendering:true},jsPDF:{unit:'mm',format:[420,297],orientation:'landscape',compress:true},pagebreak:{mode:['css']}};
+   downloadProgress.update('PDF बनाई जा रही है…','बड़ी रिपोर्ट में थोड़ा समय लग सकता है।');
    if(section==='bill'){
     const selectedMonth=document.getElementById('billPrintMonth')?.value||'all';
     const billRows=allBills().filter(b=>selectedMonth==='all'||String(b.date||'').slice(0,7)===selectedMonth).slice().sort((a,b)=>String(a.date||'').localeCompare(String(b.date||'')));
     for(const bill of billRows){
      const gallery=await billAttachmentGalleryHtml([bill]);
      const oneBillHeading=`<div class="report-heading"><span class="samiti">GRAM DAHELI YUVA SAMITI</span><span class="heading-separator"> | </span><span class="report-name">BILL DETAILS REPORT · BILL NO. ${escCell(bill.no||bill.billNo||'')}</span><span class="heading-separator"> | </span><span class="period">${escCell(rangeForName)}</span></div>`;
-     const oneBillHtml=`<section class="bill-report-page bill-details-page">${oneBillHeading}<div>${billPrintableHtml(bill).replace('<h1 class="center">ग्राम दहेली युवा समिति</h1>','')}</div>${buildApprovalHtml()}</section>${gallery}`;
+     const oneBillHtml=`<section class="bill-report-page bill-details-page">${oneBillHeading}<div>${billPrintableHtml(bill).replace('<h1 class="center">GRAM DAHELI YUVA SAMITI</h1>','')}</div>${buildApprovalHtml()}</section>${gallery}`;
      root.innerHTML=`<style>${css}</style><div id="moduleReport">${oneBillHtml}</div>`;
      const oneReport=root.querySelector('#moduleReport');
      oneReport.style.cssText+=';display:block!important;position:relative!important;width:420mm!important;max-width:420mm!important;margin:0!important;box-sizing:border-box!important;';
@@ -2113,7 +2185,8 @@ async function printModuleSection(section, action='preview'){
     const finalFilename=pdfSafeName(filename+' '+rangeForName)+'.pdf';
     await window.html2pdf().set({...exportOptions,filename:finalFilename}).from(report).save();
    }
-  }catch(err){alert('PDF Download नहीं हुआ: '+(err.message||err));}
+   downloadProgress.finish();
+  }catch(err){downloadProgress.fail();alert('PDF Download नहीं हुआ: '+(err.message||err));}
   finally{restore();}
  }else{
   const preview=window.open('','_blank');
